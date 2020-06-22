@@ -1,0 +1,32 @@
+*{
+	font-family: courier;
+}
+
+p{
+	poitner: cursor;
+}
+
+@media screen and (min-width: 601px){
+	.l-nav {
+		font-size: 1.25rem
+	}
+	.s-nav {
+		font-size: 1rem
+	}
+	.dropdown-content ,.xs-nav{
+		font-size: 0.9rem
+	}
+}
+
+
+@media screen and (max-width: 600px){
+	.l-nav {
+		font-size: 1rem
+	}
+	.s-nav{
+		font-size: 0.875rem
+	}
+	.dropdown-content ,.xs-nav{
+		font-size: 0.75rem;
+	}
+}

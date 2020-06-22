@@ -1,0 +1,21 @@
+.xs-nav{
+	background-color: #485460;
+	color:white;
+}
+
+.right >p{
+	margin:2px 0.5em;
+	padding: 0;
+	cursor: pointer;
+}
+
+.left >p{
+	margin: 2px 1em;
+	padding: 0;
+	margin-left: 2rem;
+	cursor: default;
+}
+
+.left p:hover{
+    color: lightblue ;
+}

@@ -16,7 +16,6 @@ const XsNav =() =>{
                 <img alt='money' src={money} style={{height:18, width:18}} className='pa0 ml3'/>
                 <p>Cash on Delivery</p>
             </div>
-
             <div className='tr inline-flex left'>
                 <p>Daily Deals</p>
                 <p>Customer Service</p>

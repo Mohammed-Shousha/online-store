@@ -3,19 +3,19 @@
 	color:white;
 }
 
-.right >p{
+.left >p{
 	margin:2px 0.5em;
 	padding: 0;
 	cursor: default;
 }
 
-.left >p{
+.right >p{
 	margin: 2px 1em;
 	padding: 0;
 	margin-left: 2rem;
 	cursor: pointer;
 }
 
-.left p:hover{
+.right p:hover{
     color: lightblue ;
 }

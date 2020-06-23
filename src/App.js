@@ -5,6 +5,7 @@ import Footer from './components/Footer/Footer';
 import Slideshow from './components/Slideshow/Slideshow';
 
 
+
 const App = ()=>{
 	return(
 	    <div className="App">

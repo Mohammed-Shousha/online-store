@@ -27,7 +27,7 @@ const Slideshow =() =>{
 	          	{img.map(i =>{ 
 	          		return(
 		          		<div className="each-slide">
-		          			<img src= {i}/>
+		          			<img src= {i} alt='img'/>
 		          		</div>
 	          		);
 	          	})}

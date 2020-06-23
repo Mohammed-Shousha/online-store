@@ -1,0 +1,10 @@
+.slide-container {
+  width: 60%;
+  margin: auto; 
+}
+
+.each-slide > img {
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}

@@ -7,7 +7,7 @@ import refund from './refund.png';
 
 const XsNav =() =>{
 	return(
-		<nav className=" xs-nav flex justify-between h1-m">
+		<nav className=" xs-nav flex justify-between">
 			<div className='tl inline-flex left'>
 	            <img alt='shipping' src={shipping} style={{height:18, width:18}} className='pa0 ml3'/>
                 <p>Free Shipping</p>

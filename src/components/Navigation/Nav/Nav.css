@@ -1,13 +1,11 @@
-.sticky {
-	position: -webkit-sticky;
-	position: sticky;
-	top:0;
-
-}
-
-.fix{
+.fixed{
 	position: fixed;
 	top: 0;
 	left : 0;
 	right: 0;
+}
+
+p > img{
+	height: 1rem;
+	width: 1rem
 }

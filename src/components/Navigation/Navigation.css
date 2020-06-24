@@ -21,12 +21,12 @@ p{
 
 @media screen and (max-width: 600px){
 	.l-nav {
-		font-size: 1rem
+		font-size: 0.95rem
 	}
 	.s-nav{
-		font-size: 0.875rem
+		font-size: 0.85rem
 	}
 	.dropdown-content ,.xs-nav{
-		font-size: 0.75rem;
+		font-size: 0.72rem;
 	}
 }

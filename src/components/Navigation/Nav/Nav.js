@@ -8,12 +8,12 @@ const BigNav ='pa1 l-nav mv3 mh1 pointer grow center';
 
 const Nav =() =>{
 	return(
-		<nav className ={(window.scrollY > 56) ? 'fix flex justify-end center bg-light-blue z-max': 'sticky flex justify-end center bg-light-blue z-max'} >
+		<nav className ='fixed flex justify-end center bg-light-blue z-max'>
 			<img alt='logo' src={store}  className='h2 w2 pa3 grow center pointer'/>
 			<input type='searchBox' placeholder='Search' className='br4 bw0 pa1 center mv3 mh4 w-50 h-60'/> 
 			<p className = {BigNav}> Resigter </p>
 			<p className = {BigNav}>
-				<img alt='cart' src={cart} style={{height:18, width:18}} className='pr1'/>
+				<img alt='cart' src={cart} className='pr1'/>
 				 Cart
 			</p>
 		</nav>

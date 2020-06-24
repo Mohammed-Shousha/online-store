@@ -2,6 +2,12 @@
 	position: -webkit-sticky;
 	position: sticky;
 	top:0;
-	left: 0;
-	right:0;
+
+}
+
+.fix{
+	position: fixed;
+	top: 0;
+	left : 0;
+	right: 0;
 }

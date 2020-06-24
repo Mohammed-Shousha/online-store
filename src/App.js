@@ -1,8 +1,10 @@
 import React from 'react';
 import './App.css';
 import Navigation from './components/Navigation/Navigation';
-import Footer from './components/Footer/Footer';
 import Slideshow from './components/Slideshow/Slideshow';
+import Products from './components/Products/Products';
+import Footer from './components/Footer/Footer';
+
 
 
 
@@ -12,6 +14,7 @@ class App extends React.Component {
 		    <div className="App">
 		      	<Navigation/>
 		      	<Slideshow/>
+		      	<Products/>
 		      	<Footer/>
 		    </div>
 		)

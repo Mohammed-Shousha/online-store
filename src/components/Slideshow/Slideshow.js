@@ -7,6 +7,7 @@ import img3 from './3.jpg'
 import img4 from './6.jpg'
 import img5 from './5.jpg'
 import img6 from './6.jpg'
+import img7 from './7.jpg'
 
 
 const properties = {
@@ -18,7 +19,7 @@ const properties = {
   pauseOnHover: true,
 }
 
-const img = [img1, img2, img3, img4, img5, img6]
+const img = [img1, img2, img3, img4, img5, img6, img7]
 
 const Slideshow =() =>{
 	return(

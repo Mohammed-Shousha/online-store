@@ -1,4 +1,5 @@
 import React from 'react';
+import './Products.css'
 import {ProductCard} from 'react-ui-cards';
 
 import p1 from '../Slideshow/6.jpg'
@@ -12,22 +13,40 @@ const photos2 = [p3, p4]
 
 const Products =()=>{
 	return(
-		<div className='flex'>
-			<ProductCard
-			 float={true} 
-			 photos={photos1}
-			 price='100$'
-			 productName='Beats Headset'
-			 description='Beats Studio3 Wireless (Over-Ear, Black matte)'
-			 url='cart'
-			 buttonText='Add to Cart'/>
-			 <ProductCard 
-			 float={true}
-			 photos={photos2}
-			 price='1000$'
-			 productName='IPhone11'
-			 url='cart'
-			 buttonText='Add to Cart'/>
+		<div className='container'>
+			<div className='cards'>
+				<ProductCard
+				 photos={photos1}
+				 price='100$'
+				 productName='Beats Headset'
+				 buttonText='Add to Cart'
+				 url='cart'
+				 float={true}/>
+				 <ProductCard
+				 photos={photos2}
+				 price='1000$'
+				 productName='IPhone11'
+				 buttonText='Add to Cart'
+				 url='cart'
+				 float={true}/>
+			</div>
+
+			<div className='cards'>
+				 <ProductCard
+				 photos={photos1}
+				 price='100$'
+				 productName='Beats Headset'
+				 buttonText='Add to Cart'
+				 url='cart'
+				 float={true}/>
+				 <ProductCard
+				 photos={photos2}
+				 price='1000$'
+				 productName='IPhone11'
+				 buttonText='Add to Cart'
+				 url='cart'
+				 float={true}/>
+			</div>
 		</div>
 
 

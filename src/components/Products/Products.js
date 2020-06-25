@@ -20,33 +20,34 @@ const P1 = [{
 
 const P2 = [{
 	photos : [p2, p1],
-	price : '100 EGP',
+	price : '120 EGP',
 	productName : 'Headset',
 },
 {
 	photos:[p4, p3],
-	price: '20000 EGP',
+	price: '21000 EGP',
 	productName: 'IPhone11'
 }]
 
-const PRO1 = [P1, P2] , PRO2 = [P2, P1]
+const PRO1 = [P1, P2] //, PRO2 = [P2, P1]
 
 
-const PRODUCTS = [PRO1, PRO2]
+const PRODUCTS = [PRO1]
 
 
 const Products =()=>{
 	return(
 		<div>
-			{PRODUCTS.map(PRO=>{
+			<h2>Most Popular</h2>
+			{PRODUCTS.map(PRO =>{
 				return(
-					<div className='row'>
+					<div className='row' key={PRO}>
 						{PRO.map(P =>{
 							return(
-								<div className='h-row'>
+								<div className='h-row' key={P}>
 									{P.map(product =>{
 										return(
-											<ProductCard 
+											<ProductCard key={product.productName}
 											photos = {product.photos}
 											price = {product.price}
 											productName = {product.productName}

@@ -1,10 +1,17 @@
+h2{
+	margin: 3rem 6rem 0 6rem;
+	text-align: left;
+	color: rgba(0,0,0,0.8);
+	border-bottom: 0.1rem solid rgba(0,0,0,0.8);
+}
+
 .styles__row___2QDFo > a{
-	background-color: #7f8c8d;
+	background-color: rgba(44,62,80,.8);
 	margin: 0 2rem 1rem 2rem;
 }
 
 .styles__row___2QDFo > a:hover{
-	background-color:grey
+	background-color:rgba(44,62,80,1)
 }
 
 @media screen and (max-width: 700px){

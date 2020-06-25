@@ -1,14 +1,14 @@
 import React from 'react';
-import Item from './Item/Item';
+import Dropdown from './Dropdown/Dropdown';
 
 
 const SNav =() =>{
 	return(
 		<nav className = 'flex justify-between center h2-m bg-moon-gray mb2 mt5'>
-			<Item name='Covers' elements={['IPhone','Samsung','Sony']}/>
-			<Item name='Headphones' elements={['JBL','Beats']}/>
-			<Item name='Smart Watches' elements={['Mi']}/>
-			<Item name='Chargers'/>
+			<Dropdown name='Covers' elements={['IPhone','Samsung','Sony']}/>
+			<Dropdown name='Headphones' elements={['JBL','Beats']}/>
+			<Dropdown name='Smart Watches' elements={['Mi']}/>
+			<Dropdown name='Chargers'/>
 		</nav>
 	)
 }

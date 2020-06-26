@@ -1,0 +1,39 @@
+.circle {
+  color: #fff;
+  border-radius: 50%;
+  margin: 7.5rem 3.7rem;
+  text-align: center;
+  cursor: default;
+}
+
+.icons{
+	height: 5rem;
+	width: 5rem;
+}
+
+.tag{
+	font-size: 3rem;
+	margin-bottom: 1rem
+}
+
+@media screen and (min-width: 1281px){
+	.circle{
+	  height: 20rem;
+	  width: 20rem;
+	  font-size: 2rem;
+	}
+}
+
+@media screen and (max-width: 1280px){
+	.circle{
+	  height: 18rem;
+	  width: 18rem;
+	  font-size: 1.75rem;
+	}
+}
+
+@media screen and (max-width: 1060px){
+	.circle{
+		margin: 3rem 0
+	}
+}

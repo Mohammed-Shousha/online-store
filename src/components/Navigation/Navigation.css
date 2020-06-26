@@ -8,25 +8,25 @@ p{
 
 @media screen and (min-width: 601px){
 	.l-nav {
-		font-size: 1.25rem
+		font-size: 1.5rem
 	}
 	.s-nav {
-		font-size: 1rem
+		font-size: 1.25rem
 	}
-	.dropdown-content ,.xs-nav{
-		font-size: 0.9rem
+	.dropdown-content{
+		font-size: 1rem
 	}
 }
 
 
 @media screen and (max-width: 600px){
 	.l-nav {
-		font-size: 0.95rem
+		font-size: 1.2rem
 	}
 	.s-nav{
-		font-size: 0.85rem
+		font-size: 1rem
 	}
-	.dropdown-content ,.xs-nav{
-		font-size: 0.72rem;
+	.dropdown-content{
+		font-size: 0.75rem;
 	}
 }

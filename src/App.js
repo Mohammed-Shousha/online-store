@@ -15,7 +15,7 @@ class App extends React.Component {
 		    <div className="App">
 		      	<Navigation/>
 		      	<Slideshow/>
-		      	<Products/>
+		      	<Products title='Most Popular'/>
 		      	<Features/>
 		      	<Footer/>
 		    </div>

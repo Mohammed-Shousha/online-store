@@ -32,10 +32,10 @@ const P2 = [{
 const PRODUCTS = [P1, P2]
 
 
-const Products =()=>{
+const Products =({title=''})=>{
 	return(
 		<div>
-			<h2>Most Popular</h2>
+			<h2 className={title.length ?'title': ''}>{title}</h2>
 			<div className='row'>
 				{PRODUCTS.map(P =>{
 					return(

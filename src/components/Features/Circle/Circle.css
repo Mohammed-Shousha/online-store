@@ -6,6 +6,40 @@
   cursor: default;
 }
 
+.tooltip {
+  position: relative;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 20rem;
+  font-size: 20px;
+  background-color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 95%;
+  left: 50%;
+  margin-left: -10rem;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
 .icons{
 	height: 5rem;
 	width: 5rem;
@@ -34,6 +68,6 @@
 
 @media screen and (max-width: 1060px){
 	.circle{
-		margin: 3rem 0
+		margin: 3.5rem 0
 	}
 }

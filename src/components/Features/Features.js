@@ -9,17 +9,20 @@ const FEATURES =[
 {
 	tag:'Free Shipping',
 	img: shipping,
-	color : '#005c91'
+	color : '#005c91',
+	description:'All orders of 200.00 EGP or more qualify for FREE Shipping.'
 },
 {
 	tag:'Cash on Delivery',
 	img: money,
-	color : '#009124'
+	color : '#009124',
+	description:'Pay for your order in cash at the moment the shipment is delivered to your doorstep.'
 },
 {
 	tag:'Free Refund',
 	img: refund,
-	color:'#ffb726'
+	color:'#ffb726',
+	description:'Changed your mind, you can return your product and get a full refund.'
 }]
 
 
@@ -28,7 +31,8 @@ const Feature = ()=>{
 		<div className='container'>
 			{FEATURES.map(feature =>{
 				return(
-					<Circle tag={feature.tag} img={feature.img} color={feature.color}/>
+					<Circle tag={feature.tag} img={feature.img}
+					 color={feature.color} description={feature.description}/>
 				)
 			})}
 		</div>

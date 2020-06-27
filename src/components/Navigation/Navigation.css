@@ -14,7 +14,7 @@ p{
 		font-size: 1.15rem
 	}
 	.dropdown-content{
-		font-size: 0.9rem
+		font-size: 0.85rem
 	}
 }
 
@@ -25,8 +25,5 @@ p{
 	}
 	.s-nav{
 		font-size: 0.8rem
-	}
-	.dropdown-content{
-		font-size: 0.7rem;
 	}
 }

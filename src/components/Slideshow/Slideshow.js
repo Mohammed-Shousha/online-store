@@ -1,13 +1,13 @@
 import React from 'react';
 import './Slideshow.css';
 import {Slide} from 'react-slideshow-image';
-import img1 from './1.jpg'
-import img2 from './2.jpg'
-import img3 from './3.jpg'
-import img4 from './6.jpg'
-import img5 from './5.jpg'
-import img6 from './6.jpg'
-import img7 from './7.jpg'
+import img1 from '../Photos/1.jpg'
+import img2 from '../Photos/2.jpg'
+import img3 from '../Photos/3.jpg'
+import img4 from '../Photos/6.jpg'
+import img5 from '../Photos/5.jpg'
+import img6 from '../Photos/6.jpg'
+import img7 from '../Photos/7.jpg'
 
 
 const properties = {

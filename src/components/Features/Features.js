@@ -1,9 +1,9 @@
 import React from 'react';
 import './Features.css';
 import Circle from './Circle/Circle';
-import money from './money.png'
-import refund from './refund.png'
-import shipping from './shipping.png'
+import money from '../Icons/money.png'
+import refund from '../Icons/refund.png'
+import shipping from '../Icons/shipping.png'
 
 const FEATURES =[
 {
@@ -31,7 +31,7 @@ const Feature = ()=>{
 		<div className='container'>
 			{FEATURES.map(feature =>{
 				return(
-					<Circle tag={feature.tag} img={feature.img}
+					<Circle key={feature.tag} tag={feature.tag} img={feature.img}
 					 color={feature.color} description={feature.description}/>
 				)
 			})}

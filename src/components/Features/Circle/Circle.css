@@ -20,10 +20,21 @@
   padding: 5px 0;
   position: absolute;
   z-index: 1;
-  bottom: 95%;
   left: 50%;
   margin-left: -10rem;
 }
+
+.up{
+  bottom: 95%;
+}
+
+.under{
+  top: 110%;
+  /* ::after*/
+  bottom: 100%;
+  border-color: transparent transparent white transparent;
+}
+
 
 .tooltip .tooltiptext::after {
   content: "";

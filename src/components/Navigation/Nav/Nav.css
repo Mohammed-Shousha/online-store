@@ -16,7 +16,7 @@
 
 
 .cursor-p{
-	poitner: cursor;
+	cursor: pointer;
 }
 
 @media screen and (min-width: 701px){

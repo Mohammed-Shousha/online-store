@@ -1,5 +1,8 @@
 import React from 'react';
-import './SignIn.css'
+import './SignIn.css';
+import fb from '../Icons/facebook.svg'
+import google from '../Icons/google.svg'
+
 
 class SignIn extends React.Component{
 	constructor(props){
@@ -20,7 +23,10 @@ class SignIn extends React.Component{
 					<div className="form-container sign-up-container">
 						<form  className='form'action="#">
 							<h1 className='header'>Create Account</h1>
-							
+							<div className="social-container">
+								<a className="social" href='facebook'><img src={fb} alt='facebook'/></a>
+								<a className="social" href='google'><img src={google} alt='google'/></a>
+							</div>
 							<span className='sub'>or use your email for registration</span>
 							<input className='input' type="text" placeholder="Name" />
 							<input className='input'type="email" placeholder="Email" />
@@ -31,7 +37,10 @@ class SignIn extends React.Component{
 					<div className="form-container sign-in-container">
 						<form className='form' action="#">
 							<h1 className='header'>Sign in</h1>
-						
+							<div className="social-container">
+								<a className="social" href='facebook'><img src={fb} alt='facebook'/></a>
+								<a className="social" href='google'><img src={google} alt='google'/></a>
+							</div>
 							<span className='sub'>or use your account</span>
 							<input className='input' type="email" placeholder="Email" />
 							<input className='input' type="password" placeholder="Password" />

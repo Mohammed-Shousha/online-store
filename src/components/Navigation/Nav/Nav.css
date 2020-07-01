@@ -9,7 +9,37 @@
 	right: 0;
 }
 
-p > img{
+.cart{
 	height: 1rem;
 	width: 1rem
+}
+
+
+.cursor-p{
+	poitner: cursor;
+}
+
+@media screen and (min-width: 701px){
+	.l-nav {
+		font-size: 1.5rem
+	}
+	.s-nav {
+		font-size: 1.25rem
+	}
+	.dropdown-content{
+		font-size: 1rem
+	}
+}
+
+
+@media screen and (max-width: 700px){
+	.l-nav {
+		font-size: 1rem
+	}
+	.s-nav{
+		font-size: 0.75rem
+	}
+	.dropdown-content{
+		font-size: 0.7rem
+	}
 }

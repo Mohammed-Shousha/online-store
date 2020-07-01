@@ -28,7 +28,7 @@ const FEATURES =[
 
 const Feature = ()=>{
 	return(
-		<div className='container'>
+		<div className='featurescontainer'>
 			{FEATURES.map(feature =>{
 				return(
 					<Circle key={feature.tag} tag={feature.tag} img={feature.img}

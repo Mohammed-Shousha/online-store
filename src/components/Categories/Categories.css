@@ -10,7 +10,7 @@
 	cursor: pointer;
 }
 
-.button{
+.arrow{
 	width: 3rem;
 	height: 3rem;
 	margin: 5rem 1rem ;
@@ -27,14 +27,14 @@
 }
 
 @media screen and (min-width: 1061px){
-	.all{
+	.categories-container{
 		display: flex;
 		justify-content: center;
 	}
 }
 
 @media screen and (max-width: 1060px){
-	.all{
+	.categories-container{
 		display: inline-grid;
 	}
 }

@@ -41,10 +41,10 @@ class Categories extends React.Component{
 		return(
 			<div className='mv6'>
 				<h1 className='tc'>{category}</h1>
-				<div className='all' >
-					<img className='button prev' alt='prev' src={prev} onClick={()=>this.prevCategory()}/>
+				<div className='categories-container' >
+					<img className='arrow prev' alt='prev' src={prev} onClick={()=>this.prevCategory()}/>
 					{items.map(i=> <p className='square grow' key={i}> {i} </p>)}
-					<img className='button next' alt='next' src={next} onClick={()=>this.nextCategory()}/>
+					<img className='arrow next' alt='next' src={next} onClick={()=>this.nextCategory()}/>
 				</div>	
 			</div>
 		)

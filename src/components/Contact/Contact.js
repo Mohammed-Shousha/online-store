@@ -2,7 +2,7 @@ import React from 'react';
 import email from '../Icons/email.svg';
 import phone from '../Icons/phone.svg';
 import whatsapp from '../Icons/whatsapp.svg';
-import fb from '../Icons/fb.svg';
+import fb from '../Icons/facebook.svg';
 import instagram from '../Icons/instagram.svg';
 
 const CONTACT = [

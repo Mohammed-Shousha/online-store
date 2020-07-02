@@ -9,13 +9,55 @@ class SignIn extends React.Component{
 		super(props);
 		this.state ={
 			haveAccount:true,
+			name:'',
+			email :'',
+			phone:'',
+			password:'',
+			signInEmail :'',
+			signInPassword:'',
 		}
 	}
 
-		
+	onNameChange=(e)=>{
+		this.setState({name:e.target.value})
+	}
+
+	onEmailChange=(e)=>{
+		this.setState({email:e.target.value})
+	}
+
+	onPasswordChange=(e)=>{
+		this.setState({password:e.target.value})
+	}
+
+	onPhoneChange=(e)=>{
+		this.setState({phone:e.target.value})
+	}
+
+	onSignInEmailChange=(e)=>{
+		this.setState({signInEmail:e.target.value})
+	}
+
+	onSignInPasswordChange=(e)=>{
+		this.setState({signInPassword:e.target.value})
+	}
+
+	onSumbitSignUp =()=>{
+		const {name , email, password, phone} = this.state
+		const signUpFilled = name && email && password && phone
+		if(signUpFilled) this.props.onRouteChange('home')
+	}
+	
+	onSumbitSignIn =()=>{
+		const {signInEmail, signInPassword} = this.state
+		const signInFilled = signInEmail && signInPassword
+		if(signInFilled) this.props.onRouteChange('home')
+	}
+
+
 	render(){
+
 		const {haveAccount} = this.state
-		const {onRouteChange} = this.props
 
 		return(
 			<div className='body'>
@@ -28,24 +70,25 @@ class SignIn extends React.Component{
 								<a className="social" href='google'><img src={google} alt='google'/></a>
 							</div>
 							<span className='sub'>or use your email for registration</span>
-							<input className='input' type="text" placeholder="Name" />
-							<input className='input'type="email" placeholder="Email" />
-							<input className='input' type="password" placeholder="Password" />
-							<button className='bt' onClick={()=>onRouteChange('home')}>Sign Up</button>
+							<input className='input' type="text" placeholder="Name" onChange={this.onNameChange} required />
+							<input className='input'type="email" placeholder="Email" onChange={this.onEmailChange} required/>
+							<input className='input' type="password" placeholder="Password" onChange={this.onPasswordChange} required/>
+							<input className='input' type="tel" placeholder="01234567890" pattern="[0-9]{11}" onChange={this.onPhoneChange} required />
+							<button className='bt' onClick={this.onSumbitSignUp}>Sign Up</button>
 						</form>
 					</div>
 					<div className="form-container sign-in-container">
 						<form className='form' action="#">
-							<h1 className='header'>Sign in</h1>
+							<h1 className='header'>Sign In</h1>
 							<div className="social-container">
 								<a className="social" href='facebook'><img src={fb} alt='facebook'/></a>
 								<a className="social" href='google'><img src={google} alt='google'/></a>
 							</div>
 							<span className='sub'>or use your account</span>
-							<input className='input' type="email" placeholder="Email" />
-							<input className='input' type="password" placeholder="Password" />
+							<input className='input' type="email" placeholder="Email" onChange={this.onSignInEmailChange} required/>
+							<input className='input' type="password" placeholder="Password" onChange={this.onSignInPasswordChange} required/>
 							<a href='resetPassword'className='link'>Forgot your password?</a>
-							<button className='bt' onClick={()=>onRouteChange('home')}>Sign In</button>
+							<button className='bt' onClick={this.onSumbitSignIn}>Sign In</button>
 						</form>
 					</div>
 					<div className="overlay-container">

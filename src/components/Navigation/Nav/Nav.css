@@ -15,19 +15,15 @@
 }
 
 
-.cursor-p{
-	cursor: pointer;
-}
-
 @media screen and (min-width: 701px){
 	.l-nav {
-		font-size: 1.5rem
-	}
-	.s-nav {
 		font-size: 1.25rem
 	}
+	.s-nav {
+		font-size: 1.1rem
+	}
 	.dropdown-content{
-		font-size: 1rem
+		font-size: 0.9rem
 	}
 }
 
@@ -40,6 +36,6 @@
 		font-size: 0.75rem
 	}
 	.dropdown-content{
-		font-size: 0.7rem
+		font-size: 0.6rem
 	}
 }

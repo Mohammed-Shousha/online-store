@@ -35,7 +35,7 @@ const particles = {
 
 
 const initState ={
-	route:'home'
+	route:'start'
 }
 
 class App extends React.Component {
@@ -54,9 +54,9 @@ class App extends React.Component {
 		const {route} = this.state;
 		return(
 		    <div className="App">
-		    	{route==='home'?
+		    	{(route==='home'|| route==='start')?
 		    		<div>
-				    	<Nav onRouteChange={this.onRouteChange}/>
+				    	<Nav onRouteChange={this.onRouteChange} route={route}/>
 				    	<SNav/>
 				      	<Slideshow/>
 				      	<Products title='Most Popular'/>
@@ -65,11 +65,13 @@ class App extends React.Component {
 				      	<Contact/>
 				      	<Footer/>
 			      	</div>
-			    : 	<div>
+			    : route==='signIn' 	
+			    	? <div>
 				      	<SignIn onRouteChange={this.onRouteChange}/>
 			    		<Particles className='particles absolute top-0 left-0 w-100 h-100' params={particles} />
-			      	</div>}
-		      	
+			      	</div>
+			      	:<h1> Wrong Route </h1>
+			   	}	
 		    </div>
 		)
 	}

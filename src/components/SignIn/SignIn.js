@@ -9,7 +9,6 @@ class SignIn extends React.Component{
 		super(props);
 		this.state ={
 			haveAccount:true,
-			name:'',
 			email :'',
 			phone:'',
 			password:'',
@@ -18,8 +17,8 @@ class SignIn extends React.Component{
 		}
 	}
 
-	onNameChange=(e)=>{
-		this.setState({name:e.target.value})
+	handleNameChange=(e)=>{
+		this.props.onNameChange(e);
 	}
 
 	onEmailChange=(e)=>{
@@ -43,22 +42,20 @@ class SignIn extends React.Component{
 	}
 
 	onSumbitSignUp =()=>{
-		const {name , email, password, phone} = this.state
-		const signUpFilled = name && email && password && phone
+		const {email, password, phone} = this.state
+		const signUpFilled = this.props.name && email && password && phone
 		if(signUpFilled) this.props.onRouteChange('home')
 	}
 	
 	onSumbitSignIn =()=>{
 		const {signInEmail, signInPassword} = this.state
-		const signInFilled = signInEmail && signInPassword
+		const signInFilled = signInEmail && signInPassword //until creating DB.
 		if(signInFilled) this.props.onRouteChange('home')
 	}
 
 
 	render(){
-
 		const {haveAccount} = this.state
-
 		return(
 			<div className='body'>
 				<div className={haveAccount?"allcontainer" : "allcontainer right-panel-active"}>
@@ -70,7 +67,7 @@ class SignIn extends React.Component{
 								<a className="social" href='google'><img src={google} alt='google'/></a>
 							</div>
 							<span className='sub'>or use your email for registration</span>
-							<input className='input' type="text" placeholder="Name" onChange={this.onNameChange} required />
+							<input className='input' type="text" placeholder="Name" onChange={this.handleNameChange} required />
 							<input className='input'type="email" placeholder="Email" onChange={this.onEmailChange} required/>
 							<input className='input' type="password" placeholder="Password" onChange={this.onPasswordChange} required/>
 							<input className='input' type="tel" placeholder="01234567890" pattern="[0-9]{11}" onChange={this.onPhoneChange} required />

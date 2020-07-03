@@ -34,29 +34,44 @@ const particles = {
 }
 
 
-const initState ={
-	route:'start'
-}
+// const initState ={
+// 	route:'start',
+// 	name:'',
+// 	isSignedIn:false
+// }
 
 class App extends React.Component {
 	constructor(){
 		super();
-		this.state =initState;
+		this.state ={
+			route:'start',
+			name:'',
+			isSignedIn:false
+		}
 	}
 
 	onRouteChange=(route)=>{
 		this.setState({
 			route:route
 		})
+		if(route==='home'){
+			this.setState({
+				isSignedIn:true
+			})
+		}
+	}
+
+	onNameChange=(e)=>{
+		this.setState({name:e.target.value})
 	}
 
 	render(){
-		const {route} = this.state;
+		const {route, name, isSignedIn} = this.state;
 		return(
 		    <div className="App">
 		    	{(route==='home'|| route==='start')?
 		    		<div>
-				    	<Nav onRouteChange={this.onRouteChange} route={route}/>
+				    	<Nav onRouteChange={this.onRouteChange} isSignedIn={isSignedIn} name={name}/>
 				    	<SNav/>
 				      	<Slideshow/>
 				      	<Products title='Most Popular'/>
@@ -67,7 +82,7 @@ class App extends React.Component {
 			      	</div>
 			    : route==='signIn' 	
 			    	? <div>
-				      	<SignIn onRouteChange={this.onRouteChange}/>
+				      	<SignIn onRouteChange={this.onRouteChange} onNameChange={this.onNameChange} name={name}/>
 			    		<Particles className='particles absolute top-0 left-0 w-100 h-100' params={particles} />
 			      	</div>
 			      	:<h1> Wrong Route </h1>

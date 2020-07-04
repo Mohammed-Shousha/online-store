@@ -58,6 +58,10 @@ class App extends React.Component {
 			this.setState({
 				isSignedIn:true
 			})
+		}else{
+			this.setState({
+				isSignedIn:false
+			})
 		}
 	}
 

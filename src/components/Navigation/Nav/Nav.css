@@ -9,6 +9,30 @@
 	right: 0;
 }
 
+.cart{
+	height: 1.15rem;
+	width: 1.15rem;
+	padding:0 0 0 0.5rem
+}
+
+.s-circle{
+	color: red;
+	border-radius: 50%;
+	background:white;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	height: 0.9rem;
+	width: 0.9rem;
+	font-size: 0.75rem;
+	margin-top: -0.6rem;
+	margin-left:-0.5rem ; 
+}
+
+.hide{
+	visibility: hidden;
+}
+
 .tooltip {
   position: relative;
 }
@@ -58,7 +82,7 @@
 	color: red
 }
 
-@media screen and (min-width: 701px){
+@media screen and (min-width: 781px){
 	.l-nav {
 		font-size: 1.25rem
 	}
@@ -71,7 +95,7 @@
 }
 
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 780px){
 	.l-nav {
 		font-size: 1rem
 	}

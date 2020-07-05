@@ -34,51 +34,67 @@ const particles = {
 }
 
 
-// const initState ={
-// 	route:'start',
-// 	name:'',
-// 	isSignedIn:false
-// }
+const initState ={
+	route:'home',
+	name:'',
+	isSignedIn:false,
+	cartItems:[],
+}
 
 class App extends React.Component {
 	constructor(){
 		super();
-		this.state ={
-			route:'start',
-			name:'',
-			isSignedIn:false
-		}
+		this.state = initState
 	}
 
 	onRouteChange=(route)=>{
 		this.setState({
 			route:route
 		})
-		if(route==='home'){
-			this.setState({
-				isSignedIn:true
-			})
-		}else{
-			this.setState({
-				isSignedIn:false
-			})
-		}
+	}
+
+	onSignIn =()=>{
+		this.setState({
+			isSignedIn: true,
+			route:'home'
+		})
+	}
+
+	onSignOut =()=>{
+		this.setState(initState)
 	}
 
 	onNameChange=(e)=>{
-		this.setState({name:e.target.value})
+		this.setState({
+			name:e.target.value
+		})
+	}
+
+	onAddingItems=(product)=>{
+		if(this.state.isSignedIn){
+			this.setState({
+				cartItems: this.state.cartItems.concat(product) //at the end
+				// cartItems: [product, ...this.state.cartItems] //at the beginning
+			})
+			 
+		}
+		
 	}
 
 	render(){
-		const {route, name, isSignedIn} = this.state;
+		const {route, name, isSignedIn, cartItems} = this.state;
 		return(
 		    <div className="App">
-		    	{(route==='home'|| route==='start')?
+		    	{(route==='home')?
 		    		<div>
-				    	<Nav onRouteChange={this.onRouteChange} isSignedIn={isSignedIn} name={name}/>
+				    	<Nav onRouteChange={this.onRouteChange}
+				    	 onSignOut={this.onSignOut} 
+				    	 isSignedIn={isSignedIn} 
+				    	 name={name}
+				    	 cartItems={cartItems}/>
 				    	<SNav/>
 				      	<Slideshow/>
-				      	<Products title='Most Popular'/>
+				      	<Products title='Most Popular' onAddingItems={this.onAddingItems}/>
 				      	<Categories/>
 				      	<Features/>
 				      	<Contact/>
@@ -86,7 +102,7 @@ class App extends React.Component {
 			      	</div>
 			    : route==='signIn' 	
 			    	? <div>
-				      	<SignIn onRouteChange={this.onRouteChange} onNameChange={this.onNameChange} name={name}/>
+				      	<SignIn onSignIn={this.onSignIn} onNameChange={this.onNameChange} name={name}/>
 			    		<Particles className='particles absolute top-0 left-0 w-100 h-100' params={particles} />
 			      	</div>
 			      	:<h1> Wrong Route </h1>

@@ -36,7 +36,7 @@ const P2 = [{
 const PRODUCTS = [P1, P2]
 
 
-const Products =({title=''})=>{
+const Products =({title='', onAddingItems})=>{
 	return(
 		<div>
 			<h2 className={title.length ?'title': ''}>{title}</h2>
@@ -50,8 +50,9 @@ const Products =({title=''})=>{
 									photos = {product.photos}
 									price = {product.price}
 									productName = {product.productName}
-									buttonText = 'Add to Cart'
-									float={true}/>
+									float={true}
+									buttonText ='Add To Cart'
+									onClick={()=>onAddingItems(product.id)}/>
 								)
 							})}
 						</div>

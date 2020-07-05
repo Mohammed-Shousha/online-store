@@ -44,13 +44,15 @@ class SignIn extends React.Component{
 	onSumbitSignUp =()=>{
 		const {email, password, phone} = this.state
 		const signUpFilled = this.props.name && email && password && phone
-		if(signUpFilled) this.props.onRouteChange('home')
+		if(signUpFilled){
+			 this.props.onSignIn()
+		}
 	}
 	
 	onSumbitSignIn =()=>{
 		const {signInEmail, signInPassword} = this.state
 		const signInFilled = signInEmail && signInPassword //until creating DB.
-		if(signInFilled) this.props.onRouteChange('home')
+		if(signInFilled) this.props.onSignIn()
 	}
 
 

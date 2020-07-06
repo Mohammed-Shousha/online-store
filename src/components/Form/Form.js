@@ -1,10 +1,10 @@
 import React from 'react';
-import './SignIn.css';
+import './Form.css';
 import fb from '../Icons/facebook.svg'
 import google from '../Icons/google.svg'
 
 
-class SignIn extends React.Component{
+class Form extends React.Component{
 	constructor(props){
 		super(props);
 		this.state ={
@@ -110,4 +110,4 @@ class SignIn extends React.Component{
 	}
 }
 
-export default SignIn;
+export default Form;

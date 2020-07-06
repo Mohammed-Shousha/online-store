@@ -1,10 +1,10 @@
 import React from 'react';
 import './Nav.css'
-import cart from '../../Icons/cart.png';
-import store from '../../Icons/store.png';
-import user from '../../Icons/user.png';
-import list from '../../Icons/list.png';
-import signout from '../../Icons/signout.png';
+import cart from '../Icons/cart.png';
+import store from '../Icons/store.png';
+import user from '../Icons/user.png';
+import list from '../Icons/list.png';
+import signout from '../Icons/signout.png';
 
 const BigNav ='flex pa1 l-nav mv3 mh1 pointer grow center';
 

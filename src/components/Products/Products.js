@@ -1,7 +1,6 @@
 import React from 'react';
 import './Products.css'
 import {ProductCard} from 'react-ui-cards';
-
 import p1 from '../Photos/6.jpg'
 import p2 from '../Photos/3.jpg'
 import p3 from '../Photos/7.jpg'
@@ -56,6 +55,7 @@ const Products =({title='', onAddingItems})=>{
 										ADD TO CART
 										</button>
 									</div>
+									
 								)
 							})}
 						</div>

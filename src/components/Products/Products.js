@@ -35,7 +35,6 @@ const P2 = [{
 
 const PRODUCTS = [P1, P2]
 
-
 const Products =({title='', onAddingItems})=>{
 	return(
 		<div>
@@ -46,13 +45,17 @@ const Products =({title='', onAddingItems})=>{
 						<div className='h-row' key={P[i].id}>
 							{P.map(product =>{
 								return(
-									<ProductCard key={product.id}
-									photos = {product.photos}
-									price = {product.price}
-									productName = {product.productName}
-									float={true}
-									buttonText ='Add To Cart'
-									onClick={()=>onAddingItems(product.id)}/>
+									<div className='product-card' key={product.id}>
+										<ProductCard
+										photos = {product.photos}
+										price = {product.price}
+										productName = {product.productName}
+										description='blah blah blah blah'/>
+										<button className='add-to-cart'
+										onClick={()=>onAddingItems(product.id)}>
+										ADD TO CART
+										</button>
+									</div>
 								)
 							})}
 						</div>

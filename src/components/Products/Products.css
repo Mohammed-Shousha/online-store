@@ -5,13 +5,28 @@
 	border-bottom: 0.1rem solid rgba(0,0,0,0.8);
 }
 
-.styles__row___2QDFo > a{
-	background-color: rgba(44,62,80,.8);
-	margin: 0 2rem 1rem 2rem;
+.add-to-cart{
+	width: 300px;
+	height: 40px;
+	background-color: rgba(44,62,80,.75);
+	color: white;
+	border: 0;
+	border-radius: 0.25rem;
+	padding: 5px 0 0 0 ;
+	outline: 0px solid transparent;
 }
 
-.styles__row___2QDFo > a:hover{
-	background-color:rgba(44,62,80,1)
+.add-to-cart:hover{
+	background-color:rgba(44,62,80,0.95)
+}
+
+.product-card >div{
+	margin-bottom: -5px;
+	box-shadow: none;
+}
+
+.styles__product-card-name___3n1NI{
+	margin: 50px 0 10px 0;
 }
 
 @media screen and (max-width: 700px){

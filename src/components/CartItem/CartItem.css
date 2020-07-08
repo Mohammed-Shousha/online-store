@@ -1,0 +1,30 @@
+.item-container{
+	width: 50%;
+	height: 9rem;
+	background: #a2de96;
+	display: flex;
+	position: relative;
+	border-radius: 0.5rem;
+	color: #2F4858;
+	padding: 0;
+}
+
+.item-container > img {
+	border-radius: 0.5rem 0 0 0.5rem; 
+	width:25%;
+}
+
+.item-container > div {
+	margin-left:2rem;
+	text-align: left;
+	text-transform: uppercase;
+}
+
+.remove{
+	margin: 3.5rem 0;
+	position: absolute;
+	cursor: pointer;
+	right:0;
+	width: 2rem;
+	height: 2rem;
+}

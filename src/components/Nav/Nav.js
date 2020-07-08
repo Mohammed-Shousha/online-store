@@ -41,7 +41,7 @@ const Nav =({onRouteChange, isSignedIn, onSignOut, name, cartItems}) =>{
 			: ''}
 			</div>
 
-			<div className = {BigNav}  onClick={()=>console.log(cartItems)}>
+			<div className = {BigNav} onClick={isSignedIn? ()=>onRouteChange('cart') : ()=>{}}>
 				 Cart
 				<div className='flex'>
 					<img alt='cart' src={cart} className='cart'/>

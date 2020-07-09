@@ -1,5 +1,4 @@
 .item-container{
-	width: 50%;
 	height: 9rem;
 	background: #a2de96;
 	display: flex;
@@ -27,4 +26,14 @@
 	right:0;
 	width: 2rem;
 	height: 2rem;
+}
+
+.item-container{
+	width: 50%
+}
+
+@media screen and (max-width: 780px){
+	.item-container{
+		width: 80%
+	}
 }

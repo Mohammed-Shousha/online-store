@@ -16,6 +16,33 @@
 	padding:0 0 0 0.5rem
 }
 
+.logo{
+	height: 2rem;
+	width: 2rem;
+	margin: 1rem 3rem
+}
+
+.search{
+	width: 50%;
+	margin: 1rem 2rem;
+	padding: 1rem;
+	border: 0;
+	border-radius: 1rem;
+}
+
+.l-nav {
+	font-size: 1.25rem;
+	margin: 1rem ;
+}
+
+.s-nav {
+	font-size: 1.1rem
+}
+
+.dropdown-content{
+	font-size: 0.9rem
+}
+
 .s-circle{
 	color: red;
 	border-radius: 50%;
@@ -34,7 +61,7 @@
 	visibility: hidden;
 }
 
-.tooltip {
+.tooltipNav {
   position: relative;
 }
 
@@ -83,17 +110,6 @@
 	color: red
 }
 
-@media screen and (min-width: 781px){
-	.l-nav {
-		font-size: 1.25rem
-	}
-	.s-nav {
-		font-size: 1.1rem
-	}
-	/*.dropdown-content{
-		font-size: 0.9rem
-	}*/
-}
 
 
 @media screen and (max-width: 780px){
@@ -103,7 +119,10 @@
 	.s-nav{
 		font-size: 0.85rem
 	}
-	/*.dropdown-content{
-		font-size: 0.6rem
-	}*/
+	.dropdown-content{
+		font-size: 0.7rem
+	}
+	.search{
+		width: 30%;
+	}
 }

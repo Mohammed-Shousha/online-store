@@ -8,23 +8,24 @@ import list from '../Icons/list.png';
 import signout from '../Icons/signout.png';
 
 
-const BigNav ='flex pa1 l-nav mv3 mh1 pointer grow center';
+const BigNav ='flex l-nav pa1 ph4 grow center';
 
 
 const Nav =({isSignedIn, onSignOut, name, cartItems}) =>{
 	return(
-		<nav className ='fixed flex justify-end center bg-light-blue z-max'>
+		<nav className ='fixed flex justify-end  bg-light-blue z-max'>
 
-			<Link to='' className='pa2 pl5 pt3'>
-			<img alt='logo' src={store} 
-			className='h2 w2 grow center pointer' />
+			<Link to=''>
+				<img alt='logo' src={store} 
+				 className='logo grow'/>
 			</Link>
 
-			<input type='searchBox' placeholder='Search' className='br4 bw0 pa1 center mv3 mh4 w-50 h-60' contentEditable='true'/> 
+			<input type='searchBox' placeholder='Search'
+			 className='search center' contentEditable='true'/> 
 
 			<Link to={!isSignedIn? '/signin': ''}>
 				<div 
-				className = {!isSignedIn? BigNav : 'tooltipNav pa1 l-nav mv3 mh1 pointer grow center'}>
+				className = {!isSignedIn? BigNav : 'tooltipNav l-nav ph5 pa1 pointer center'}>
 					{!isSignedIn? 'SignIn or SignUp':'Hi '+ name}
 					{isSignedIn?
 					<div className='tooltipTextNav'>
@@ -45,7 +46,7 @@ const Nav =({isSignedIn, onSignOut, name, cartItems}) =>{
 				</div>
 			</Link>
 
-			<Link to={isSignedIn? 'cart' : ''} className='mh5'>
+			<Link to={isSignedIn? 'cart' : ''}>
 				<div className = {BigNav}>
 					 Cart
 					<div className='flex'>

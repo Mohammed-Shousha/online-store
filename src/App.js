@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router , Route} from 'react-router-dom';
+import {BrowserRouter as Router, Switch,  Route} from 'react-router-dom';
 import './App.css';
 import Home from './containers/Home'
 import Nav from './components/Nav/Nav'
@@ -63,7 +63,7 @@ class App extends React.Component {
 		return(
 			<Router>
 			    <div className="App">
-
+			    	<Switch>
 			    	<Route path='/' exact render={()=>(
 			    	 	<div>
 				    	 	<Nav 
@@ -93,8 +93,13 @@ class App extends React.Component {
 					     	 cartItems={cartItems}
 					     	 onRemovingItem={onRemovingItem}/>
 			     	 	</div>
+
 			     	)}/>
 
+			     	<Route render ={()=>(
+			     	 	<h1> Under Construction </h1>
+			     	)}/>
+			     	</Switch>
 			    </div>
 		    </Router>
 		)

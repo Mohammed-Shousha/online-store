@@ -1,7 +1,10 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import './Form.css';
-import fb from '../Icons/facebook.svg'
-import google from '../Icons/google.svg'
+import fb from '../Icons/facebook.svg';
+import google from '../Icons/google.svg';
+
+const emailFormat = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/
 
 
 class Form extends React.Component{
@@ -41,28 +44,21 @@ class Form extends React.Component{
 		this.setState({signInPassword:e.target.value})
 	}
 
-	onSumbitSignUp =()=>{
-		const {email, password, phone} = this.state
-		const signUpFilled = this.props.name && email && password && phone
-		if(signUpFilled){
-			 this.props.onSignIn()
-		}
-	}
-	
-	onSumbitSignIn =()=>{
-		const {signInEmail, signInPassword} = this.state
-		const signInFilled = signInEmail && signInPassword //until creating DB.
-		if(signInFilled) this.props.onSignIn()
-	}
-
 
 	render(){
-		const {haveAccount} = this.state
+
+		const {haveAccount, email, password, phone} = this.state
+		const signUpFilled = this.props.name && email.match(emailFormat) && password  && phone.match(/^\d{11}$/)
+		const {signInEmail, signInPassword} = this.state
+		const signInFilled = signInEmail.match(emailFormat)  && signInPassword
+		
 		return(
 			<div className='body'>
+
 				<div className={haveAccount?"allcontainer" : "allcontainer right-panel-active"}>
+				
 					<div className="form-container sign-up-container">
-						<form  className='form'action="#">
+						<form  className='form'>
 							<h1 className='header'>Create Account</h1>
 							<div className="social-container">
 								<a className="social" href='facebook'><img src={fb} alt='facebook'/></a>
@@ -72,12 +68,17 @@ class Form extends React.Component{
 							<input className='input' type="text" placeholder="Name" onChange={this.handleNameChange} required />
 							<input className='input'type="email" placeholder="Email" onChange={this.onEmailChange} required/>
 							<input className='input' type="password" placeholder="Password" onChange={this.onPasswordChange} required/>
-							<input className='input' type="tel" placeholder="01234567890" pattern="[0-9]{11}" onChange={this.onPhoneChange} required />
-							<button className='bt' onClick={this.onSumbitSignUp}>Sign Up</button>
+							<input className='input' type="tel" placeholder="01234567890" onChange={this.onPhoneChange} required />
+							<Link onClick={this.props.onSignIn} to={signUpFilled? '' : 'signin'}>
+								<button className='bt'>
+								 Sign Up 
+								</button>
+							</Link>
 						</form>
 					</div>
+
 					<div className="form-container sign-in-container">
-						<form className='form' action="#">
+						<form className='form'>
 							<h1 className='header'>Sign In</h1>
 							<div className="social-container">
 								<a className="social" href='facebook'><img src={fb} alt='facebook'/></a>
@@ -87,24 +88,34 @@ class Form extends React.Component{
 							<input className='input' type="email" placeholder="Email" onChange={this.onSignInEmailChange} required/>
 							<input className='input' type="password" placeholder="Password" onChange={this.onSignInPasswordChange} required/>
 							<a href='resetPassword'className='link'>Forgot your password?</a>
-							<button className='bt' onClick={this.onSumbitSignIn}>Sign In</button>
+							<Link onClick={this.props.onSignIn} to={signInFilled? '' : 'signin'} >
+								<button className='bt'> Sign In </button>						
+							</Link>
 						</form>
 					</div>
+
 					<div className="overlay-container">
+
 						<div className="overlay">
+
 							<div className="overlay-panel overlay-left">
 								<h1 className='header'>Welcome Back!</h1>
 								<p className='p'>To keep connected with us please login with your personal info</p>
 								<button className="bt ghost" onClick={()=>this.setState({haveAccount:true})}>Sign In</button>
 							</div>
+
 							<div className="overlay-panel overlay-right">
 								<h1 className='header'>Hello, Friend!</h1>
 								<p className='p'>Enter your personal details and start journey with us</p>
 								<button className=" bt ghost" onClick={()=>this.setState({haveAccount:false})}>Sign Up</button>
 							</div>
+
 						</div>
+
 					</div>
+
 				</div>
+
 			</div>
 		)
 	}

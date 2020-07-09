@@ -5,3 +5,8 @@
 *{
 	font-family: courier;
 }
+
+a{
+	text-decoration: none;
+	color: inherit;
+}

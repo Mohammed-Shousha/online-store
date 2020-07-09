@@ -1,4 +1,5 @@
 import React from 'react';
+import {BrowserRouter as Router , Route} from 'react-router-dom';
 import './App.css';
 import Home from './containers/Home'
 import Nav from './components/Nav/Nav'
@@ -6,8 +7,8 @@ import SignIn from './containers/SignIn'
 import Cart from './containers/Cart'
 
 
+
 const initState ={
-	route:'home',
 	name:'',
 	isSignedIn:false,
 	cartItems:[],
@@ -19,16 +20,10 @@ class App extends React.Component {
 		this.state = initState
 	}
 
-	onRouteChange =(route)=>{
-		this.setState({
-			route:route
-		})
-	}
 
 	onSignIn =()=>{
 		this.setState({
 			isSignedIn: true,
-			route:'home'
 		})
 	}
 
@@ -62,45 +57,46 @@ class App extends React.Component {
 	}
 
 	render(){
-		const {route, name, isSignedIn, cartItems} = this.state;
-		const {onRouteChange, onSignOut, onAddingItem, onRemovingItem, onSignIn, onNameChange} = this
+		const {name, isSignedIn, cartItems} = this.state;
+		const {onSignOut, onAddingItem, onRemovingItem, onSignIn, onNameChange} = this
 
 		return(
-		    <div className="App">
-		    	{route==='home'?
-		    		<div>
-			    		<Nav 
-				    	 onRouteChange={onRouteChange}
-			    		 onSignOut={onSignOut}  
-				    	 isSignedIn={isSignedIn}
-				    	 name={name}
-				    	 cartItems={cartItems} />
-			    		<Home 
-			    		 onAddingItem={onAddingItem} />
-		    		</div>
+			<Router>
+			    <div className="App">
 
-			    :route==='signIn'?
-			    	<SignIn
-			    	 onSignIn={onSignIn}
-			    	 onNameChange={onNameChange}
-			    	 name={name}/>
+			    	<Route path='/' exact render={()=>(
+			    	 	<div>
+				    	 	<Nav 
+				    		 onSignOut={onSignOut}  
+					    	 isSignedIn={isSignedIn}
+					    	 name={name}
+					    	 cartItems={cartItems} />
+				    	 	<Home onAddingItem={onAddingItem}/>
+			    	 	</div>
+			    	)}/>
+		    		 
+		    		<Route path='/signin' render={()=>(
+		    		 	<SignIn
+				    	  onSignIn={onSignIn}
+				    	  onNameChange={onNameChange}
+				    	  name={name}/>
+				    )}/>
 
-			    :route==='cart'?
-			    	<div>
-				    	<Nav 
-				    	 onRouteChange={onRouteChange}
-			    		 onSignOut={onSignOut}  
-				    	 isSignedIn={isSignedIn}
-				    	 name={name}
-				    	 cartItems={cartItems}/>
-				    	<Cart
-				    	 cartItems={cartItems}
-				    	 onRouteChange={onRouteChange}
-				    	 onRemovingItem={onRemovingItem}/>
-			    	</div>
+ 			    	<Route path='/cart' render={()=>(
+		    			<div>
+			    			<Nav 
+				    		 onSignOut={onSignOut}  
+					    	 isSignedIn={isSignedIn}
+					    	 name={name}
+					    	 cartItems={cartItems} />
+			    			<Cart
+					     	 cartItems={cartItems}
+					     	 onRemovingItem={onRemovingItem}/>
+			     	 	</div>
+			     	)}/>
 
-			    :<h1> Wrong Route </h1>}	
-		    </div>
+			    </div>
+		    </Router>
 		)
 	}
 } 

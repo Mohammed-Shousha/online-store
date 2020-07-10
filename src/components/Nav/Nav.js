@@ -46,7 +46,7 @@ const Nav =({isSignedIn, onSignOut, name, cartItems}) =>{
 				</div>
 			</Link>
 
-			<Link to={isSignedIn? 'cart' : ''}>
+			<Link to={isSignedIn? 'cart' : ''} onClick={()=>console.log(cartItems)}>
 				<div className = {BigNav}>
 					 Cart
 					<div className='flex'>

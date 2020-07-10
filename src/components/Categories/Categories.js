@@ -2,37 +2,27 @@ import React from 'react';
 import './Categories.css';
 import prev from '../Icons/prev.svg'
 import next from '../Icons/next.svg'
+import {CATEGORIES} from '../Database'
 
-const States = [{
-	category:'HEADPHONES',
-	items:['Jbl', 'Sony', 'Mi']
-},
-{
-	category:'COVERS',
-	items:['IPhone', 'Sony', 'Samsung']	
-},
-{
-	category:'SMART WATCHES',
-	items:['Jbl', 'Mi']
-}]
+
 
 let index = 0
 
 class Categories extends React.Component{
 	constructor(){
 		super();
-		this.state = States[index]
+		this.state = CATEGORIES[index]
 	}
 
 	nextCategory=()=>{
 		if(index===2) index=-1
-		this.setState(States[index+1])
+		this.setState(CATEGORIES[index+1])
 		index++
 	}
 
 	prevCategory=()=>{
 		if(index===0) index=3
-		this.setState(States[index-1])
+		this.setState(CATEGORIES[index-1])
 		index--
 	}
 

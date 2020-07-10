@@ -48,7 +48,7 @@ class Form extends React.Component{
 	}
 
 	onSubmitSignUp=()=>{
-		const {haveAccount, email, password, phone} = this.state
+		const {email, password, phone} = this.state
 		const signUpFilled = this.props.name && email.match(emailFormat) && password  && phone.match(phoneFormat)
 
 		if(signUpFilled){

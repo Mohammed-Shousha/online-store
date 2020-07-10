@@ -5,6 +5,7 @@ import fb from '../Icons/facebook.svg';
 import google from '../Icons/google.svg';
 
 const emailFormat = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/
+const phoneFormat = /^\d{11}$/
 
 
 class Form extends React.Component{
@@ -12,6 +13,8 @@ class Form extends React.Component{
 		super(props);
 		this.state ={
 			haveAccount:true,
+			validEmail:true,
+			validPhone:true,
 			email :'',
 			phone:'',
 			password:'',
@@ -44,12 +47,35 @@ class Form extends React.Component{
 		this.setState({signInPassword:e.target.value})
 	}
 
+	onSubmitSignUp=()=>{
+		const {haveAccount, email, password, phone} = this.state
+		const signUpFilled = this.props.name && email.match(emailFormat) && password  && phone.match(phoneFormat)
+
+		if(signUpFilled){
+			this.props.onSignIn()
+		}else if (!email.match(emailFormat)){
+			this.setState({validEmail:false})
+		}else if (!phone.match(phoneFormat)){
+			this.setState({validPhone:false})
+		}
+	}
+
+	onSubmitSignIn =()=>{
+		const {signInEmail, signInPassword} = this.state
+		const signInFilled = signInEmail.match(emailFormat)  && signInPassword
+
+		if(signInFilled){
+			this.props.onSignIn()
+		}else if(!signInEmail.match(emailFormat)){
+			this.setState({validEmail:false})
+		}//else if (signInPassword.match(passwordFormat))
+	}
+
 
 	render(){
 
-		const {haveAccount, email, password, phone} = this.state
-		const signUpFilled = this.props.name && email.match(emailFormat) && password  && phone.match(/^\d{11}$/)
-		const {signInEmail, signInPassword} = this.state
+		const {haveAccount, email, password, phone, validEmail, validPhone, signInEmail, signInPassword} = this.state
+		const signUpFilled = this.props.name && email.match(emailFormat) && password  && phone.match(phoneFormat)
 		const signInFilled = signInEmail.match(emailFormat)  && signInPassword
 		
 		return(
@@ -69,7 +95,10 @@ class Form extends React.Component{
 							<input className='input'type="email" placeholder="Email" onChange={this.onEmailChange} required/>
 							<input className='input' type="password" placeholder="Password" onChange={this.onPasswordChange} required/>
 							<input className='input' type="tel" placeholder="01234567890" onChange={this.onPhoneChange} required />
-							<Link onClick={this.props.onSignIn} to={signUpFilled? '' : 'signin'}>
+							<p className={(validEmail && validPhone )? 'valid hide':'valid'}>
+							 Please Enter A Valid {!validPhone? 'Phone': 'Email'}
+							 </p>
+							<Link onClick={this.onSubmitSignUp} to={signUpFilled? '' : 'signin'}>
 								<button className='bt'>
 								 Sign Up 
 								</button>
@@ -88,14 +117,14 @@ class Form extends React.Component{
 							<input className='input' type="email" placeholder="Email" onChange={this.onSignInEmailChange} required/>
 							<input className='input' type="password" placeholder="Password" onChange={this.onSignInPasswordChange} required/>
 							<a href='resetPassword'className='link'>Forgot your password?</a>
-							<Link onClick={this.props.onSignIn} to={signInFilled? '' : 'signin'} >
+							<p className={validEmail ? 'valid hide': 'valid'}> Wrong Email or Password</p>
+							<Link onClick={this.onSubmitSignIn} to={signInFilled? '' : 'signin'} >
 								<button className='bt'> Sign In </button>						
 							</Link>
 						</form>
 					</div>
 
 					<div className="overlay-container">
-
 						<div className="overlay">
 
 							<div className="overlay-panel overlay-left">
@@ -111,7 +140,6 @@ class Form extends React.Component{
 							</div>
 
 						</div>
-
 					</div>
 
 				</div>

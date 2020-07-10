@@ -64,41 +64,41 @@ class App extends React.Component {
 			<Router>
 			    <div className="App">
 			    	<Switch>
-			    	<Route path='/' exact render={()=>(
-			    	 	<div>
-				    	 	<Nav 
-				    		 onSignOut={onSignOut}  
-					    	 isSignedIn={isSignedIn}
-					    	 name={name}
-					    	 cartItems={cartItems} />
-				    	 	<Home onAddingItem={onAddingItem}/>
-			    	 	</div>
-			    	)}/>
-		    		 
-		    		<Route path='/signin' render={()=>(
-		    		 	<SignIn
-				    	  onSignIn={onSignIn}
-				    	  onNameChange={onNameChange}
-				    	  name={name}/>
-				    )}/>
+				    	<Route path='/' exact render={()=>(
+				    	 	<div>
+					    	 	<Nav 
+					    		 onSignOut={onSignOut}  
+						    	 isSignedIn={isSignedIn}
+						    	 name={name}
+						    	 cartItems={cartItems} />
+					    	 	<Home onAddingItem={onAddingItem}/>
+				    	 	</div>
+				    	)}/>
+			    		 
+			    		<Route path='/signin' render={()=>(
+			    		 	<SignIn
+					    	  onSignIn={onSignIn}
+					    	  onNameChange={onNameChange}
+					    	  name={name}/>
+					    )}/>
 
- 			    	<Route path='/cart' render={()=>(
-		    			<div>
-			    			<Nav 
-				    		 onSignOut={onSignOut}  
-					    	 isSignedIn={isSignedIn}
-					    	 name={name}
-					    	 cartItems={cartItems} />
-			    			<Cart
-					     	 cartItems={cartItems}
-					     	 onRemovingItem={onRemovingItem}/>
-			     	 	</div>
+	 			    	<Route path='/cart' render={()=>(
+			    			<div>
+				    			<Nav 
+					    		 onSignOut={onSignOut}  
+						    	 isSignedIn={isSignedIn}
+						    	 name={name}
+						    	 cartItems={cartItems} />
+				    			<Cart
+						     	 cartItems={cartItems}
+						     	 onRemovingItem={onRemovingItem}/>
+				     	 	</div>
 
-			     	)}/>
+				     	)}/>
 
-			     	<Route render ={()=>(
-			     	 	<h1> Under Construction </h1>
-			     	)}/>
+				     	<Route render ={()=>(
+				     	 	<h1> Under Construction </h1>
+				     	)}/>
 			     	</Switch>
 			    </div>
 		    </Router>

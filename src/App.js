@@ -64,25 +64,25 @@ class App extends React.Component {
 			<Router>
 			    <div className="App">
 			    	<Switch>
-				    	<Route path='/' exact render={()=>(
-				    	 	<div>
+				    	<Route path='/' exact>
+				    		<div>
 					    	 	<Nav 
 					    		 onSignOut={onSignOut}  
 						    	 isSignedIn={isSignedIn}
 						    	 name={name}
 						    	 cartItems={cartItems} />
-					    	 	<Home onAddingItem={onAddingItem}/>
+					    	 	<Home onAddingItem={onAddingItem} />
 				    	 	</div>
-				    	)}/>
+				    	</Route>
 			    		 
-			    		<Route path='/signin' render={()=>(
-			    		 	<SignIn
+			    		<Route path='/signin'>
+			    			<SignIn
 					    	  onSignIn={onSignIn}
 					    	  onNameChange={onNameChange}
 					    	  name={name}/>
-					    )}/>
+					    </Route>
 
-	 			    	<Route path='/cart' render={()=>(
+	 			    	<Route path='/cart'>
 			    			<div>
 				    			<Nav 
 					    		 onSignOut={onSignOut}  
@@ -93,12 +93,11 @@ class App extends React.Component {
 						     	 cartItems={cartItems}
 						     	 onRemovingItem={onRemovingItem}/>
 				     	 	</div>
+				     	</Route>
 
-				     	)}/>
-
-				     	<Route render ={()=>(
+				     	<Route>
 				     	 	<h1> Under Construction </h1>
-				     	)}/>
+				     	</Route>
 			     	</Switch>
 			    </div>
 		    </Router>

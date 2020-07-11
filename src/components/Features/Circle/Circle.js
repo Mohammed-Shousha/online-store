@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import './Circle.css'
 
 
@@ -14,4 +14,4 @@ const Circle = ({tag, img, color, description}) =>{
 	)
 }
 
-export default Circle;
+export default Circle

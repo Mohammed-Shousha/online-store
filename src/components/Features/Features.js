@@ -1,6 +1,6 @@
-import React from 'react';
-import './Features.css';
-import Circle from './Circle/Circle';
+import React from 'react'
+import './Features.css'
+import Circle from './Circle/Circle'
 import {FEATURES} from '../Database'
 
 
@@ -17,4 +17,4 @@ const Feature = ()=>{
 	)
 }
 
-export default Feature;
+export default Feature

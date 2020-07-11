@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {CONTACT} from '../Database'
 
 
@@ -17,4 +17,4 @@ const Contact =() =>{
 	)
 }
 
-export default Contact;
+export default Contact

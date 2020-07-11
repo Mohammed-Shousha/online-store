@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import './Footer.css'
 
 
@@ -10,7 +10,7 @@ const Footer =()=>{
 			 <span>About Us</span> | <span>Privacy Policy</span> | <span>Terms of Use</span> 
 			</p>
 		</footer>
-	);
+	)
 }
 
-export default Footer;
+export default Footer

@@ -1,15 +1,22 @@
-import p1 from './Photos/6.jpg'
-import p2 from './Photos/3.jpg'
-import p3 from './Photos/7.jpg'
-import p4 from './Photos/2.jpg'
+import img1 from './Photos/1.jpg'
+import img2 from './Photos/2.jpg'
+import img3 from './Photos/3.jpg'
+import img4 from './Photos/4.jpg'
+import img5 from './Photos/5.jpg'
+import img6 from './Photos/6.jpg'
+import img7 from './Photos/7.jpg'
+
 import money from './Icons/money.png'
 import refund from './Icons/refund.png'
 import shipping from './Icons/shipping.png'
+
 import email from './Icons/email.svg'
 import phone from './Icons/phone.svg'
 import whatsapp from './Icons/whatsapp.svg'
 import fb from './Icons/facebook.svg'
 import instagram from './Icons/instagram.svg'
+
+export const slideShowImages = [img1, img2, img3, img4, img5, img6, img7]
 
 export const CATEGORIES = [{
 	category:'HEADPHONES',
@@ -74,28 +81,28 @@ export const FEATURES =[
 
 export const Pro = [{
 	id: 0,
-	photos: [p1, p2],
+	photos: [img6, img3],
 	price: '100 EGP',
 	description: 'blah blah blah',
 	productName : 'Headset'
 },
 {
 	id: 1,
-	photos:[p3, p4],
+	photos:[img7, img2],
 	price: '20000 EGP',
 	description: 'blah blah blah',
 	productName: 'IPhone11'
 },
 {
 	id: 2,
-	photos: [p2, p1],
+	photos: [img3, img6],
 	price: '120 EGP',
 	description: 'blah blah blah',
 	productName: 'Headset'
 },
 {
 	id: 3,
-	photos: [p4, p3],
+	photos: [img2, img7],
 	price: '21000 EGP',
 	description: 'blah blah blah',
 	productName: 'IPhone11'

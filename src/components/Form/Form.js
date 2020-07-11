@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
-import './Form.css';
-import fb from '../Icons/facebook.svg';
-import google from '../Icons/google.svg';
+import React, {useState} from 'react'
+import {Link} from 'react-router-dom'
+import './Form.css'
+import fb from '../Icons/facebook.svg'
+import google from '../Icons/google.svg'
 
 
 const Form =({name, onSignIn, onNameChange}) => {
@@ -148,4 +148,4 @@ const Form =({name, onSignIn, onNameChange}) => {
 	
 }
 
-export default Form;
+export default Form

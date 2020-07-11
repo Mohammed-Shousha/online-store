@@ -4,9 +4,8 @@ import prev from '../Icons/prev.svg'
 import next from '../Icons/next.svg'
 import {CATEGORIES} from '../Database'
 
-
-
 let index = 0
+
 
 class Categories extends React.Component{
 	constructor(){

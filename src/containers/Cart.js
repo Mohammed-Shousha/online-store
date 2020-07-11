@@ -1,7 +1,7 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
-import SNav from '../components/SNav/SNav';
-import CartItem from '../components/CartItem/CartItem';
+import React from 'react'
+import {Link} from 'react-router-dom'
+import SNav from '../components/SNav/SNav'
+import CartItem from '../components/CartItem/CartItem'
 
 
 const Cart = ({cartItems, onRemovingItem})=>{

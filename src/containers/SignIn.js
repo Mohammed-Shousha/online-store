@@ -1,6 +1,6 @@
-import React from 'react';
-import Form from '../components/Form/Form';
-import Particles from 'react-particles-js';
+import React from 'react'
+import Form from '../components/Form/Form'
+import Particles from 'react-particles-js'
 
 const particles = {
   particles: {
@@ -35,7 +35,7 @@ const SignIn =({onSignIn, onNameChange, name})=>{
     		 className='particles absolute top-0 left-0 w-100 h-100'
     		 params={particles} />
 		</div>
-	);
+	)
 }
 
-export default SignIn;
+export default SignIn

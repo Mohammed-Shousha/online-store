@@ -1,14 +1,13 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React from 'react'
+import {Link} from 'react-router-dom'
 import './Nav.css'
-import cart from '../Icons/cart.png';
-import store from '../Icons/store.png';
-import user from '../Icons/user.png';
-import list from '../Icons/list.png';
-import signout from '../Icons/signout.png';
+import cart from '../Icons/cart.png'
+import store from '../Icons/store.png'
+import user from '../Icons/user.png'
+import list from '../Icons/list.png'
+import signout from '../Icons/signout.png'
 
-
-const BigNav ='flex l-nav pa1 ph4 grow center';
+const BigNav ='flex l-nav pa1 ph4 grow center'
 
 
 const Nav =({isSignedIn, onSignOut, name, cartItems}) =>{
@@ -57,7 +56,6 @@ const Nav =({isSignedIn, onSignOut, name, cartItems}) =>{
 			</Link>
 
 		</nav>
-
 	)
 }
 

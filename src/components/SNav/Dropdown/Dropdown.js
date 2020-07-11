@@ -1,21 +1,22 @@
-import React from 'react';
-import './Dropdown.css';
+import React from 'react'
+import './Dropdown.css'
 
-const SmallNav ='pointer s-nav mv1 mh3 pv1';
+const SmallNav ='pointer s-nav mv1 mh3 pv1'
 
 const Dropdown=({name,elements=[]})=>{
-	let len = elements.length;
+	let len = elements.length
+
 	return len? 
 		<div className='dropdown'>
 			<p className= {SmallNav}> {name} </p>
 			<div className='dropdown-content'>
 			{elements.map(x => <p key={x}>{x}</p>)}
 			</div>
-		</div>:
+		</div>
 
-		<div className='dropdown'>
+		:<div className='dropdown'>
 			<p className= {SmallNav}> {name} </p>
 		</div>
 }
 
-export default Dropdown;
+export default Dropdown

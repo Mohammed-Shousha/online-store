@@ -1,14 +1,14 @@
-import React from 'react';
+import React from 'react'
 import './Products.css'
-import {ProductCard} from 'react-ui-cards';
+import {ProductCard} from 'react-ui-cards'
 import {Pro} from '../Database'
 
 
 const Products =({title='', onAddingItem})=>{
 
 	let P = [...Pro]
-	const PRODUCTS = [];
-	while(P.length) PRODUCTS.push(P.splice(0,2));
+	const PRODUCTS = []
+	while(P.length) PRODUCTS.push(P.splice(0,2))
 
 	return(
 		<div>
@@ -38,9 +38,8 @@ const Products =({title='', onAddingItem})=>{
 				})}
 			</div>	
 		</div>
-
-	);
+	)
 }
 
 
-export default Products;
+export default Products

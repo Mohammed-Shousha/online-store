@@ -6,6 +6,7 @@
 	border-radius: 0.5rem;
 	color: #2F4858;
 	padding: 0;
+	margin-left: 4rem;
 }
 
 .item-container > img {
@@ -29,11 +30,12 @@
 }
 
 .item-container{
-	width: 50%
+	width: 70%
 }
 
-@media screen and (max-width: 780px){
+@media screen and (max-width: 1000px){
 	.item-container{
-		width: 80%
+		width: 85%;
+		align-self: center;
 	}
 }

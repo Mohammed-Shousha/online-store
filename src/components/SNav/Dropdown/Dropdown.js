@@ -14,7 +14,8 @@ const Dropdown=({name,elements=[]})=>{
 			</div>
 		</div>
 
-		:<div className='dropdown'>
+		:
+		<div className='dropdown'>
 			<p className= {SmallNav}> {name} </p>
 		</div>
 }

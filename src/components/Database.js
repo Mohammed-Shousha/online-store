@@ -82,28 +82,28 @@ export const FEATURES =[
 export const Pro = [{
 	id: 0,
 	photos: [img6, img3],
-	price: '100 EGP',
+	price: 100,
 	description: 'blah blah blah',
 	productName : 'Headset'
 },
 {
 	id: 1,
 	photos:[img7, img2],
-	price: '20000 EGP',
+	price: 20000,
 	description: 'blah blah blah',
 	productName: 'IPhone11'
 },
 {
 	id: 2,
 	photos: [img3, img6],
-	price: '120 EGP',
+	price: 120,
 	description: 'blah blah blah',
 	productName: 'Headset'
 },
 {
 	id: 3,
 	photos: [img2, img7],
-	price: '21000 EGP',
+	price: 21000,
 	description: 'blah blah blah',
 	productName: 'IPhone11'
 }]

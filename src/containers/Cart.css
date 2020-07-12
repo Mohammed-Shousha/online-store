@@ -1,0 +1,10 @@
+.cart-container{
+	display: flex;
+	justify-content: space-around;
+}
+
+@media screen and (max-width: 1000px){
+	.cart-container{
+		display: inline-grid;
+	}
+}

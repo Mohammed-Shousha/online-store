@@ -22,7 +22,7 @@ const Products =({title='', onAddingItem})=>{
 									<div className='product-card' key={product.id}>
 										<ProductCard
 										 photos = {product.photos}
-										 price = {product.price}
+										 price = {`${product.price} EGP`}
 										 productName = {product.productName}
 										 description='blah blah blah blah'/>
 										<button 

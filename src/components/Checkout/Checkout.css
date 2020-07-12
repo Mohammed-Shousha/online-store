@@ -1,0 +1,40 @@
+.checkout{
+	text-align: justify;
+	white-space: nowrap;
+	padding: 2rem 3.5rem 1rem 3.5rem;
+	/*display: inline-block;*/
+	margin : 0 3rem 3rem 0;
+	background: #184d47;
+	color: white;
+	border-radius: 0.5rem;
+}
+
+@media screen and (max-width: 1000px){
+	.checkout{
+		width: 85%;
+		margin: 2rem 4rem;
+	}
+}
+
+
+.checkout span{
+	word-spacing: -5px;
+	float: right;
+}
+
+.checkout-botton{
+	width: 100%;
+	border: 0;
+	margin-top: 1.5rem;
+	height: 3rem;
+	border-radius: 3px;
+	color:black;
+	background: #d6efc7;
+	outline: 0px solid transparent;
+	cursor: pointer;
+	transition-duration: .5s
+}
+
+.checkout-botton:hover{
+	transform: scale(1.05);
+}

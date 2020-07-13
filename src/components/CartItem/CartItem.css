@@ -14,16 +14,19 @@
 	width:25%;
 }
 
-.item-container > div {
+.product-details{
 	margin-left:2rem;
 	text-align: left;
 	text-transform: uppercase;
 }
 
-.remove{
-	margin: 3.5rem 0;
+.qty{
+	margin: 1.25rem 0.35rem;
+}
+
+.product-action{
+	margin:0 3rem 0 0;
 	position: absolute;
-	cursor: pointer;
 	right:0;
 	width: 2rem;
 	height: 2rem;

@@ -1,6 +1,6 @@
 import React from 'react'
-import Form from '../components/Form/Form'
 import Particles from 'react-particles-js'
+import Form from '../../components/Form/Form'
 
 const particles = {
   particles: {

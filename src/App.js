@@ -1,17 +1,19 @@
 import React, {useState} from 'react'
 import {BrowserRouter as Router, Switch,  Route} from 'react-router-dom'
 import './App.css'
-import Home from './containers/Home'
+import Home from './containers/Home/Home'
+import SignIn from './containers/SignIn/SignIn'
+import Cart from './containers/Cart/Cart'
 import Nav from './components/Nav/Nav'
-import SignIn from './containers/SignIn'
-import Cart from './containers/Cart'
+import {Pro} from './components/Database'
 
 
 const App =()=> {
 
+	const nProducts = Pro.length
 	const [name, setName] = useState('');
 	const [isSignedIn, setIsSignedIn] = useState(false)
-	const [cartItems, setCartItems] = useState([])
+	const [cartItems, setCartItems] = useState(Array(nProducts).fill(0))
 
 	const onSignIn =()=>{
 		setIsSignedIn(true)
@@ -20,27 +22,25 @@ const App =()=> {
 	const onSignOut =()=>{
 		setName('')
 		setIsSignedIn(false)
-		setCartItems([])
+		setCartItems(Array(nProducts).fill(0))
 	}
 
 	const onNameChange =(e)=>{
 		setName(e.target.value)
 	}
 
-	const onAddingItem =(product)=>{
+	const onAddingItem =(productId)=>{
 		if(isSignedIn){
-			setCartItems(cartItems.concat(product)) //at the end
-			//[product, ...cartItems] at the beginning
+			let newCartItems=[...cartItems]
+			newCartItems[productId]++
+			setCartItems(newCartItems)
 		}	
 	}
 
-	const onRemovingItem =(id)=>{
-		let arr = [...cartItems]
-		let index = arr.indexOf(id)
-		if (index !== -1) {
-		    arr.splice(index, 1)
-		    setCartItems(arr)
-		}
+	const onRemovingItem =(productId)=>{
+		let newCartItems=[...cartItems]
+		newCartItems[productId]--
+		setCartItems(newCartItems)
 	}
 
 

@@ -3,9 +3,10 @@ import './Checkout.css'
 import {Pro} from '../Database'
 
 
-const Checkout =({cartItems})=>{
+const Checkout =({cartItemsEntries})=>{
+	
 	const shippingFee = 100
-	let subtotal = cartItems.reduce((t, id)=> t+ Number(Pro[id].price),0)
+	let subtotal = cartItemsEntries.reduce((t, i)=> t+ Number(Pro[i[0]].price)*i[1] ,0)
 	let total = subtotal + shippingFee
 
 	return(

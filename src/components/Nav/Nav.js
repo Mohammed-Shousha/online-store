@@ -45,12 +45,14 @@ const Nav =({isSignedIn, onSignOut, name, cartItems}) =>{
 				</div>
 			</Link>
 
-			<Link to={isSignedIn? 'cart' : ''} onClick={()=>console.log(cartItems)}>
+			<Link to={isSignedIn? 'cart' : ''}>
 				<div className = {BigNav}>
 					 Cart
 					<div className='flex'>
 						<img alt='cart' src={cart} className='cart'/>
-						<div className={cartItems.length ? 's-circle': 's-circle hide'} >{cartItems.length}</div>
+						<div className={cartItems.every(x => x===0) ? 's-circle hide': 's-circle'}>
+							{cartItems.reduce((t,i) => t+i ,0)}
+						</div>
 					</div>
 				</div>
 			</Link>

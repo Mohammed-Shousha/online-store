@@ -36,3 +36,15 @@
 .dropdown:hover >p{
   color: #f7f1e3;
 }
+
+@media screen and (max-width: 780px){
+  .dropdown-content{
+    font-size: 0.7rem;
+  }
+}
+
+@media screen and (max-width: 600px){
+  .dropdown-content{
+    font-size: 0.5rem;
+  }
+}

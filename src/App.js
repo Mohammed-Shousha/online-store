@@ -1,11 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, lazy, Suspense} from 'react'
 import {BrowserRouter as Router, Switch,  Route} from 'react-router-dom'
 import './App.css'
-import Home from './containers/Home/Home'
-import SignIn from './containers/SignIn/SignIn'
-import Cart from './containers/Cart/Cart'
-import Nav from './components/Nav/Nav'
 import {Pro} from './components/Database'
+import Loading from './components/Loading/Loading' 
+const Home = lazy(()=> import('./containers/Home/Home')) 
+const Cart = lazy(()=> import('./containers/Cart/Cart')) 
+const SignIn = lazy(()=> import('./containers/SignIn/SignIn'))
+const Nav = lazy(()=> import('./components/Nav/Nav')) 
 
 
 const App =()=> {
@@ -46,44 +47,46 @@ const App =()=> {
 
 	return(
 		<Router>
-		    <div className="App">
-		    	<Switch>
-			    	<Route path='/' exact>
-			    		<div>
-				    	 	<Nav 
-				    		 onSignOut={onSignOut}  
-					    	 isSignedIn={isSignedIn}
-					    	 name={name}
-					    	 cartItems={cartItems} />
-				    	 	<Home onAddingItem={onAddingItem} />
-			    	 	</div>
-			    	</Route>
-		    		 
-		    		<Route path='/signin'>
-		    			<SignIn
-				    	  onSignIn={onSignIn}
-				    	  onNameChange={onNameChange}
-				    	  name={name}/>
-				    </Route>
+			<Suspense fallback={<Loading/>}>
+			    <div className="App">
+			    	<Switch>
+				    	<Route path='/' exact>
+				    		<div>
+					    	 	<Nav 
+					    		 onSignOut={onSignOut}  
+						    	 isSignedIn={isSignedIn}
+						    	 name={name}
+						    	 cartItems={cartItems} />
+						    	 <Home onAddingItem={onAddingItem} />
+				    	 	</div>
+				    	</Route>
+			    		 
+			    		<Route path='/signin'>
+			    			<SignIn
+					    	  onSignIn={onSignIn}
+					    	  onNameChange={onNameChange}
+					    	  name={name}/>
+					    </Route>
 
- 			    	<Route path='/cart'>
-		    			<div>
-			    			<Nav 
-				    		 onSignOut={onSignOut}  
-					    	 isSignedIn={isSignedIn}
-					    	 name={name}
-					    	 cartItems={cartItems} />
-			    			<Cart
-					     	 cartItems={cartItems}
-					     	 onRemovingItem={onRemovingItem}/>
-			     	 	</div>
-			     	</Route>
+	 			    	<Route path='/cart'>
+			    			<div>
+				    			<Nav 
+					    		 onSignOut={onSignOut}  
+						    	 isSignedIn={isSignedIn}
+						    	 name={name}
+						    	 cartItems={cartItems} />
+				    			<Cart
+						     	 cartItems={cartItems}
+						     	 onRemovingItem={onRemovingItem}/>
+				     	 	</div>
+				     	</Route>
 
-			     	<Route>
-			     	 	<h1> Under Construction </h1>
-			     	</Route>
-		     	</Switch>
-		    </div>
+				     	<Route path='*'>
+				     	 	<Loading/>
+				     	</Route>
+			     	</Switch>
+			    </div>
+		    </Suspense>
 	    </Router>
 	)
 } 

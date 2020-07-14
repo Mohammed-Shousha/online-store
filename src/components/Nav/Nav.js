@@ -7,12 +7,12 @@ import user from '../Icons/user.png'
 import list from '../Icons/list.png'
 import signout from '../Icons/signout.png'
 
-const BigNav ='flex l-nav pa1 ph4 grow center'
+const BigNav ='flex l-nav grow'
 
 
 const Nav =({isSignedIn, onSignOut, name, cartItems}) =>{
 	return(
-		<nav className ='fixed flex justify-end  bg-light-blue z-max'>
+		<nav className ='fixed flex justify-around bg-light-blue z-max'>
 
 			<Link to=''>
 				<img alt='logo' src={store} 
@@ -24,7 +24,7 @@ const Nav =({isSignedIn, onSignOut, name, cartItems}) =>{
 
 			<Link to={!isSignedIn? '/signin': ''}>
 				<div 
-				className = {!isSignedIn? BigNav : 'tooltipNav l-nav ph5 pa1 pointer center'}>
+				className = {!isSignedIn? BigNav : 'tooltipNav l-nav grow'}>
 					{!isSignedIn? 'SignIn or SignUp':'Hi '+ name}
 					{isSignedIn?
 					<div className='tooltipTextNav'>

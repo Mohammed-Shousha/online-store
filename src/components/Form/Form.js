@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import './Form.css'
 import fb from '../Icons/facebook.svg'
@@ -76,6 +76,44 @@ const Form =({name, onSignIn, onNameChange}) => {
 
 	const [haveAccount, setHaveAccount] = useState(true)
 
+	const nameInput = useRef(null)
+	const emailInput = useRef(null)
+	const passwordInput = useRef(null)
+	const phoneInput = useRef(null)
+	const signUpButton = useRef(null)
+
+	const signInEmailInput = useRef(null)
+	const signInPasswordInput = useRef(null)
+	const signInButton = useRef(null)
+
+	const handleKeyUp =(e)=> {
+		if(e.keyCode === 13){
+			switch(e.target.type){
+				case 'text' :
+					emailInput.current.focus()
+					break
+				case 'email':
+					e.target.id === 'sign-up-email'?
+						passwordInput.current.focus()
+					: 	signInPasswordInput.current.focus()
+					break
+				case 'password':
+					e.target.id ==='sign-up-password'?
+						phoneInput.current.focus()
+					:	signInButton.current.click()
+					break
+				default :
+					signUpButton.current.click()
+			}
+		}
+  	}
+
+  	useEffect(()=>{
+  		haveAccount?
+  		 	signInEmailInput.current.focus()
+  		:	nameInput.current.focus()
+  	},[haveAccount])
+
 
 	return(
 		<div className='body'>
@@ -83,44 +121,58 @@ const Form =({name, onSignIn, onNameChange}) => {
 			<div className={haveAccount?"allcontainer" : "allcontainer right-panel-active"}>
 			
 				<div className="form-container sign-up-container">
-					<form  className='form'>
+					<div  className='form'>
 						<h1 className='header'>Create Account</h1>
 						<div className="social-container">
 							<a className="social" href='facebook'><img src={fb} alt='facebook'/></a>
 							<a className="social" href='google'><img src={google} alt='google'/></a>
 						</div>
 						<span className='sub'>or use your email for registration</span>
-						<input className='input' type="text" placeholder="Name" onChange={handleNameChange} required />
-						<input className='input'type="email" placeholder="Email" onChange={handleEmailChange} required/>
-						<input className='input' type="password" placeholder="Password" onChange={handlePasswordChange} required/>
-						<input className='input' type="tel" placeholder="01234567890" onChange={handlePhoneChange} required />
+						<input className='input' type="text" placeholder="Name" 
+						 ref={nameInput} onKeyUp={handleKeyUp} onChange={handleNameChange} 
+						/>
+						<input className='input' type="email" placeholder="Email" id='sign-up-email'
+						 ref={emailInput} onKeyUp={handleKeyUp} onChange={handleEmailChange} 
+						/>
+						<input className='input' type="password" placeholder="Password" id='sign-up-password'
+						 ref={passwordInput} onKeyUp={handleKeyUp} onChange={handlePasswordChange} 
+						/>
+						<input className='input' type="tel" placeholder="01234567890"
+						 ref={phoneInput} onKeyUp={handleKeyUp} onChange={handlePhoneChange} 
+						/>
 						<p className={(validEmail && validPhone )? 'valid hide':'valid'}>
 						 Please Enter A Valid {!validPhone? 'Phone': 'Email'}
-						 </p>
-						<Link onClick={handleSubmitSignUp} to={signUpFilled? '' : 'signin'}>
-							<button className='bt' onClick={()=> console.log(signUpData)} >
+						</p>
+						<Link  to={signUpFilled? '' : 'signin'}>
+							<button ref={signUpButton} className='bt' onClick={handleSubmitSignUp}>
 							 Sign Up 
 							</button>
 						</Link>
-					</form>
+					</div>
 				</div>
 
 				<div className="form-container sign-in-container">
-					<form className='form'>
+					<div className='form'>
 						<h1 className='header'>Sign In</h1>
 						<div className="social-container">
 							<a className="social" href='facebook'><img src={fb} alt='facebook'/></a>
 							<a className="social" href='google'><img src={google} alt='google'/></a>
 						</div>
 						<span className='sub'>or use your account</span>
-						<input className='input' type="email" placeholder="Email" onChange={handleSignInEmailChange} required/>
-						<input className='input' type="password" placeholder="Password" onChange={handleSignInPasswordChange} required/>
+						<input className='input' type="email" placeholder="Email"
+						 ref={signInEmailInput} onKeyUp={handleKeyUp} onChange={handleSignInEmailChange} 
+						/>
+						<input className='input' type="password" placeholder="Password" 
+						 ref={signInPasswordInput} onKeyUp={handleKeyUp} onChange={handleSignInPasswordChange} 
+						/>
 						<a href='resetPassword'className='link'>Forgot your password?</a>
 						<p className={validEmail ? 'valid hide': 'valid'}> Wrong Email or Password</p>
-						<Link onClick={handleSubmitSignIn} to={signInFilled? '' : 'signin'} >
-							<button className='bt'> Sign In </button>						
+						<Link to={signInFilled? '' : 'signin'} >
+							<button ref={signInButton} className='bt' onClick={handleSubmitSignIn}>
+							 Sign In
+							</button>						
 						</Link>
-					</form>
+					</div>
 				</div>
 
 				<div className="overlay-container">

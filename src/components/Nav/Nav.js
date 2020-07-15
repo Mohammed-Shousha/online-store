@@ -22,7 +22,7 @@ const Nav =({isSignedIn, onSignOut, name, cartItems}) =>{
 			<input type='searchBox' placeholder='Search'
 			 className='search center' contentEditable='true'/> 
 
-			<Link to={!isSignedIn? '/signin': ''}>
+			<Link to={!isSignedIn? '/signin': location => location}>
 				<div 
 				className = {!isSignedIn? BigNav : 'tooltipNav l-nav grow'}>
 					{!isSignedIn? 'SignIn or SignUp':'Hi '+ name}
@@ -36,10 +36,12 @@ const Nav =({isSignedIn, onSignOut, name, cartItems}) =>{
 							<img src={user} alt='user' className='h1 w1 pr2' />
 							Profile
 						 </div>
-						 <div id='signout' onClick={()=>onSignOut()} >
-							<img src={signout} alt='signout' className='h1 w1 pr2'/>
-							Sign Out
-						  </div> 
+						 <Link to='/'>
+							 <div id='signout' onClick={onSignOut} >
+								<img src={signout} alt='signout' className='h1 w1 pr2'/>
+								Sign Out
+							  </div> 
+						 </Link>
 					</div>
 					: ''}
 				</div>

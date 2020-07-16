@@ -6,7 +6,9 @@ import Loading from './components/Loading/Loading'
 const Home = lazy(()=> import('./containers/Home/Home')) 
 const Cart = lazy(()=> import('./containers/Cart/Cart')) 
 const SignIn = lazy(()=> import('./containers/SignIn/SignIn'))
+const Checkout = lazy(()=> import('./containers/Checkout/Checkout')) 
 const Nav = lazy(()=> import('./components/Nav/Nav')) 
+
 
 
 const App =()=> {
@@ -80,6 +82,10 @@ const App =()=> {
 						     	 cartItems={cartItems}
 						     	 onRemovingItem={onRemovingItem}/>
 				     	 	</div>
+				     	</Route>
+
+				     	<Route path='/checkout'>
+				     	 	<Checkout/>
 				     	</Route>
 
 				     	<Route path='*'>

@@ -18,6 +18,19 @@ import instagram from './Icons/instagram.svg'
 
 export const slideShowImages = [img1, img2, img3, img4, img5, img6, img7]
 
+export const STEPS=[{
+	id:1,
+	name:'Shipping Address'
+},
+{
+	id:2,
+	name:'Payment'
+},
+{
+	id:3,
+	name:'Order Placed'
+}]
+
 export const CATEGORIES = [{
 	category:'HEADPHONES',
 	items:['Jbl', 'Sony', 'Mi']

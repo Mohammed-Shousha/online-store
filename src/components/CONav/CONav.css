@@ -1,0 +1,60 @@
+.checkout-nav{
+	height: 4rem;
+	background: lightblue;
+	display: flex;
+	justify-content: space-between;
+}
+
+.back-arrow{
+	height: 1.5rem;
+	width: 1.5rem;
+	margin: 1.25rem 0.75rem;
+	margin-right: 0.25rem;
+}
+
+.checkout-logo{
+	height: 2.5rem;
+	width: 2.5rem;
+	margin: 0.75rem 1rem;
+
+}
+
+.num-circle{
+	border-radius: 50%;
+	background:transparent;
+	color: grey;
+	border: 1px grey solid;
+	width: 1.5rem;
+	height: 1.5rem;
+	margin: -0.1rem 1rem;
+	padding: 0.2rem;
+}
+
+.active-circle{
+	background: #2196f3;
+	border: none;
+	color: white;
+}
+
+.checkout-step{
+	display: flex;
+	margin: 1rem;
+}
+
+.active-step{
+	font-weight: bold;
+}
+
+.done{
+	height: 1.5rem;
+	width: 1.5rem;
+	margin: -0.1rem 1rem;
+
+}
+
+@media screen and (max-width: 780px){
+	.checkout-text{
+		font-size: 1rem;
+		margin: 1.5rem 0;
+	}
+}

@@ -1,4 +1,4 @@
-.checkout{
+.order-summary{
 	text-align: justify;
 	white-space: nowrap;
 	padding: 2rem 3.5rem 1rem 3.5rem;
@@ -10,14 +10,14 @@
 }
 
 @media screen and (max-width: 1000px){
-	.checkout{
+	.order-summary{
 		width: 85%;
 		margin: 2rem 4rem;
 	}
 }
 
 
-.checkout span{
+.order-summary span{
 	word-spacing: -5px;
 	float: right;
 }
@@ -30,7 +30,7 @@
 	border-radius: 3px;
 	color:black;
 	background: #d6efc7;
-	outline: 0px solid transparent;
+	outline: none;
 	cursor: pointer;
 	transition-duration: .5s
 }

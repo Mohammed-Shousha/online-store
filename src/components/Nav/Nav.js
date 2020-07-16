@@ -36,8 +36,8 @@ const Nav =({isSignedIn, onSignOut, name, cartItems}) =>{
 							<img src={user} alt='user' className='h1 w1 pr2' />
 							Profile
 						 </div>
-						 <Link to='/'>
-							 <div id='signout' onClick={onSignOut} >
+						 <Link to='/' onClick={onSignOut}>
+							 <div id='signout'  >
 								<img src={signout} alt='signout' className='h1 w1 pr2'/>
 								Sign Out
 							  </div> 

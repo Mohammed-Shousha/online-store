@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import './Cart.css'
 import SNav from '../../components/SNav/SNav'
 import CartItem from '../../components/CartItem/CartItem'
-import Checkout from '../../components/Checkout/Checkout'
+import OrderSummary from '../../components/OrderSummary/OrderSummary'
 import Footer from '../../components/Footer/Footer'
 
 
@@ -33,7 +33,7 @@ const Cart = ({cartItems, onRemovingItem})=>{
 							 onRemovingItem={onRemovingItem}
 							 cartItemsEntries={cartItemsEntries}/>)}
 					</div>
-					<Checkout cartItemsEntries={cartItemsEntries}/>
+					<OrderSummary cartItemsEntries={cartItemsEntries}/>
 				</div>
 			}
 			<Footer/>

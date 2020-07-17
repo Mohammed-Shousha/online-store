@@ -18,6 +18,21 @@ import instagram from './Icons/instagram.svg'
 
 export const slideShowImages = [img1, img2, img3, img4, img5, img6, img7]
 
+export const Addresses = [{
+	id: 1,
+	label:'home',
+	Name: 'Mohammed Shousha',
+	Address: 'Second Floor, Apartment 3 Mohamed El Adawy - Mansoura Qism 2 - Mansoura - Dakahlia Governorate',
+	Phone: '01202973528'
+},
+{
+	id:2,
+	label:'work',
+	Name:'Mohammed Shousha',
+	Address: 'Second Floor, Apartment 3 Mohamed El Adawy - Mansoura Qism 2 - Mansoura - Dakahlia Governorate',
+	Phone: '01202973528'
+}]
+
 export const STEPS=[{
 	id:1,
 	name:'Shipping Address'

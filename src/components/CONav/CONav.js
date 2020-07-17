@@ -16,16 +16,16 @@ const CONav = ({step, handleBack})=>{
 				<Link to={step===1 ?'/cart': location=> location} onClick={handleBack}>
 					<div className='flex'>
 						<img src={back} alt='back' className='back-arrow'/>
-						<h2 className='checkout-text'>{Back[step-1] }</h2>
+						<h3 className='checkout-text'>{Back[step-1] }</h3>
 					</div>
 				</Link>
-				<h2 className='checkout-text'> Checkout </h2>
+				<h3 className='checkout-text'> Checkout </h3>
 				<Link to='/'>
 					<img src={logo} alt='logo' className='checkout-logo'/>
 				</Link>
 			</nav>
 
-			<nav className='flex justify-around'>
+			<nav className='flex justify-around mv3'>
 				{STEPS.map(s=>{
 					return(
 						<div key={s.id} className={s.id === step?'checkout-step active-step': 'checkout-step'}>

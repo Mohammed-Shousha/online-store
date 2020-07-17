@@ -1,0 +1,66 @@
+.shipping-title{
+	text-align: left;
+	margin: 1.5rem 3rem;
+}
+
+.shipping-details{
+	border: 1px solid grey;
+	border-radius: 3px;
+	width: 20%;
+	margin: 1rem 0rem 1rem 4rem;
+	padding: 1rem 0.5rem ;
+	box-shadow: -5px 5px 5px 1px #b1b493;
+	background: #f7f7ee;
+}
+
+.shipping-details:hover{
+	border:1.5px solid #2196f3;
+}
+
+.active-address{
+	border:1.5px solid #2196f3;
+}
+
+.shipping-details > h3{
+	text-align: center;
+	text-transform: uppercase;
+	margin: 0.1rem 0;
+}
+
+.shipping-details div{
+	text-align: left;
+	color: grey;
+	margin: 1rem 0.5rem;
+}
+
+.shipping-name{
+	font-weight: 600;
+	color: black;
+	margin: 0.25rem 0 0.5rem 0;
+}
+
+.shipping-address{
+	color: black;	
+	font-size: 0.8rem;
+	margin: 0.25rem 0 0.5rem 0;
+
+}
+
+.shipping-phone{
+	color: black;
+	margin: 0.25rem 0 0.5rem 0;
+	font-size: 0.9rem;
+}
+
+.new-address{
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+}
+
+.add-sign{
+	width: 1rem;
+	margin: 0 0.75rem;
+}
+
+

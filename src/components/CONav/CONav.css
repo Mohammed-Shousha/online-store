@@ -52,6 +52,10 @@
 
 }
 
+.checkout-text{
+	margin: 1.4rem 0;
+}
+
 @media screen and (max-width: 780px){
 	.checkout-text{
 		font-size: 1rem;

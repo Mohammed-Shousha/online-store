@@ -1,21 +1,24 @@
-import React, {useState, useRef, useEffect} from 'react'
+import React, {Fragment, useState, useRef, useEffect} from 'react'
 import {Link} from 'react-router-dom'
+import GMap from '../GMap/GMap'
 import './Form.css'
 import fb from '../Icons/facebook.svg'
 import google from '../Icons/google.svg'
 
 
-const Form =({name, onSignIn, onNameChange}) => {
+const Form =({name, address, onSignIn, setName, setAddress}) => {
 
 	const [signUpData, setSignUpData] = useState({
 		email:'',
 		password:'',
-		phone:''
+		phone:'',
 	})
 	const {email, password, phone} = signUpData
 
+	const [marker, setMarker] = useState({lat:'', lng:''})
+
 	const handleNameChange=(e)=>{
-		onNameChange(e)
+		setName(e.target.value)
 	}
 
 	const handleEmailChange=(e)=>{
@@ -30,6 +33,15 @@ const Form =({name, onSignIn, onNameChange}) => {
 		setSignUpData({ ...signUpData, phone:e.target.value})
 	}
 
+	const handleAddressChange=(e)=>{
+		setAddress(e.target.value)
+	}
+
+	const handleAddressConfirm=()=>{
+		setDetectAddress(false)
+		addressInput.current.value=`lat:${marker.lat}  lng:${marker.lng}`
+		setAddress(`lat:${marker.lat}  lng:${marker.lng}`)
+	}
 
 	const [signInData, setSignInData ] = useState({
 		signInEmail:'',
@@ -47,7 +59,7 @@ const Form =({name, onSignIn, onNameChange}) => {
 
 	const emailFormat = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/
 	const phoneFormat = /^\d{11}$/
-	const signUpFilled = name && email.match(emailFormat) && password  && phone.match(phoneFormat)
+	const signUpFilled = name && email.match(emailFormat) && password  && phone.match(phoneFormat) && address
 	const signInFilled = signInEmail.match(emailFormat)  && signInPassword
 
 	const [valid, setValid] = useState({
@@ -76,10 +88,13 @@ const Form =({name, onSignIn, onNameChange}) => {
 
 	const [haveAccount, setHaveAccount] = useState(true)
 
+	const [detectAddress, setDetectAddress] = useState(false)
+
 	const nameInput = useRef(null)
 	const emailInput = useRef(null)
 	const passwordInput = useRef(null)
 	const phoneInput = useRef(null)
+	const addressInput = useRef(null)
 	const signUpButton = useRef(null)
 
 	const signInEmailInput = useRef(null)
@@ -102,6 +117,9 @@ const Form =({name, onSignIn, onNameChange}) => {
 						phoneInput.current.focus()
 					:	signInButton.current.click()
 					break
+				case 'tel':
+					addressInput.current.focus()
+					break
 				default :
 					signUpButton.current.click()
 			}
@@ -116,6 +134,7 @@ const Form =({name, onSignIn, onNameChange}) => {
 
 
 	return(
+		<Fragment>
 		<div className='body'>
 
 			<div className={haveAccount?"allcontainer" : "allcontainer right-panel-active"}>
@@ -123,11 +142,6 @@ const Form =({name, onSignIn, onNameChange}) => {
 				<div className="form-container sign-up-container">
 					<div  className='form'>
 						<h1 className='header'>Create Account</h1>
-						<div className="social-container">
-							<a className="social" href='facebook'><img src={fb} alt='facebook'/></a>
-							<a className="social" href='google'><img src={google} alt='google'/></a>
-						</div>
-						<span className='sub'>or use your email for registration</span>
 						<input className='input' type="text" placeholder="Name" 
 						 ref={nameInput} onKeyUp={handleKeyUp} onChange={handleNameChange} 
 						/>
@@ -137,12 +151,18 @@ const Form =({name, onSignIn, onNameChange}) => {
 						<input className='input' type="password" placeholder="Password" id='sign-up-password'
 						 ref={passwordInput} onKeyUp={handleKeyUp} onChange={handlePasswordChange} 
 						/>
-						<input className='input' type="tel" placeholder="01234567890"
+						<input className='input ' type="tel" placeholder="01234567890"
 						 ref={phoneInput} onKeyUp={handleKeyUp} onChange={handlePhoneChange} 
+						/>
+						<textarea className='input' placeholder='Address' rows='2'
+						 ref={addressInput} onChange={handleAddressChange} onKeyUp={handleKeyUp}
 						/>
 						<p className={(validEmail && validPhone )? 'valid hide':'valid'}>
 						 Please Enter A Valid {!validPhone? 'Phone': 'Email'}
 						</p>
+						<button className='bt' onClick={()=>setDetectAddress(true)}>
+						 Detect My Location 
+						</button>
 						<Link  to={signUpFilled? '' : 'signin'}>
 							<button ref={signUpButton} className='bt' onClick={handleSubmitSignUp}>
 							 Sign Up 
@@ -192,10 +212,19 @@ const Form =({name, onSignIn, onNameChange}) => {
 
 					</div>
 				</div>
-
 			</div>
-
 		</div>
+		
+		<div className={detectAddress? 'map-con' : 'map-con hide'}>
+			<GMap 
+			 setMarker={setMarker}
+			 marker={marker}
+			 />
+			<button className='bt' style={{'background':'black'}} onClick={handleAddressConfirm}> 
+			 Confirm
+			</button>
+		</div>
+		</Fragment>
 	)
 	
 }

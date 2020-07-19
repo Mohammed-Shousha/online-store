@@ -7,6 +7,7 @@ const Home = lazy(()=> import('./containers/Home/Home'))
 const Cart = lazy(()=> import('./containers/Cart/Cart')) 
 const SignIn = lazy(()=> import('./containers/SignIn/SignIn'))
 const Checkout = lazy(()=> import('./containers/Checkout/Checkout')) 
+const MapPage = lazy(()=> import('./containers/MapPage/MapPage')) 
 const Nav = lazy(()=> import('./components/Nav/Nav')) 
 
 
@@ -14,9 +15,11 @@ const Nav = lazy(()=> import('./components/Nav/Nav'))
 const App =()=> {
 
 	const nProducts = Pro.length
-	const [name, setName] = useState('');
+	const [name, setName] = useState('')
+	const [address, setAddress] = useState('')
 	const [isSignedIn, setIsSignedIn] = useState(false)
 	const [cartItems, setCartItems] = useState(Array(nProducts).fill(0))
+
 
 
 	const onSignIn =()=>{
@@ -29,9 +32,9 @@ const App =()=> {
 		setCartItems(Array(nProducts).fill(0))
 	}
 
-	const onNameChange =(e)=>{
-		setName(e.target.value)
-	}
+	// const onNameChange =(e)=>{
+	// 	setName(e.target.value)
+	// }
 
 	const onAddingItem =(productId)=>{
 		if(isSignedIn){
@@ -67,8 +70,10 @@ const App =()=> {
 			    		<Route path='/signin'>
 			    			<SignIn
 					    	  onSignIn={onSignIn}
-					    	  onNameChange={onNameChange}
-					    	  name={name}/>
+					    	  name={name}
+					    	  setName={setName}
+					    	  address={address}
+					    	  setAddress={setAddress}/>
 					    </Route>
 
 	 			    	<Route path='/cart'>
@@ -85,7 +90,13 @@ const App =()=> {
 				     	</Route>
 
 				     	<Route path='/checkout'>
-				     	 	<Checkout/>
+				     	 	<Checkout
+				     	 	name={name}
+				     	 	address={address}/>
+				     	</Route>
+
+				     	<Route path='/map'>
+				     	 	<MapPage/>
 				     	</Route>
 
 				     	<Route path='*'>

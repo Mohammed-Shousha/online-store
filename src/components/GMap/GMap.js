@@ -1,14 +1,14 @@
-import React, {useState, useRef} from 'react'
+import React, {useRef} from 'react'
 import { GoogleMap, Marker, useLoadScript} from "@react-google-maps/api"
 import Geocode from "react-geocode"
-import './Map.css'
+import './GMap.css'
 import compass from '../Icons/compass.svg'
 import Loading from '../Loading/Loading'
 
 
 const mapContainerStyle = {
   height: "80vh",
-  width: "80vw",
+  width: "85vw",
 }
 
 const center = {
@@ -22,19 +22,7 @@ const options = {
 }
 
 
-const GMap =()=>{
-
-	const [marker, setMarker] = useState({lat:'', lng:''})
-
-	const onMapClick =(e)=> {
-	    setMarker(
-	      {
-	        lat: e.latLng.lat(),
-	        lng: e.latLng.lng(),
-	      },
-	    )
-	}
-
+const GMap =({marker, setMarker})=>{
 
 	const {isLoaded, loadError} =useLoadScript({
 		googleMapsApiKey : 'AIzaSyAec45bB1-bXR0LZ7ac3C72I_eurXDcins'
@@ -46,6 +34,13 @@ const GMap =()=>{
    		mapRef.current = map
   	}, [])
 
+  	const onMapClick =(e)=> {
+	    setMarker({
+	        lat: e.latLng.lat(),
+	        lng: e.latLng.lng(),
+	    })
+	}
+
     const panTo = React.useCallback(({ lat, lng }) => {
 	    mapRef.current.panTo({ lat, lng })
 	    mapRef.current.setZoom(13.5)
@@ -55,9 +50,9 @@ const GMap =()=>{
 		navigator.geolocation.getCurrentPosition(
           ({coords}) => {
             setMarker({
-              lat: coords.latitude,
-              lng: coords.longitude,
-            })
+          		lat: coords.latitude,
+          		lng: coords.longitude,
+        	})
 	        panTo({
 	        	lat: coords.latitude,
 	            lng: coords.longitude,

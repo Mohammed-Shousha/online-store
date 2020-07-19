@@ -24,13 +24,16 @@ const particles = {
   }
 }
 
-const SignIn =({onSignIn, onNameChange, name})=>{
+
+const SignIn =({onSignIn, setName, name, address, setAddress})=>{
 	return(
 		<div>
       	<Form
       	 onSignIn={onSignIn}
-      	 onNameChange={onNameChange} 
-      	 name={name} />
+      	 name={name}
+      	 setName={setName}
+         address={address}
+         setAddress={setAddress}/>
     		<Particles
     		 className='particles absolute top-0 left-0 w-100 h-100'
     		 params={particles} />

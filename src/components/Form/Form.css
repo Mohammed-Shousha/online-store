@@ -5,11 +5,20 @@
   align-items: center;
   flex-direction: column;
   margin-top: 7rem; 
+  overflow: hidden;
+}
+
+.map-con{
+  position: absolute;
+  top:0;
+  right: 0;
+  left: 0;
+  z-index: 999;
 }
 
 .header {
   font-weight: bold;
-  margin: 0;
+  margin: 12px 0;
 }
 
 
@@ -55,6 +64,7 @@
   cursor: pointer;
   text-transform: uppercase;
   transition: transform 80ms ease-in;
+  margin: 0px 5px 5px;
 }
 
 .bt:active {
@@ -85,8 +95,12 @@
   background-color: #eee;
   border: none;
   padding: 12px 15px;
-  margin: 8px 0;
+  margin: 8px 0  ;
   width: 100%;
+}
+
+textarea{
+  resize: none;
 }
 
 .allcontainer {

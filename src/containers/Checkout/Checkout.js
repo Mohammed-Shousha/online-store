@@ -2,11 +2,10 @@ import React, {useState} from 'react'
 import './Checkout.css'
 import CONav from '../../components/CONav/CONav'
 import Shipping from '../../components/Shipping/Shipping'
-import GMap from '../../components/Map/Map'
 import Footer from '../../components/Footer/Footer'
 
 
-const Checkout = ()=>{
+const Checkout = ({name, address})=>{
 
 	const [step, setStep] = useState(1)
 
@@ -21,7 +20,9 @@ const Checkout = ()=>{
 	return (
 		<div>
 			<CONav step={step} handleBack={handleBack}/>
-			{step===1? <Shipping/>
+			{step===1? <Shipping 
+						name={name}
+						address={address}/>
 			:step===2? <h1> Hi </h1>
 			:<h1> There </h1>}
 

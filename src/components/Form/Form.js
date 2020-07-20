@@ -6,19 +6,13 @@ import fb from '../Icons/facebook.svg'
 import google from '../Icons/google.svg'
 
 
-const Form =({name, address, onSignIn, setName, setAddress}) => {
+const Form =({signUpData, setSignUpData, marker, setMarker, onSignIn}) => {
 
-	const [signUpData, setSignUpData] = useState({
-		email:'',
-		password:'',
-		phone:'',
-	})
-	const {email, password, phone} = signUpData
-
-	const [marker, setMarker] = useState({lat:'', lng:''})
+	
+	const {name, email, password, phone, addresses} = signUpData
 
 	const handleNameChange=(e)=>{
-		setName(e.target.value)
+		setSignUpData({ ...signUpData, name:e.target.value})
 	}
 
 	const handleEmailChange=(e)=>{
@@ -34,13 +28,16 @@ const Form =({name, address, onSignIn, setName, setAddress}) => {
 	}
 
 	const handleAddressChange=(e)=>{
-		setAddress(e.target.value)
+		setSignUpData({ ...signUpData,
+		 addresses:[{name:name, address:e.target.value, phone:phone}]})
 	}
 
 	const handleAddressConfirm=()=>{
 		setDetectAddress(false)
 		addressInput.current.value=`lat:${marker.lat}  lng:${marker.lng}`
-		setAddress(`lat:${marker.lat}  lng:${marker.lng}`)
+		setSignUpData({ ...signUpData,
+		 addresses:[{name:name,address:`lat:${marker.lat}  lng:${marker.lng}`,phone:phone}]})
+		setMarker({lat:'',lng:''})
 	}
 
 	const [signInData, setSignInData ] = useState({
@@ -59,7 +56,7 @@ const Form =({name, address, onSignIn, setName, setAddress}) => {
 
 	const emailFormat = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/
 	const phoneFormat = /^\d{11}$/
-	const signUpFilled = name && email.match(emailFormat) && password  && phone.match(phoneFormat) && address
+	const signUpFilled = name && email.match(emailFormat) && password  && phone.match(phoneFormat) && addresses.length? addresses[0].address : false 
 	const signInFilled = signInEmail.match(emailFormat)  && signInPassword
 
 	const [valid, setValid] = useState({
@@ -69,6 +66,7 @@ const Form =({name, address, onSignIn, setName, setAddress}) => {
 	const {validEmail, validPhone} = valid
 
 	const handleSubmitSignUp=()=>{
+		console.log(signUpData)
 		if(signUpFilled){
 			onSignIn()
 		}else if (!email.match(emailFormat)){
@@ -217,16 +215,19 @@ const Form =({name, address, onSignIn, setName, setAddress}) => {
 		
 		<div className={detectAddress? 'map-con' : 'map-con hide'}>
 			<GMap 
-			 setMarker={setMarker}
 			 marker={marker}
+			 setMarker={setMarker}
 			 />
-			<button className='bt' style={{'background':'black'}} onClick={handleAddressConfirm}> 
+			<button 
+			 className='bt' 
+			 style={{'background':'#342b38'}}
+			 onClick={handleAddressConfirm}
+			> 
 			 Confirm
 			</button>
 		</div>
 		</Fragment>
 	)
-	
 }
 
 export default Form

@@ -56,11 +56,34 @@
 	display: flex;
   	align-items: center;
   	justify-content: center;
+  	cursor: pointer;
 }
 
 .add-sign{
 	width: 1rem;
 	margin: 0 0.75rem;
+}
+
+.map-nav{
+	width: 85vw;
+	background: white;
+	display: inline-grid;
+}
+
+.confirm-location{
+	position: absolute;
+	border-radius: 20px;
+	border: 1px solid #342b38;
+	background-color: #342b38;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	cursor: pointer;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+	margin: 0px 5px 5px;
 }
 
 

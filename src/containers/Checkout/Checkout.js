@@ -5,7 +5,7 @@ import Shipping from '../../components/Shipping/Shipping'
 import Footer from '../../components/Footer/Footer'
 
 
-const Checkout = ({name, address})=>{
+const Checkout = ({signUpData,setSignUpData, marker, setMarker})=>{
 
 	const [step, setStep] = useState(1)
 
@@ -17,16 +17,23 @@ const Checkout = ({name, address})=>{
 		setStep(step-1)
 	}
 
+	const [newAddress, setNewAddress]= useState(false)
+
 	return (
 		<div>
 			<CONav step={step} handleBack={handleBack}/>
 			{step===1? <Shipping 
-						name={name}
-						address={address}/>
+						 signUpData={signUpData}
+						 setSignUpData={setSignUpData}
+						 marker={marker}
+					     setMarker={setMarker}
+					     newAddress={newAddress}
+					     setNewAddress={setNewAddress}
+					    />
 			:step===2? <h1> Hi </h1>
 			:<h1> There </h1>}
 
-			<button className='checkout-continue' onClick={handleNext}> Continue </button>
+			<button className={newAddress? 'hide checkout-continue':'checkout-continue'} onClick={handleNext}> Continue </button>
 			<Footer/>
 		</div>
 	)

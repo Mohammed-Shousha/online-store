@@ -1,8 +1,8 @@
-import React, {useRef} from 'react'
+import React, {useRef, Fragment} from 'react'
 import { GoogleMap, Marker, useLoadScript} from "@react-google-maps/api"
 import Geocode from "react-geocode"
 import './GMap.css'
-import compass from '../Icons/compass.svg'
+import pin from '../Icons/pin.svg'
 import Loading from '../Loading/Loading'
 
 
@@ -79,12 +79,9 @@ const GMap =({marker, setMarker})=>{
 	if(!isLoaded) return <Loading/>
 
 	return(
+		<Fragment>
+		<h3 className='add-new-address'> Add New Address </h3>
 		<div className='map-container'>
-			<img 
-			 src={compass} alt='compass' 
-			 className='compass'
-			 onClick={Locate} 
-			/>
 			<GoogleMap
 	         mapContainerStyle={mapContainerStyle}
 	         zoom={6.15}
@@ -93,13 +90,17 @@ const GMap =({marker, setMarker})=>{
 	         onClick={onMapClick}
 	         onLoad={onMapLoad}
 	        >
+	        <button onClick={Locate} className='locate-me-button compass'>
+				<img src={pin} alt='pin' className='pin'/>
+				Locate Me
+			</button>
 	      		<Marker
-	      		 key={`${marker.lat}-${marker.lng}`}
 	      		 position={{ lat: marker.lat, lng: marker.lng }} 
 	      		 onClick={()=>console.log(marker)}
 	      		/>
 	      	</GoogleMap>
-      	</div>	
+      	</div>
+      	</Fragment>	
 	)
 }
 

@@ -25,15 +25,15 @@ const particles = {
 }
 
 
-const SignIn =({onSignIn, setName, name, address, setAddress})=>{
+const SignIn =({onSignIn, signUpData, setSignUpData, marker, setMarker})=>{
 	return(
 		<div>
       	<Form
       	 onSignIn={onSignIn}
-      	 name={name}
-      	 setName={setName}
-         address={address}
-         setAddress={setAddress}/>
+      	 signUpData={signUpData}
+         setSignUpData={setSignUpData}
+         marker={marker}
+         setMarker={setMarker}/>
     		<Particles
     		 className='particles absolute top-0 left-0 w-100 h-100'
     		 params={particles} />

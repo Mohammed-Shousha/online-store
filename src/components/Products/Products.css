@@ -13,7 +13,7 @@
 	border: 0;
 	border-radius: 0.25rem;
 	padding: 5px 0 0 0 ;
-	outline: 0px solid transparent;
+	outline: none;
 }
 
 .add-to-cart:hover{

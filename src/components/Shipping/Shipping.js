@@ -2,43 +2,47 @@ import React, {Fragment, useState} from 'react'
 import './Shipping.css'
 import GMap from '../GMap/GMap'
 import add from '../Icons/add.svg'
-import {Addresses} from '../Database'
 
 
-const Shipping =({name, address})=>{
+const Shipping =({signUpData,setSignUpData, marker, setMarker, newAddress, setNewAddress})=>{
 
-	const [addressId, setAddressId] = useState(1)
+	const {name, addresses, phone} = signUpData
 
-	const handleAddressChange =(id)=>{
-		setAddressId(id)
+	const [selectedAddress, setSelectedAddress] = useState(0)
+
+	const handleAddressSelect =(id)=>{
+		setSelectedAddress(id)
 	}
 
-	const [newAddress, setNewAddress]= useState(false)
-
+	const handleAddingAddress =()=>{
+		setNewAddress(false)
+		setSignUpData({ ...signUpData,
+		 addresses:[...addresses,{name:name, address:`lat:${marker.lat}  lng:${marker.lng}`, phone:phone}]})
+	}
 
 	return(
 		<Fragment>
 			<h2 className='shipping-title'> Shipping Address</h2>
 			{!newAddress?
 			<div className='flex'>
-				{Addresses.map(a=>{
+				{addresses.map((a,i)=>{
 					return(
-						<div key={a.id}
-						 onClick={()=>handleAddressChange(a.id)} 
-						 className={a.id===addressId? 'shipping-details active-address': 'shipping-details'}
+						<div key={i}
+						 onClick={()=>handleAddressSelect(i)} 
+						 className={i===selectedAddress? 'shipping-details active-address': 'shipping-details'}
 						>
-							<h3>{a.label}</h3>
+							<h3>Address {i+1}</h3>
 							<div>
 								Name
-								<p className='shipping-name'>{name}</p>
+								<p className='shipping-name'>{a.name}</p>
 							</div>
 							<div>
 								Address
-								<p className='shipping-address'>{address}</p>
+								<p className='shipping-address'>{a.address}</p>
 							</div>
 							<div>
 								Phone
-								<p className='shipping-phone'>{a.Phone}</p>
+								<p className='shipping-phone'>{a.phone}</p>
 							</div>
 						</div>
 					)
@@ -52,8 +56,16 @@ const Shipping =({name, address})=>{
 				</div>
 			</div>
 			:<Fragment>
-				<h1> TO BE Map </h1>
-				<button onClick={()=>setNewAddress(false)}> Confirm</button>
+				<GMap
+				 marker={marker}
+				 setMarker={setMarker}
+				/>
+				<button
+				 className='confirm-location'
+				 onClick={handleAddingAddress}
+				 >
+					Confirm
+				</button>
 			</Fragment>}
 		</Fragment>
 	)

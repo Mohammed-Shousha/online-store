@@ -1,9 +1,10 @@
-import React, {useRef, Fragment} from 'react'
-import { GoogleMap, Marker, useLoadScript} from "@react-google-maps/api"
+import React, {useRef, useState, Fragment} from 'react'
+import { GoogleMap, Marker, useLoadScript, InfoWindow} from "@react-google-maps/api"
 import Geocode from "react-geocode"
+import Loading from '../Loading/Loading'
 import './GMap.css'
 import pin from '../Icons/pin.svg'
-import Loading from '../Loading/Loading'
+import pin2 from '../Icons/pin2.svg'
 
 
 const mapContainerStyle = {
@@ -19,6 +20,7 @@ const center = {
 const options = {
   disableDefaultUI: true,
   zoomControl: true,
+  clickableIcons: false 
 }
 
 
@@ -34,16 +36,23 @@ const GMap =({marker, setMarker})=>{
    		mapRef.current = map
   	}, [])
 
+  	const [selected, setSelected] = useState(null)
+
   	const onMapClick =(e)=> {
 	    setMarker({
 	        lat: e.latLng.lat(),
-	        lng: e.latLng.lng(),
+	        lng: e.latLng.lng()
+	    })
+
+	    setSelected({
+	        lat: e.latLng.lat(),
+	        lng: e.latLng.lng()
 	    })
 	}
 
     const panTo = React.useCallback(({ lat, lng }) => {
 	    mapRef.current.panTo({ lat, lng })
-	    mapRef.current.setZoom(13.5)
+	    mapRef.current.setZoom(16)
   	}, [])
 
 	const Locate =()=>{
@@ -51,18 +60,24 @@ const GMap =({marker, setMarker})=>{
           ({coords}) => {
             setMarker({
           		lat: coords.latitude,
-          		lng: coords.longitude,
+          		lng: coords.longitude
         	})
+
+        	setSelected({
+		    	lat: coords.latitude,
+          		lng: coords.longitude
+		    })
+
 	        panTo({
 	        	lat: coords.latitude,
-	            lng: coords.longitude,
+	            lng: coords.longitude
 	        })
           },
           (error) => console.error(error)
         )
     }
 
-	// const toAddress=(lat, lng) =>{
+	// const toAddress=() =>{
 	// 	Geocode.setApiKey('AIzaSyAec45bB1-bXR0LZ7ac3C72I_eurXDcins')
 	// 	Geocode.fromLatLng(26.8, 30.8).then(
 	// 	  res => {
@@ -95,9 +110,31 @@ const GMap =({marker, setMarker})=>{
 				Locate Me
 			</button>
 	      		<Marker
-	      		 position={{ lat: marker.lat, lng: marker.lng }} 
-	      		 onClick={()=>console.log(marker)}
+	      		 position={{ lat:parseFloat(marker.lat), lng:parseFloat(marker.lng)}} 
+	             animation= {window.google.maps.Animation.DROP}
+	      		 icon={{
+		            url:pin2,
+		            origin: new window.google.maps.Point(0, 0),
+		            anchor: new window.google.maps.Point(15, 15),
+		            scaledSize: new window.google.maps.Size(30, 30),
+	             }}
+	             onClick={()=> setSelected(marker)}
 	      		/>
+	      		{selected?
+	      		<InfoWindow
+	      		 position={{lat: selected.lat, lng:selected.lng}}
+	      		 options={{
+	      		 	pixelOffset: new window.google.maps.Size(0,-16),
+	      		 	maxWidth:200
+	      		 }}
+	      		 onCloseClick={() => setSelected(null)}
+	      		>
+		      		<div className='info-window'>
+		      			<h3> Address </h3>
+		      			<p className='black-50'>address details</p>
+		      		</div> 
+	      		</InfoWindow>
+	      		:null}
 	      	</GoogleMap>
       	</div>
       	</Fragment>	

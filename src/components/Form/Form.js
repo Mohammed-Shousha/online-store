@@ -66,7 +66,6 @@ const Form =({signUpData, setSignUpData, marker, setMarker, onSignIn}) => {
 	const {validEmail, validPhone} = valid
 
 	const handleSubmitSignUp=()=>{
-		console.log(signUpData)
 		if(signUpFilled){
 			onSignIn()
 		}else if (!email.match(emailFormat)){
@@ -133,7 +132,7 @@ const Form =({signUpData, setSignUpData, marker, setMarker, onSignIn}) => {
 
 	return(
 		<Fragment>
-		<div className='body'>
+		<div className={detectAddress? 'body hide':'body'}>
 
 			<div className={haveAccount?"allcontainer" : "allcontainer right-panel-active"}>
 			

@@ -2,6 +2,7 @@ import React, {Fragment, useState} from 'react'
 import './Shipping.css'
 import GMap from '../GMap/GMap'
 import add from '../Icons/add.svg'
+import prev from '../Icons/prev.svg'
 
 
 const Shipping =({signUpData,setSignUpData, marker, setMarker, newAddress, setNewAddress})=>{
@@ -56,6 +57,13 @@ const Shipping =({signUpData,setSignUpData, marker, setMarker, newAddress, setNe
 				</div>
 			</div>
 			:<Fragment>
+				<div 
+				 className='back-to-addresses'
+				 onClick={()=>setNewAddress(false)}>
+					<h3>
+					<img src={prev} alt='back'/>
+					 Back to Addresses </h3>
+				</div>
 				<GMap
 				 marker={marker}
 				 setMarker={setMarker}

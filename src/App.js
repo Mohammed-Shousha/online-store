@@ -33,7 +33,7 @@ const App =()=> {
 	})
 	const {name} = signUpData
 
-	const [marker, setMarker] = useState({lat:'', lng:''})
+	const [marker, setMarker] = useState({lat:null, lng:null})
 
 	const onSignIn =()=>{
 		setIsSignedIn(true)

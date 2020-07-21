@@ -11,6 +11,10 @@
 	margin-right: 0.25rem;
 }
 
+.info-window {
+	background: white;
+}
+
 .locate-me-button{
 	position: absolute;
 	top: 1.5rem;

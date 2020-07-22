@@ -8,7 +8,6 @@ import google from '../Icons/google.svg'
 
 const Form =({signUpData, setSignUpData, marker, setMarker, onSignIn}) => {
 
-	
 	const {name, email, password, phone, addresses} = signUpData
 
 	const handleNameChange=(e)=>{

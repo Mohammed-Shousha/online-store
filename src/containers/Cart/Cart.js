@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import {Link} from 'react-router-dom'
 import './Cart.css'
 import SNav from '../../components/SNav/SNav'
@@ -12,11 +12,11 @@ const Cart = ({cartItems, onRemovingItem})=>{
 	const cartItemsEntries = Object.entries(cartItems)
 
 	return(
-		<div>
+		<Fragment>
 			<SNav/>
 			<h1 className='tl mt4 ml5'> My Cart </h1>
 			{cartItems.every(x => x===0) ?
-				<div>
+				<Fragment>
 					<h1> YOUR CART IS EMPTY</h1>
 					<Link to=''>
 						<p 
@@ -24,7 +24,7 @@ const Cart = ({cartItems, onRemovingItem})=>{
 						 Continue Shopping?
 						</p> 
 					</Link>
-				</div>
+				</Fragment>
 			:
 				<div className='cart-container'>
 					<div>
@@ -37,7 +37,7 @@ const Cart = ({cartItems, onRemovingItem})=>{
 				</div>
 			}
 			<Footer/>
-		</div>
+		</Fragment>
 	)
 }
 

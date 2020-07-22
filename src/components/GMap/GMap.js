@@ -6,7 +6,6 @@ import './GMap.css'
 import pin from '../Icons/pin.svg'
 import pin2 from '../Icons/pin2.svg'
 
-
 const mapContainerStyle = {
   height: "80vh",
   width: "85vw",
@@ -140,6 +139,5 @@ const GMap =({marker, setMarker})=>{
       	</Fragment>	
 	)
 }
-
 
 export default GMap

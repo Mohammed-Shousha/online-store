@@ -61,8 +61,9 @@ const Shipping =({signUpData,setSignUpData, marker, setMarker, newAddress, setNe
 				 className='back-to-addresses'
 				 onClick={()=>setNewAddress(false)}>
 					<h3>
-					<img src={prev} alt='back'/>
-					 Back to Addresses </h3>
+						<img src={prev} alt='back'/>
+						Back to Addresses 
+					</h3>
 				</div>
 				<GMap
 				 marker={marker}
@@ -71,7 +72,7 @@ const Shipping =({signUpData,setSignUpData, marker, setMarker, newAddress, setNe
 				<button
 				 className='confirm-location'
 				 onClick={handleAddingAddress}
-				 >
+				>
 					Confirm
 				</button>
 			</Fragment>}

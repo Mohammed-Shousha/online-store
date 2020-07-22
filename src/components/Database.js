@@ -18,20 +18,27 @@ import instagram from './Icons/instagram.svg'
 
 export const slideShowImages = [img1, img2, img3, img4, img5, img6, img7]
 
-export const Addresses = [{
-	id: 1,
-	label:'home',
-	Name: 'Mohammed Shousha',
-	Address: 'Second Floor, Apartment 3 Mohamed El Adawy - Mansoura Qism 2 - Mansoura - Dakahlia Governorate',
-	Phone: '01202973528'
-},
-{
-	id:2,
-	label:'work',
-	Name:'Mohammed Shousha',
-	Address: 'Second Floor, Apartment 3 Mohamed El Adawy - Mansoura Qism 2 - Mansoura - Dakahlia Governorate',
-	Phone: '01202973528'
-}]
+export const particles = {
+  particles: {
+    number:{
+      value:300,
+      density:{
+        enable: false,
+        value_area: 800
+      }
+    },
+    color: {
+      value: "#003e45"
+    },
+    line_linked: {
+      enable: true,
+      distance: 120,
+      color: "#003e45",
+      opacity: 0.4,
+      width: 1
+    },              
+  }
+}
 
 export const STEPS=[{
 	id:1,
@@ -47,16 +54,20 @@ export const STEPS=[{
 }]
 
 export const CATEGORIES = [{
-	category:'HEADPHONES',
-	items:['Jbl', 'Sony', 'Mi']
+	category:'Headphones',
+	items:['JBL', 'Sony', 'Beats']
 },
 {
-	category:'COVERS',
+	category:'Covers',
 	items:['IPhone', 'Sony', 'Samsung']	
 },
 {
-	category:'SMART WATCHES',
-	items:['Jbl', 'Mi']
+	category:'Smart Watches',
+	items:['JBL', 'Mi']
+},
+{
+	category:'Chargers',
+	items:[]
 }]
 
 export const CONTACT = [
@@ -107,8 +118,9 @@ export const FEATURES =[
 }]
 
 
-export const Pro = [{
+export const ProductsList = [{
 	id: 0,
+	brand:'jbl',
 	photos: [img6, img3],
 	price: 100,
 	description: 'blah blah blah',
@@ -116,6 +128,7 @@ export const Pro = [{
 },
 {
 	id: 1,
+	brand:'apple',
 	photos:[img7, img2],
 	price: 20000,
 	description: 'blah blah blah',
@@ -123,6 +136,7 @@ export const Pro = [{
 },
 {
 	id: 2,
+	brand:'jbl',
 	photos: [img3, img6],
 	price: 120,
 	description: 'blah blah blah',
@@ -130,6 +144,23 @@ export const Pro = [{
 },
 {
 	id: 3,
+	brand:'apple',
+	photos: [img2, img7],
+	price: 21000,
+	description: 'blah blah blah',
+	productName: 'IPhone11'
+},
+{
+	id: 4,
+	brand:'apple',
+	photos: [img2, img7],
+	price: 21000,
+	description: 'blah blah blah',
+	productName: 'IPhone11'
+},
+{
+	id: 5,
+	brand:'apple',
 	photos: [img2, img7],
 	price: 21000,
 	description: 'blah blah blah',

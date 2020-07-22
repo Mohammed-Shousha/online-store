@@ -1,7 +1,6 @@
 import React, {useState, lazy, Suspense} from 'react'
 import {BrowserRouter as Router, Switch,  Route} from 'react-router-dom'
-import './App.css'
-import {Pro} from './components/Database'
+import {ProductsList} from './components/Database'
 import Loading from './components/Loading/Loading' 
 const Home = lazy(()=> import('./containers/Home/Home')) 
 const Cart = lazy(()=> import('./containers/Cart/Cart')) 
@@ -20,7 +19,7 @@ const App =()=> {
 		addresses:[]
 	}
 
-	const nProducts = Pro.length
+	const nProducts = ProductsList.length
 	const [isSignedIn, setIsSignedIn] = useState(false)
 	const [cartItems, setCartItems] = useState(Array(nProducts).fill(0))
 
@@ -63,54 +62,52 @@ const App =()=> {
 	return(
 		<Router>
 			<Suspense fallback={<Loading/>}>
-			    <div className="App">
-			    	<Switch>
-				    	<Route path='/' exact>
-				    		<div>
-					    	 	<Nav 
-					    		 onSignOut={onSignOut}  
-						    	 isSignedIn={isSignedIn}
-						    	 name={name}
-						    	 cartItems={cartItems} />
-						    	 <Home onAddingItem={onAddingItem} />
-				    	 	</div>
-				    	</Route>
-			    		 
-			    		<Route path='/signin'>
-			    			<SignIn
-					    	  onSignIn={onSignIn}
-					    	  signUpData={signUpData}
-					    	  setSignUpData={setSignUpData}
-					    	  marker={marker}
-					    	  setMarker={setMarker}/>
-					    </Route>
+		    	<Switch>
+			    	<Route path='/' exact>
+			    		<div>
+				    	 	<Nav 
+				    		 onSignOut={onSignOut}  
+					    	 isSignedIn={isSignedIn}
+					    	 name={name}
+					    	 cartItems={cartItems} />
+					    	 <Home onAddingItem={onAddingItem} />
+			    	 	</div>
+			    	</Route>
+		    		 
+		    		<Route path='/signin'>
+		    			<SignIn
+				    	  onSignIn={onSignIn}
+				    	  signUpData={signUpData}
+				    	  setSignUpData={setSignUpData}
+				    	  marker={marker}
+				    	  setMarker={setMarker}/>
+				    </Route>
 
-	 			    	<Route path='/cart'>
-			    			<div>
-				    			<Nav 
-					    		 onSignOut={onSignOut}  
-						    	 isSignedIn={isSignedIn}
-						    	 name={name}
-						    	 cartItems={cartItems} />
-				    			<Cart
-						     	 cartItems={cartItems}
-						     	 onRemovingItem={onRemovingItem}/>
-				     	 	</div>
-				     	</Route>
+ 			    	<Route path='/cart'>
+		    			<div>
+			    			<Nav 
+				    		 onSignOut={onSignOut}  
+					    	 isSignedIn={isSignedIn}
+					    	 name={name}
+					    	 cartItems={cartItems} />
+			    			<Cart
+					     	 cartItems={cartItems}
+					     	 onRemovingItem={onRemovingItem}/>
+			     	 	</div>
+			     	</Route>
 
-				     	<Route path='/checkout'>
-				     	 	<Checkout
-				     	 	 signUpData={signUpData}
-				     	 	 setSignUpData={setSignUpData}
-				     	 	 marker={marker}
-					    	 setMarker={setMarker}/>
-				     	</Route>
+			     	<Route path='/checkout'>
+			     	 	<Checkout
+			     	 	 signUpData={signUpData}
+			     	 	 setSignUpData={setSignUpData}
+			     	 	 marker={marker}
+				    	 setMarker={setMarker}/>
+			     	</Route>
 
-				     	<Route path='*'>
-				     	 	<Loading/>
-				     	</Route>
-			     	</Switch>
-			    </div>
+			     	<Route path='*'>
+			     	 	<Loading/>
+			     	</Route>
+		     	</Switch>
 		    </Suspense>
 	    </Router>
 	)

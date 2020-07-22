@@ -2,7 +2,9 @@ import React, {useState} from 'react'
 import './Categories.css'
 import prev from '../Icons/prev.svg'
 import next from '../Icons/next.svg'
-import {CATEGORIES} from '../Database'
+import {CATEGORIES as CAT} from '../Database'
+
+const CATEGORIES = CAT.filter(c=> c.items.length>0)
 
 
 const Categories =()=> {

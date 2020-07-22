@@ -1,12 +1,12 @@
 @media screen and (min-width: 1061px){
-	.featurescontainer{
+	.features-container{
 		display: flex;
 		justify-content: center;
 	}
 }
 
 @media screen and (max-width: 1060px){
-	.featurescontainer{
+	.features-container{
 		display: inline-grid;
 	}
 }

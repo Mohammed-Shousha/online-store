@@ -3,7 +3,7 @@
 	justify-content: space-around;
 }
 
-@media screen and (max-width: 1000px){
+@media screen and (max-width: 1150px){
 	.cart-container{
 		display: inline-grid;
 	}

@@ -1,15 +1,14 @@
 import React from 'react'
 import Dropdown from './Dropdown/Dropdown'
+import {CATEGORIES} from '../Database'
 
 
-const SNav =() =>{
-	return(
-		<nav className = 'flex justify-between center h2-m bg-moon-gray mb4 mt5'>
-			<Dropdown name='Covers' elements={['IPhone','Samsung','Sony']}/>
-			<Dropdown name='Headphones' elements={['JBL','Beats']}/>
-			<Dropdown name='Smart Watches' elements={['Mi']}/>
-			<Dropdown name='Chargers'/>
-		</nav>
-	)
-}
+const SNav =() =>(
+	<nav className = 'flex justify-between center h2-m bg-moon-gray mb4 mt5'>
+	{CATEGORIES.map(item =>(
+		<Dropdown name={item.category} elements={item.items}/>
+	))}
+	</nav>
+)
+
 export default SNav

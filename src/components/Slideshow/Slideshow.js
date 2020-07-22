@@ -13,19 +13,16 @@ const properties = {
 }
 
 
-const Slideshow =() =>{
-	return(
-		<div className="slide-container">
-	        <Slide {...properties}>
-	          	{slideShowImages.map(i =>{ 
-	          		return(
-		          		<div className="each-slide" key={i}>
-		          			<img src= {i} alt='img'/>
-		          		</div>
-	          		)
-	          	})}
-	        </Slide>
-      	</div>
-	)
-}
+const Slideshow =() =>(
+	<div className="slide-container">
+        <Slide {...properties}>
+          	{slideShowImages.map(img =>(
+          		<div className="each-slide" key={img}>
+          			<img src= {img} alt='img'/>
+          		</div>
+          	))}
+        </Slide>
+  	</div>
+)
+
 export default Slideshow

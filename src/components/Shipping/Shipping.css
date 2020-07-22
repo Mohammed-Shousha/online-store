@@ -14,11 +14,11 @@
 }
 
 .shipping-details:hover{
-	border:1.5px solid #2196f3;
+	border:1.2px solid #2196f3;
 }
 
 .active-address{
-	border:1.5px solid #2196f3;
+	border:1.2px solid #2196f3;
 }
 
 .shipping-details > h3{

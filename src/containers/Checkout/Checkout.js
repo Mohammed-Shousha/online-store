@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {Fragment, useState} from 'react'
 import './Checkout.css'
 import CONav from '../../components/CONav/CONav'
 import Shipping from '../../components/Shipping/Shipping'
@@ -20,22 +20,31 @@ const Checkout = ({signUpData,setSignUpData, marker, setMarker})=>{
 	const [newAddress, setNewAddress]= useState(false)
 
 	return (
-		<div>
+		<Fragment>
 			<CONav step={step} handleBack={handleBack}/>
-			{step===1? <Shipping 
-						 signUpData={signUpData}
-						 setSignUpData={setSignUpData}
-						 marker={marker}
-					     setMarker={setMarker}
-					     newAddress={newAddress}
-					     setNewAddress={setNewAddress}
-					    />
-			:step===2? <h1> Hi </h1>
-			:<h1> There </h1>}
+			{step===1? 
+				<Shipping 
+				 signUpData={signUpData}
+				 setSignUpData={setSignUpData}
+				 marker={marker}
+			     setMarker={setMarker}
+			     newAddress={newAddress}
+			     setNewAddress={setNewAddress}
+				/>
+			:step===2? 
+				<h1> Hi </h1>
+			:
+				<h1> There </h1>
+			}
 
-			<button className={newAddress? 'hide checkout-continue':'checkout-continue'} onClick={handleNext}> Continue </button>
+			<button 
+			 className={newAddress? 'hide checkout-continue':'checkout-continue'}
+			 onClick={handleNext}
+			>
+				Continue 
+			</button>
 			<Footer/>
-		</div>
+		</Fragment>
 	)
 }
 

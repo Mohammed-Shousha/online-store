@@ -26,18 +26,16 @@ const CONav = ({step, handleBack})=>{
 			</nav>
 
 			<nav className='flex justify-around mv3'>
-				{STEPS.map(s=>{
-					return(
-						<div key={s.id} className={s.id === step?'checkout-step active-step': 'checkout-step'}>
-							{s.id < step?
-							<img src={check} className='done' alt='check'/> 
-							:<div className={s.id===step?'num-circle active-circle':'num-circle'}>
-								{s.id}
-							</div>}
-							{s.name}
-						</div>
-					)
-				})}
+				{STEPS.map(s=>(
+					<div key={s.id} className={s.id === step?'checkout-step active-step': 'checkout-step'}>
+						{s.id < step?
+						<img src={check} className='done' alt='check'/> 
+						:<div className={s.id===step?'num-circle active-circle':'num-circle'}>
+							{s.id}
+						</div>}
+						{s.name}
+					</div>
+				))}
 			</nav>
 		</Fragment>
 	)

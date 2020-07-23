@@ -5,8 +5,12 @@ import {CATEGORIES} from '../Database'
 
 const SNav =() =>(
 	<nav className = 'flex justify-between center h2-m bg-moon-gray mb4 mt5'>
-	{CATEGORIES.map(item =>(
-		<Dropdown name={item.category} elements={item.items}/>
+	{CATEGORIES.map((item, i) =>(
+		<Dropdown 
+		 key={i}
+		 name={item.category} 
+		 elements={item.items}
+		/>
 	))}
 	</nav>
 )

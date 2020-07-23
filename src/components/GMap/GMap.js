@@ -78,7 +78,7 @@ const GMap =({marker, setMarker})=>{
 
 	// const toAddress=() =>{
 	// 	Geocode.setApiKey('AIzaSyAec45bB1-bXR0LZ7ac3C72I_eurXDcins')
-	// 	Geocode.fromLatLng(26.8, 30.8).then(
+	// 	Geocode.fromLatLng(marker.lat, marker.lng).then(
 	// 	  res => {
 	//     	const address = res.results[0].formatted_address
 	// 	    console.log(address)

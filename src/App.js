@@ -7,6 +7,7 @@ const Cart = lazy(()=> import('./containers/Cart/Cart'))
 const SignIn = lazy(()=> import('./containers/SignIn/SignIn'))
 const Checkout = lazy(()=> import('./containers/Checkout/Checkout'))  
 const Nav = lazy(()=> import('./components/Nav/Nav')) 
+const Orders= lazy(()=> import('./components/Orders/Orders')) 
 
 
 const App =()=> {
@@ -22,6 +23,7 @@ const App =()=> {
 	const nProducts = ProductsList.length
 	const [isSignedIn, setIsSignedIn] = useState(false)
 	const [cartItems, setCartItems] = useState(Array(nProducts).fill(0))
+	const [orders , setOrders] = useState([])
 
 	const [signUpData, setSignUpData] = useState({
 		name:'',
@@ -101,7 +103,22 @@ const App =()=> {
 			     	 	 signUpData={signUpData}
 			     	 	 setSignUpData={setSignUpData}
 			     	 	 marker={marker}
-				    	 setMarker={setMarker}/>
+				    	 setMarker={setMarker}
+				    	 orders={orders}
+				    	 setOrders={setOrders}
+				    	 cartItems={cartItems}/>
+			     	</Route>
+
+			     	<Route path='/orders'>
+			     		<Nav 
+			    		 onSignOut={onSignOut}  
+				    	 isSignedIn={isSignedIn}
+				    	 name={name}
+				    	 cartItems={cartItems} />
+			     		<Orders
+			     		 orders={orders}
+			     		 cartItems={cartItems}
+			     		 />
 			     	</Route>
 
 			     	<Route path='*'>

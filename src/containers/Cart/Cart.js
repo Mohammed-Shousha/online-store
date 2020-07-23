@@ -9,7 +9,7 @@ import Footer from '../../components/Footer/Footer'
 
 const Cart = ({cartItems, onRemovingItem})=>{
 
-	const cartItemsEntries = Object.entries(cartItems)
+	const cartItemsEntries = Object.entries(cartItems).filter(x=> x[1] > 0)
 
 	return(
 		<Fragment>
@@ -28,10 +28,12 @@ const Cart = ({cartItems, onRemovingItem})=>{
 			:
 				<div className='cart-container'>
 					<div>
-						{cartItemsEntries.filter(x=> x[1] > 0).map(x=> 
+						{cartItemsEntries.map(x=> 
 							<CartItem key={x[0]} productId={x[0]} 
 							 onRemovingItem={onRemovingItem}
-							 cartItemsEntries={cartItemsEntries}/>)}
+							 cartItems={cartItems}
+							/>
+						)}
 					</div>
 					<OrderSummary cartItemsEntries={cartItemsEntries}/>
 				</div>

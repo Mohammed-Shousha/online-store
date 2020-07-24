@@ -131,9 +131,9 @@ const Form =({signUpData, setSignUpData, marker, setMarker, onSignIn}) => {
 
 	return(
 		<Fragment>
-		<div className={detectAddress? 'body hide':'body'}>
+		<div className={`body ${detectAddress? 'hide':''}`}>
 
-			<div className={haveAccount?"allcontainer" : "allcontainer right-panel-active"}>
+			<div className={`allcontainer ${haveAccount? '' : 'right-panel-active'}`}>
 			
 				<div className="form-container sign-up-container">
 					<div  className='form'>
@@ -153,7 +153,7 @@ const Form =({signUpData, setSignUpData, marker, setMarker, onSignIn}) => {
 						<textarea className='input' placeholder='Address' rows='2'
 						 ref={addressInput} onChange={handleAddressChange} onKeyUp={handleKeyUp}
 						/>
-						<p className={(validEmail && validPhone )? 'valid hide':'valid'}>
+						<p className={`valid ${(validEmail && validPhone )? ' hide':''}`}>
 						 Please Enter A Valid {!validPhone? 'Phone': 'Email'}
 						</p>
 						<button className='bt' onClick={()=>setDetectAddress(true)}>
@@ -182,7 +182,7 @@ const Form =({signUpData, setSignUpData, marker, setMarker, onSignIn}) => {
 						 ref={signInPasswordInput} onKeyUp={handleKeyUp} onChange={handleSignInPasswordChange} 
 						/>
 						<a href='resetPassword'className='link'>Forgot your password?</a>
-						<p className={validEmail ? 'valid hide': 'valid'}> Wrong Email or Password</p>
+						<p className={`valid ${validEmail ? ' hide': ''}`}> Wrong Email or Password</p>
 						<Link to={signInFilled? '' : 'signin'} >
 							<button ref={signInButton} className='bt' onClick={handleSubmitSignIn}>
 							 Sign In
@@ -211,7 +211,7 @@ const Form =({signUpData, setSignUpData, marker, setMarker, onSignIn}) => {
 			</div>
 		</div>
 		
-		<div className={detectAddress? 'map-con' : 'map-con hide'}>
+		<div className={`map-con ${detectAddress? '' : 'hide'}`}>
 			<GMap 
 			 marker={marker}
 			 setMarker={setMarker}

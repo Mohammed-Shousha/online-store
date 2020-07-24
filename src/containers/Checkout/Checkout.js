@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import './Checkout.css'
 import CONav from '../../components/CONav/CONav'
 import Shipping from '../../components/Shipping/Shipping'
-import CartItem from '../../components/CartItem/CartItem'
+import Payment from '../../components/Payment/Payment'
 import Footer from '../../components/Footer/Footer'
 
 
@@ -37,7 +37,6 @@ const Checkout = ({signUpData,setSignUpData, marker, setMarker, cartItems, order
 	const placeOrder =()=>{
 		handleNext()
 		setOrders([...orders, [cartItemsEntries, cartItems, orderTime()]])
-		console.log(orders)
 	}
 
 	const cartItemsEntries = Object.entries(cartItems).filter(x=> x[1] > 0)
@@ -59,7 +58,7 @@ const Checkout = ({signUpData,setSignUpData, marker, setMarker, cartItems, order
 				/>
 
 				<button 
-				 className={newAddress? 'hide checkout-continue':'checkout-continue'}
+				 className={`checkout-continue ${newAddress? 'hide':''}`}
 				 onClick={handleNext}
 				>
 					Continue 
@@ -67,14 +66,10 @@ const Checkout = ({signUpData,setSignUpData, marker, setMarker, cartItems, order
 				</Fragment>
 			:step===2?
 				<Fragment> 
-				<div>
-				{cartItemsEntries.map(x=> 
-					<CartItem key={x[0]} productId={x[0]} 
-					 editable={false}
-					 cartItems={cartItems}
-					/>
-				)}
-				</div>
+				<Payment
+				 cartItems={cartItems}
+				 cartItemsEntries={cartItemsEntries}
+				/>
 				<button
 				 className='checkout-continue'
 				 onClick={placeOrder}

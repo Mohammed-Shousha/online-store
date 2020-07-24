@@ -4,7 +4,7 @@ import './OrderSummary.css'
 import {ProductsList} from '../Database'
 
 
-const OrderSummary =({cartItemsEntries})=>{
+const OrderSummary =({cartItemsEntries, checkoutNow=true})=>{
 	
 	const shippingFee = 100
 	let subtotal = cartItemsEntries.reduce((t, i)=> t+ Number(ProductsList[i[0]].price)*i[1] ,0)
@@ -19,9 +19,11 @@ const OrderSummary =({cartItemsEntries})=>{
 				<h3> Shipping <span>{`${shippingFee} EGP`}</span> </h3>
 				<hr/>
 				<h2> Total <span>{`${total} EGP`}</span> </h2>
-				<Link to='/checkout'>
-					<button className='checkout-botton'> CHECKOUT NOW </button>
-				</Link>
+				{checkoutNow?
+					<Link to='/checkout'>
+						<button className='checkout-botton'> CHECKOUT NOW </button>
+					</Link>
+				: null}
 			</div>
 		</div>
 	)

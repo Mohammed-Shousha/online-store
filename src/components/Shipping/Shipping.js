@@ -30,7 +30,7 @@ const Shipping =({signUpData,setSignUpData, marker, setMarker, newAddress, setNe
 					return(
 						<div key={i}
 						 onClick={()=>handleAddressSelect(i)} 
-						 className={i===selectedAddress? 'shipping-details active-address': 'shipping-details'}
+						 className={`shipping-details ${i===selectedAddress? 'active-address': ''}`}
 						>
 							<h3>Address {i+1}</h3>
 							<div>

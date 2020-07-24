@@ -23,7 +23,7 @@ const Nav =({isSignedIn, onSignOut, name, cartItems}) =>{
 			 className='search center' contentEditable='true'/> 
 
 			<div onClick={!isSignedIn? ()=> history.push('/signin') : null}
-			className = {!isSignedIn? 'l-nav grow pointer' : 'tooltipNav l-nav grow pointer'}>
+			className = {`l-nav grow pointer ${!isSignedIn? '' : 'tooltipNav'}`}>
 				{isSignedIn? 'Hi '+ name: 'SignIn or SignUp'}
 				{isSignedIn?
 				<div className='tooltipTextNav'>
@@ -54,7 +54,7 @@ const Nav =({isSignedIn, onSignOut, name, cartItems}) =>{
 					 Cart
 					<div className='flex'>
 						<img alt='cart' src={cart} className='cart'/>
-						<div className={cartItems.every(x => x===0) ? 's-circle hide': 's-circle'}>
+						<div className={`s-circle ${cartItems.every(x => x===0) ? 'hide': ''}`}>
 							{cartItems.reduce((t,i) => t+i ,0)}
 						</div>
 					</div>

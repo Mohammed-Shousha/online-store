@@ -72,18 +72,23 @@ const App =()=> {
 				    		 onSignOut={onSignOut}  
 					    	 isSignedIn={isSignedIn}
 					    	 name={name}
-					    	 cartItems={cartItems} />
-					    	 <Home onAddingItem={onAddingItem} />
+					    	 cartItems={cartItems} 
+					    	/>
+					    	 <Home 
+					    	 onAddingItem={onAddingItem}
+					    	 isSignedIn={isSignedIn}
+					    	/>
 			    	 	</div>
 			    	</Route>
 		    		 
 		    		<Route path='/signin'>
 		    			<SignIn
-				    	  onSignIn={onSignIn}
-				    	  signUpData={signUpData}
-				    	  setSignUpData={setSignUpData}
-				    	  marker={marker}
-				    	  setMarker={setMarker}/>
+				    	 onSignIn={onSignIn}
+				    	 signUpData={signUpData}
+				    	 setSignUpData={setSignUpData}
+				    	 marker={marker}
+				    	 setMarker={setMarker}
+				    	/>
 				    </Route>
 
  			    	<Route path='/cart'>
@@ -92,10 +97,12 @@ const App =()=> {
 				    		 onSignOut={onSignOut}  
 					    	 isSignedIn={isSignedIn}
 					    	 name={name}
-					    	 cartItems={cartItems} />
+					    	 cartItems={cartItems} 
+					    	/>
 			    			<Cart
 					     	 cartItems={cartItems}
-					     	 onRemovingItem={onRemovingItem}/>
+					     	 onRemovingItem={onRemovingItem}
+					     	/>
 			     	 	</div>
 			     	</Route>
 
@@ -107,7 +114,8 @@ const App =()=> {
 				    	 setMarker={setMarker}
 				    	 orders={orders}
 				    	 setOrders={setOrders}
-				    	 cartItems={cartItems}/>
+				    	 cartItems={cartItems}
+				    	/>
 			     	</Route>
 
 			     	<Route path='/orders'>
@@ -115,11 +123,12 @@ const App =()=> {
 			    		 onSignOut={onSignOut}  
 				    	 isSignedIn={isSignedIn}
 				    	 name={name}
-				    	 cartItems={cartItems} />
+				    	 cartItems={cartItems}
+				    	/>
 			     		<Orders
 			     		 orders={orders}
 			     		 cartItems={cartItems}
-			     		 />
+			     		/>
 			     	</Route>
 
 
@@ -128,9 +137,11 @@ const App =()=> {
 			    		 onSignOut={onSignOut}  
 				    	 isSignedIn={isSignedIn}
 				    	 name={name}
-				    	 cartItems={cartItems} />
+				    	 cartItems={cartItems}
+				    	/>
 				    	<StoreItems
 				    	 onAddingItem={onAddingItem}
+					     isSignedIn={isSignedIn}
 				    	/>
           			</Route>
 

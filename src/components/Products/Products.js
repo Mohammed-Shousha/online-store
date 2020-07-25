@@ -1,9 +1,10 @@
-import React, {Fragment} from 'react'
-import './Products.css'
+import React, {useState, Fragment} from 'react'
 import {ProductCard} from 'react-ui-cards'
+import './Products.css'
+import SignInFirst from '../SignInFirst/SignInFirst'
 
 
-const Products =({title='', brand='', type='', num='' ,products, onAddingItem})=>{
+const Products =({title='', brand='', type='', num='' ,products, isSignedIn, onAddingItem})=>{
 
 	if(brand){
 		products = products.filter(product=> product.brand === brand)
@@ -27,6 +28,8 @@ const Products =({title='', brand='', type='', num='' ,products, onAddingItem})=
 		PRO=[]
 	}
 
+	const [alert, setAlert] = useState(false)
+
 	return(
 		<Fragment>
 		<h2 className={title.length ?'title': ''}>{title}</h2>
@@ -44,7 +47,7 @@ const Products =({title='', brand='', type='', num='' ,products, onAddingItem})=
 									 description='blah blah blah blah'/>
 									<button 
 									 className='add-to-cart'
-									 onClick={()=>onAddingItem(product.id)}>
+									 onClick={isSignedIn?()=>onAddingItem(product.id) : ()=> setAlert(true)}>
 									 ADD TO CART
 									</button>
 								</div>								
@@ -54,6 +57,11 @@ const Products =({title='', brand='', type='', num='' ,products, onAddingItem})=
 				</div>
 			))}
 		</div>
+		{alert?
+			<SignInFirst 
+			 setAlert={setAlert}
+			/> 
+		:null}
 		</Fragment>
 	)
 }

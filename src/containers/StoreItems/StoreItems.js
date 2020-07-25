@@ -7,8 +7,8 @@ import Footer from '../../components/Footer/Footer'
 import {ProductsList} from '../../components/Database'
 
 
-const StoreItems =({onAddingItem})=>{
-	let { id } = useParams()
+const StoreItems =({onAddingItem , isSignedIn})=>{
+	let {id} = useParams()
 
 	let type = id.split('-')[0].toLowerCase().replace(/\s/g, "-")
 
@@ -25,6 +25,7 @@ const StoreItems =({onAddingItem})=>{
 		 brand={brand}
 		 type={type}
 		 products={ProductsList}
+		 isSignedIn={isSignedIn}
 		 onAddingItem={onAddingItem}
 		/>
 		<Contact/>

@@ -13,7 +13,7 @@ const Nav =({isSignedIn, onSignOut, name, cartItems}) =>{
 	let history= useHistory()
 
 	return(
-		<nav className ='fixed flex justify-around bg-light-blue z-max'>
+		<nav className ='nav-bar'>
 			<Link to='/'>
 				<img alt='logo' src={store} 
 				 className='logo grow'/>

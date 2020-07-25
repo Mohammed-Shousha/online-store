@@ -2,12 +2,16 @@
   outline: none;
 }
 
-.fixed{
+.nav-bar{
 	position: fixed;
 	top: 0;
 	left : 0;
 	right: 0;
 	height: 4rem;
+	background: lightblue;
+	display: flex;
+	justify-content: space-around;
+	z-index: 10;
 }
 
 .cart{

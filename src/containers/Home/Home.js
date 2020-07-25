@@ -9,20 +9,21 @@ import Footer from '../../components/Footer/Footer'
 import {ProductsList} from '../../components/Database'
 
 
-const Home = ({onAddingItem}) =>(
+const Home = ({onAddingItem, isSignedIn}) =>(
 	<Fragment>
-    	      <SNav/>
-      	<Slideshow/>
-      	<Products
-      	 title='Most Popular'
-             num={4}
-      	 onAddingItem={onAddingItem}
-      	 products={ProductsList} 
-            />
-      	<Categories/>
-      	<Features/>
-      	<Contact/>
-      	<Footer/>
+   <SNav/>
+	<Slideshow/>
+	<Products
+	 title='Most Popular'
+     num={4}
+	 products={ProductsList}
+     isSignedIn={isSignedIn}
+	 onAddingItem={onAddingItem}
+   />
+	<Categories/>
+	<Features/>
+	<Contact/>
+	<Footer/>
 	</Fragment>
 )
 

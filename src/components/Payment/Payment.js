@@ -51,7 +51,7 @@ const Payment =({cartItemsEntries, cartItems})=> {
 						</div>
 					: 
 						<div>
-							<p> To Be Card Payment // Strip </p>
+							<p> To Be Card Payment // Stripe </p>
 						</div>
 					}
 				</div>

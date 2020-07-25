@@ -6,6 +6,7 @@ const Home = lazy(()=> import('./containers/Home/Home'))
 const Cart = lazy(()=> import('./containers/Cart/Cart')) 
 const SignIn = lazy(()=> import('./containers/SignIn/SignIn'))
 const Checkout = lazy(()=> import('./containers/Checkout/Checkout'))  
+const StoreItems = lazy(()=> import('./containers/StoreItems/StoreItems'))  
 const Nav = lazy(()=> import('./components/Nav/Nav')) 
 const Orders= lazy(()=> import('./components/Orders/Orders')) 
 
@@ -120,6 +121,18 @@ const App =()=> {
 			     		 cartItems={cartItems}
 			     		 />
 			     	</Route>
+
+
+          			<Route path="/:id">
+          				<Nav 
+			    		 onSignOut={onSignOut}  
+				    	 isSignedIn={isSignedIn}
+				    	 name={name}
+				    	 cartItems={cartItems} />
+				    	<StoreItems
+				    	 onAddingItem={onAddingItem}
+				    	/>
+          			</Route>
 
 			     	<Route path='*'>
 			     	 	<Loading/>

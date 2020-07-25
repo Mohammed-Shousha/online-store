@@ -3,13 +3,20 @@ import './Products.css'
 import {ProductCard} from 'react-ui-cards'
 
 
-const Products =({title='', onAddingItem, products, brand=''})=>{
+const Products =({title='', brand='', type='', num='' ,products, onAddingItem})=>{
 
 	if(brand){
 		products = products.filter(product=> product.brand === brand)
 	}
 
+	if(type){
+		products = products.filter(product=> product.type === type)
+	}
+
 	let P = [...products]
+	if(num){
+		P= P.slice(0, num)
+	}
 	let PRO = []
 	const PRODUCTS = []
 	while(P.length){

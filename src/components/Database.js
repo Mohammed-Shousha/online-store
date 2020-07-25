@@ -6,6 +6,35 @@ import img5 from './Photos/5.jpg'
 import img6 from './Photos/6.jpg'
 import img7 from './Photos/7.jpg'
 
+import beatsHeadset1 from './Photos/headset-beats-1.jpg'
+import jblHeadset1 from './Photos/headset-jbl-1.jpg'
+import jblHeadset2 from './Photos/headset-jbl-2.jpg'
+import sonyHeadset1 from './Photos/headset-sony-1.jpg'
+import sonyHeadset2 from './Photos/headset-sony-2.jpg'
+
+import jblSpeaker1 from './Photos/speaker-jbl-1.jpg'
+import jblSpeaker2 from './Photos/speaker-jbl-2.jpg'
+import boseSpeaker1 from './Photos/speaker-bose-1.jpg'
+import boseSpeaker2 from './Photos/speaker-bose-2.jpg'
+
+import appleCover1 from './Photos/cover-iphone-1.jpg'
+import appleCover2 from './Photos/cover-iphone-2.jpg'
+import appleCover3 from './Photos/cover-iphone-3.jpg'
+import appleCover4 from './Photos/cover-iphone-4.jpg'
+import samsungCover1 from './Photos/cover-samsung-1.jpg'
+import samsungCover2 from './Photos/cover-samsung-2.jpg'
+import huaweiCover1 from './Photos/cover-huawei-1.jpg'
+import huaweiCover2 from './Photos/cover-huawei-2.jpg'
+
+import appleSmartwatch1 from './Photos/smartwatch-apple-1.jpg'
+import appleSmartwatch2 from './Photos/smartwatch-apple-2.jpg'
+import fitbitSmartwatch1 from './Photos/smartwatch-fitbit-1.jpg'
+import fitbitSmartwatch2 from './Photos/smartwatch-fitbit-2.jpg'
+import miSmartwatch1 from './Photos/smartwatch-mi-1.jpg'
+
+import powerbank1 from './Photos/powerbank-1.jpg'
+import powerbank2 from './Photos/powerbank-2.jpg'
+
 import money from './Icons/money.png'
 import refund from './Icons/refund.png'
 import shipping from './Icons/shipping.png'
@@ -55,18 +84,22 @@ export const STEPS=[{
 
 export const CATEGORIES = [{
 	category:'Headphones',
-	items:['JBL', 'Sony', 'Beats']
+	items:['Beats', 'JBL', 'Sony']
+},
+{
+	category:'Speakers',
+	items:['JBL', 'Bose']
 },
 {
 	category:'Covers',
-	items:['IPhone', 'Sony', 'Samsung']	
+	items:['Apple', 'Samsung', 'Huawei']	
 },
 {
 	category:'Smart Watches',
-	items:['JBL', 'Mi']
+	items:['Apple', 'Fitbit', 'Mi']
 },
 {
-	category:'Chargers',
+	category:'Power Banks',
 	items:[]
 }]
 
@@ -120,49 +153,161 @@ export const FEATURES =[
 
 export const ProductsList = [{
 	id: 0,
-	brand:'jbl',
-	photos: [img6, img3],
-	price: 100,
+	type:'headphones',
+	brand:'beats',
+	productName : 'Beats Headset',
+	price: 350,
+	photos: [img6, beatsHeadset1],
 	description: 'blah blah blah',
-	productName : 'Headset'
 },
 {
 	id: 1,
+	type:'covers',
 	brand:'apple',
-	photos:[img7, img2],
-	price: 20000,
+	productName: 'IPhone11 Cover',
+	price: 100,
+	photos:[img2],
 	description: 'blah blah blah',
-	productName: 'IPhone11'
 },
 {
 	id: 2,
-	brand:'jbl',
-	photos: [img3, img6],
-	price: 120,
+	type:'speakers',
+	brand:'bose',
+	productName: 'Bose Speaker',
+	price: 800,
+	photos: [boseSpeaker2, boseSpeaker1],
 	description: 'blah blah blah',
-	productName: 'Headset'
 },
 {
 	id: 3,
+	type:'smart-watches',
 	brand:'apple',
-	photos: [img2, img7],
-	price: 21000,
+	productName: 'Apple Watch',
+	price: 5000,
+	photos: [appleSmartwatch1, appleSmartwatch2],
 	description: 'blah blah blah',
-	productName: 'IPhone11'
 },
 {
 	id: 4,
-	brand:'apple',
-	photos: [img2, img7],
-	price: 21000,
+	type:'covers',
+	brand:'samsung',
+	productName: 'Samsung Cover',
+	price: 120,
+	photos: [samsungCover2, samsungCover1],
 	description: 'blah blah blah',
-	productName: 'IPhone11'
 },
 {
 	id: 5,
-	brand:'apple',
-	photos: [img2, img7],
-	price: 21000,
+	type:'headphones',
+	brand:'sony',
+	productName: 'Sony Headset',
+	price: 300,
+	photos: [sonyHeadset1, sonyHeadset2],
 	description: 'blah blah blah',
-	productName: 'IPhone11'
-}]
+},
+{
+	id: 6,
+	type:'covers',
+	brand:'apple',
+	productName: 'IPhone X Cover',
+	price: 200,
+	photos: [appleCover3, appleCover4],
+	description: 'blah blah blah',
+},
+{
+	id: 7,
+	type:'power-banks',
+	productName: 'Power Bank',
+	price: 400,
+	photos: [powerbank1],
+	description: 'blah blah blah',
+},
+{
+	id: 8,
+	type:'smart-watches',
+	brand:'fitbit',
+	productName: 'Fitbit Watch',
+	price: 4000,
+	photos: [fitbitSmartwatch1, fitbitSmartwatch2],
+	description: 'blah blah blah',
+},
+{
+	id: 9,
+	type:'headphones',
+	brand:'jbl',
+	productName: 'Jbl Headset',
+	price: 300,
+	photos: [jblHeadset1, jblHeadset2],
+	description: 'blah blah blah',
+},
+{
+	id: 10,
+	type:'covers',
+	brand:'huawei',
+	productName: 'Huawei Cover',
+	price: 100,
+	photos: [huaweiCover1, huaweiCover2],
+	description: 'blah blah blah',
+},
+{
+	id: 11,
+	type:'speakers',
+	brand:'jbl',
+	productName: 'Jbl Speaker',
+	price: 700,
+	photos: [jblSpeaker1, jblSpeaker2],
+	description: 'blah blah blah',
+},
+{
+	id: 12,
+	type:'covers',
+	brand:'apple',
+	productName: 'IPhone11 Cover',
+	price: 200,
+	photos: [appleCover1, appleCover2],
+	description: 'blah blah blah',
+},
+{
+	id: 13,
+	type:'speakers',
+	brand:'bose',
+	productName: 'Bose Speaker',
+	price: 800,
+	photos: [boseSpeaker1, boseSpeaker2],
+	description: 'blah blah blah',
+},
+{
+	id: 14,
+	type:'covers',
+	brand:'huawei',
+	productName: 'Huawei Cover',
+	price: 100,
+	photos: [huaweiCover2, huaweiCover1],
+	description: 'blah blah blah',
+},
+{
+	id: 15,
+	type:'covers',
+	brand:'samsung',
+	productName: 'Samsung Cover',
+	price: 120,
+	photos: [samsungCover1, samsungCover2],
+	description: 'blah blah blah',
+},
+{
+	id: 16,
+	type:'smart-watches',
+	brand:'mi',
+	productName: 'Mi Watch',
+	price: 1000,
+	photos: [miSmartwatch1],
+	description: 'blah blah blah',
+},
+{
+	id: 17,
+	type:'power-banks',
+	productName: 'Solar Power Bank',
+	price: 800,
+	photos: [powerbank2],
+	description: 'blah blah blah',
+},]

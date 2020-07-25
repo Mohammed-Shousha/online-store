@@ -15,14 +15,9 @@ const Home = ({onAddingItem}) =>(
       	<Slideshow/>
       	<Products
       	 title='Most Popular'
+             num={4}
       	 onAddingItem={onAddingItem}
       	 products={ProductsList} 
-            />
-      	<Products
-      	 title='New Arrivals'
-      	 onAddingItem={onAddingItem}
-      	 products={ProductsList}
-      	 brand={'apple'} 
             />
       	<Categories/>
       	<Features/>

@@ -1,0 +1,60 @@
+.profile-title{
+	margin: 6.5rem 0 0 3rem ;
+	text-align: left;
+	justify-content: space-around;
+	width: 80vw;
+}
+
+.profile-container{
+	width: 85vw;
+	border-radius: 5px;
+	border: 2px red solid;
+	margin: auto;
+	margin-top: 2.5rem;
+	margin-bottom: 3rem;
+	padding: 0.5rem 1rem;
+	background: white;
+}
+
+textarea{
+  resize: none;
+}
+
+.profile-general{
+	width: 45%
+}
+
+.profile-general p{
+	text-align: left;
+	font-size: 15px;
+	color: grey;
+
+}
+
+.profile-general .i{
+	font-size: 12px;
+	font-style: italic;
+}
+
+.profile-general textarea, input{
+	width: 100%;
+	border: none;
+	border-bottom: 1px solid grey;
+	font-size: 20px;
+	outline: none;
+}
+
+.profile-general input{
+	color: grey;
+}
+
+.profile-save-bt{
+	margin: 2rem 2rem 1rem ;
+	border-radius: 2px;
+	border:1px solid grey;
+	background: white;
+	padding: 0.75rem 1.5rem;
+	outline: none;
+	font-weight: bold;
+	cursor: pointer;
+}

@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {Link} from 'react-router-dom'
 import './Categories.css'
 import prev from '../Icons/prev.svg'
 import next from '../Icons/next.svg'
@@ -29,7 +30,11 @@ const Categories =()=> {
 			<h1 className='tc'>{category}</h1>
 			<div className='categories-container' >
 				<img className='arrow prev' alt='prev' src={prev} onClick={prevCategory}/>
-				{items.map(i=> <p className='square grow' key={i}> {i} </p>)}
+				{items.map(item=> 
+					<Link to={`${category}-${item}`} key={item}> 
+						<p className='square grow' key={item}> {item} </p>
+					</Link>
+				)}
 				<img className='arrow next' alt='next' src={next} onClick={nextCategory}/>
 			</div>	
 		</div>

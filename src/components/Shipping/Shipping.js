@@ -21,7 +21,7 @@ const Shipping =({signUpData,setSignUpData, marker, setMarker, newAddress, setNe
 		 addresses:[...addresses,{name:name, address:`lat:${marker.lat}  lng:${marker.lng}`, phone:phone}]})
 	}
 
-	const filteredAddresses = addresses.filter(a=> a.address!='')
+	const filteredAddresses = addresses.filter(a=> a.address!=='')
 
 	return(
 		<Fragment>

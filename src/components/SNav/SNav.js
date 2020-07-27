@@ -13,9 +13,9 @@ const SNav =() =>(
 				</Link>
 				{items.length?
 					<div className='dropdown-content'>
-					{items.map(x => (
-						<Link to={`${category}-${x}`} key={x}> 
-							<p >{x}</p>
+					{items.map(item => (
+						<Link to={`${category}-${item}`} key={item}> 
+							<p >{item}</p>
 						</Link>
 					))}
 					</div>

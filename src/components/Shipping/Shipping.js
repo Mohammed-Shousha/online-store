@@ -21,13 +21,14 @@ const Shipping =({signUpData,setSignUpData, marker, setMarker, newAddress, setNe
 		 addresses:[...addresses,{name:name, address:`lat:${marker.lat}  lng:${marker.lng}`, phone:phone}]})
 	}
 
+	const filteredAddresses = addresses.filter(a=> a.address!='')
+
 	return(
 		<Fragment>
 			<h2 className='shipping-title'> Shipping Address</h2>
 			{!newAddress?
 			<div className='flex'>
-				{addresses.map((a,i)=>{
-					return(
+					{filteredAddresses.map((a,i)=>(
 						<div key={i}
 						 onClick={()=>handleAddressSelect(i)} 
 						 className={`shipping-details ${i===selectedAddress? 'active-address': ''}`}
@@ -46,8 +47,7 @@ const Shipping =({signUpData,setSignUpData, marker, setMarker, newAddress, setNe
 								<p className='shipping-phone'>{a.phone}</p>
 							</div>
 						</div>
-					)
-				})}
+					))}
 
 				<div 
 				 className='shipping-details new-address'

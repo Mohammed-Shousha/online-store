@@ -18,7 +18,7 @@ const App =()=> {
 		email:'',
 		password:'',
 		phone:'',
-		addresses:[]
+		addresses:[{name:'', address:'', phone:''}]
 	}
 
 	const nProducts = ProductsList.length
@@ -31,9 +31,14 @@ const App =()=> {
 		email:'',
 		password:'',
 		phone:'',
-		addresses:[]
+		addresses:[{name:'', address:'', phone:''}]
 	})
 	const {name} = signUpData
+
+	const [signInData, setSignInData ] = useState({
+		signInEmail:'',
+		signInPassword:''
+	})
 
 	const [marker, setMarker] = useState({lat:null, lng:null})
 
@@ -88,6 +93,7 @@ const App =()=> {
 				    	 setSignUpData={setSignUpData}
 				    	 marker={marker}
 				    	 setMarker={setMarker}
+				    	 setSignInData={setSignInData}
 				    	/>
 				    </Route>
 

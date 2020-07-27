@@ -24,7 +24,7 @@ const Nav =({isSignedIn, onSignOut, name, cartItems}) =>{
 
 			<div onClick={!isSignedIn? ()=> history.push('/signin') : null}
 			className = {`l-nav grow pointer ${!isSignedIn? '' : 'tooltipNav'}`}>
-				{isSignedIn? 'Hi '+ name: 'SignIn or SignUp'}
+				{isSignedIn? 'Hi '+ (name? name : '') : 'SignIn or SignUp'}
 				{isSignedIn?
 				<div className='tooltipTextNav'>
 				<Link to='/orders'>

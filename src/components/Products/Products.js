@@ -57,11 +57,10 @@ const Products =({title='', brand='', type='', num='' ,products, isSignedIn, onA
 				</div>
 			))}
 		</div>
-		{alert?
+		{alert&&
 			<SignInFirst 
 			 setAlert={setAlert}
-			/> 
-		:null}
+			/> }
 		</Fragment>
 	)
 }

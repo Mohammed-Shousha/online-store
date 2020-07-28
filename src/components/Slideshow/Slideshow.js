@@ -1,16 +1,7 @@
 import React from 'react'
 import './Slideshow.css'
 import {Slide} from 'react-slideshow-image'
-import {slideShowImages} from '../Database'
-
-const properties = {
-  duration: 3500,
-  transitionDuration: 550,
-  infinite: true,
-  indicators: false,
-  arrows: true,
-  pauseOnHover: true,
-}
+import {slideShowImages, properties} from '../Database'
 
 
 const Slideshow =() =>(

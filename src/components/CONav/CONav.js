@@ -2,7 +2,7 @@ import React , {Fragment} from 'react'
 import {Link} from 'react-router-dom'
 import './CONav.css'
 import back from '../Icons/prev.svg'
-import logo from '../Icons/store.png'
+import logo from '../Icons/store.svg'
 import check from '../Icons/check.svg'
 import {STEPS} from '../Database'
 

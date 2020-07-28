@@ -16,15 +16,12 @@ const CartItem = ({ productId, cartItems, onRemovingItem, editable=true})=>(
 			<div className='product-action'>
 				<h3 className='qty'>x{cartItems[productId]}</h3>
 				<br/>
-				{editable?
+				{editable&&
 					<img 
 					 src={remove} alt='remove'
 					 className='pointer' 
 					 onClick={()=> onRemovingItem(productId)}
-					/>
-				:
-					null
-				}
+					/>}
 			 </div>
 		</div>
 	</div>

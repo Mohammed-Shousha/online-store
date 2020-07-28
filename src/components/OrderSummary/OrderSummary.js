@@ -19,11 +19,10 @@ const OrderSummary =({cartItemsEntries, checkoutNow=true})=>{
 				<h3> Shipping <span>{`${shippingFee} EGP`}</span> </h3>
 				<hr/>
 				<h2> Total <span>{`${total} EGP`}</span> </h2>
-				{checkoutNow?
+				{checkoutNow&&
 					<Link to='/checkout'>
 						<button className='checkout-botton'> CHECKOUT NOW </button>
-					</Link>
-				: null}
+					</Link>}
 			</div>
 		</div>
 	)

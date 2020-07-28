@@ -11,15 +11,16 @@ const SNav =() =>(
 				<Link to={category}>
 					<p className= 'pointer s-nav mv1 mh3 pv1'> {category} </p>
 				</Link>
-				{items.length?
+				{items.length ?
 					<div className='dropdown-content'>
 					{items.map(item => (
 						<Link to={`${category}-${item}`} key={item}> 
 							<p >{item}</p>
 						</Link>
 					))}
-					</div>
-				:null}
+				</div>
+				:
+				null}
 			</div>
 		))}
 	</nav>

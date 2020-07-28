@@ -35,9 +35,9 @@ import miSmartwatch1 from './Photos/smartwatch-mi-1.jpg'
 import powerbank1 from './Photos/powerbank-1.jpg'
 import powerbank2 from './Photos/powerbank-2.jpg'
 
-import money from './Icons/money.png'
-import refund from './Icons/refund.png'
-import shipping from './Icons/shipping.png'
+import money from './Icons/money.svg'
+import refund from './Icons/refund.svg'
+import shipping from './Icons/shipping.svg'
 
 import email from './Icons/email.svg'
 import phone from './Icons/phone.svg'
@@ -46,6 +46,15 @@ import fb from './Icons/facebook.svg'
 import instagram from './Icons/instagram.svg'
 
 export const slideShowImages = [img1, img2, img3, img4, img5, img6, img7]
+
+export const properties = {
+  duration: 3500,
+  transitionDuration: 550,
+  infinite: true,
+  indicators: false,
+  arrows: true,
+  pauseOnHover: true,
+}
 
 export const particles = {
   particles: {

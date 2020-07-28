@@ -119,7 +119,7 @@ const GMap =({marker, setMarker})=>{
 	             }}
 	             onClick={()=> setSelected(marker)}
 	      		/>
-	      		{selected?
+	      		{selected&&
 	      		<InfoWindow
 	      		 position={{lat: selected.lat, lng:selected.lng}}
 	      		 options={{
@@ -132,8 +132,7 @@ const GMap =({marker, setMarker})=>{
 		      			<h3> Address </h3>
 		      			<p className='black-50'>address details</p>
 		      		</div> 
-	      		</InfoWindow>
-	      		:null}
+	      		</InfoWindow>}
 	      	</GoogleMap>
       	</div>
       	</Fragment>	

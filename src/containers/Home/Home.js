@@ -11,7 +11,7 @@ import {ProductsList} from '../../components/Database'
 
 const Home = ({onAddingItem, isSignedIn}) =>(
 	<Fragment>
-   <SNav/>
+   	<SNav/>
 	<Slideshow/>
 	<Products
 	 title='Most Popular'

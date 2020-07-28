@@ -1,11 +1,11 @@
 import React from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import './Nav.css'
-import cart from '../Icons/cart.png'
-import store from '../Icons/store.png'
-import user from '../Icons/user.png'
-import list from '../Icons/list.png'
-import signout from '../Icons/signout.png'
+import cart from '../Icons/cart.svg'
+import store from '../Icons/store.svg'
+import user from '../Icons/user.svg'
+import list from '../Icons/list.svg'
+import signout from '../Icons/signout.svg'
 
 
 const Nav =({isSignedIn, onSignOut, name, cartItems}) =>{
@@ -23,9 +23,9 @@ const Nav =({isSignedIn, onSignOut, name, cartItems}) =>{
 			 className='search center' contentEditable='true'/> 
 
 			<div onClick={!isSignedIn? ()=> history.push('/signin') : null}
-			className = {`l-nav grow pointer ${!isSignedIn? '' : 'tooltipNav'}`}>
+			className = {`l-nav grow pointer ${isSignedIn? 'tooltipNav' : ''}`}>
 				{isSignedIn? 'Hi '+ (name? name : '') : 'SignIn or SignUp'}
-				{isSignedIn?
+				{isSignedIn &&
 				<div className='tooltipTextNav'>
 				<Link to='/orders'>
 					<div>
@@ -45,13 +45,12 @@ const Nav =({isSignedIn, onSignOut, name, cartItems}) =>{
 						Sign Out
 					</div> 
 				</Link>	
-				</div>
-				: null}
+				</div>}
 			</div>
 
 			<Link to={isSignedIn? 'cart' : '/'}>
 				<div className ='l-nav grow'>
-					 Cart
+					Cart
 					<div className='flex'>
 						<img alt='cart' src={cart} className='cart'/>
 						<div className={`s-circle ${cartItems.every(x => x===0) ? 'hide': ''}`}>

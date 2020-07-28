@@ -1,4 +1,4 @@
-import React, {useState, lazy, Suspense} from 'react'
+import React, {Fragment, useState, lazy, Suspense} from 'react'
 import {BrowserRouter as Router, Switch,  Route} from 'react-router-dom'
 import {ProductsList} from './components/Database'
 import Loading from './components/Loading/Loading' 
@@ -23,22 +23,22 @@ const App =()=> {
 	}
 
 	const nProducts = ProductsList.length
-	const [isSignedIn, setIsSignedIn] = useState(true)
+	const [isSignedIn, setIsSignedIn] = useState(false)
 	const [cartItems, setCartItems] = useState(Array(nProducts).fill(0))
 	const [orders , setOrders] = useState([])
 
 	const [signUpData, setSignUpData] = useState({
-		name:'Mohammed',
-		email:'mo@g.co',
-		password:'123',
-		phone:'01234567890',
+		name:'',
+		email:'',
+		password:'',
+		phone:'',
 		addresses:[{name:'', address:'', phone:''}]
 	})
 	const {name} = signUpData
 
 	const [signInData, setSignInData ] = useState({
-		signInEmail:'mo@hhh.co',
-		signInPassword:'000'
+		signInEmail:'',
+		signInPassword:''
 	})
 
 	const [marker, setMarker] = useState({lat:null, lng:null})
@@ -67,27 +67,60 @@ const App =()=> {
 		setCartItems(newCartItems)
 	}
 
+	const NavRoutes =()=>(
+    	<Fragment>
+		<Nav 
+		 onSignOut={onSignOut}  
+    	 isSignedIn={isSignedIn}
+    	 name={name}
+    	 cartItems={cartItems} 
+    	/>
+    	<Switch>
+	    	<Route path='/' exact>
+		    	<Home 
+		    	 onAddingItem={onAddingItem}
+		    	 isSignedIn={isSignedIn}
+		    	/>
+	    	</Route>
+		    <Route path='/cart'>
+    			<Cart
+		     	 cartItems={cartItems}
+		     	 onRemovingItem={onRemovingItem}
+		     	/>
+	     	</Route>
+	     	<Route path='/orders'>
+	     		<Orders
+	     		 orders={orders}
+	     		 cartItems={cartItems}
+	     		/>
+	     	</Route>
+	     	<Route path='/profile'>
+	     		<Profile
+	     		 signUpData={signUpData}
+	     		 setSignUpData={setSignUpData}
+	     		 signInData={signInData}
+	     		 setSignInData={setSignInData}
+	     		/>
+	     	</Route>
+  			<Route path="/:id">
+		    	<StoreItems
+		    	 onAddingItem={onAddingItem}
+			     isSignedIn={isSignedIn}
+		    	/>
+  			</Route>
+	     	<Route path='*'>
+	     	 	<Loading/>
+	     	</Route>
+	    </Switch>
+	    </Fragment>
+	)
+
 
 	return(
 		<Router>
 			<Suspense fallback={<Loading/>}>
-		    	<Switch>
-			    	<Route path='/' exact>
-			    		<div>
-				    	 	<Nav 
-				    		 onSignOut={onSignOut}  
-					    	 isSignedIn={isSignedIn}
-					    	 name={name}
-					    	 cartItems={cartItems} 
-					    	/>
-					    	 <Home 
-					    	 onAddingItem={onAddingItem}
-					    	 isSignedIn={isSignedIn}
-					    	/>
-			    	 	</div>
-			    	</Route>
-		    		 
-		    		<Route path='/signin'>
+				<Switch>
+		    		<Route path='/signin' exact>
 		    			<SignIn
 				    	 onSignIn={onSignIn}
 				    	 signUpData={signUpData}
@@ -96,24 +129,8 @@ const App =()=> {
 				    	 setMarker={setMarker}
 				    	 setSignInData={setSignInData}
 				    	/>
-				    </Route>
-
- 			    	<Route path='/cart'>
-		    			<div>
-			    			<Nav 
-				    		 onSignOut={onSignOut}  
-					    	 isSignedIn={isSignedIn}
-					    	 name={name}
-					    	 cartItems={cartItems} 
-					    	/>
-			    			<Cart
-					     	 cartItems={cartItems}
-					     	 onRemovingItem={onRemovingItem}
-					     	/>
-			     	 	</div>
 			     	</Route>
-
-			     	<Route path='/checkout'>
+			     	<Route path='/checkout' exact>
 			     	 	<Checkout
 			     	 	 signUpData={signUpData}
 			     	 	 setSignUpData={setSignUpData}
@@ -124,52 +141,8 @@ const App =()=> {
 				    	 cartItems={cartItems}
 				    	/>
 			     	</Route>
-
-			     	<Route path='/orders'>
-			     		<Nav 
-			    		 onSignOut={onSignOut}  
-				    	 isSignedIn={isSignedIn}
-				    	 name={name}
-				    	 cartItems={cartItems}
-				    	/>
-			     		<Orders
-			     		 orders={orders}
-			     		 cartItems={cartItems}
-			     		/>
-			     	</Route>
-
-			     	<Route path='/profile'>
-			     		<Nav 
-			    		 onSignOut={onSignOut}  
-				    	 isSignedIn={isSignedIn}
-				    	 name={name}
-				    	 cartItems={cartItems} 
-				    	/>
-			     		<Profile
-			     		 signUpData={signUpData}
-			     		 setSignUpData={setSignUpData}
-			     		 signInData={signInData}
-			     		 setSignInData={setSignInData}
-			     		/>
-			     	</Route>
-
-          			<Route path="/:id">
-          				<Nav 
-			    		 onSignOut={onSignOut}  
-				    	 isSignedIn={isSignedIn}
-				    	 name={name}
-				    	 cartItems={cartItems}
-				    	/>
-				    	<StoreItems
-				    	 onAddingItem={onAddingItem}
-					     isSignedIn={isSignedIn}
-				    	/>
-          			</Route>
-
-			     	<Route path='*'>
-			     	 	<Loading/>
-			     	</Route>
-		     	</Switch>
+					<NavRoutes/>
+			    </Switch>
 		    </Suspense>
 	    </Router>
 	)

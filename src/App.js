@@ -23,22 +23,22 @@ const App =()=> {
 	}
 
 	const nProducts = ProductsList.length
-	const [isSignedIn, setIsSignedIn] = useState(false)
+	const [isSignedIn, setIsSignedIn] = useState(true)
 	const [cartItems, setCartItems] = useState(Array(nProducts).fill(0))
 	const [orders , setOrders] = useState([])
 
 	const [signUpData, setSignUpData] = useState({
-		name:'',
-		email:'',
-		password:'',
-		phone:'',
+		name:'Mohammed',
+		email:'mo@g.co',
+		password:'123',
+		phone:'01234567890',
 		addresses:[{name:'', address:'', phone:''}]
 	})
 	const {name} = signUpData
 
 	const [signInData, setSignInData ] = useState({
-		signInEmail:'',
-		signInPassword:''
+		signInEmail:'mo@hhh.co',
+		signInPassword:'000'
 	})
 
 	const [marker, setMarker] = useState({lat:null, lng:null})

@@ -1,9 +1,10 @@
- import React, {Fragment, useState, useRef, useEffect} from 'react'
- import { Formik, Field, Form, ErrorMessage } from 'formik'
- import * as Yup from 'yup'
+import React, {Fragment, useState, useRef, useEffect} from 'react'
+import { Formik, Field, Form, ErrorMessage } from 'formik'
+import * as Yup from 'yup'
 import {useHistory} from 'react-router-dom'
 import GMap from '../GMap/GMap'
 import './Formik.css'
+import {passwordRegex} from '../Constants'
 
  
  const FormikForm = ({onSignIn, signUpData, setSignUpData, marker, setMarker, setSignInData}) => {
@@ -14,7 +15,6 @@ import './Formik.css'
 	const [detectAddress, setDetectAddress] = useState(false)
 	const [addressFocused, setAddressFocused] = useState(false)
 
-	const passwordRegex = /^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{8,}$/
 
 	const nameInput = useRef(null)
 	const emailInput = useRef(null)

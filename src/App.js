@@ -23,8 +23,8 @@ const App =()=> {
 	}
 
 	const nProducts = ProductsList.length
-	const [isSignedIn, setIsSignedIn] = useState(false)
-	const [cartItems, setCartItems] = useState(Array(nProducts).fill(0))
+	const [isSignedIn, setIsSignedIn] = useState(true)
+	const [cartItems, setCartItems] = useState([1,1,0,1,0,0,0])
 	const [orders , setOrders] = useState([])
 
 	const [signUpData, setSignUpData] = useState({

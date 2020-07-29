@@ -20,29 +20,29 @@ const Nav =({isSignedIn, onSignOut, name, cartItems}) =>{
 			</Link>
 
 			<input type='searchBox' placeholder='Search'
-			 className='search center' contentEditable='true'/> 
+			 className='search'/> 
 
-			<div onClick={!isSignedIn? ()=> history.push('/signin') : null}
-			className = {`l-nav grow pointer ${isSignedIn? 'tooltipNav' : ''}`}>
+			<div onClick={isSignedIn? null : ()=> history.push('/signin')}
+			className = {`l-nav grow ${isSignedIn? 'tooltipNav' : ''}`}>
 				{isSignedIn? 'Hi '+ (name? name : '') : 'SignIn or SignUp'}
 				{isSignedIn &&
 				<div className='tooltipTextNav'>
 				<Link to='/orders'>
-					<div>
-					 	<img src={list} alt='list' className='h1 w1 pr2' />
-					 	Orders 
+					<div className='user-action'>
+					 	<img src={list} alt='list'/>
+					 	<p>Orders </p>
 					</div>
 				</Link>
 				<Link to='/profile'>
-					<div>
-						<img src={user} alt='user' className='h1 w1 pr2' />
-						Profile
+					<div className='user-action'>
+						<img src={user} alt='user'/>
+						<p>Profile</p>
 					</div>
 				</Link>	
-				<Link to='/' onClick={onSignOut}>
-					<div id='signout'>
-						<img src={signout} alt='signout' className='h1 w1 pr2'/>
-						Sign Out
+				<Link to='/' onClick={onSignOut} >
+					<div id='signout' className='user-action'>
+						<img src={signout} alt='signout'/>
+						<p>Sign Out</p>
 					</div> 
 				</Link>	
 				</div>}

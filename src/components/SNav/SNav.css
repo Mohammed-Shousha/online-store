@@ -1,3 +1,27 @@
+.s-nav-bar{
+  display: flex;
+  justify-content: space-between;
+  margin: 4rem 0;
+  height: 2.25rem;
+}
+
+.s-nav {
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 780px){
+  .s-nav{
+    font-size: 0.85rem
+  }
+}
+
+@media screen and (max-width: 600px){
+  .s-nav{
+    font-size: 0.65rem
+  }
+}
+
 .dropdown {
   position: relative;
   display: inline-block;

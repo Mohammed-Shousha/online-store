@@ -1,71 +1,50 @@
-[contenteditable] {
-  outline: none;
-}
-
 .nav-bar{
 	position: fixed;
 	top: 0;
 	left : 0;
 	right: 0;
-	height: 4rem;
-	background: lightblue;
 	display: flex;
 	justify-content: space-around;
+	height: 4rem;
+	background: lightblue;
 	z-index: 10;
 }
 
-.cart{
-	height: 1.15rem;
-	width: 1.15rem;
-	margin-left: 0.5rem;
-}
-
 .logo{
-	height: 2rem;
 	width: 2rem;
-	align-text:left;
-	padding: 1rem;
+	margin: 1rem 0.5rem;
+	outline: none;
 }
 
 .search{
 	width: 60%;
-	margin: 1rem 2rem;
+	margin: 1rem;
 	padding: 1rem;
 	border: 0;
 	border-radius: 1rem;
+  	outline: none;
 }
 
 .l-nav {
 	display: flex;
 	font-size: 1.25rem;
 	margin: 1rem 0;
+	cursor: pointer;
 	white-space: nowrap;
 	padding: 0.25rem 1.5rem
 }
-.s-nav {
-	font-size: 1.1rem
-}
 
-.dropdown-content{
-	font-size: 0.9rem
-}
-
-.s-circle{
-	color: red;
-	border-radius: 50%;
-	background:white;
-	align-items: center;
-	justify-content: center;
+.user-action{
+	padding: 0.5rem 0.1rem;
+	font-size: 0.75em;
+	margin: 0;
 	display: flex;
-	height: 0.9rem;
-	width: 0.9rem;
-	font-size: 0.75rem;
-	margin-top: -0.6rem;
-	margin-left:-0.5rem ; 
+	justify-content: center;
 }
 
-.hide{
-	visibility: hidden;
+.user-action img{
+	width: 1rem;
+	margin: 0 0.5rem;
 }
 
 .tooltipNav {
@@ -74,16 +53,17 @@
 
 .tooltipNav .tooltipTextNav {
   visibility: hidden;
-  width: 10rem;
+  width: 9rem;
   background-color: #fff;
   text-align: center;
   border-radius: 3px;
   padding: 0;
   position: absolute;
-  z-index: 1;
+  z-index: 12;
   left: 50%;
   top: 120%;
-  margin-left: -5rem;
+  margin-left: -4.5rem;
+  box-shadow: 0px 10px 12px 0px rgba(0,0,0,0.2);
 }
 
 .tooltipNav .tooltipTextNav::after {
@@ -101,14 +81,6 @@
   visibility: visible;
 }
 
-.tooltipTextNav div {
-	padding: 1rem;
-	font-size: 0.75em;
-	margin: 0;
-	display: flex;
-	justify-content: center;
-}
-
 .tooltipTextNav div:hover {
 	background: rgba(0,0,0,0.05);
 }
@@ -117,14 +89,35 @@
 	color: red
 }
 
+.cart{
+	width: 1.15rem;
+	margin-left: 5px;
+}
+
+.s-circle{
+	color: red;
+	border-radius: 50%;
+	background:white;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	height: 0.9rem;
+	width: 0.9rem;
+	font-size: 0.75rem;
+	margin-top: -0.45rem;
+	margin-left:-0.6rem ; 
+}
+
+.hide{
+	visibility: hidden;
+}
+
 @media screen and (max-width: 780px){
 	.l-nav {
 		font-size: 1rem;
 		padding-top: 0.5rem;
 	}
-	.s-nav{
-		font-size: 0.85rem
-	}
+
 	.search{
 		width: 50%;
 	}
@@ -135,9 +128,7 @@
 		font-size: 0.75rem;
 		white-space:normal;
 	}
-	.s-nav{
-		font-size: 0.65rem
-	}
+
 	.tooltipNav .tooltipTextNav{
 		width: 7.5rem;
 		margin-left: -3.75rem;

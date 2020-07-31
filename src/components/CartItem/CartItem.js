@@ -1,7 +1,7 @@
 import React from 'react'
+import {ProductsList} from '../Database'
 import './CartItem.css'
 import remove from '../Icons/delete.svg'
-import {ProductsList} from '../Database'
 
 
 const CartItem = ({ productId, cartItems, onRemovingItem, editable=true})=>(

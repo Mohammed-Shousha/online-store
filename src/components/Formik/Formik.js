@@ -1,13 +1,23 @@
-import React, {Fragment, useState, useRef, useEffect} from 'react'
+import React, {Fragment, useState,useContext, useRef, useEffect} from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import {useHistory} from 'react-router-dom'
 import GMap from '../GMap/GMap'
 import './Formik.css'
 import {passwordRegex} from '../Constants'
+import {DataContext} from '../../context/DataContext'
+import {LocationContext} from '../../context/LocationContext'
 
  
- const FormikForm = ({onSignIn, signUpData, setSignUpData, marker, setMarker, setSignInData}) => {
+ const FormikForm = () => {
+
+ 	const {setIsSignedIn, signUpData, setSignUpData, setSignInData} = useContext(DataContext)
+
+ 	const {marker, setMarker} = useContext(LocationContext)
+
+ 	const onSignIn =()=>{
+ 		setIsSignedIn(true)
+ 	}
 
  	let history = useHistory()
 

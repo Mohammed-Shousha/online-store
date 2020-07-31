@@ -1,12 +1,17 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useState, useContext} from 'react'
+import {DataContext} from '../../context/DataContext'
+import {LocationContext} from '../../context/LocationContext'
 import './Shipping.css'
 import GMap from '../GMap/GMap'
 import add from '../Icons/add.svg'
 import prev from '../Icons/prev.svg'
 
 
-const Shipping =({signUpData,setSignUpData, marker, setMarker, newAddress, setNewAddress})=>{
+const Shipping =({newAddress, setNewAddress})=>{
 
+	const {marker, setMarker} = useContext(LocationContext)
+	
+	const {signUpData,setSignUpData} = useContext(DataContext)
 	const {name, addresses, phone} = signUpData
 
 	const [selectedAddress, setSelectedAddress] = useState(0)

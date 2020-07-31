@@ -9,7 +9,7 @@ import Footer from '../../components/Footer/Footer'
 import {ProductsList} from '../../components/Database'
 
 
-const Home = ({onAddingItem, isSignedIn}) =>(
+const Home = () =>(
 	<Fragment>
    	<SNav/>
 	<Slideshow/>
@@ -17,8 +17,6 @@ const Home = ({onAddingItem, isSignedIn}) =>(
 	 title='Most Popular'
      num={4}
 	 products={ProductsList}
-     isSignedIn={isSignedIn}
-	 onAddingItem={onAddingItem}
    />
 	<Categories/>
 	<Features/>

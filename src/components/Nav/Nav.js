@@ -1,6 +1,8 @@
-import React from 'react'
+import React , {useContext} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import './Nav.css'
+import {DataContext} from '../../context/DataContext'
+import {CartItemsContext} from '../../context/CartItemsContext'
 import cart from '../Icons/cart.svg'
 import store from '../Icons/store.svg'
 import user from '../Icons/user.svg'
@@ -8,7 +10,25 @@ import list from '../Icons/list.svg'
 import signout from '../Icons/signout.svg'
 
 
-const Nav =({isSignedIn, onSignOut, name, cartItems}) =>{
+const Nav =() =>{
+
+	const {isSignedIn, setIsSignedIn, signUpData, setSignUpData} = useContext(DataContext)
+	const {cartItems, setCartItems, nProducts} = useContext(CartItemsContext)
+	const {name} = signUpData
+
+	const initSignUp = {
+		name:'',
+		email:'',
+		password:'',
+		phone:'',
+		addresses:[{name:'', address:'', phone:''}]
+	}
+
+	const onSignOut =()=>{
+		setIsSignedIn(false)
+		setCartItems(Array(nProducts).fill(0))
+		setSignUpData(initSignUp)
+	}
 
 	let history= useHistory()
 

@@ -1,7 +1,7 @@
 import React, {Fragment, useState} from 'react'
-import './Payment.css'
 import CartItem from '../../components/CartItem/CartItem'
 import OrderSummary from '../../components/OrderSummary/OrderSummary'
+import './Payment.css'
 import money from '../Icons/cash.svg'
 import greenMoney from '../Icons/cash-green.svg'
 import credit from '../Icons/credit.svg'

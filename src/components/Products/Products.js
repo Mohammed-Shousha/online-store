@@ -1,10 +1,15 @@
-import React, {useState, Fragment} from 'react'
+import React, {useState, useContext, Fragment} from 'react'
+import {DataContext} from '../../context/DataContext'
+import {CartItemsContext} from '../../context/CartItemsContext'
 import {ProductCard} from 'react-ui-cards'
-import './Products.css'
 import SignInFirst from '../SignInFirst/SignInFirst'
+import './Products.css'
 
 
-const Products =({title='', brand='', type='', num='' ,products, isSignedIn, onAddingItem})=>{
+const Products =({title='', brand='', type='', num='' ,products})=>{
+
+	const{isSignedIn} = useContext(DataContext)
+	const{onAddingItem} = useContext(CartItemsContext)
 
 	if(brand){
 		products = products.filter(product=> product.brand === brand)

@@ -1,12 +1,15 @@
-import React, {Fragment, useState, useRef} from 'react'
+import React, {Fragment, useState, useRef, useContext} from 'react'
+import {DataContext} from '../../context/DataContext'
 import { Formik, Field, Form} from 'formik'
 import * as Yup from 'yup'
-import './Profile.css'
 import Footer from '../Footer/Footer'
 import {passwordRegex} from '../Constants'
+import './Profile.css'
 
 
-const Profile =({signInData, setSignInData, signUpData, setSignUpData})=> {
+const Profile =()=> {
+
+	const {signInData, signUpData, setSignUpData} = useContext(DataContext)
 
 	const [changePassword, setChangePassword ] = useState(false)
 

@@ -1,13 +1,16 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useContext} from 'react'
 import {Link} from 'react-router-dom'
 import './Cart.css'
 import SNav from '../../components/SNav/SNav'
 import CartItem from '../../components/CartItem/CartItem'
 import OrderSummary from '../../components/OrderSummary/OrderSummary'
 import Footer from '../../components/Footer/Footer'
+import {CartItemsContext} from '../../context/CartItemsContext'
 
 
-const Cart = ({cartItems, onRemovingItem})=>{
+const Cart = ()=>{
+
+	const {cartItems, onRemovingItem} = useContext(CartItemsContext)
 
 	const cartItemsEntries = Object.entries(cartItems).filter(x=> x[1] > 0)
 

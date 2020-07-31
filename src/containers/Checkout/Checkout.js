@@ -1,13 +1,20 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment,useContext, useState} from 'react'
+import {CartItemsContext} from '../../context/CartItemsContext'
+import {OrdersContext} from '../../context/OrdersContext'
 import {Link} from 'react-router-dom'
-import './Checkout.css'
 import CONav from '../../components/CONav/CONav'
 import Shipping from '../../components/Shipping/Shipping'
 import Payment from '../../components/Payment/Payment'
 import Footer from '../../components/Footer/Footer'
+import './Checkout.css'
 
 
-const Checkout = ({signUpData,setSignUpData, marker, setMarker, cartItems, orders, setOrders})=>{
+const Checkout = ()=>{
+
+	const {orders, setOrders} = useContext(OrdersContext)
+	const {cartItems} = useContext(CartItemsContext)
+
+	const cartItemsEntries = Object.entries(cartItems).filter(x=> x[1] > 0)
 
 	const [step, setStep] = useState(1)
 
@@ -18,6 +25,13 @@ const Checkout = ({signUpData,setSignUpData, marker, setMarker, cartItems, order
 	const handleBack =()=>{
 		setStep(step-1)
 	}
+
+	const placeOrder =()=>{
+		handleNext()
+		setOrders([...orders, [cartItemsEntries, cartItems, orderTime()]])
+	}
+
+	const [newAddress, setNewAddress]= useState(false)
 
 	const orderTime =()=> {
 		let date = new Date()
@@ -34,25 +48,12 @@ const Checkout = ({signUpData,setSignUpData, marker, setMarker, cartItems, order
 	  	return today + ' '+  now
 	}
 
-	const placeOrder =()=>{
-		handleNext()
-		setOrders([...orders, [cartItemsEntries, cartItems, orderTime()]])
-	}
-
-	const cartItemsEntries = Object.entries(cartItems).filter(x=> x[1] > 0)
-
-	const [newAddress, setNewAddress]= useState(false)
-
 	return (
 		<Fragment>
 			<CONav step={step} handleBack={handleBack}/>
 			{step===1?
 				<Fragment> 
 				<Shipping 
-				 signUpData={signUpData}
-				 setSignUpData={setSignUpData}
-				 marker={marker}
-			     setMarker={setMarker}
 			     newAddress={newAddress}
 			     setNewAddress={setNewAddress}
 				/>

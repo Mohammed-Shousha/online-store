@@ -1,5 +1,5 @@
 import React, {Fragment, lazy, Suspense} from 'react'
-import {BrowserRouter as Router, Switch,  Route} from 'react-router-dom'
+import {BrowserRouter as Router, Switch,  Route, Redirect} from 'react-router-dom'
 import ContextProvider  from './context/ContextProvider'  
 import Loading from './components/Loading/Loading'
 const Home = lazy(()=> import('./containers/Home/Home')) 
@@ -30,12 +30,12 @@ const App =()=> {
 	     	<Route path='/profile'>
 	     		<Profile/>
 	     	</Route>
-  			<Route path="/:id">
+  			<Route path="/categories/:id">
 		    	<StoreItems/>
   			</Route>
-	     	<Route path='*'>
-	     	 	<Loading/>
-	     	</Route>
+  			<Route path='*'>
+	 			<Redirect to='/NotFound'/>
+			</Route>
 	    </Switch>
 	    </Fragment>
 	)
@@ -50,6 +50,10 @@ const App =()=> {
 				     	</Route>
 				     	<Route path='/checkout' exact>
 				     	 	<Checkout/>
+				     	</Route>
+						<Route path='/NotFound'>
+				     	 	<h1> Not Found </h1>
+				     	 	<Loading/>
 				     	</Route>
 						<NavRoutes/>
 				    </Switch>

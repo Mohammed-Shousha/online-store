@@ -27,11 +27,13 @@ const Categories =()=> {
 
 	return(
 		<div className='mv6'>
-			<h1 className='tc'>{category}</h1>
+			<Link to={`/categories/${category}`}>
+				<h1 className='tc'>{category}</h1>
+			</Link>
 			<div className='categories-container' >
 				<img className='arrow prev' alt='prev' src={prev} onClick={prevCategory}/>
 				{items.map(item=> 
-					<Link to={`${category}-${item}`} key={item}> 
+					<Link to={`/categories/${category}-${item}`} key={item}> 
 						<p className='square grow' key={item}> {item} </p>
 					</Link>
 				)}

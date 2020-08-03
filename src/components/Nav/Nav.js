@@ -1,7 +1,7 @@
 import React , {useContext, useState} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import Autosuggest from 'react-autosuggest'
-import {searchSuggestions} from '../Database'
+import {ProductsList} from '../Database'
 import {DataContext} from '../../context/DataContext'
 import {CartItemsContext} from '../../context/CartItemsContext'
 import './Nav.css'
@@ -50,16 +50,7 @@ const Nav =() =>{
 	}
 
 	const searchItem =(value)=>{
-		value = value.trim().toLowerCase()
-		const filteredItems = searchSuggestions.filter(suggestion=>(
-			suggestion.name.toLowerCase().match(value)))
-		if(!filteredItems.length){
-			history.push('/notfound')
-		}
-		else{
-			const{category, brand} = filteredItems[0]
-			history.push(`/categories/${category}-${brand}`)
-		}
+		history.push(`/search?q=${value}`)
 		setValue('')
 	}
 
@@ -78,7 +69,7 @@ const Nav =() =>{
 		}
 		else{
 			setSuggestions(
-				searchSuggestions.filter(suggestion =>(
+				ProductsList.filter(suggestion =>(
 				suggestion.name.toLowerCase().match(inputValue)
 			)))
 		}

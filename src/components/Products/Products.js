@@ -6,23 +6,17 @@ import SignInFirst from '../SignInFirst/SignInFirst'
 import './Products.css'
 
 
-const Products =({title='', brand='', type='', num='' ,products})=>{
+const Products =({title='', num='', products})=>{
 
 	const{isSignedIn} = useContext(DataContext)
 	const{setCartItems} = useContext(CartItemsContext)
 
-	if(brand){
-		products = products.filter(product=> product.brand === brand)
-	}
-
-	if(type){
-		products = products.filter(product=> product.type === type)
-	}
-
 	let P = [...products]
+
 	if(num){
 		P= P.slice(0, num)
 	}
+
 	let PRO = []
 	const PRODUCTS = []
 	while(P.length){
@@ -37,7 +31,7 @@ const Products =({title='', brand='', type='', num='' ,products})=>{
 
 	return(
 		<Fragment>
-		<h2 className={title.length ?'title': ''}>{title}</h2>
+		<h2 className={title.length ?'title': ''}>{title.toUpperCase()}</h2>
 		<div className='products-container'>
 			{PRODUCTS.map((PRO,i)=>(
 				<div className='row' key={i}>
@@ -48,7 +42,7 @@ const Products =({title='', brand='', type='', num='' ,products})=>{
 									<ProductCard
 									 photos = {product.photos}
 									 price = {`${product.price} EGP`}
-									 productName = {product.productName}
+									 productName = {product.name}
 									 description='blah blah blah blah'/>
 									<button 
 									 className='add-to-cart'
@@ -62,10 +56,7 @@ const Products =({title='', brand='', type='', num='' ,products})=>{
 				</div>
 			))}
 		</div>
-		{alert&&
-			<SignInFirst 
-			 setAlert={setAlert}
-			/> }
+		{alert && <SignInFirst setAlert={setAlert} />}
 		</Fragment>
 	)
 }

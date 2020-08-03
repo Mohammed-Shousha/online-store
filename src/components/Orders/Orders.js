@@ -1,6 +1,8 @@
 import React, {Fragment ,useContext} from 'react'
 import {Link} from 'react-router-dom'
+import SNav from '../SNav/SNav'
 import CartItem from '../CartItem/CartItem'
+import Contact from '../Contact/Contact'
 import Footer from '../Footer/Footer'
 import './Orders.css'
 import {CartItemsContext} from '../../context/CartItemsContext'
@@ -14,21 +16,22 @@ const Orders =()=>{
 
 	return(
 		<Fragment>
-		<h1 className='orders-title'> Orders </h1>
+		<SNav/>
+		<h1 className='tl ml5'> Orders </h1>
 		{!orders.length?
 			<div>
-				<h2> You don't have any orders yet</h2>
+				<h1> You don't have any orders yet</h1>
 				{cartItems.every(x => x===0) ?
 					<Link to='/'>
-						<p className='pointer hover-black-60 mb5'>
+						<h3 className='pointer hover-black-60 mb5'>
 						 Continue Shopping?
-						</p> 
+						</h3> 
 					</Link>
 				:
 					<Link to='/checkout'>
-						<p className='pointer hover-black-60 mb5'>
+						<h3 className='pointer hover-black-60 mb5'>
 						 Checkout Now?
-						</p> 
+						</h3> 
 					</Link>
 				}
 			</div>
@@ -46,6 +49,7 @@ const Orders =()=>{
 				))}
 			</div>
 		}
+		<Contact/>
 		<Footer/>
 		</Fragment>
 	)

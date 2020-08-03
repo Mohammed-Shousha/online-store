@@ -4,6 +4,7 @@ import './Cart.css'
 import SNav from '../../components/SNav/SNav'
 import CartItem from '../../components/CartItem/CartItem'
 import OrderSummary from '../../components/OrderSummary/OrderSummary'
+import Contact from '../../components/Contact/Contact'
 import Footer from '../../components/Footer/Footer'
 import {CartItemsContext} from '../../context/CartItemsContext'
 
@@ -17,15 +18,15 @@ const Cart = ()=>{
 	return(
 		<Fragment>
 		<SNav/>
-		<h1 className='tl mt4 ml5'> My Cart </h1>
+		<h1 className='tl ml5'> My Cart </h1>
 		{cartItems.every(x => x===0) ?
 			<Fragment>
 				<h1> YOUR CART IS EMPTY</h1>
-				<Link to=''>
-					<p 
+				<Link to='/'>
+					<h3 
 					 className='pointer hover-black-60 mb5'>
 					 Continue Shopping?
-					</p> 
+					</h3> 
 				</Link>
 			</Fragment>
 		:
@@ -44,6 +45,7 @@ const Cart = ()=>{
 				/>
 			</div>
 		}
+		<Contact/>
 		<Footer/>
 		</Fragment>
 	)

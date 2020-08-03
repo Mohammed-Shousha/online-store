@@ -6,7 +6,8 @@ const Home = lazy(()=> import('./containers/Home/Home'))
 const Cart = lazy(()=> import('./containers/Cart/Cart')) 
 const SignIn = lazy(()=> import('./containers/SignIn/SignIn'))
 const Checkout = lazy(()=> import('./containers/Checkout/Checkout'))  
-const StoreItems = lazy(()=> import('./containers/StoreItems/StoreItems'))  
+const StoreItems = lazy(()=> import('./containers/StoreItems/StoreItems')) 
+const SearchResults = lazy(()=> import('./containers/SearchResults/SearchResults')) 
 const Nav = lazy(()=> import('./components/Nav/Nav')) 
 const Orders= lazy(()=> import('./components/Orders/Orders')) 
 const Profile= lazy(()=> import('./components/Profile/Profile')) 
@@ -32,6 +33,9 @@ const App =()=> {
 	     	</Route>
   			<Route path="/categories/:id">
 		    	<StoreItems/>
+  			</Route>
+  			<Route path="/search">
+		    	<SearchResults/>
   			</Route>
   			<Route path='*'>
 	 			<Redirect to='/notfound'/>

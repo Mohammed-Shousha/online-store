@@ -47,6 +47,24 @@ import instagram from './Icons/instagram.svg'
 
 export const slideShowImages = [img1, img2, img3, img4, img5, img6, img7]
 
+export const searchSuggestions =[
+{
+	name: 'Sony Headset',
+	category:'Headphones',
+	brand:'Sony',
+},
+{
+	name: 'JBL Headset',
+	category:'Headphones',
+	brand:'Jbl',
+},
+{
+	name: 'Beats Headset',
+	category:'Headphones',
+	brand:'Beats',
+},
+]
+
 export const properties = {
   duration: 3500,
   transitionDuration: 550,

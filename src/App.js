@@ -34,7 +34,7 @@ const App =()=> {
 		    	<StoreItems/>
   			</Route>
   			<Route path='*'>
-	 			<Redirect to='/NotFound'/>
+	 			<Redirect to='/notfound'/>
 			</Route>
 	    </Switch>
 	    </Fragment>
@@ -51,7 +51,7 @@ const App =()=> {
 				     	<Route path='/checkout' exact>
 				     	 	<Checkout/>
 				     	</Route>
-						<Route path='/NotFound'>
+						<Route path='/notfound'>
 				     	 	<h1> Not Found </h1>
 				     	 	<Loading/>
 				     	</Route>

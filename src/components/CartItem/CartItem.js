@@ -1,10 +1,15 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {ProductsList} from '../Database'
 import './CartItem.css'
 import remove from '../Icons/delete.svg'
+import {CartItemsContext} from '../../context/CartItemsContext'
 
 
-const CartItem = ({ productId, cartItems, onRemovingItem, editable=true})=>(
+
+const CartItem = ({ productId, editable=true})=>{
+	const {cartItems, setCartItems} = useContext(CartItemsContext)
+
+	return(
 	<div className='cart-items-container'>
 		<div className='item-container'>
 			<img src={ProductsList[productId].photos[0]} alt='product'/>
@@ -20,11 +25,12 @@ const CartItem = ({ productId, cartItems, onRemovingItem, editable=true})=>(
 					<img 
 					 src={remove} alt='remove'
 					 className='pointer' 
-					 onClick={()=> onRemovingItem(productId)}
+					 onClick={()=> setCartItems({type:'REMOVE_ITEM', payload:productId})}
 					/>}
 			 </div>
 		</div>
 	</div>
 )
+}
 
 export default CartItem

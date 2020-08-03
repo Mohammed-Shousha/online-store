@@ -9,7 +9,7 @@ import './Products.css'
 const Products =({title='', brand='', type='', num='' ,products})=>{
 
 	const{isSignedIn} = useContext(DataContext)
-	const{onAddingItem} = useContext(CartItemsContext)
+	const{setCartItems} = useContext(CartItemsContext)
 
 	if(brand){
 		products = products.filter(product=> product.brand === brand)
@@ -52,7 +52,7 @@ const Products =({title='', brand='', type='', num='' ,products})=>{
 									 description='blah blah blah blah'/>
 									<button 
 									 className='add-to-cart'
-									 onClick={isSignedIn?()=>onAddingItem(product.id) : ()=> setAlert(true)}>
+									 onClick={isSignedIn?()=>setCartItems({type:"ADD_ITEM", payload:product.id}) : ()=> setAlert(true)}>
 									 ADD TO CART
 									</button>
 								</div>								

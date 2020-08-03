@@ -10,7 +10,7 @@ import {CartItemsContext} from '../../context/CartItemsContext'
 
 const Cart = ()=>{
 
-	const {cartItems, onRemovingItem} = useContext(CartItemsContext)
+	const {cartItems} = useContext(CartItemsContext)
 
 	const cartItemsEntries = Object.entries(cartItems).filter(x=> x[1] > 0)
 
@@ -32,8 +32,9 @@ const Cart = ()=>{
 			<div className='cart-container'>
 				<div>
 					{cartItemsEntries.map(x=> 
-						<CartItem key={x[0]} productId={x[0]} 
-						 onRemovingItem={onRemovingItem}
+						<CartItem 
+						 key={x[0]} 
+						 productId={x[0]} 
 						 cartItems={cartItems}
 						/>
 					)}

@@ -1,13 +1,16 @@
-import React , {useContext} from 'react'
+import React , {useContext, useState} from 'react'
 import {Link, useHistory} from 'react-router-dom'
-import './Nav.css'
+import Autosuggest from 'react-autosuggest'
+import {searchSuggestions} from '../Database'
 import {DataContext} from '../../context/DataContext'
 import {CartItemsContext} from '../../context/CartItemsContext'
+import './Nav.css'
 import cart from '../Icons/cart.svg'
 import store from '../Icons/store.svg'
 import user from '../Icons/user.svg'
 import list from '../Icons/list.svg'
 import signout from '../Icons/signout.svg'
+import search from '../Icons/search.svg'
 
 
 const Nav =() =>{
@@ -30,7 +33,67 @@ const Nav =() =>{
 		setSignUpData(initSignUp)
 	}
 
+
 	let history= useHistory()
+
+	const getSuggestionValue = (suggestion) => suggestion.name
+
+	const renderSuggestion = (suggestion) => (
+	  <div> {suggestion.name} </div>
+	)
+
+	const [value, setValue] = useState('')
+	const [suggestions, setSuggestions] =useState([]) 
+
+	const onChange = (e, {newValue, method})=>{
+		setValue(newValue)
+	}
+
+	const searchItem =(value)=>{
+		value = value.trim().toLowerCase()
+		const filteredItems = searchSuggestions.filter(suggestion=>(
+			suggestion.name.toLowerCase().match(value)))
+		if(!filteredItems.length){
+			history.push('/notfound')
+		}
+		else{
+			const{category, brand} = filteredItems[0]
+			history.push(`/categories/${category}-${brand}`)
+		}
+		setValue('')
+	}
+
+	const onKeyUp =(e)=>{
+		if(e.keyCode===13){
+			searchItem(value)
+		}
+	}
+
+	const onSuggestionsFetchRequested = ({ value }) => {
+	    let inputValue = value.trim().toLowerCase()
+		let inputLength = inputValue.length
+
+		if(!inputLength){
+		    setSuggestions([])
+		}
+		else{
+			setSuggestions(
+				searchSuggestions.filter(suggestion =>(
+				suggestion.name.toLowerCase().match(inputValue)
+			)))
+		}
+	}
+
+	const onSuggestionsClearRequested =()=>{
+		setSuggestions([])
+	}
+
+	const inputProps = {
+		placeholder: 'Search',
+      	value,
+      	onChange,
+      	onKeyUp,
+	}
 
 	return(
 		<nav className ='nav-bar'>
@@ -39,8 +102,20 @@ const Nav =() =>{
 				 className='logo grow'/>
 			</Link>
 
-			<input type='searchBox' placeholder='Search'
-			 className='search'/> 
+			<Autosuggest
+	         suggestions={suggestions}
+	         inputProps={inputProps}
+	         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+	         onSuggestionsClearRequested={onSuggestionsClearRequested}
+	         getSuggestionValue={getSuggestionValue}
+	         renderSuggestion={renderSuggestion}
+		    />
+
+		    <img 
+		     src={search} alt='search' 
+		     className='search'
+		     onClick={()=>searchItem(value)}
+		    />
 
 			<div onClick={isSignedIn? null : ()=> history.push('/signin')}
 			className = {`l-nav grow ${isSignedIn? 'tooltipNav' : ''}`}>

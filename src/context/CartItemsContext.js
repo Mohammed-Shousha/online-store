@@ -1,27 +1,16 @@
-import React, { createContext, useState } from "react"
+import React, { createContext, useState, useReducer } from "react"
 import {ProductsList} from '../components/Database'
+import CartItemsReducer from './CartItemsReducer'
 
 export const CartItemsContext = createContext()
 
 export const CartItemsProvider =({children})=>{
 
 	const nProducts = ProductsList.length
-	const [cartItems, setCartItems] = useState(Array(nProducts).fill(0))
-
-	const onAddingItem =(productId)=>{
-		let newCartItems=[...cartItems]
-		newCartItems[productId]++
-		setCartItems(newCartItems)	
-	}
-
-	const onRemovingItem =(productId)=>{
-		let newCartItems=[...cartItems]
-		newCartItems[productId]--
-		setCartItems(newCartItems)
-	}
+	const [cartItems, setCartItems] = useReducer( CartItemsReducer, Array(nProducts).fill(0))
 
 	return(
-		<CartItemsContext.Provider value={{cartItems, setCartItems, onAddingItem, onRemovingItem, nProducts}}>
+		<CartItemsContext.Provider value={{cartItems, setCartItems, nProducts}}>
 			{children}
 		</CartItemsContext.Provider>
 	)

@@ -5,7 +5,7 @@ import {CATEGORIES} from '../Database'
 
 
 const SNav =() =>(
-	<nav className = 's-nav-bar bg-moon-gray'>
+	<nav className ='s-nav-bar'>
 		{CATEGORIES.map(({category, items}, i) =>(
 			<div className='dropdown' key={i}>
 				<Link to={`/categories/${category.toLowerCase()}`}>

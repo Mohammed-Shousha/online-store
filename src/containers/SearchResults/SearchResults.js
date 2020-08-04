@@ -1,9 +1,6 @@
 import React, {Fragment} from 'react'
 import {useLocation, Link} from "react-router-dom"
-import SNav from '../../components/SNav/SNav'
 import Products from '../../components/Products/Products'
-import Contact from '../../components/Contact/Contact'
-import Footer from '../../components/Footer/Footer'
 import {ProductsList} from '../../components/Database'
 import './SearchResults.css'
 import box from '../../components/Icons/box.svg'
@@ -19,7 +16,6 @@ const SearchResults =()=>{
 
 	return(
 		<Fragment>
-		<SNav/>
 		{products.length?
 			<Fragment>
 			<h1> Seatch Results for {name} </h1>
@@ -38,8 +34,6 @@ const SearchResults =()=>{
 			</Link>
 			</Fragment>
 		}
-		<Contact/>
-		<Footer/>
 		</Fragment>
 	)	
 }

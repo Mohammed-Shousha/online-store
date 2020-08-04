@@ -8,9 +8,11 @@ const SignIn = lazy(()=> import('./containers/SignIn/SignIn'))
 const Checkout = lazy(()=> import('./containers/Checkout/Checkout'))  
 const StoreItems = lazy(()=> import('./containers/StoreItems/StoreItems')) 
 const SearchResults = lazy(()=> import('./containers/SearchResults/SearchResults')) 
+const Orders= lazy(()=> import('./containers/Orders/Orders')) 
+const Profile= lazy(()=> import('./containers/Profile/Profile')) 
 const Nav = lazy(()=> import('./components/Nav/Nav')) 
-const Orders= lazy(()=> import('./components/Orders/Orders')) 
-const Profile= lazy(()=> import('./components/Profile/Profile')) 
+const SNav = lazy(()=> import('./components/SNav/SNav')) 
+const Footer = lazy(()=> import('./components/Footer/Footer')) 
 
 
 const App =()=> {
@@ -18,6 +20,7 @@ const App =()=> {
 	const NavRoutes =()=>(
     	<Fragment>
 		<Nav/>
+		<SNav/>
     	<Switch>
 	    	<Route path='/' exact>
 		    	<Home/>
@@ -41,6 +44,7 @@ const App =()=> {
 	 			<Redirect to='/notfound'/>
 			</Route>
 	    </Switch>
+	    <Footer/>
 	    </Fragment>
 	)
 

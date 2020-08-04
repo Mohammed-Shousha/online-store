@@ -45,13 +45,15 @@ const Nav =() =>{
 	const [value, setValue] = useState('')
 	const [suggestions, setSuggestions] =useState([]) 
 
-	const onChange = (e, {newValue, method})=>{
+	const onChange = (e, {newValue})=>{
 		setValue(newValue)
 	}
 
 	const searchItem =(value)=>{
-		history.push(`/search?q=${value}`)
-		setValue('')
+		if(value){
+			history.push(`/search?q=${value}`)
+			setValue('')
+		}
 	}
 
 	const onKeyUp =(e)=>{

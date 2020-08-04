@@ -1,9 +1,6 @@
 import React, {Fragment} from 'react'
 import {useParams} from 'react-router-dom'
-import SNav from '../../components/SNav/SNav'
 import Products from '../../components/Products/Products'
-import Contact from '../../components/Contact/Contact'
-import Footer from '../../components/Footer/Footer'
 import {ProductsList} from '../../components/Database'
 
 
@@ -22,13 +19,10 @@ const StoreItems =()=>{
 
 	return(
 		<Fragment>
-		<SNav/>
 		<Products
 		 title={id}
 		 products={products}
 		/>
-		<Contact/>
-		<Footer/>
 		</Fragment>
 	)
 }

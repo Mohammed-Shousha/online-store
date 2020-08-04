@@ -1,3 +1,8 @@
+.cart-title{
+	margin-left: 3rem;
+	text-align: left;
+}
+
 .cart-container{
 	display: flex;
 	justify-content: space-around;
@@ -7,4 +12,9 @@
 	.cart-container{
 		display: inline-grid;
 	}
+}
+
+.empty-cart-img{
+	width: 190px;
+	margin-right: 55px;
 }

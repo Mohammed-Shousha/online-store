@@ -2,8 +2,7 @@ import React, {Fragment, useState, useRef, useContext} from 'react'
 import {DataContext} from '../../context/DataContext'
 import { Formik, Field, Form} from 'formik'
 import * as Yup from 'yup'
-import Footer from '../Footer/Footer'
-import {passwordRegex} from '../Constants'
+import {passwordRegex} from '../../components/Constants'
 import './Profile.css'
 
 
@@ -165,7 +164,6 @@ const Profile =()=> {
 				</Formik>
 			</div>
 		</div>}
-		<Footer/>
 		</Fragment>
 	)
 }

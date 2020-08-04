@@ -1,12 +1,10 @@
 import React, {Fragment ,useContext} from 'react'
 import {Link} from 'react-router-dom'
-import SNav from '../SNav/SNav'
-import CartItem from '../CartItem/CartItem'
-import Contact from '../Contact/Contact'
-import Footer from '../Footer/Footer'
-import './Orders.css'
+import CartItem from '../../components/CartItem/CartItem'
 import {CartItemsContext} from '../../context/CartItemsContext'
 import {OrdersContext} from '../../context/OrdersContext'
+import './Orders.css'
+import box from '../../components/Icons/box.svg'
 
 
 const Orders =()=>{
@@ -16,10 +14,10 @@ const Orders =()=>{
 
 	return(
 		<Fragment>
-		<SNav/>
-		<h1 className='tl ml5'> Orders </h1>
+		<h1 className='orders-title'> Orders </h1>
 		{!orders.length?
 			<div>
+				<img src={box} alt='box' className='box-img'/>
 				<h1> You don't have any orders yet</h1>
 				{cartItems.every(x => x===0) ?
 					<Link to='/'>
@@ -49,8 +47,6 @@ const Orders =()=>{
 				))}
 			</div>
 		}
-		<Contact/>
-		<Footer/>
 		</Fragment>
 	)
 }

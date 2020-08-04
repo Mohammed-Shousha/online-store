@@ -18,19 +18,25 @@ const Orders =()=>{
 		{!orders.length?
 			<div>
 				<img src={box} alt='box' className='box-img'/>
-				<h1> You don't have any orders yet</h1>
+				<h1> You Don't Have Any Orders Yet</h1>
 				{cartItems.every(x => x===0) ?
+					<Fragment>
+					<p> What are you waiting for ? </p> 
 					<Link to='/'>
-						<h3 className='pointer hover-black-60 mb5'>
-						 Continue Shopping?
-						</h3> 
+						<button className='continue-shopping'>
+							Continue Shopping
+						</button>
 					</Link>
+					</Fragment>
 				:
+					<Fragment>
+					<p>But there is some items in your cart </p>
 					<Link to='/checkout'>
-						<h3 className='pointer hover-black-60 mb5'>
-						 Checkout Now?
-						</h3> 
+						<button className='continue-shopping'>
+							Checkout Now
+						</button> 
 					</Link>
+					</Fragment>
 				}
 			</div>
 		:
@@ -39,7 +45,8 @@ const Orders =()=>{
 					<Fragment key={i}>
 					<h2>Order Time: {order[2]}</h2>
 					{order[0].map(x=>
-						<CartItem key={x[0]} productId={x[0]} 
+						<CartItem 
+						 key={x[0]} productId={x[0]} 
 					 	 editable={false}
 					 	 cartItems={order[1]}
 						 />)}

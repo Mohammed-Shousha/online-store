@@ -11,6 +11,7 @@
 	padding: 1rem 0.5rem ;
 	box-shadow: -5px 5px 5px 1px #b1b493;
 	background: #f7f7ee;
+	min-height: 220px;
 }
 
 .shipping-details:hover{

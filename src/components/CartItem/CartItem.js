@@ -1,12 +1,12 @@
 import React, {useContext} from 'react'
 import {ProductsList} from '../Database'
+import {CartItemsContext} from '../../context/CartItemsContext'
 import './CartItem.css'
 import remove from '../Icons/delete.svg'
-import {CartItemsContext} from '../../context/CartItemsContext'
 
 
 
-const CartItem = ({ productId, editable=true})=>{
+const CartItem = ({ productId, editable=true })=>{
 	const {cartItems, setCartItems} = useContext(CartItemsContext)
 
 	return(
@@ -14,7 +14,7 @@ const CartItem = ({ productId, editable=true})=>{
 		<div className='item-container'>
 			<img src={ProductsList[productId].photos[0]} alt='product'/>
 			<div className='product-details'>
-				<h2 > {ProductsList[productId].productName}</h2>
+				<h2 > {ProductsList[productId].name}</h2>
 				<h3> {ProductsList[productId].price} EGP </h3>
 				<p> {ProductsList[productId].description} </p>
 			</div>

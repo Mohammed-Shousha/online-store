@@ -24,13 +24,12 @@ const SearchResults =()=>{
 		:
 			<Fragment>
 			<img src={box} alt='box' className='box-img'/>
-			<h1> We couldn’t find what you were looking for </h1>
+			<h1> We Couldn’t Find What You Were Looking For </h1>
 			<p> Keep calm and search again. We have SO many other products that you will like! </p>
 			<Link to='/'>
-				<h3 
-				 className='pointer hover-black-60 mb5 mt2'>
-				 Continue Shopping?
-				</h3> 
+				<button className='continue-shopping'>
+					Continue Shopping
+				</button>
 			</Link>
 			</Fragment>
 		}

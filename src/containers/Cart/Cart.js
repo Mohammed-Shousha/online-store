@@ -19,12 +19,12 @@ const Cart = ()=>{
 		{cartItems.every(x => x===0) ?
 			<Fragment>
 			<img src ={emptyCart} alt='cart' className='empty-cart-img'/>
-			<h1> YOUR CART IS EMPTY</h1>
+			<h1> Your Cart Is Empty</h1>
+			<p> What are you waiting for ? </p>  
 			<Link to='/'>
-				<h3 
-				 className='pointer hover-black-60 mb5'>
-				 Continue Shopping?
-				</h3> 
+				<button className='start-shopping'>
+					Start Shopping
+				</button>
 			</Link>
 			</Fragment>
 		:

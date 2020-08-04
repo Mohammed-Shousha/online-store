@@ -50,44 +50,42 @@ const Checkout = ()=>{
 
 	return (
 		<Fragment>
-			<CONav step={step} handleBack={handleBack}/>
-			{step===1?
-				<Fragment> 
-				<Shipping 
-			     newAddress={newAddress}
-			     setNewAddress={setNewAddress}
-				/>
+		<CONav step={step} handleBack={handleBack}/>
+		{step===1?
+			<Fragment> 
+			<Shipping 
+		     newAddress={newAddress}
+		     setNewAddress={setNewAddress}
+			/>
 
-				<button 
-				 className={`checkout-continue ${newAddress? 'hide':''}`}
-				 onClick={handleNext}
-				>
-					Continue 
+			<button 
+			 className={`checkout-button ${newAddress? 'hide':''}`}
+			 onClick={handleNext}
+			>
+				Continue 
+			</button>
+			</Fragment>
+		:step===2?
+			<Fragment> 
+			<Payment
+			 cartItems={cartItems}
+			 cartItemsEntries={cartItemsEntries}
+			/>
+			<button
+			 className='checkout-button'
+			 onClick={placeOrder}
+			>
+				Place Order
+			</button>
+			</Fragment>
+		:
+			<Link to='/orders'>
+				<button className='checkout-button'>
+					To Order
 				</button>
-				</Fragment>
-			:step===2?
-				<Fragment> 
-				<Payment
-				 cartItems={cartItems}
-				 cartItemsEntries={cartItemsEntries}
-				/>
-				<button
-				 className='checkout-continue'
-				 onClick={placeOrder}
-				>
-					Place Order
-				</button>
-				</Fragment>
-			:
-				<Link to='/orders'>
-					<button className='checkout-continue'>
-						To Order
-					</button>
-				</Link>
-			}
-
-			
-			<Footer/>
+			</Link>
+		}		
+		<Footer/>
 		</Fragment>
 	)
 }

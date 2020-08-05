@@ -1,9 +1,8 @@
 import React , {useContext, useState} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import Autosuggest from 'react-autosuggest'
-import {ProductsList, USERS} from '../Database'
+import {ProductsList} from '../Database'
 import {DataContext} from '../../context/DataContext'
-import {CartItemsContext} from '../../context/CartItemsContext'
 import './Nav.css'
 import cart from '../Icons/cart.svg'
 import store from '../Icons/store.svg'
@@ -16,21 +15,11 @@ import search from '../Icons/search.svg'
 const Nav =() =>{
 
 	const {isSignedIn, setIsSignedIn, data, setData} = useContext(DataContext)
-	const {cartItems, setCartItems} = useContext(CartItemsContext)
-	const {name} = data
-
-	const initData = {
-		name:'',
-		email:'',
-		password:'',
-		phone:'',
-		addresses:[{name:'', address:'', phone:''}]
-	}
+	const {name, cartItems} = data
 
 	const onSignOut =()=>{
 		setIsSignedIn(false)
-		setCartItems({type:'RESET'})
-		setData(initData)
+		setData({type:'SIGN_OUT'})
 	}
 
 
@@ -136,7 +125,7 @@ const Nav =() =>{
 				</div>}
 			</div>
 
-			<Link to={isSignedIn? 'cart' : '/'}>
+			<Link to={isSignedIn? '/cart' : '/'}>
 				<div className ='l-nav grow'>
 					Cart
 					<div className='flex'>

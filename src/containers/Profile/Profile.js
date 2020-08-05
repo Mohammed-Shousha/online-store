@@ -20,7 +20,7 @@ const Profile =()=> {
 
 	const newPasswordInput = useRef(null)
 	const confirmPasswordInput = useRef(null)
-	const okButton = useRef(null)
+	const OKButton = useRef(null)
 	const phoneInput = useRef(null)
 	const saveButton = useRef(null)
 
@@ -40,7 +40,7 @@ const Profile =()=> {
 					confirmPasswordInput.current.focus()
 					break
 				default :
-					okButton.current.click()
+					OKButton.current.click()
 			}
 		}
   	}
@@ -57,10 +57,13 @@ const Profile =()=> {
 		        	.matches(/^\d{11}$/,'Invalid Phone')
 		     })}
 			 onSubmit={({name, phone}) => {
-				setData({ ...data,
-					name: name,
-					phone:phone
-				})
+				setData({type:'EDIT_DATA', payload:
+				{
+					name:name,
+				 	phone:phone,
+				 	email:data.email,
+				 	password:data.password
+				}})
 			 }}
 			>
 			{({errors, touched})=>(
@@ -125,7 +128,13 @@ const Profile =()=> {
 			        	.oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
 			     })}
 				 onSubmit={({newPassword}) => {
-					setData({ ...data, password: newPassword})
+					setData({type:'EDIT_DATA', payload:
+					 {
+						password: newPassword,
+						name:data.name,
+						phone:data.phone,
+						email:data.email,
+					}})
 					setChangePassword(false)
 				 }}
 				>
@@ -157,7 +166,7 @@ const Profile =()=> {
 						</div>
 						<div className='change-password-bts flex'>
 							<button type='button' onClick={()=>setChangePassword(false)}> CANCEL </button>
-							<button type='submit' ref={okButton} style={{'color': 'blue'}}> OK </button>
+							<button type='submit' ref={OKButton} style={{'color': 'blue'}}> OK </button>
 						</div>
 					</Form>
 				)}

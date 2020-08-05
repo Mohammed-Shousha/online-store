@@ -1,13 +1,19 @@
 import React, {useContext} from 'react'
 import {ProductsList} from '../Database'
-import {CartItemsContext} from '../../context/CartItemsContext'
+import {DataContext} from '../../context/DataContext'
 import './CartItem.css'
 import remove from '../Icons/delete.svg'
 
 
 const CartItem = ({ productId, editable=true })=>{
 
-	const {cartItems, setCartItems} = useContext(CartItemsContext)
+	const {data, setData} = useContext(DataContext)
+	const {cartItems} = data
+
+	const onRemovingItem=(id)=>{
+		setData({type:'EDIT_ITEM', payload: {productId:id, method:'REMOVE'}})
+	}
+
 
 	return(
 		<div className='cart-items-container'>
@@ -27,7 +33,7 @@ const CartItem = ({ productId, editable=true })=>{
 						<img 
 						src={remove} alt='remove'
 						className='bin-img ' 
-						onClick={()=> setCartItems({type:'REMOVE_ITEM', payload:productId})}
+						onClick={()=> onRemovingItem(productId)}
 						/>
 					}
 				</div>

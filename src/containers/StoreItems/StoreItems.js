@@ -8,8 +8,8 @@ const StoreItems =()=>{
 	let {id} = useParams()
 
 	let type = id.split('-')[0].toLowerCase()
+	
 	let products = ProductsList.filter(product=> product.type === type)
-
 
 	let brand = ''
 	if(id.split('-').length > 1){

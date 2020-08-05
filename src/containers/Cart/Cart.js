@@ -2,14 +2,15 @@ import React, {Fragment, useContext} from 'react'
 import {Link} from 'react-router-dom'
 import CartItem from '../../components/CartItem/CartItem'
 import OrderSummary from '../../components/OrderSummary/OrderSummary'
-import {CartItemsContext} from '../../context/CartItemsContext'
+import {DataContext} from '../../context/DataContext'
 import './Cart.css'
 import emptyCart from '../../components/Icons/empty-cart.svg'
 
 
 const Cart = ()=>{
 
-	const {cartItems} = useContext(CartItemsContext)
+	const{data} = useContext(DataContext)
+	const {cartItems} = data
 
 	const cartItemsEntries = Object.entries(cartItems).filter(x=> x[1] > 0)
 

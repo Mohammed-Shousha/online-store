@@ -1,6 +1,5 @@
 import React, {Fragment,useContext, useState} from 'react'
-import {CartItemsContext} from '../../context/CartItemsContext'
-import {OrdersContext} from '../../context/OrdersContext'
+import {DataContext} from '../../context/DataContext'
 import {Link} from 'react-router-dom'
 import CONav from '../../components/CONav/CONav'
 import Shipping from '../../components/Shipping/Shipping'
@@ -11,8 +10,8 @@ import './Checkout.css'
 
 const Checkout = ()=>{
 
-	const {orders, setOrders} = useContext(OrdersContext)
-	const {cartItems} = useContext(CartItemsContext)
+	const {data, setData} = useContext(DataContext)
+	const {cartItems} = data
 
 	const cartItemsEntries = Object.entries(cartItems).filter(x=> x[1] > 0)
 
@@ -28,7 +27,9 @@ const Checkout = ()=>{
 
 	const placeOrder =()=>{
 		handleNext()
-		setOrders([...orders, [cartItemsEntries, cartItems, orderTime()]])
+		setData({type:'EDIT_ORDERS', payload:
+			[cartItemsEntries, cartItems, orderTime()]
+		})
 	}
 
 	const [newAddress, setNewAddress]= useState(false)
@@ -81,7 +82,7 @@ const Checkout = ()=>{
 		:
 			<Link to='/orders'>
 				<button className='checkout-button'>
-					To Order
+					To Orders
 				</button>
 			</Link>
 		}		

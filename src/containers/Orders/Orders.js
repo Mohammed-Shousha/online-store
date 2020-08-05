@@ -1,16 +1,15 @@
 import React, {Fragment ,useContext} from 'react'
 import {Link} from 'react-router-dom'
 import CartItem from '../../components/CartItem/CartItem'
-import {CartItemsContext} from '../../context/CartItemsContext'
-import {OrdersContext} from '../../context/OrdersContext'
+import {DataContext} from '../../context/DataContext'
 import './Orders.css'
 import box from '../../components/Icons/box.svg'
 
 
 const Orders =()=>{
 
-	const {cartItems} = useContext(CartItemsContext)
-	const {orders} = useContext(OrdersContext)
+	const {data} = useContext(DataContext)
+	const {cartItems, orders} = data
 
 	return(
 		<Fragment>

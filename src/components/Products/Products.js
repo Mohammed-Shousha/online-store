@@ -1,6 +1,5 @@
 import React, {useState, useContext, Fragment} from 'react'
 import {DataContext} from '../../context/DataContext'
-import {CartItemsContext} from '../../context/CartItemsContext'
 import {ProductCard} from 'react-ui-cards'
 import SignInFirst from '../SignInFirst/SignInFirst'
 import './Products.css'
@@ -8,8 +7,7 @@ import './Products.css'
 
 const Products =({title='', num='', products})=>{
 
-	const{isSignedIn} = useContext(DataContext)
-	const{setCartItems} = useContext(CartItemsContext)
+	const{isSignedIn, setData} = useContext(DataContext)
 
 	let P = [...products]
 
@@ -29,6 +27,10 @@ const Products =({title='', num='', products})=>{
 
 	const [alert, setAlert] = useState(false)
 
+	const onAddingItems =(id)=>{
+		setData({type:'EDIT_ITEM', payload: {productId:id, method:'ADD'}})
+	}
+
 	return(
 		<Fragment>
 		<h2 className={title.length ?'title': ''}>{title.toUpperCase()}</h2>
@@ -46,7 +48,7 @@ const Products =({title='', num='', products})=>{
 									 description='blah blah blah blah'/>
 									<button 
 									 className='add-to-cart'
-									 onClick={isSignedIn?()=>setCartItems({type:"ADD_ITEM", payload:product.id}) : ()=> setAlert(true)}>
+									 onClick={isSignedIn?()=>onAddingItems(product.id) : ()=> setAlert(true)}>
 									 ADD TO CART
 									</button>
 								</div>								

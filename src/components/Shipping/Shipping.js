@@ -22,8 +22,11 @@ const Shipping =({newAddress, setNewAddress})=>{
 
 	const handleAddingAddress =()=>{
 		setNewAddress(false)
-		setData({ ...data,
-		 addresses:[...addresses,{name:name, address:`lat:${marker.lat}  lng:${marker.lng}`, phone:phone}]})
+		setData({type:'EDIT_ADDRESSES', payload:
+			[...addresses, 
+				{name: name, address: `lat:${marker.lat} lng:${marker.lng}`, phone: phone}
+			]
+		})
 	}
 
 	const filteredAddresses = addresses.filter(a=> a.address!=='')

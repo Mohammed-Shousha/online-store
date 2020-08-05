@@ -40,12 +40,13 @@ import {LocationContext} from '../../context/LocationContext'
 
 	const handleAddressConfirm=()=>{
 		setDetectAddress(false)
-		setData({ ...data,
-		 addresses:[{
-		 	name:nameInput.current.value,
-		 	address:`lat:${marker.lat}  lng:${marker.lng}`,
-		 	phone:phoneInput.current.value
-		 }]})
+		setData({type:'EDIT_ADDRESSES', payload:
+			[{
+				name:nameInput.current.value,
+				address:`lat:${marker.lat}  lng:${marker.lng}`,
+				phone:phoneInput.current.value
+			}]
+		})
 		addressInput.current.value =`lat:${marker.lat}  lng:${marker.lng}`
 		setMarker({lat:'',lng:''})
 	}
@@ -117,20 +118,35 @@ import {LocationContext} from '../../context/LocationContext'
 					history.push('/')
 					onSignIn()
 					if(!data.addresses[0].address){ 
-						setData({ ...data,
+						// setData({ ...data,
+						// 	name: name,
+						// 	email: signUpEmail,
+						// 	password: signUpPassword,
+						// 	phone:phone,
+		 				// 	addresses:[{name:name, address:address, phone:phone}]
+		 				// })
+						 setData({type:'EDIT_DATA', payload:{
 							name: name,
 							email: signUpEmail,
 							password: signUpPassword,
 							phone:phone,
-		 					addresses:[{name:name, address:address, phone:phone}]
-		 				})
+						 }})
+						 setData({type:'EDIT_ADDRESSES', payload:
+							[{name:name, address:address, phone:phone}]
+						 })
 					}else{
-					 	setData({...data,
+					 	// setData({...data,
+						// 	name: name,
+						// 	email: signUpEmail,
+						// 	password: signUpPassword,
+						// 	phone:phone,
+						// })
+						setData({type:'EDIT_DATA', payload:{
 							name: name,
 							email: signUpEmail,
 							password: signUpPassword,
 							phone:phone,
-						})
+						 }})
 					}
 				 }}
 				>
@@ -188,22 +204,22 @@ import {LocationContext} from '../../context/LocationContext'
 				 validationSchema={Yup.object({
 			        signInEmail: Yup.string()
 			           .required('Required')
-					   .test('match', 'Wrong Email', (signInEmail)=>(USERS.map(user=>user.email===signInEmail))),
+					   .test('match', 'Wrong Email', (signInEmail)=>(USERS.some(user=> user.email===signInEmail))),
 			        signInPassword: Yup.string()
 			        	.required('Required')
-						.test('match', 'Wrong Password', (signInPassword)=>(USERS.map(user=>user.password===signInPassword))),
+						.test('match', 'Wrong Password', (signInPassword)=>(USERS.some(user=> user.password===signInPassword))),
 			     })}
 				 onSubmit={(data) => {
 					onSignIn()
 					history.push('/')
 					const {name, email, password, phone, addresses} =USERS.find(user => user.email===data.signInEmail)
-					setData({...data,
+					setData({type:'EDIT_DATA', payload:{
 						name:name,
 						email:email,
 						password:password,
 						phone:phone, 
 						addresses:addresses
-					})
+					}})
 				 }}
 				>
 				{({errors, touched})=>(

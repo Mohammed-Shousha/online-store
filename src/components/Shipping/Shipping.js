@@ -11,8 +11,8 @@ const Shipping =({newAddress, setNewAddress})=>{
 
 	const {marker, setMarker} = useContext(LocationContext)
 	
-	const {signUpData,setSignUpData} = useContext(DataContext)
-	const {name, addresses, phone} = signUpData
+	const {data, setData} = useContext(DataContext)
+	const {name, addresses, phone} = data
 
 	const [selectedAddress, setSelectedAddress] = useState(0)
 
@@ -22,7 +22,7 @@ const Shipping =({newAddress, setNewAddress})=>{
 
 	const handleAddingAddress =()=>{
 		setNewAddress(false)
-		setSignUpData({ ...signUpData,
+		setData({ ...data,
 		 addresses:[...addresses,{name:name, address:`lat:${marker.lat}  lng:${marker.lng}`, phone:phone}]})
 	}
 

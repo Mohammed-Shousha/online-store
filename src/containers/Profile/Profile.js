@@ -8,7 +8,7 @@ import './Profile.css'
 
 const Profile =()=> {
 
-	const {signInData, signUpData, setSignUpData} = useContext(DataContext)
+	const {data, setData} = useContext(DataContext)
 
 	const [changePassword, setChangePassword ] = useState(false)
 
@@ -51,13 +51,13 @@ const Profile =()=> {
 		<div className='profile-container'>
 			<h3 className='tl'> General Information </h3>
 			<Formik
-			 initialValues={{name: signUpData.name , phone:signUpData.phone}}
+			 initialValues={{name: data.name , phone:data.phone}}
 			 validationSchema={Yup.object({
 		        phone : Yup.string()
 		        	.matches(/^\d{11}$/,'Invalid Phone')
 		     })}
 			 onSubmit={({name, phone}) => {
-				setSignUpData({ ...signUpData,
+				setData({ ...data,
 					name: name,
 					phone:phone
 				})
@@ -92,12 +92,12 @@ const Profile =()=> {
 			<div className='flex justify-around'>
 				<div className='profile-details'>
 					<p> Email </p>
-					<input type='email' style={{'color': '#555752'}} value={signUpData.email || signInData.signInEmail} readOnly/>
+					<input type='email' style={{'color': '#555752'}} value={data.email} readOnly/>
 					<p className='i'> You can't change your email </p>
 				</div>
 				<div className='profile-details'>
 					<p> Password </p>
-					<input type='password' style={{'color': '#555752'}} value={signUpData.password || signInData.signInPassword} readOnly/>	
+					<input type='password' style={{'color': '#555752'}} value={data.password} readOnly/>	
 				</div>
 			</div>
 			<div className='flex justify-end'>
@@ -116,7 +116,7 @@ const Profile =()=> {
 				 validationSchema={Yup.object({
 			        password: Yup.string()
 			        	.required('Required')
-			        	.test('match', 'Wrong Password', (password)=>(password===signUpData.password)),	
+			        	.test('match', 'Wrong Password', (password)=>(password===data.password)),	
 			        newPassword: Yup.string()
 			        	.required('Required')
 			        	.matches(passwordRegex, 'Password must contain at least one letter, at least one number, and be longer than 8 charaters'),
@@ -125,7 +125,7 @@ const Profile =()=> {
 			        	.oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
 			     })}
 				 onSubmit={({newPassword}) => {
-					setSignUpData({ ...signUpData, password: newPassword})
+					setData({ ...data, password: newPassword})
 					setChangePassword(false)
 				 }}
 				>

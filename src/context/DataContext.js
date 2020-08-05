@@ -4,9 +4,9 @@ export const DataContext = createContext()
 
 export const DataProvider =({children})=>{
 
-	const [isSignedIn, setIsSignedIn] = useState(true)
+	const [isSignedIn, setIsSignedIn] = useState(false)
 
-	const [signUpData, setSignUpData] = useState({
+	const [data, setData] = useState({
 		name:'',
 		email:'',
 		password:'',
@@ -14,13 +14,8 @@ export const DataProvider =({children})=>{
 		addresses:[{name:'', address:'', phone:''}]
 	})
 
-	const [signInData, setSignInData ] = useState({
-		signInEmail:'',
-		signInPassword:''
-	})
-
 	return(
-		<DataContext.Provider value={{isSignedIn, setIsSignedIn, signUpData, setSignUpData, signInData, setSignInData}}>
+		<DataContext.Provider value={{isSignedIn, setIsSignedIn, data, setData}}>
 			{children}
 		</DataContext.Provider>
 	)

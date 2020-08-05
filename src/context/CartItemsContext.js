@@ -10,7 +10,7 @@ export const CartItemsProvider =({children})=>{
 	const [cartItems, setCartItems] = useReducer(CartItemsReducer, Array(nProducts).fill(0))
 
 	return(
-		<CartItemsContext.Provider value={{cartItems, setCartItems, nProducts}}>
+		<CartItemsContext.Provider value={{cartItems, setCartItems}}>
 			{children}
 		</CartItemsContext.Provider>
 	)

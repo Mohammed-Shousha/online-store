@@ -5,13 +5,14 @@ import {useHistory} from 'react-router-dom'
 import GMap from '../GMap/GMap'
 import './Formik.css'
 import {passwordRegex} from '../Constants'
+import {USERS} from '../Database'
 import {DataContext} from '../../context/DataContext'
 import {LocationContext} from '../../context/LocationContext'
 
  
  const FormikForm = () => {
 
- 	const {setIsSignedIn, signUpData, setSignUpData, setSignInData} = useContext(DataContext)
+ 	const {setIsSignedIn, data, setData} = useContext(DataContext)
 
  	const {marker, setMarker} = useContext(LocationContext)
 
@@ -39,7 +40,7 @@ import {LocationContext} from '../../context/LocationContext'
 
 	const handleAddressConfirm=()=>{
 		setDetectAddress(false)
-		setSignUpData({ ...signUpData,
+		setData({ ...data,
 		 addresses:[{
 		 	name:nameInput.current.value,
 		 	address:`lat:${marker.lat}  lng:${marker.lng}`,
@@ -69,7 +70,7 @@ import {LocationContext} from '../../context/LocationContext'
 					addressInput.current.focus()
 					setAddressFocused(true)
 					break
-				default :
+				default:
 					signUpButton.current.click()
 			}
 		}
@@ -115,20 +116,22 @@ import {LocationContext} from '../../context/LocationContext'
 				 onSubmit={({name, signUpEmail, signUpPassword, phone, address}) => {
 					history.push('/')
 					onSignIn()
-					!signUpData.addresses[0].address? 
-						setSignUpData({ ...signUpData,
+					if(!data.addresses[0].address){ 
+						setData({ ...data,
 							name: name,
 							email: signUpEmail,
 							password: signUpPassword,
 							phone:phone,
 		 					addresses:[{name:name, address:address, phone:phone}]
 		 				})
-					: 	setSignUpData({...signUpData,
+					}else{
+					 	setData({...data,
 							name: name,
 							email: signUpEmail,
 							password: signUpPassword,
 							phone:phone,
 						})
+					}
 				 }}
 				>
 				{({errors, touched})=>(
@@ -171,7 +174,6 @@ import {LocationContext} from '../../context/LocationContext'
 						     	<button type='submit'  className='bt' ref={signUpButton}>
 						     		Sign Up
 						     	</button>
-						        
 							</div>	
 						</div>
 					</Form>
@@ -185,16 +187,23 @@ import {LocationContext} from '../../context/LocationContext'
 				 }}
 				 validationSchema={Yup.object({
 			        signInEmail: Yup.string()
-			           .email('Invalid Email')
-			           .required('Required'),
-			        signInPassword: Yup.string()
-			           .matches(passwordRegex,'Password must contain at least one letter, at least one number, and be longer than 8 charaters')
 			           .required('Required')
+					   .test('match', 'Wrong Email', (signInEmail)=>(USERS.map(user=>user.email===signInEmail))),
+			        signInPassword: Yup.string()
+			        	.required('Required')
+						.test('match', 'Wrong Password', (signInPassword)=>(USERS.map(user=>user.password===signInPassword))),
 			     })}
 				 onSubmit={(data) => {
 					onSignIn()
 					history.push('/')
-					setSignInData(data)
+					const {name, email, password, phone, addresses} =USERS.find(user => user.email===data.signInEmail)
+					setData({...data,
+						name:name,
+						email:email,
+						password:password,
+						phone:phone, 
+						addresses:addresses
+					})
 				 }}
 				>
 				{({errors, touched})=>(

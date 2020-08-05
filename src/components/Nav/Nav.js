@@ -1,7 +1,7 @@
 import React , {useContext, useState} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import Autosuggest from 'react-autosuggest'
-import {ProductsList} from '../Database'
+import {ProductsList, USERS} from '../Database'
 import {DataContext} from '../../context/DataContext'
 import {CartItemsContext} from '../../context/CartItemsContext'
 import './Nav.css'
@@ -15,11 +15,11 @@ import search from '../Icons/search.svg'
 
 const Nav =() =>{
 
-	const {isSignedIn, setIsSignedIn, signUpData, setSignUpData} = useContext(DataContext)
-	const {cartItems, setCartItems, nProducts} = useContext(CartItemsContext)
-	const {name} = signUpData
+	const {isSignedIn, setIsSignedIn, data, setData} = useContext(DataContext)
+	const {cartItems, setCartItems} = useContext(CartItemsContext)
+	const {name} = data
 
-	const initSignUp = {
+	const initData = {
 		name:'',
 		email:'',
 		password:'',
@@ -29,8 +29,8 @@ const Nav =() =>{
 
 	const onSignOut =()=>{
 		setIsSignedIn(false)
-		setCartItems(Array(nProducts).fill(0))
-		setSignUpData(initSignUp)
+		setCartItems({type:'RESET'})
+		setData(initData)
 	}
 
 

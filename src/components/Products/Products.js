@@ -3,6 +3,7 @@ import {DataContext} from '../../context/DataContext'
 import {ProductCard} from 'react-ui-cards'
 import SignInFirst from '../SignInFirst/SignInFirst'
 import './Products.css'
+import { editItem } from '../../context/DataActions'
 
 
 const Products =({title='', num='', products})=>{
@@ -27,8 +28,8 @@ const Products =({title='', num='', products})=>{
 
 	const [alert, setAlert] = useState(false)
 
-	const onAddingItems =(id)=>{
-		setData({type:'EDIT_ITEM', payload: {productId:id, method:'ADD'}})
+	const onAddingItems =(productId)=>{
+		setData(editItem(productId, true))
 	}
 
 	return(

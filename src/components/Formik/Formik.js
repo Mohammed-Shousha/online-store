@@ -7,6 +7,7 @@ import './Formik.css'
 import {passwordRegex} from '../Constants'
 import {USERS} from '../Database'
 import {DataContext} from '../../context/DataContext'
+import {editData, editAddresses} from '../../context/DataActions'
 import {LocationContext} from '../../context/LocationContext'
 
  
@@ -15,10 +16,6 @@ import {LocationContext} from '../../context/LocationContext'
  	const {setIsSignedIn, data, setData} = useContext(DataContext)
 
  	const {marker, setMarker} = useContext(LocationContext)
-
- 	const onSignIn =()=>{
- 		setIsSignedIn(true)
- 	}
 
  	let history = useHistory()
 
@@ -40,13 +37,13 @@ import {LocationContext} from '../../context/LocationContext'
 
 	const handleAddressConfirm=()=>{
 		setDetectAddress(false)
-		setData({type:'EDIT_ADDRESSES', payload:
+		setData(editAddresses(
 			[{
 				name:nameInput.current.value,
 				address:`lat:${marker.lat}  lng:${marker.lng}`,
 				phone:phoneInput.current.value
 			}]
-		})
+		))
 		addressInput.current.value =`lat:${marker.lat}  lng:${marker.lng}`
 		setMarker({lat:'',lng:''})
 	}
@@ -116,37 +113,10 @@ import {LocationContext} from '../../context/LocationContext'
 			     })}
 				 onSubmit={({name, signUpEmail, signUpPassword, phone, address}) => {
 					history.push('/')
-					onSignIn()
+					setIsSignedIn(true)
+					setData(editData(name, signUpEmail, signUpPassword, phone))
 					if(!data.addresses[0].address){ 
-						// setData({ ...data,
-						// 	name: name,
-						// 	email: signUpEmail,
-						// 	password: signUpPassword,
-						// 	phone:phone,
-		 				// 	addresses:[{name:name, address:address, phone:phone}]
-		 				// })
-						 setData({type:'EDIT_DATA', payload:{
-							name: name,
-							email: signUpEmail,
-							password: signUpPassword,
-							phone:phone,
-						 }})
-						 setData({type:'EDIT_ADDRESSES', payload:
-							[{name:name, address:address, phone:phone}]
-						 })
-					}else{
-					 	// setData({...data,
-						// 	name: name,
-						// 	email: signUpEmail,
-						// 	password: signUpPassword,
-						// 	phone:phone,
-						// })
-						setData({type:'EDIT_DATA', payload:{
-							name: name,
-							email: signUpEmail,
-							password: signUpPassword,
-							phone:phone,
-						 }})
+						setData(editAddresses([{name:name, address:address, phone:phone}]))
 					}
 				 }}
 				>
@@ -210,16 +180,11 @@ import {LocationContext} from '../../context/LocationContext'
 						.test('match', 'Wrong Password', (signInPassword)=>(USERS.some(user=> user.password===signInPassword))),
 			     })}
 				 onSubmit={(data) => {
-					onSignIn()
+					setIsSignedIn(true)
 					history.push('/')
 					const {name, email, password, phone, addresses} =USERS.find(user => user.email===data.signInEmail)
-					setData({type:'EDIT_DATA', payload:{
-						name:name,
-						email:email,
-						password:password,
-						phone:phone, 
-						addresses:addresses
-					}})
+					setData(editData(name, email, password, phone))
+					setData(editAddresses(addresses))
 				 }}
 				>
 				{({errors, touched})=>(

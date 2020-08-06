@@ -25,13 +25,17 @@ export const DataReducer =(data, action)=>{
             }
         case 'EDIT_ITEM':
             let newCartItems = [...data.cartItems]
-            if(action.payload.method==='ADD'){
+            if(action.payload.addItem){
                 newCartItems[action.payload.productId]++
             }else{
             newCartItems[action.payload.productId]--
             }
             return {...data,
                 cartItems:newCartItems
+            }
+        case 'CLEAR_CART':
+            return{...data,
+                cartItems:initData.cartItems
             }
         case 'EDIT_ORDERS':
             return{...data,

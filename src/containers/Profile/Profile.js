@@ -1,5 +1,6 @@
 import React, {Fragment, useState, useRef, useContext} from 'react'
 import {DataContext} from '../../context/DataContext'
+import {editData} from '../../context/DataActions'
 import { Formik, Field, Form} from 'formik'
 import * as Yup from 'yup'
 import {passwordRegex} from '../../components/Constants'
@@ -57,13 +58,7 @@ const Profile =()=> {
 		        	.matches(/^\d{11}$/,'Invalid Phone')
 		     })}
 			 onSubmit={({name, phone}) => {
-				setData({type:'EDIT_DATA', payload:
-				{
-					name:name,
-				 	phone:phone,
-				 	email:data.email,
-				 	password:data.password
-				}})
+				setData(editData(name, data.email, data.password, phone))
 			 }}
 			>
 			{({errors, touched})=>(
@@ -128,13 +123,7 @@ const Profile =()=> {
 			        	.oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
 			     })}
 				 onSubmit={({newPassword}) => {
-					setData({type:'EDIT_DATA', payload:
-					 {
-						password: newPassword,
-						name:data.name,
-						phone:data.phone,
-						email:data.email,
-					}})
+					setData(editData(data.name, data.email, newPassword, data.phone))
 					setChangePassword(false)
 				 }}
 				>

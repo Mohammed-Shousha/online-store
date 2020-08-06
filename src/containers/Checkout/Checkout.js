@@ -6,6 +6,7 @@ import Shipping from '../../components/Shipping/Shipping'
 import Payment from '../../components/Payment/Payment'
 import Footer from '../../components/Footer/Footer'
 import './Checkout.css'
+import { editOrders } from '../../context/DataActions'
 
 
 const Checkout = ()=>{
@@ -27,9 +28,9 @@ const Checkout = ()=>{
 
 	const placeOrder =()=>{
 		handleNext()
-		setData({type:'EDIT_ORDERS', payload:
+		setData(editOrders(
 			[cartItemsEntries, cartItems, orderTime()]
-		})
+		))
 	}
 
 	const [newAddress, setNewAddress]= useState(false)

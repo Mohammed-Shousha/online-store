@@ -10,16 +10,18 @@ import user from '../Icons/user.svg'
 import list from '../Icons/list.svg'
 import signout from '../Icons/signout.svg'
 import search from '../Icons/search.svg'
+import { signOut } from '../../context/DataActions'
 
 
 const Nav =() =>{
 
 	const {isSignedIn, setIsSignedIn, data, setData} = useContext(DataContext)
 	const {name, cartItems} = data
+	const newName = name.split(' ')[0]
 
 	const onSignOut =()=>{
 		setIsSignedIn(false)
-		setData({type:'SIGN_OUT'})
+		setData(signOut())
 	}
 
 
@@ -101,7 +103,7 @@ const Nav =() =>{
 
 			<div onClick={isSignedIn? null : ()=> history.push('/signin')}
 			className = {`l-nav grow ${isSignedIn? 'tooltipNav' : ''}`}>
-				{isSignedIn? 'Hi '+ (name? name : '') : 'SignIn or SignUp'}
+				{isSignedIn? `Hi ${newName}` : 'SignIn or SignUp'}
 				{isSignedIn &&
 				<div className='tooltipTextNav'>
 				<Link to='/orders'>

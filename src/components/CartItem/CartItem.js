@@ -3,6 +3,7 @@ import {ProductsList} from '../Database'
 import {DataContext} from '../../context/DataContext'
 import './CartItem.css'
 import remove from '../Icons/delete.svg'
+import { editItem } from '../../context/DataActions'
 
 
 const CartItem = ({ productId, editable=true })=>{
@@ -10,8 +11,8 @@ const CartItem = ({ productId, editable=true })=>{
 	const {data, setData} = useContext(DataContext)
 	const {cartItems} = data
 
-	const onRemovingItem=(id)=>{
-		setData({type:'EDIT_ITEM', payload: {productId:id, method:'REMOVE'}})
+	const onRemovingItem=(productId)=>{
+		setData(editItem(productId, false))
 	}
 
 

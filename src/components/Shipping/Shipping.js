@@ -1,5 +1,6 @@
 import React, {Fragment, useState, useContext} from 'react'
 import {DataContext} from '../../context/DataContext'
+import {editAddresses} from '../../context/DataActions'
 import {LocationContext} from '../../context/LocationContext'
 import './Shipping.css'
 import GMap from '../GMap/GMap'
@@ -22,11 +23,12 @@ const Shipping =({newAddress, setNewAddress})=>{
 
 	const handleAddingAddress =()=>{
 		setNewAddress(false)
-		setData({type:'EDIT_ADDRESSES', payload:
+		setData(editAddresses(
 			[...addresses, 
 				{name: name, address: `lat:${marker.lat} lng:${marker.lng}`, phone: phone}
 			]
-		})
+		))
+		setMarker({lat:'',lng:''})
 	}
 
 	const filteredAddresses = addresses.filter(a=> a.address!=='')

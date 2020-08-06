@@ -30,3 +30,32 @@
 	width: 190px;
 	margin-right: 55px;
 }
+
+.clear-cart{
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	cursor: pointer;
+	padding: 0.5rem 3rem;
+	margin: auto;
+	border:none;
+	border-radius: 0.5rem;
+	background: #206a5d;
+	color:#d6efc7;
+	transition-duration: .7s;
+	outline: none;
+}
+
+.clear-cart:hover{
+	transform: scale(1.05);
+}
+
+.clear-cart > img{
+	width: 2rem;
+	margin:auto;
+	margin-left: 10px;
+}
+
+.clear-cart > p{
+	margin: auto;
+}

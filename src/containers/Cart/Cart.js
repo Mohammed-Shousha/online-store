@@ -5,12 +5,18 @@ import OrderSummary from '../../components/OrderSummary/OrderSummary'
 import {DataContext} from '../../context/DataContext'
 import './Cart.css'
 import emptyCart from '../../components/Icons/empty-cart.svg'
+import emptyCartButton from '../../components/Icons/empty-cart-button.svg'
+import { clearCart } from '../../context/DataActions'
 
 
 const Cart = ()=>{
 
-	const{data} = useContext(DataContext)
+	const{data, setData} = useContext(DataContext)
 	const {cartItems} = data
+
+	const handleClearCart =()=>{
+		setData(clearCart())
+	}
 
 	const cartItemsEntries = Object.entries(cartItems).filter(x=> x[1] > 0)
 
@@ -39,9 +45,15 @@ const Cart = ()=>{
 						/>
 					)}
 				</div>
-				<OrderSummary 
-				 cartItemsEntries={cartItemsEntries}
-				/>
+				<div>
+					<OrderSummary 
+					cartItemsEntries={cartItemsEntries}
+					/>
+					<button onClick={handleClearCart} className='clear-cart'>
+						<p>Clear Cart</p>
+						<img src={emptyCartButton} alt='empty-cart'/>
+					</button>
+				</div>
 			</div>
 		}
 		</Fragment>

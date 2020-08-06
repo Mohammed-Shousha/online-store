@@ -1,6 +1,6 @@
 import React, {useRef, useState, Fragment} from 'react'
 import { GoogleMap, Marker, useLoadScript, InfoWindow} from "@react-google-maps/api"
-import Geocode from "react-geocode"
+// import Geocode from "react-geocode"
 import Loading from '../Loading/Loading'
 import './GMap.css'
 import pin from '../Icons/pin.svg'
@@ -104,7 +104,7 @@ const GMap =({marker, setMarker})=>{
 	         onClick={onMapClick}
 	         onLoad={onMapLoad}
 	        >
-	        <button onClick={Locate} className='locate-me-button compass'>
+	        <button onClick={Locate} className='locate-me-button'>
 				<img src={pin} alt='pin' className='pin'/>
 				Locate Me
 			</button>

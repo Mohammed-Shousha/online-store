@@ -43,7 +43,6 @@ const Nav =() =>{
 	const searchItem =(value)=>{
 		if(value){
 			history.push(`/search?q=${value}`)
-			setValue('')
 		}
 	}
 

@@ -1,10 +1,10 @@
 import React, {Fragment, lazy, Suspense} from 'react'
 import {BrowserRouter as Router, Switch,  Route, Redirect} from 'react-router-dom'
-import ContextProvider  from './context/ContextProvider'  
+import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 import Loading from './components/Loading/Loading'
 const Home = lazy(()=> import('./containers/Home/Home')) 
 const Cart = lazy(()=> import('./containers/Cart/Cart')) 
-const SignIn = lazy(()=> import('./containers/SignIn/SignIn'))
+const Form = lazy(()=> import('./containers/Form/Form'))
 const Checkout = lazy(()=> import('./containers/Checkout/Checkout'))  
 const StoreItems = lazy(()=> import('./containers/StoreItems/StoreItems')) 
 const SearchResults = lazy(()=> import('./containers/SearchResults/SearchResults')) 
@@ -25,15 +25,15 @@ const App =()=> {
 	    	<Route path='/' exact>
 		    	<Home/>
 	    	</Route>
-		    <Route path='/cart'>
-    			<Cart/>
-	     	</Route>
-	     	<Route path='/orders'>
+		    <PrivateRoute path='/cart'>
+				<Cart/>
+	     	</PrivateRoute>
+	     	<PrivateRoute path='/orders'>
 	     		<Orders/>
-	     	</Route>
-	     	<Route path='/profile'>
+	     	</PrivateRoute>
+	     	<PrivateRoute path='/profile'>
 	     		<Profile/>
-	     	</Route>
+	     	</PrivateRoute>
   			<Route path="/categories/:id">
 		    	<StoreItems/>
   			</Route>
@@ -49,25 +49,22 @@ const App =()=> {
 	)
 
 	return(
-		<ContextProvider>
-			<Router>
-				<Suspense fallback={<Loading/>}>
-					<Switch>
-			    		<Route path='/signin' exact>
-			    			<SignIn/>
-				     	</Route>
-				     	<Route path='/checkout' exact>
-				     	 	<Checkout/>
-				     	</Route>
-						<Route path='/notfound'>
-				     	 	<h1> Not Found </h1>
-				     	 	<Loading/>
-				     	</Route>
-						<NavRoutes/>
-				    </Switch>
-			    </Suspense>
-		    </Router>
-	    </ContextProvider>
+		<Router>
+			<Suspense fallback={<Loading/>}>
+				<Switch>
+					<Route path={['/signin' , '/signup']}>
+						<Form/>
+					</Route>
+					<PrivateRoute path='/checkout'>
+						<Checkout/>
+					</PrivateRoute>
+					<Route path='/notfound'>
+						<h1> 404 Not Found </h1>
+					</Route>
+					<NavRoutes/>
+				</Switch>
+			</Suspense>
+		</Router>
 	)
 } 
 

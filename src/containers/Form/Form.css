@@ -13,25 +13,6 @@
   width: 1.5rem;
 }
 
-.form-container {
-  position: absolute;
-  top: 4.5rem;
-  right: 0;
-  left: 0;
-  margin: auto;
-  background-color: #ffffff;
-  border-radius: 10px;
-  padding: 15px 50px;
-  width: 440px;
-  min-height: 500px;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  flex-direction: column;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25);
-  z-index: 1;
-}
-
 .error{
   font-size: 12px;
 	color: red;
@@ -48,42 +29,13 @@
   visibility: hidden;
 }
 
-.bt {
-  border-radius: 20px;
-  border: 1px solid #4bb1bd;
-  background-color: #4bb1bd;
-  color: #FFFFFF;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 12px 45px;
-  letter-spacing: 1px;
-  cursor: pointer;
-  text-transform: uppercase;
-  transition: transform 80ms ease-in;
-  margin: 0px 5px 5px;
-  outline: none;
-}
-
-.bt:active {
-  transform: scale(0.95);
-}
-
-.input {
-  background-color: #eee;
-  border: none;
-  padding: 12px 15px;
-  margin: 10px 0  ;
-  width: 100%;
-}
-
 textarea{
   resize: none;
 }
 
 .link{
-    font-weight: bold;
-    margin-left: 1px;;
-
+  font-weight: bold;
+  margin-left: 1px;;
 }
 
 .map-con{

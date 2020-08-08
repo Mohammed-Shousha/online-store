@@ -7,6 +7,9 @@ import {passwordRegex} from '../Constants'
 import {DataContext} from '../../context/DataContext'
 import {editData, editAddresses} from '../../context/DataActions'
 import {LocationContext} from '../../context/LocationContext'
+import FormButton from '../StyledComponents/FormButton'
+import FormContainer from '../StyledComponents/FormContainer'
+import StyledField from '../StyledComponents/StyledField'
 
  
  const SignUp = () => {
@@ -104,47 +107,48 @@ import {LocationContext} from '../../context/LocationContext'
 		{({errors, touched})=>(
 			<Form onKeyDown={handleKeyDown}>
 				<div className={detectAddress? 'hide' :''}>
-				<div className='form-container'>
+				<FormContainer >
 					<h1 className='header'>Create Account</h1>
-					<Field 
-						name="name" type="text" className='input'
+					<StyledField 
+						name="name" type="text"
 						placeholder="Name" innerRef={nameInput} onKeyUp={handleKeyUp}
 					/>
 					<ErrorMessage name="name" />
-					<Field 
-						name="signUpEmail" type="Email" className='input' id='sign-up-email'
+					<StyledField 
+						name="signUpEmail" type="Email" id='sign-up-email'
 						placeholder="Email" innerRef={emailInput} onKeyUp={handleKeyUp} 
 					/>
 					{touched.signUpEmail && errors.signUpEmail && <p className='error'>{errors.signUpEmail}</p>}
-					<Field 
-						name="signUpPassword" type="password" className='input' id='sign-up-password'
+					<StyledField 
+						name="signUpPassword" type="password" id='sign-up-password'
 						placeholder='Password' innerRef={passwordInput} onKeyUp={handleKeyUp}
 					/>
 					{touched.signUpPassword && errors.signUpPassword && <p className='error'>{errors.signUpPassword}</p>}
-					<Field 
-						name="phone" type="tel" className='input'
+					<StyledField 
+						name="phone" type="tel"
 						placeholder="01234567890" innerRef={phoneInput} onKeyUp={handleKeyUp}
 					/>
 					{touched.phone && errors.phone && <p className='error'>{errors.phone}</p>}
-					<Field 
-						name="address" type="text" className='input' as='textarea' value={undefined}
-						placeholder="Address (Optional)" innerRef={addressInput} onKeyUp={handleKeyUp}
+					<StyledField 
+						name="address" type="text" as='textarea' value={undefined}
+						placeholder="Address (Optional)" ref={addressInput} onKeyUp={handleKeyUp}
 						onClick={()=> setAddressFocused(true)}
 					/>
-					{addressFocused && <button 
-						type='button' className='bt' 
-						style={{'background':'#342b38', 'border':'none'}} 
+					{addressFocused && 
+					<FormButton 
+						type='FormButton'
+						grey
 						onClick={()=>setDetectAddress(true)}
 					>
 						Detect My Location 
-					</button> }
-					<button type='submit'  className='bt' ref={signUpButton}>
+					</FormButton> }
+					<FormButton  ref={signUpButton}>
 						Sign Up
-					</button>
+					</FormButton>
 					<p> Have Account?
 						<Link to='signin' className='link'> Sign In </Link>
 					</p>
-				</div>	
+				</FormContainer>	
 				</div>	
 			</Form>
 		)}
@@ -155,13 +159,9 @@ import {LocationContext} from '../../context/LocationContext'
 			 marker={marker}
 			 setMarker={setMarker}
 			/>
-			<button 
-			 className='bt' 
-			 style={{'background':'#342b38', 'border':'none'}}
-			 onClick={handleAddressConfirm}
-			> 
+			<FormButton grey onClick={handleAddressConfirm}> 
 				Confirm
-			</button>
+			</FormButton>
 		</div>
 		</Fragment>
 	)

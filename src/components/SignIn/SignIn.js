@@ -5,6 +5,9 @@ import { useHistory, Link } from 'react-router-dom'
 import { USERS } from '../Database'
 import { DataContext } from '../../context/DataContext'
 import { editData, editAddresses } from '../../context/DataActions'
+import FormButton from '../StyledComponents/FormButton'
+import FormContainer from '../StyledComponents/FormContainer'
+import StyledField from '../StyledComponents/StyledField'
 
 
 const SignIn = () => {
@@ -57,26 +60,26 @@ const SignIn = () => {
         >
             {({ errors, touched }) => (
                 <Form onKeyDown={handleKeyDown}>
-                    <div className="form-container">
+                    <FormContainer>
                         <h1 className='header'>Sign In</h1>
-                        <Field
-                            name='signInEmail' className='input' type="email"
+                        <StyledField
+                            name='signInEmail' type='email'
                             placeholder="Email" onKeyUp={handleKeyUp}
                         />
                         {touched.signInEmail && errors.signInEmail && <p className='error'>{errors.signInEmail}</p>}
-                        <Field
-                            name='signInPassword' className='input' type="password"
+                        <StyledField
+                            name='signInPassword' type="password"
                             placeholder="Password" innerRef={signInPasswordInput} onKeyUp={handleKeyUp}
                         />
                         {touched.signInPassword && errors.signInPassword && <p className='error'>{errors.signInPassword}</p>}
-                        <button type='submit' className='bt' ref={signInButton}>
+                        <FormButton ref={signInButton}>
                             Sign In
-                        </button>
+                        </FormButton>
                         <p>
                             New User?
                             <Link to='/signup' className='link'> Sign Up </Link>
                         </p>
-                    </div>
+                    </FormContainer>
                 </Form>
             )}
         </Formik>

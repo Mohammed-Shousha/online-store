@@ -4,6 +4,8 @@ import {editData} from '../../context/DataActions'
 import { Formik, Field, Form} from 'formik'
 import * as Yup from 'yup'
 import {passwordRegex} from '../../components/Constants'
+import FlexContainer from '../../components/StyledComponents/FlexContainer'
+import { ProfileContainer, ProfileDetails, ProfileText, ChangePasswordButton, ProfileButton } from '../../components/StyledComponents/ProfileComponents'
 import './Profile.css'
 
 
@@ -49,8 +51,8 @@ const Profile =()=> {
 	return(
 		<Fragment>
 		<h1 className='profile-title'> Profile </h1>
-		<div className='profile-container'>
-			<h3 className='tl'> General Information </h3>
+		<ProfileContainer>
+			<h3> General Information </h3>
 			<Formik
 			 initialValues={{name: data.name , phone:data.phone}}
 			 validationSchema={Yup.object({
@@ -63,45 +65,46 @@ const Profile =()=> {
 			>
 			{({errors, touched})=>(
 				<Form onKeyDown={handleKeyDown}>
-					<div className='flex justify-around'>
-						<div className='profile-details'>
+					<FlexContainer around>
+						<ProfileDetails>
 							<p> Name </p>
-							<Field name='name' as='input' onKeyUp={handleKeyUp} />
-						</div>
-						<div className='profile-details'>
+							<Field name='name' onKeyUp={handleKeyUp} />
+						</ProfileDetails>
+						<ProfileDetails>
 							<p> Phone </p>
 							<Field 
-							 name='phone' as='input' 
-							 innerRef={phoneInput} onKeyUp={handleKeyUp}
+								name='phone'  
+								innerRef={phoneInput} onKeyUp={handleKeyUp}
 							/>
-					       {touched.phone && errors.phone && <p className='i' style={{'color':'red'}}>{errors.phone}</p>}
-						</div>
-					</div>
-					<div className='flex justify-end'>
-						<button type='submit' className='profile-save-bt' ref={saveButton}> SAVE </button>
-					</div>
+							{touched.phone && errors.phone && <ProfileText error>{errors.phone}</ProfileText>}
+						</ProfileDetails>
+					</FlexContainer>
+					<FlexContainer end>
+						<ProfileButton type='submit' ref={saveButton}> SAVE </ProfileButton>
+					</FlexContainer>
 				</Form>
 			)}
 			</Formik>
-		</div>
+		</ProfileContainer>
 
-		<div className='profile-container'>
-			<h3 className='tl'> Security </h3>
-			<div className='flex justify-around'>
-				<div className='profile-details'>
+		<ProfileContainer>
+			<h3> Security </h3>
+			<FlexContainer around>
+				<ProfileDetails>
 					<p> Email </p>
 					<input type='email' style={{'color': '#555752'}} value={data.email} readOnly/>
-					<p className='i'> You can't change your email </p>
-				</div>
-				<div className='profile-details'>
+					<ProfileText> You can't change your email </ProfileText>
+				</ProfileDetails>
+				<ProfileDetails>
 					<p> Password </p>
 					<input type='password' style={{'color': '#555752'}} value={data.password} readOnly/>	
-				</div>
-			</div>
-			<div className='flex justify-end'>
-				<button className='profile-save-bt' onClick={()=>setChangePassword(true)}> CHANGE PASSWORD </button>
-			</div>
-		</div>
+				</ProfileDetails>
+			</FlexContainer>
+			<FlexContainer end>
+				<ProfileButton onClick={()=>setChangePassword(true)}> CHANGE PASSWORD </ProfileButton>
+			</FlexContainer>
+		</ProfileContainer>
+
 		{changePassword &&
 		<div className='modal'>
 			<div className='change-password-container'>
@@ -129,34 +132,34 @@ const Profile =()=> {
 				>
 				{({errors, touched})=>(
 					<Form onKeyDown={handleKeyDown}>
-						<div className='change-password-details'>
+						<ProfileDetails changePassword>
 							<p> Current Password </p>
 							<Field 
-							 name='password' as='input' type='password'
+							 name='password'  type='password'
 							 onKeyUp={handleKeyUp}
 							/>
-							{touched.password && errors.password && <h6>{errors.password}</h6>}
-						</div>
-						<div className='change-password-details'>
+							{touched.password && errors.password && <ProfileText error>{errors.password}</ProfileText>}
+						</ProfileDetails>
+						<ProfileDetails changePassword>
 							<p> New Password </p>
 							<Field 
-							 name='newPassword' as='input' type='password' 
+							 name='newPassword'  type='password' 
 							 innerRef={newPasswordInput} onKeyUp={handleKeyUp}
 							/>
-							{touched.newPassword && errors.newPassword && <h6>{errors.newPassword}</h6>}
-						</div>
-						<div className='change-password-details'>
+							{touched.newPassword && errors.newPassword && <ProfileText error>{errors.newPassword}</ProfileText>}
+						</ProfileDetails>
+								<ProfileDetails changePassword>
 							<p>Confirm New Password </p>
 							<Field 
-							 name='confirmPassword' as='input' type='password' 
+							 name='confirmPassword'  type='password' 
 							 innerRef={confirmPasswordInput} onKeyUp={handleKeyUp}
 							/>
-							{touched.confirmPassword && errors.confirmPassword && <h6>{errors.confirmPassword}</h6>}
-						</div>
-						<div className='change-password-bts flex'>
-							<button type='button' onClick={()=>setChangePassword(false)}> CANCEL </button>
-							<button type='submit' ref={OKButton} style={{'color': 'blue'}}> OK </button>
-						</div>
+							{touched.confirmPassword && errors.confirmPassword && <ProfileText error>{errors.confirmPassword}</ProfileText>}
+						</ProfileDetails>
+						<FlexContainer around>
+							<ChangePasswordButton color='#555752' type='button' onClick={()=>setChangePassword(false)}> CANCEL </ChangePasswordButton>
+							<ChangePasswordButton color='blue' type='submit' ref={OKButton}> OK </ChangePasswordButton>
+						</FlexContainer>
 					</Form>
 				)}
 				</Formik>

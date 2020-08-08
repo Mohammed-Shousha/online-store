@@ -1,7 +1,7 @@
 import React, {Fragment, lazy, Suspense} from 'react'
 import {BrowserRouter as Router, Switch,  Route, Redirect} from 'react-router-dom'
 import PrivateRoute from './components/PrivateRoute/PrivateRoute'
-import Loading from './components/Loading/Loading'
+import Loading from './components/StyledComponents/Loading'
 const Home = lazy(()=> import('./containers/Home/Home')) 
 const Cart = lazy(()=> import('./containers/Cart/Cart')) 
 const Form = lazy(()=> import('./containers/Form/Form'))

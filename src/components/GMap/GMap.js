@@ -1,10 +1,11 @@
 import React, {useRef, useState, Fragment} from 'react'
 import { GoogleMap, Marker, useLoadScript, InfoWindow} from "@react-google-maps/api"
 // import Geocode from "react-geocode"
-import Loading from '../Loading/Loading'
+import Loading from '../StyledComponents/Loading'
 import './GMap.css'
 import pin from '../Icons/pin.svg'
 import pin2 from '../Icons/pin2.svg'
+import {GoogleMapsKey} from '../Constants'
 
 const mapContainerStyle = {
   height: "80vh",
@@ -26,8 +27,7 @@ const options = {
 const GMap =({marker, setMarker})=>{
 
 	const {isLoaded, loadError} =useLoadScript({
-		googleMapsApiKey : 'AIzaSyAec45bB1-bXR0LZ7ac3C72I_eurXDcins'
-
+		googleMapsApiKey : GoogleMapsKey
 	})
 
 	const mapRef = useRef()

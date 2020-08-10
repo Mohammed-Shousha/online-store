@@ -1,20 +1,22 @@
 import React from 'react'
-import './Features.css'
 import {FEATURES} from '../Database'
+import FlexContainer from '../StyledComponents/FlexContainer'
+import { Circle } from '../StyledComponents/FeturesComponents'
+import {Tooltip} from '../StyledComponents/Tooltip'
 
 
-const Features = ()=>(
-	<div className='features-container'>
+const Features = () =>(
+	<FlexContainer center responsive margin='0 auto 150px'>
 		{FEATURES.map(feature =>(
-			<div className='circle' key={feature.tag} style={{background:feature.color}}>
-				<div className='pa1 tooltip'>
-					<h3 className='tag'> {feature.tag} </h3>
-					<p className='tooltiptext up' style={{color:feature.color}}> {feature.description} </p>
-					<img className='icons' src ={feature.img} alt ='feature'/>
-				</div>
-			</div>
+			<Circle key={feature.tag} color={feature.color}>
+				<Tooltip>
+					<h1> {feature.tag} </h1>
+					<p> {feature.description} </p>
+					<img src ={feature.img} alt ='feature'/>
+				</Tooltip>
+			</Circle>
 		))}
-	</div>
+	</FlexContainer>
 )
 
 export default Features

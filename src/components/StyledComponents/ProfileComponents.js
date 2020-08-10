@@ -13,11 +13,11 @@ export const ProfileContainer = styled.div`
         text-align:left;
     }
 `
-
 export const ProfileDetails = styled.div `
     
     width: ${props => props.changePassword? '':'45%'};
     margin: ${props => props.changePassword ? '2.5rem 0.5rem': ''};
+    pointer-events:${props => props.readOnly ? 'none' : ''};
 
     p{
         color: #555752;
@@ -31,6 +31,7 @@ export const ProfileDetails = styled.div `
         border-bottom: 1px solid grey;
         font-size: 20px;
         outline: none;
+        color : ${props => props.readOnly? '#555752': 'black'};
     }
 `
 
@@ -53,6 +54,26 @@ export const ProfileButton = styled.button`
     outline: none;
     font-weight: bold;
     cursor: pointer;
+`
+
+export const ChangePasswordContainer = styled.div`
+    position: fixed;
+	top: 10vh;
+	right: 0;
+	left: 0;
+	max-width: 450px;
+	margin: auto;
+	border-radius: 3px;
+	background: white;
+	border: 1px solid red;
+	padding: 2rem 1rem;
+
+    & > div {
+        line-height: 12px;
+        p{
+            font-size: 10px;
+        }
+    }
 `
 
 export const ChangePasswordButton = styled(ProfileButton)`

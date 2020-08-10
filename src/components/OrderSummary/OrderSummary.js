@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import './OrderSummary.css'
 import {ProductsList} from '../Database'
+import { CartButton, OrderSummaryContainer } from '../StyledComponents/CartComponents'
 
 
 const OrderSummary =({cartItemsEntries, checkoutNow=true})=>{
@@ -11,8 +11,8 @@ const OrderSummary =({cartItemsEntries, checkoutNow=true})=>{
 	let total = subtotal + shippingFee
 
 	return(
-		<div className='order-summary-container'>
-			<div className='order-summary'>
+		<OrderSummaryContainer>
+			<div>
 				<h1 > Order Summary </h1>
 				<hr/>
 				<h3> Subtotal <span>{`${subtotal} EGP`}</span> </h3>
@@ -21,10 +21,11 @@ const OrderSummary =({cartItemsEntries, checkoutNow=true})=>{
 				<h2> Total <span>{`${total} EGP`}</span> </h2>
 				{checkoutNow&&
 					<Link to='/checkout'>
-						<button className='checkout-botton'> CHECKOUT NOW </button>
-					</Link>}
+						<CartButton checkout> CHECKOUT NOW </CartButton>
+					</Link>
+				}
 			</div>
-		</div>
+		</OrderSummaryContainer>
 	)
 }
 

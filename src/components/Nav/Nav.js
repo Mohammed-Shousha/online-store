@@ -5,12 +5,13 @@ import {ProductsList} from '../Database'
 import {DataContext} from '../../context/DataContext'
 import './Nav.css'
 import cart from '../Icons/cart.svg'
-import store from '../Icons/store.svg'
 import user from '../Icons/user.svg'
 import list from '../Icons/list.svg'
 import signout from '../Icons/signout.svg'
 import search from '../Icons/search.svg'
 import { signOut } from '../../context/DataActions'
+import { MainNav } from '../StyledComponents/Navbar'
+import Logo from '../StyledComponents/Logo'
 
 
 const Nav =() =>{
@@ -79,12 +80,9 @@ const Nav =() =>{
 	}
 
 	return(
-		<nav className ='nav-bar'>
-			<Link to='/'>
-				<img alt='logo' src={store} 
-				 className='logo grow'/>
-			</Link>
-
+		<MainNav>
+			<Logo/>
+			
 			<Autosuggest
 	         suggestions={suggestions}
 	         inputProps={inputProps}
@@ -137,7 +135,7 @@ const Nav =() =>{
 					</div>
 				</div>
 			</Link>
-		</nav>
+		</MainNav>
 	)
 }
 

@@ -1,12 +1,15 @@
 import React, {Fragment, useContext} from 'react'
-import {Link} from 'react-router-dom'
 import CartItem from '../../components/CartItem/CartItem'
 import OrderSummary from '../../components/OrderSummary/OrderSummary'
 import {DataContext} from '../../context/DataContext'
-import './Cart.css'
 import emptyCart from '../../components/Icons/empty-cart.svg'
 import emptyCartButton from '../../components/Icons/empty-cart-button.svg'
 import { clearCart } from '../../context/DataActions'
+import Title from '../../components/StyledComponents/Title'
+import FlexContainer from '../../components/StyledComponents/FlexContainer'
+import LinkButton from '../../components/StyledComponents/LinkButton'
+import Icon from '../../components/StyledComponents/Icon'
+import {CartButton} from '../../components/StyledComponents/CartComponents'
 
 
 const Cart = ()=>{
@@ -22,20 +25,18 @@ const Cart = ()=>{
 
 	return(
 		<Fragment>
-		<h1 className='cart-title'> My Cart </h1>
+		<Title> My Cart </Title>
 		{cartItems.every(x => x===0) ?
 			<Fragment>
-			<img src ={emptyCart} alt='cart' className='empty-cart-img'/>
+			<Icon src ={emptyCart} alt='cart'/>
 			<h1> Your Cart Is Empty</h1>
 			<p> What are you waiting for ? </p>  
-			<Link to='/'>
-				<button className='start-shopping'>
-					Start Shopping
-				</button>
-			</Link>
+			<LinkButton to='/'>
+				Start Shopping
+			</LinkButton>
 			</Fragment>
 		:
-			<div className='cart-container'>
+			<FlexContainer around responsive>
 				<div>
 					{cartItemsEntries.map(x=> 
 						<CartItem 
@@ -49,12 +50,12 @@ const Cart = ()=>{
 					<OrderSummary 
 					cartItemsEntries={cartItemsEntries}
 					/>
-					<button onClick={handleClearCart} className='clear-cart'>
+					<CartButton onClick={handleClearCart}>
 						<p>Clear Cart</p>
 						<img src={emptyCartButton} alt='empty-cart'/>
-					</button>
+					</CartButton>
 				</div>
-			</div>
+			</FlexContainer>
 		}
 		</Fragment>
 	)

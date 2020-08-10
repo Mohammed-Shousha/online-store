@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
-import './Categories.css'
 import prev from '../Icons/prev.svg'
 import next from '../Icons/next.svg'
 import {CATEGORIES as CAT} from '../Database'
+import {Square, Arrow, CategoriesContainer} from '../StyledComponents/CategoriesComponents'
+import FlexContainer from '../StyledComponents/FlexContainer'
 
 const CATEGORIES = CAT.filter(c=> c.items.length>0)
 
@@ -26,20 +27,22 @@ const Categories =()=> {
 	}
 
 	return(
-		<div className='mv6'>
+		<CategoriesContainer>
 			<Link to={`/categories/${category}`}>
-				<h1 className='tc'>{category}</h1>
+				<h1>{category}</h1>
 			</Link>
-			<div className='categories-container' >
-				<img className='arrow prev' alt='prev' src={prev} onClick={prevCategory}/>
+			<FlexContainer>
+				<Arrow alt='prev' src={prev} onClick={prevCategory}/>
+			<FlexContainer responsive>
 				{items.map(item=> 
 					<Link to={`/categories/${category}-${item}`} key={item}> 
-						<p className='square grow' key={item}> {item} </p>
+						<Square key={item}> {item} </Square>
 					</Link>
 				)}
-				<img className='arrow next' alt='next' src={next} onClick={nextCategory}/>
-			</div>	
-		</div>
+			</FlexContainer>
+				<Arrow alt='next' src={next} onClick={nextCategory}/>
+			</FlexContainer>
+		</CategoriesContainer>
 	)
 }
 

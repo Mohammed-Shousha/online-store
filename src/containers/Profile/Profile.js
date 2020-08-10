@@ -5,8 +5,9 @@ import { Formik, Field, Form} from 'formik'
 import * as Yup from 'yup'
 import {passwordRegex} from '../../components/Constants'
 import FlexContainer from '../../components/StyledComponents/FlexContainer'
-import { ProfileContainer, ProfileDetails, ProfileText, ChangePasswordButton, ProfileButton } from '../../components/StyledComponents/ProfileComponents'
-import './Profile.css'
+import Title from '../../components/StyledComponents/Title'
+import Modal from '../../components/StyledComponents/Modal'
+import { ProfileContainer, ProfileDetails, ProfileText, ProfileButton, ChangePasswordContainer,  ChangePasswordButton } from '../../components/StyledComponents/ProfileComponents'
 
 
 const Profile =()=> {
@@ -50,7 +51,7 @@ const Profile =()=> {
 
 	return(
 		<Fragment>
-		<h1 className='profile-title'> Profile </h1>
+		<Title> Profile </Title>
 		<ProfileContainer>
 			<h3> General Information </h3>
 			<Formik
@@ -90,14 +91,14 @@ const Profile =()=> {
 		<ProfileContainer>
 			<h3> Security </h3>
 			<FlexContainer around>
-				<ProfileDetails>
+				<ProfileDetails readOnly>
 					<p> Email </p>
-					<input type='email' style={{'color': '#555752'}} value={data.email} readOnly/>
+					<input type='email' value={data.email}/>
 					<ProfileText> You can't change your email </ProfileText>
 				</ProfileDetails>
-				<ProfileDetails>
+				<ProfileDetails readOnly>
 					<p> Password </p>
-					<input type='password' style={{'color': '#555752'}} value={data.password} readOnly/>	
+					<input type='password' value={data.password}/>	
 				</ProfileDetails>
 			</FlexContainer>
 			<FlexContainer end>
@@ -106,9 +107,9 @@ const Profile =()=> {
 		</ProfileContainer>
 
 		{changePassword &&
-		<div className='modal'>
-			<div className='change-password-container'>
-				<div className='change-password-title'>
+		<Modal>
+			<ChangePasswordContainer>
+				<div>
 					<h3> Change Password </h3>
 					<p> Enter your current password and new password to change the password </p>
 				</div>
@@ -163,8 +164,8 @@ const Profile =()=> {
 					</Form>
 				)}
 				</Formik>
-			</div>
-		</div>}
+			</ChangePasswordContainer>
+		</Modal>}
 		</Fragment>
 	)
 }

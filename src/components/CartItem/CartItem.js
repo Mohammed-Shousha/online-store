@@ -1,10 +1,10 @@
 import React, {useContext} from 'react'
 import {ProductsList} from '../Database'
 import {DataContext} from '../../context/DataContext'
-import './CartItem.css'
 import remove from '../Icons/delete.svg'
 import { editItem } from '../../context/DataActions'
-
+import {CartItemsContainer, ProductDetails, ProductActions} from '../StyledComponents/CartComponents'
+import FlexContainer from '../StyledComponents/FlexContainer'
 
 const CartItem = ({ productId, editable=true })=>{
 
@@ -17,29 +17,28 @@ const CartItem = ({ productId, editable=true })=>{
 
 
 	return(
-		<div className='cart-items-container'>
-			<div className='item-container'>
-				<div className='flex'>
-					<img src={ProductsList[productId].photos[0]} alt='product' className='product-img'/>
-					<div className='product-details'>
-						<h2 > {ProductsList[productId].name}</h2>
+		<CartItemsContainer>
+			<div>
+				<FlexContainer>
+					<img src={ProductsList[productId].photos[0]} alt={ProductsList[productId].name}/>
+					<ProductDetails>
+						<h2> {ProductsList[productId].name}</h2>
 						<h3> {ProductsList[productId].price} EGP </h3>
 						<p> {ProductsList[productId].description} </p>
-					</div>
-				</div>
-				<div className='product-action'>
-					<h3 className='qty'>x{cartItems[productId]}</h3>
+					</ProductDetails>
+				</FlexContainer>
+				<ProductActions>
+					<h3>x{cartItems[productId]}</h3>
 					<br/>
 					{editable&&
 						<img 
 						src={remove} alt='remove'
-						className='bin-img ' 
 						onClick={()=> onRemovingItem(productId)}
 						/>
 					}
-				</div>
+				</ProductActions>
 			</div>
-		</div>
+		</CartItemsContainer>
 	)
 }
 

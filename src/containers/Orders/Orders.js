@@ -1,9 +1,10 @@
 import React, {Fragment ,useContext} from 'react'
-import {Link} from 'react-router-dom'
 import CartItem from '../../components/CartItem/CartItem'
 import {DataContext} from '../../context/DataContext'
-import './Orders.css'
 import box from '../../components/Icons/box.svg'
+import Title from '../../components/StyledComponents/Title'
+import Icon from '../../components/StyledComponents/Icon'
+import LinkButton from '../../components/StyledComponents/LinkButton'
 
 
 const Orders =()=>{
@@ -13,28 +14,24 @@ const Orders =()=>{
 
 	return(
 		<Fragment>
-		<h1 className='orders-title'> Orders </h1>
+		<Title> Orders </Title>
 		{!orders.length?
 			<div>
-				<img src={box} alt='box' className='box-img'/>
+				<Icon src={box} alt='box'/>
 				<h1> You Don't Have Any Orders Yet</h1>
 				{cartItems.every(x => x===0) ?
 					<Fragment>
 					<p> What are you waiting for ? </p> 
-					<Link to='/'>
-						<button className='continue-shopping'>
-							Continue Shopping
-						</button>
-					</Link>
+					<LinkButton to='/'>
+						Continue Shopping
+					</LinkButton>
 					</Fragment>
 				:
 					<Fragment>
 					<p>But there is some items in your cart </p>
-					<Link to='/checkout'>
-						<button className='continue-shopping'>
-							Checkout Now
-						</button> 
-					</Link>
+					<LinkButton to='/checkout'>
+						Checkout Now
+					</LinkButton>
 					</Fragment>
 				}
 			</div>

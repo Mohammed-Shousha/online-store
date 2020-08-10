@@ -2,10 +2,11 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import './SNav.css'
 import {CATEGORIES} from '../Database'
+import { Navbar } from '../StyledComponents/Navbar'
 
 
 const SNav =() =>(
-	<nav className ='s-nav-bar'>
+	<Navbar small>
 		{CATEGORIES.map(({category, items}, i) =>(
 			<div className='dropdown' key={i}>
 				<Link to={`/categories/${category.toLowerCase()}`}>
@@ -21,7 +22,7 @@ const SNav =() =>(
 				</div>}
 			</div>
 		))}
-	</nav>
+	</Navbar>
 )
 
 export default SNav

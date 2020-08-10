@@ -5,7 +5,7 @@ import { Formik, Field, Form} from 'formik'
 import * as Yup from 'yup'
 import {passwordRegex} from '../../components/Constants'
 import FlexContainer from '../../components/StyledComponents/FlexContainer'
-import Title from '../../components/StyledComponents/Title'
+import {Title1} from '../../components/StyledComponents/Titles'
 import Modal from '../../components/StyledComponents/Modal'
 import { ProfileContainer, ProfileDetails, ProfileText, ProfileButton, ChangePasswordContainer,  ChangePasswordButton } from '../../components/StyledComponents/ProfileComponents'
 
@@ -51,7 +51,7 @@ const Profile =()=> {
 
 	return(
 		<Fragment>
-		<Title> Profile </Title>
+		<Title1> Profile </Title1>
 		<ProfileContainer>
 			<h3> General Information </h3>
 			<Formik

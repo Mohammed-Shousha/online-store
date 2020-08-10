@@ -2,7 +2,11 @@ import styled from 'styled-components'
 
 const FlexContainer = styled.div`
     display:flex;
-    justify-content:${props => props.around ? 'space-around' : props.end? 'flex-end':'center'};
+    justify-content:${props => props.around ? 'space-around' 
+    : props.end? 'flex-end'
+    :props.center? 'center'
+    :props.between? 'space-between'
+    :props.start? 'flex-start':''};
     align-items:center;
     margin: ${props => props.margin};
 

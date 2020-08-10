@@ -2,7 +2,7 @@ import React, {Fragment ,useContext} from 'react'
 import CartItem from '../../components/CartItem/CartItem'
 import {DataContext} from '../../context/DataContext'
 import box from '../../components/Icons/box.svg'
-import Title from '../../components/StyledComponents/Title'
+import {Title1} from '../../components/StyledComponents/Titles'
 import Icon from '../../components/StyledComponents/Icon'
 import LinkButton from '../../components/StyledComponents/LinkButton'
 
@@ -14,7 +14,7 @@ const Orders =()=>{
 
 	return(
 		<Fragment>
-		<Title> Orders </Title>
+		<Title1> Orders </Title1>
 		{!orders.length?
 			<div>
 				<Icon src={box} alt='box'/>

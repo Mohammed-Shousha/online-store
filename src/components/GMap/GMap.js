@@ -1,11 +1,11 @@
 import React, {useRef, useState, Fragment} from 'react'
-import { GoogleMap, Marker, useLoadScript, InfoWindow} from "@react-google-maps/api"
+import { GoogleMap, Marker, useLoadScript} from "@react-google-maps/api"
 // import Geocode from "react-geocode"
 import Loading from '../StyledComponents/Loading'
-import './GMap.css'
 import pin from '../Icons/pin.svg'
 import pin2 from '../Icons/pin2.svg'
 import {GoogleMapsKey} from '../Constants'
+import {MapTitle, MapContainer, LocateMe, AddressWindow} from '../StyledComponents/MapComponents'
 
 const mapContainerStyle = {
   height: "80vh",
@@ -94,8 +94,8 @@ const GMap =({marker, setMarker})=>{
 
 	return(
 		<Fragment>
-		<h3 className='add-new-address'> Add New Address </h3>
-		<div className='map-container'>
+		<MapTitle> Add New Address </MapTitle>
+		<MapContainer>
 			<GoogleMap
 	         mapContainerStyle={mapContainerStyle}
 	         zoom={6.15}
@@ -104,10 +104,10 @@ const GMap =({marker, setMarker})=>{
 	         onClick={onMapClick}
 	         onLoad={onMapLoad}
 	        >
-	        <button onClick={Locate} className='locate-me-button'>
-				<img src={pin} alt='pin' className='pin'/>
+	        <LocateMe onClick={Locate}>
+				<img src={pin} alt='pin' />
 				Locate Me
-			</button>
+			</LocateMe>
 	      		<Marker
 	      		 position={{ lat:parseFloat(marker.lat), lng:parseFloat(marker.lng)}} 
 	             animation= {window.google.maps.Animation.DROP}
@@ -120,21 +120,17 @@ const GMap =({marker, setMarker})=>{
 	             onClick={()=> setSelected(marker)}
 	      		/>
 	      		{selected&&
-	      		<InfoWindow
+	      		<AddressWindow
 	      		 position={{lat: selected.lat, lng:selected.lng}}
-	      		 options={{
-	      		 	pixelOffset: new window.google.maps.Size(0,-16),
-	      		 	maxWidth:200
-	      		 }}
 	      		 onCloseClick={() => setSelected(null)}
 	      		>
-		      		<div className='info-window'>
+		      		<div>
 		      			<h3> Address </h3>
-		      			<p className='black-50'>address details</p>
+		      			<p style={{'color':'#636363'}}> address details </p>
 		      		</div> 
-	      		</InfoWindow>}
+	      		</AddressWindow>}
 	      	</GoogleMap>
-      	</div>
+      	</MapContainer>
       	</Fragment>	
 	)
 }

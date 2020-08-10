@@ -1,11 +1,13 @@
 import React, {Fragment, useState} from 'react'
 import CartItem from '../../components/CartItem/CartItem'
 import OrderSummary from '../../components/OrderSummary/OrderSummary'
-import './Payment.css'
 import money from '../Icons/cash.svg'
 import greenMoney from '../Icons/cash-green.svg'
 import credit from '../Icons/credit.svg'
 import greenCredit from '../Icons/credit-green.svg'
+import FlexContainer from '../StyledComponents/FlexContainer'
+import {PaymentButton, CashPayment} from '../StyledComponents/PaymentComponents'
+import {Title2, Title3} from '../StyledComponents/Titles'
 
 
 const Payment =({cartItemsEntries, cartItems})=> {
@@ -14,50 +16,47 @@ const Payment =({cartItemsEntries, cartItems})=> {
 
 	return(
 		<Fragment>
-		<h2 className='payment-text'> Payment</h2>
-		<div className='payment-container'>
+		<Title2> Payment</Title2>
+		<FlexContainer around responsive>
 			<div>
 				<Fragment>
-				<h3 className='payment-text'> Payment Method </h3>
-				<div className='flex justify-center'>
-					<button 
-					 className={`payment-method-button ${cash? '' : 'active-button'}`}
-					 onClick={()=> setCash(false)}
+				<Title3> Payment Method </Title3>
+				<FlexContainer center>
+					<PaymentButton
+						active={!cash}
+					 	onClick={()=> setCash(false)}
 					> 
-						<img src={cash? credit: greenCredit} alt='credit' className='payment-img'/>
+						<img src={cash? credit: greenCredit} alt='credit'/>
 						Pay with Card
-					</button>
+					</PaymentButton>
 
-					<button 
-					 className={`payment-method-button ${cash? 'active-button' : ''}`}
-					 onClick={()=> setCash(true)}
+					<PaymentButton
+						active={cash}
+					 	onClick={()=> setCash(true)}
 					>
-						<img src={cash? greenMoney: money} alt='money' className='payment-img'/>
+						<img src={cash? greenMoney: money} alt='money'/>
 						Pay with Cash
-					</button>
-				</div>
-				<div className='flex justify-center'>
+					</PaymentButton>
+				</FlexContainer>
+				<FlexContainer center>
 					{cash? 
-						<div className='cash-payment'>
+						<CashPayment>
 							<p>Please note there is a non-refundable fee of 10.00 EGP for our cash on delivery service. </p>
 							<p>To save on this amount,&nbsp; 
-								<strong 
-								 className='pointer'
-								 onClick={()=> setCash(false)}
-								>
+								<strong onClick={()=> setCash(false)}>
 									please proceed with debit/credit card.
 								</strong>
 							</p>
-						</div>
+						</CashPayment>
 					: 
-						<div>
+						<CashPayment>
 							<p> To Be Card Payment // Stripe </p>
-						</div>
+						</CashPayment>
 					}
-				</div>
+				</FlexContainer>
 				</Fragment>
 				<div>
-					<h3 className='payment-text'> Your Order </h3>
+					<Title3> Your Order </Title3>
 					{cartItemsEntries.map(x=> 
 						<CartItem key={x[0]} productId={x[0]} 
 						 editable={false}
@@ -70,7 +69,7 @@ const Payment =({cartItemsEntries, cartItems})=> {
 			 cartItemsEntries={cartItemsEntries}
 			 checkoutNow={false}
 			/>
-		</div>
+		</FlexContainer>
 		</Fragment>
 	)
 }

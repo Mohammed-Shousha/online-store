@@ -1,19 +1,17 @@
 import React from 'react'
-import './Slideshow.css'
 import {Slide} from 'react-slideshow-image'
 import {slideShowImages, properties} from '../Database'
+import {SlideContainer, SlidePhoto} from '../StyledComponents/SlideshowComponents'
 
 
 const Slideshow =() =>(
-	<div className="slide-container">
+	<SlideContainer>
         <Slide {...properties}>
           	{slideShowImages.map(img =>(
-          		<div className="each-slide" key={img}>
-          			<img src= {img} alt='img'/>
-          		</div>
+				<SlidePhoto key={img} src= {img} alt='img'/>
           	))}
         </Slide>
-  	</div>
+  	</SlideContainer>
 )
 
 export default Slideshow

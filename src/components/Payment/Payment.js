@@ -7,7 +7,7 @@ import credit from '../Icons/credit.svg'
 import greenCredit from '../Icons/credit-green.svg'
 import FlexContainer from '../StyledComponents/FlexContainer'
 import {PaymentButton, CashPayment} from '../StyledComponents/PaymentComponents'
-import {Title2, Title3} from '../StyledComponents/Titles'
+import Title from '../StyledComponents/Title'
 
 
 const Payment =({cartItemsEntries, cartItems})=> {
@@ -16,11 +16,11 @@ const Payment =({cartItemsEntries, cartItems})=> {
 
 	return(
 		<Fragment>
-		<Title2> Payment</Title2>
+		<Title h2> Payment</Title>
 		<FlexContainer around responsive>
 			<div>
 				<Fragment>
-				<Title3> Payment Method </Title3>
+				<Title h3> Payment Method </Title>
 				<FlexContainer center>
 					<PaymentButton
 						active={!cash}
@@ -56,7 +56,7 @@ const Payment =({cartItemsEntries, cartItems})=> {
 				</FlexContainer>
 				</Fragment>
 				<div>
-					<Title3> Your Order </Title3>
+					<Title h3> Your Order </Title>
 					{cartItemsEntries.map(x=> 
 						<CartItem key={x[0]} productId={x[0]} 
 						 editable={false}

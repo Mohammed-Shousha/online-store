@@ -80,7 +80,7 @@ export const CartItemsContainer = styled.div `
     
         &>div>img{
             border-radius: 0.5rem 0 0 0.5rem; 
-            width:25%;
+            width:200px;
         }
     }
 `
@@ -92,14 +92,15 @@ export const ProductDetails = styled.div `
 `
 
 export const ProductActions = styled.div`
-    width:1000px;
-
-    h3{
-    	margin: 1.25rem 0.35rem;
-    }
-
-    img{
-        width:100%;
-        cursor: pointer;
+    &&{
+        margin-right:1rem;
+        h3{
+            margin: 1.25rem 0.35rem;
+        }
+    
+        img{
+            cursor: pointer;
+            width:2rem;
+        }
     }
 `

@@ -1,12 +1,11 @@
 import React, {Fragment,useContext, useState} from 'react'
 import {DataContext} from '../../context/DataContext'
-import {Link} from 'react-router-dom'
 import CONav from '../../components/CONav/CONav'
 import Shipping from '../../components/Shipping/Shipping'
 import Payment from '../../components/Payment/Payment'
 import Footer from '../../components/Footer/Footer'
-import './Checkout.css'
 import { editOrders } from '../../context/DataActions'
+import LinkButton, {Button} from '../../components/StyledComponents/LinkButton'
 
 
 const Checkout = ()=>{
@@ -59,13 +58,9 @@ const Checkout = ()=>{
 		     newAddress={newAddress}
 		     setNewAddress={setNewAddress}
 			/>
-
-			<button 
-			 className={`checkout-button ${newAddress? 'hide':''}`}
-			 onClick={handleNext}
-			>
+			<Button onClick={handleNext} hide={newAddress}>
 				Continue 
-			</button>
+			</Button>
 			</Fragment>
 		:step===2?
 			<Fragment> 
@@ -73,19 +68,14 @@ const Checkout = ()=>{
 			 cartItems={cartItems}
 			 cartItemsEntries={cartItemsEntries}
 			/>
-			<button
-			 className='checkout-button'
-			 onClick={placeOrder}
-			>
+			<Button onClick={placeOrder}>
 				Place Order
-			</button>
+			</Button>
 			</Fragment>
 		:
-			<Link to='/orders'>
-				<button className='checkout-button'>
-					To Orders
-				</button>
-			</Link>
+			<LinkButton to='/orders'>
+				To Orders
+			</LinkButton>
 		}		
 		<Footer/>
 		</Fragment>

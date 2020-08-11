@@ -2,10 +2,13 @@ import React, {Fragment, useState, useContext} from 'react'
 import {DataContext} from '../../context/DataContext'
 import {editAddresses} from '../../context/DataActions'
 import {LocationContext} from '../../context/LocationContext'
-import './Shipping.css'
 import GMap from '../GMap/GMap'
 import add from '../Icons/add.svg'
 import prev from '../Icons/prev.svg'
+import Title from '../StyledComponents/Title'
+import FlexContainer from '../StyledComponents/FlexContainer'
+import {ShippingDetails, BackTitle} from '../StyledComponents/ShippingComponents'
+import {MapButton} from '../StyledComponents/FormButton'
 
 
 const Shipping =({newAddress, setNewAddress})=>{
@@ -35,56 +38,48 @@ const Shipping =({newAddress, setNewAddress})=>{
 
 	return(
 		<Fragment>
-			<h2 className='shipping-title'> Shipping Address</h2>
+			<Title h2> Shipping Address </Title>
 			{!newAddress?
-			<div className='flex'>
+			<FlexContainer>
 					{filteredAddresses.map((a,i)=>(
-						<div key={i}
-						 onClick={()=>handleAddressSelect(i)} 
-						 className={`shipping-details ${i===selectedAddress? 'active-address': ''}`}
+						<ShippingDetails 
+							key={i}
+						 	onClick={()=>handleAddressSelect(i)} 
+							active={i===selectedAddress}
 						>
 							<h3>Address {i+1}</h3>
 							<div>
 								Name
-								<p className='shipping-name'>{a.name}</p>
+								<p><strong>{a.name}</strong></p>
 							</div>
 							<div>
 								Address
-								<p className='shipping-address'>{a.address}</p>
+								<p>{a.address}</p>
 							</div>
 							<div>
 								Phone
-								<p className='shipping-phone'>{a.phone}</p>
+								<p>{a.phone}</p>
 							</div>
-						</div>
+						</ShippingDetails>
 					))}
 
-				<div 
-				 className='shipping-details new-address'
-				 onClick={()=>setNewAddress(true)}>
-					<img src={add} alt='add' className='add-sign'/>
-					 <p>Add a New Address</p>
-				</div>
-			</div>
+				<ShippingDetails new onClick={()=>setNewAddress(true)}>
+						<img src={add} alt='add'/>
+						<p>Add a New Address</p>
+				</ShippingDetails>
+			</FlexContainer>
 			:<Fragment>
-				<div 
-				 className='back-to-addresses'
-				 onClick={()=>setNewAddress(false)}>
-					<h3>
+					<BackTitle onClick={()=>setNewAddress(false)}>
 						<img src={prev} alt='back'/>
 						Back to Addresses 
-					</h3>
-				</div>
+					</BackTitle>
 				<GMap
 				 marker={marker}
 				 setMarker={setMarker}
 				/>
-				<button
-				 className='confirm-location'
-				 onClick={handleAddingAddress}
-				>
+				<MapButton grey onClick={handleAddingAddress}>
 					Confirm
-				</button>
+				</MapButton>
 			</Fragment>}
 		</Fragment>
 	)

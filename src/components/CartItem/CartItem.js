@@ -19,7 +19,7 @@ const CartItem = ({ productId, editable=true })=>{
 	return(
 		<CartItemsContainer>
 			<div>
-				<FlexContainer>
+				<FlexContainer noAlign >
 					<img src={ProductsList[productId].photos[0]} alt={ProductsList[productId].name}/>
 					<ProductDetails>
 						<h2> {ProductsList[productId].name}</h2>

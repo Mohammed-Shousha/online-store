@@ -1,13 +1,12 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import './SignInFirst.css'
 import x from '../Icons/x.svg'
+import Alert from '../StyledComponents/Alert'
 
 
 const SignInFirst =({setAlert})=>(
-	<div className='sign-in-first'>
+	<Alert>
 		<img 
-		 className='x'
 		 src={x} alt='x'
 		 onClick={()=>setAlert(false)}/>
 		<p>In Order to Add Items to Your Cart <br/>
@@ -15,8 +14,7 @@ const SignInFirst =({setAlert})=>(
 				<strong>SignIn or SignUp</strong>
 			</Link>
 		</p>
-	</div>
-
+	</Alert>
 )
 
 export default SignInFirst

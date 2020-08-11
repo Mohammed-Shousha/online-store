@@ -2,9 +2,10 @@ import React, {Fragment ,useContext} from 'react'
 import CartItem from '../../components/CartItem/CartItem'
 import {DataContext} from '../../context/DataContext'
 import box from '../../components/Icons/box.svg'
-import {Title1} from '../../components/StyledComponents/Titles'
+import Title from '../../components/StyledComponents/Title'
 import Icon from '../../components/StyledComponents/Icon'
 import LinkButton from '../../components/StyledComponents/LinkButton'
+import FlexContainer from '../../components/StyledComponents/FlexContainer'
 
 
 const Orders =()=>{
@@ -14,7 +15,7 @@ const Orders =()=>{
 
 	return(
 		<Fragment>
-		<Title1> Orders </Title1>
+		<Title h1> Orders </Title>
 		{!orders.length?
 			<div>
 				<Icon src={box} alt='box'/>
@@ -36,19 +37,21 @@ const Orders =()=>{
 				}
 			</div>
 		:
-			<div>
-				{orders.map((order, i)=>(
-					<Fragment key={i}>
-					<h2>Order Time: {order[2]}</h2>
-					{order[0].map(x=>
-						<CartItem 
-						 key={x[0]} productId={x[0]} 
-					 	 editable={false}
-					 	 cartItems={order[1]}
-						 />)}
-					</Fragment>
-				))}
-			</div>
+			<Fragment>
+			{orders.map((order, i)=>(
+				<Fragment key={i}>
+				<h2>Order Time: {order[2]}</h2>
+				{order[0].map(x=>
+				<FlexContainer center>
+					<CartItem 
+						key={x[0]} productId={x[0]} 
+						editable={false}
+						cartItems={order[1]}
+					/>
+				</FlexContainer>)}
+				</Fragment>
+			))}
+			</Fragment>
 		}
 		</Fragment>
 	)

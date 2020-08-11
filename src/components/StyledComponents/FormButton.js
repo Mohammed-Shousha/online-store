@@ -23,3 +23,7 @@ const FormButton = styled.button.attrs(props => ({
 `
 
 export default FormButton
+
+export const MapButton = styled(FormButton) `
+    position: absolute
+`

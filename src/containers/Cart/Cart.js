@@ -5,7 +5,7 @@ import {DataContext} from '../../context/DataContext'
 import emptyCart from '../../components/Icons/empty-cart.svg'
 import emptyCartButton from '../../components/Icons/empty-cart-button.svg'
 import { clearCart } from '../../context/DataActions'
-import {Title1} from '../../components/StyledComponents/Titles'
+import Title from '../../components/StyledComponents/Title'
 import FlexContainer from '../../components/StyledComponents/FlexContainer'
 import LinkButton from '../../components/StyledComponents/LinkButton'
 import Icon from '../../components/StyledComponents/Icon'
@@ -25,7 +25,7 @@ const Cart = ()=>{
 
 	return(
 		<Fragment>
-		<Title1> My Cart </Title1>
+		<Title h1> My Cart </Title>
 		{cartItems.every(x => x===0) ?
 			<Fragment>
 			<Icon src ={emptyCart} alt='cart'/>
@@ -36,7 +36,7 @@ const Cart = ()=>{
 			</LinkButton>
 			</Fragment>
 		:
-			<FlexContainer around responsive>
+			<FlexContainer around noAlign responsive>
 				<div>
 					{cartItemsEntries.map(x=> 
 						<CartItem 

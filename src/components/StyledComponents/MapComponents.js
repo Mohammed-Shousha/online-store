@@ -2,12 +2,11 @@ import styled from 'styled-components'
 import { InfoWindow } from '@react-google-maps/api'
 
 export const MapTitle = styled.h3 `
-    display: inline-grid;
     font-weight:normal;
 	text-align: left;
 	padding: 0.75rem 1rem;
 	width: 85vw;
-	margin: 0;
+	margin: auto;
 	margin-top: 1.75rem;
 	background: #342b38;
 	color: white;

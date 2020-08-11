@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 
-const Button = styled.button `
+export const Button = styled.button `
     border:none;
 	background: #2196f3;
 	color: white;
@@ -12,6 +12,7 @@ const Button = styled.button `
 	padding: 0.75rem 1.25rem;
 	outline: none;
 	cursor: pointer;
+	visibility: ${props =>props.hide? 'hidden':''};
 `
 const LinkButton = ({children, to})=>(
     <Link to={to}>

@@ -1,9 +1,9 @@
 import React from 'react'
-import {DataProvider} from './DataContext'
-import {LocationProvider} from './LocationContext'
+import { DataProvider } from './DataContext'
+import { LocationProvider } from './LocationContext'
 
 
-const ContextProvider =({children})=>(
+const ContextProvider = ({ children }) => (
 	<DataProvider>
 		<LocationProvider>
 			{children}

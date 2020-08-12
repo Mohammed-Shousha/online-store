@@ -1,80 +1,80 @@
-import React, {useRef, useState, Fragment} from 'react'
-import { GoogleMap, Marker, useLoadScript} from "@react-google-maps/api"
+import React, { useRef, useState, Fragment } from 'react'
+import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api"
 // import Geocode from "react-geocode"
 import Loading from '../StyledComponents/Loading'
 import pin from '../Icons/pin.svg'
 import pin2 from '../Icons/pin2.svg'
-import {GoogleMapsKey} from '../Constants'
-import {MapTitle, MapContainer, LocateMe, AddressWindow} from '../StyledComponents/MapComponents'
+import { GoogleMapsKey } from '../Constants'
+import { MapTitle, MapContainer, LocateMe, AddressWindow } from '../StyledComponents/MapComponents'
 
 const mapContainerStyle = {
-  height: "80vh",
-  width: "85vw",
+	height: "80vh",
+	width: "85vw",
 }
 
 const center = {
-  lat: 26.8,
-  lng: 30.8,
+	lat: 26.8,
+	lng: 30.8,
 }
 
 const options = {
-  disableDefaultUI: true,
-  zoomControl: true,
-  clickableIcons: false 
+	disableDefaultUI: true,
+	zoomControl: true,
+	clickableIcons: false
 }
 
 
-const GMap =({marker, setMarker})=>{
+const GMap = ({ marker, setMarker }) => {
 
-	const {isLoaded, loadError} =useLoadScript({
-		googleMapsApiKey : GoogleMapsKey
+	const { isLoaded, loadError } = useLoadScript({
+		googleMapsApiKey: GoogleMapsKey
 	})
 
 	const mapRef = useRef()
-  	const onMapLoad = React.useCallback((map) => {
-   		mapRef.current = map
-  	}, [])
+	const onMapLoad = React.useCallback((map) => {
+		mapRef.current = map
+	}, [])
 
-  	const [selected, setSelected] = useState(null)
+	const [selected, setSelected] = useState(null)
 
-  	const onMapClick =(e)=> {
-	    setMarker({
-	        lat: e.latLng.lat(),
-	        lng: e.latLng.lng()
-	    })
+	const onMapClick = (e) => {
+		setMarker({
+			lat: e.latLng.lat(),
+			lng: e.latLng.lng()
+		})
 
-	    setSelected({
-	        lat: e.latLng.lat(),
-	        lng: e.latLng.lng()
-	    })
+		setSelected({
+			lat: e.latLng.lat(),
+			lng: e.latLng.lng()
+		})
 	}
 
-    const panTo = React.useCallback(({ lat, lng }) => {
-	    mapRef.current.panTo({ lat, lng })
-	    mapRef.current.setZoom(16)
-  	}, [])
+	const panTo = React.useCallback(({ lat, lng }) => {
+		mapRef.current.panTo({ lat, lng })
+		mapRef.current.setZoom(16)
+	}, [])
 
-	const Locate =()=>{
+	const Locate = () => {
 		navigator.geolocation.getCurrentPosition(
-          ({coords}) => {
-            setMarker({
-          		lat: coords.latitude,
-          		lng: coords.longitude
-        	})
+			({ coords }) => {
+				setMarker({
+					lat: coords.latitude,
+					lng: coords.longitude
+				})
 
-        	setSelected({
-		    	lat: coords.latitude,
-          		lng: coords.longitude
-		    })
+				setSelected({
+					lat: coords.latitude,
+					lng: coords.longitude
+				})
 
-	        panTo({
-	        	lat: coords.latitude,
-	            lng: coords.longitude
-	        })
-          },
-          (error) => console.error(error)
-        )
-    }
+				panTo({
+					lat: coords.latitude,
+					lng: coords.longitude
+				})
+			},
+			(error) => console.error(error)
+		)
+	}
 
 	// const toAddress=() =>{
 	// 	Geocode.setApiKey('AIzaSyAec45bB1-bXR0LZ7ac3C72I_eurXDcins')
@@ -89,49 +89,50 @@ const GMap =({marker, setMarker})=>{
 	// )}
 
 
-	if(loadError) return 'ERROR !!'
-	if(!isLoaded) return <Loading/>
+	if (loadError) return 'ERROR !!'
+	if (!isLoaded) return <Loading />
 
-	return(
+	return (
 		<Fragment>
-		<MapTitle> Add New Address </MapTitle>
-		<MapContainer>
-			<GoogleMap
-	         mapContainerStyle={mapContainerStyle}
-	         zoom={6.15}
-	         center={center}
-	         options={options}
-	         onClick={onMapClick}
-	         onLoad={onMapLoad}
-	        >
-	        <LocateMe onClick={Locate}>
-				<img src={pin} alt='pin' />
-				Locate Me
-			</LocateMe>
-	      		<Marker
-	      		 position={{ lat:parseFloat(marker.lat), lng:parseFloat(marker.lng)}} 
-	             animation= {window.google.maps.Animation.DROP}
-	      		 icon={{
-		            url:pin2,
-		            origin: new window.google.maps.Point(0, 0),
-		            anchor: new window.google.maps.Point(15, 15),
-		            scaledSize: new window.google.maps.Size(30, 30),
-	             }}
-	             onClick={()=> setSelected(marker)}
-	      		/>
-	      		{selected&&
-	      		<AddressWindow
-	      		 position={{lat: selected.lat, lng:selected.lng}}
-	      		 onCloseClick={() => setSelected(null)}
-	      		>
-		      		<div>
-		      			<h3> Address </h3>
-		      			<p style={{'color':'#636363'}}> address details </p>
-		      		</div> 
-	      		</AddressWindow>}
-	      	</GoogleMap>
-      	</MapContainer>
-      	</Fragment>	
+			<MapTitle> Add New Address </MapTitle>
+			<MapContainer>
+				<GoogleMap
+					mapContainerStyle={mapContainerStyle}
+					zoom={6.15}
+					center={center}
+					options={options}
+					onClick={onMapClick}
+					onLoad={onMapLoad}
+				>
+					<LocateMe onClick={Locate}>
+						<img src={pin} alt='pin' />
+						Locate Me
+					</LocateMe>
+					<Marker
+						position={{ lat: parseFloat(marker.lat), lng: parseFloat(marker.lng) }}
+						animation={window.google.maps.Animation.DROP}
+						icon={{
+							url: pin2,
+							origin: new window.google.maps.Point(0, 0),
+							anchor: new window.google.maps.Point(15, 15),
+							scaledSize: new window.google.maps.Size(30, 30),
+						}}
+						onClick={() => setSelected(marker)}
+					/>
+					{selected &&
+						<AddressWindow
+							position={{ lat: selected.lat, lng: selected.lng }}
+							onCloseClick={() => setSelected(null)}
+						>
+							<div>
+								<h3> Address </h3>
+								<p style={{ 'color': '#636363' }}> address details </p>
+							</div>
+						</AddressWindow>
+					}
+				</GoogleMap>
+			</MapContainer>
+		</Fragment>
 	)
 }
 

@@ -19,4 +19,9 @@ export const MainNav = styled(Navbar) `
 	right: 0;
 	z-index: 50;
     justify-content:space-around;
+
+    &> img{
+        width: 1.2rem;
+        cursor: pointer;
+    }
 `

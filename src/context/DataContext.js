@@ -1,17 +1,17 @@
 import React, { createContext, useState, useReducer } from "react"
-import {initData, DataReducer} from './DataReducer'
+import { initData, DataReducer } from './DataReducer'
 
 
 export const DataContext = createContext()
 
-export const DataProvider =({children})=>{
+export const DataProvider = ({ children }) => {
 
 	const [isSignedIn, setIsSignedIn] = useState(false)
 
 	const [data, setData] = useReducer(DataReducer, initData)
 
-	return(
-		<DataContext.Provider value={{isSignedIn, setIsSignedIn, data, setData}}>
+	return (
+		<DataContext.Provider value={{ isSignedIn, setIsSignedIn, data, setData }}>
 			{children}
 		</DataContext.Provider>
 	)

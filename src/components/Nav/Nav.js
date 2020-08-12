@@ -1,8 +1,8 @@
-import React , {useContext, useState} from 'react'
-import {Link, useHistory} from 'react-router-dom'
+import React, { useContext, useState, useRef, useEffect } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 import Autosuggest from 'react-autosuggest'
-import {ProductsList} from '../Database'
-import {DataContext} from '../../context/DataContext'
+import { ProductsList } from '../Database'
+import { DataContext } from '../../context/DataContext'
 import './Nav.css'
 import cart from '../Icons/cart.svg'
 import user from '../Icons/user.svg'
@@ -12,128 +12,152 @@ import search from '../Icons/search.svg'
 import { signOut } from '../../context/DataActions'
 import { MainNav } from '../StyledComponents/Navbar'
 import Logo from '../StyledComponents/Logo'
+import FlexContainer from '../StyledComponents/FlexContainer'
+import { NavText, UserAction, CartCircle, UserActionsContainer } from '../StyledComponents/NavComponents'
 
 
-const Nav =() =>{
+const Nav = () => {
 
-	const {isSignedIn, setIsSignedIn, data, setData} = useContext(DataContext)
-	const {name, cartItems} = data
+	const { isSignedIn, setIsSignedIn, data, setData } = useContext(DataContext)
+	const { name, cartItems } = data
 	const newName = name.split(' ')[0]
 
-	const onSignOut =()=>{
+	const onSignOut = () => {
 		setIsSignedIn(false)
 		setData(signOut())
 	}
 
-
-	let history= useHistory()
+	let history = useHistory()
 
 	const getSuggestionValue = (suggestion) => suggestion.name
 
 	const renderSuggestion = (suggestion) => (
-	  <div> {suggestion.name} </div>
+		<div> {suggestion.name} </div>
 	)
 
 	const [value, setValue] = useState('')
-	const [suggestions, setSuggestions] =useState([]) 
+	const [suggestions, setSuggestions] = useState([])
 
-	const onChange = (e, {newValue})=>{
+	const onChange = (e, { newValue }) => {
 		setValue(newValue)
 	}
 
-	const searchItem =(value)=>{
-		if(value){
+	const searchItem = (value) => {
+		if (value) {
 			history.push(`/search?q=${value}`)
 		}
 	}
 
-	const onKeyUp =(e)=>{
-		if(e.keyCode===13){
+	const onKeyUp = (e) => {
+		if (e.keyCode === 13) {
 			searchItem(value)
 		}
 	}
 
 	const onSuggestionsFetchRequested = ({ value }) => {
-	    let inputValue = value.trim().toLowerCase()
+		let inputValue = value.trim().toLowerCase()
 		let inputLength = inputValue.length
 
-		if(!inputLength){
-		    setSuggestions([])
+		if (!inputLength) {
+			setSuggestions([])
 		}
-		else{
+		else {
 			setSuggestions(
-				ProductsList.filter(suggestion =>(
-				suggestion.name.toLowerCase().match(inputValue)
-			)))
+				ProductsList.filter(suggestion => (
+					suggestion.name.toLowerCase().match(inputValue)
+				)))
 		}
 	}
 
-	const onSuggestionsClearRequested =()=>{
+	const onSuggestionsClearRequested = () => {
 		setSuggestions([])
 	}
 
 	const inputProps = {
 		placeholder: 'Search',
-      	value,
-      	onChange,
-      	onKeyUp,
+		value,
+		onChange,
+		onKeyUp,
 	}
 
-	return(
+	const [show, setShow] = useState(false)
+
+	const toggleShow = () => {
+		setShow(!show)
+	}
+
+	const userActions = useRef(null)
+
+	useEffect(() => {
+		const handleClickOutside = (e) => {
+			if (userActions.current && !userActions.current.contains(e.target)) {
+				setShow(false)
+			}
+		}
+
+		document.addEventListener("mousedown", handleClickOutside)
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside)
+		}
+	}, [show])
+
+	return (
 		<MainNav>
-			<Logo/>
-			
+			<Logo />
+
 			<Autosuggest
-	         suggestions={suggestions}
-	         inputProps={inputProps}
-	         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-	         onSuggestionsClearRequested={onSuggestionsClearRequested}
-	         getSuggestionValue={getSuggestionValue}
-	         renderSuggestion={renderSuggestion}
-		    />
+				suggestions={suggestions}
+				inputProps={inputProps}
+				onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+				onSuggestionsClearRequested={onSuggestionsClearRequested}
+				getSuggestionValue={getSuggestionValue}
+				renderSuggestion={renderSuggestion}
+			/>
 
-		    <img 
-		     src={search} alt='search' 
-		     className='search'
-		     onClick={()=>searchItem(value)}
-		    />
+			<img
+				src={search} alt='search'
+				onClick={() => searchItem(value)}
+			/>
 
-			<div onClick={isSignedIn? null : ()=> history.push('/signin')}
-			className = {`l-nav grow ${isSignedIn? 'tooltipNav' : ''}`}>
-				{isSignedIn? `Hi ${newName}` : 'SignIn or SignUp'}
-				{isSignedIn &&
-				<div className='tooltipTextNav'>
-				<Link to='/orders'>
-					<div className='user-action'>
-					 	<img src={list} alt='list'/>
-					 	<p>Orders </p>
-					</div>
-				</Link>
-				<Link to='/profile'>
-					<div className='user-action'>
-						<img src={user} alt='user'/>
-						<p>Profile</p>
-					</div>
-				</Link>	
-				<Link to='/' onClick={onSignOut} >
-					<div id='signout' className='user-action'>
-						<img src={signout} alt='signout'/>
-						<p>Sign Out</p>
-					</div> 
-				</Link>	
-				</div>}
-			</div>
+			<NavText
+				relative
+				ref={userActions}
+				onClick={isSignedIn ? toggleShow : () => history.push('/signin')}
+			>
+				{isSignedIn ? `Hi ${newName}` : 'SignIn or SignUp'}
+				{isSignedIn && show &&
+					<UserActionsContainer>
+						<Link to='/orders'>
+							<UserAction>
+								<img src={list} alt='list' />
+								<p> Orders </p>
+							</UserAction>
+						</Link>
+						<Link to='/profile'>
+							<UserAction>
+								<img src={user} alt='user' />
+								<p> Profile </p>
+							</UserAction>
+						</Link>
+						<Link to='/' onClick={onSignOut} >
+							<UserAction signOut>
+								<img src={signout} alt='signout' />
+								<p> Sign Out </p>
+							</UserAction>
+						</Link>
+					</UserActionsContainer>}
+			</NavText>
 
-			<Link to={isSignedIn? '/cart' : '/'}>
-				<div className ='l-nav grow'>
+			<Link to={isSignedIn ? '/cart' : '/'}>
+				<NavText>
 					Cart
-					<div className='flex'>
-						<img alt='cart' src={cart} className='cart'/>
-						<div className={`s-circle ${cartItems.every(x => x===0) ? 'hide': ''}`}>
-							{cartItems.reduce((t,i) => t+i ,0)}
-						</div>
-					</div>
-				</div>
+					<FlexContainer>
+						<img alt='cart' src={cart} />
+						<CartCircle hide={cartItems.every(x => x === 0)}>
+							{cartItems.reduce((t, i) => t + i, 0)}
+						</CartCircle>
+					</FlexContainer>
+				</NavText>
 			</Link>
 		</MainNav>
 	)

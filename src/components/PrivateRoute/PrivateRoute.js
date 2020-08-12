@@ -3,19 +3,19 @@ import { DataContext } from '../../context/DataContext'
 import { Route, Redirect } from 'react-router-dom'
 
 
-const PrivateRoute = ({children}) => {
-    
+const PrivateRoute = ({ children }) => {
+
     const { isSignedIn } = useContext(DataContext)
-    
-    return ( 
+
+    return (
         <Route>
-            {isSignedIn?
+            {isSignedIn ?
                 children
             :
-                <Redirect to='signin'/>
+                <Redirect to='signin' />
             }
         </Route>
     )
 }
- 
+
 export default PrivateRoute;

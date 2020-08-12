@@ -15,12 +15,7 @@ export const CartButton = styled.button `
 	border-radius: 5px;
 	background: ${props => props.checkout ? fc :bc};
 	color: ${props => props.checkout ? bc : fc};
-	transition-duration: .7s;
 	outline: none;
-
-    &:hover{
-        transform: scale(1.05);
-    }
 
     p{
 	    margin: auto;

@@ -1,53 +1,53 @@
-import React, {Fragment, useState, useContext} from 'react'
-import {DataContext} from '../../context/DataContext'
-import {editAddresses} from '../../context/DataActions'
-import {LocationContext} from '../../context/LocationContext'
+import React, { Fragment, useState, useContext } from 'react'
+import { DataContext } from '../../context/DataContext'
+import { editAddresses } from '../../context/DataActions'
+import { LocationContext } from '../../context/LocationContext'
 import GMap from '../GMap/GMap'
 import add from '../Icons/add.svg'
 import prev from '../Icons/prev.svg'
 import Title from '../StyledComponents/Title'
 import FlexContainer from '../StyledComponents/FlexContainer'
-import {ShippingDetails, BackTitle} from '../StyledComponents/ShippingComponents'
-import {MapButton} from '../StyledComponents/FormButton'
+import { ShippingDetails, BackTitle } from '../StyledComponents/ShippingComponents'
+import { MapButton } from '../StyledComponents/Buttons'
 
 
-const Shipping =({newAddress, setNewAddress})=>{
+const Shipping = ({ newAddress, setNewAddress }) => {
 
-	const {marker, setMarker} = useContext(LocationContext)
-	
-	const {data, setData} = useContext(DataContext)
-	const {name, addresses, phone} = data
+	const { marker, setMarker } = useContext(LocationContext)
+
+	const { data, setData } = useContext(DataContext)
+	const { name, addresses, phone } = data
 
 	const [selectedAddress, setSelectedAddress] = useState(0)
 
-	const handleAddressSelect =(id)=>{
+	const handleAddressSelect = (id) => {
 		setSelectedAddress(id)
 	}
 
-	const handleAddingAddress =()=>{
+	const handleAddingAddress = () => {
 		setNewAddress(false)
 		setData(editAddresses(
-			[...addresses, 
-				{name: name, address: `lat:${marker.lat} lng:${marker.lng}`, phone: phone}
+			[...addresses,
+			{ name: name, address: `lat:${marker.lat} lng:${marker.lng}`, phone: phone }
 			]
 		))
-		setMarker({lat:'',lng:''})
+		setMarker({ lat: '', lng: '' })
 	}
 
-	const filteredAddresses = addresses.filter(a=> a.address!=='')
+	const filteredAddresses = addresses.filter(a => a.address !== '')
 
-	return(
+	return (
 		<Fragment>
 			<Title h2> Shipping Address </Title>
-			{!newAddress?
-			<FlexContainer>
-					{filteredAddresses.map((a,i)=>(
-						<ShippingDetails 
+			{!newAddress ?
+				<FlexContainer>
+					{filteredAddresses.map((a, i) => (
+						<ShippingDetails
 							key={i}
-						 	onClick={()=>handleAddressSelect(i)} 
-							active={i===selectedAddress}
+							onClick={() => handleAddressSelect(i)}
+							active={i === selectedAddress}
 						>
-							<h3>Address {i+1}</h3>
+							<h3>Address {i + 1}</h3>
 							<div>
 								Name
 								<p><strong>{a.name}</strong></p>
@@ -63,24 +63,26 @@ const Shipping =({newAddress, setNewAddress})=>{
 						</ShippingDetails>
 					))}
 
-				<ShippingDetails new onClick={()=>setNewAddress(true)}>
-						<img src={add} alt='add'/>
+					<ShippingDetails new onClick={() => setNewAddress(true)}>
+						<img src={add} alt='add' />
 						<p>Add a New Address</p>
-				</ShippingDetails>
-			</FlexContainer>
-			:<Fragment>
-					<BackTitle onClick={()=>setNewAddress(false)}>
-						<img src={prev} alt='back'/>
-						Back to Addresses 
+					</ShippingDetails>
+				</FlexContainer>
+
+			: 	<Fragment>
+					<BackTitle onClick={() => setNewAddress(false)}>
+						<img src={prev} alt='back' />
+						Back to Addresses
 					</BackTitle>
-				<GMap
-				 marker={marker}
-				 setMarker={setMarker}
-				/>
-				<MapButton grey onClick={handleAddingAddress}>
-					Confirm
-				</MapButton>
-			</Fragment>}
+					<GMap
+						marker={marker}
+						setMarker={setMarker}
+					/>
+					<MapButton grey onClick={handleAddingAddress}>
+						Confirm
+					</MapButton>
+				</Fragment>
+			}
 		</Fragment>
 	)
 }

@@ -17,7 +17,7 @@ export const MapContainer = styled.div `
     display: flex;
 	align-items: center;
 	justify-content: center;
-    margin: 0rem 0 1.5rem 0;
+    margin-bottom: 1.5rem;
 `
 
 export const LocateMe = styled.button `

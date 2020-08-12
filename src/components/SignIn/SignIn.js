@@ -1,17 +1,17 @@
-import React, {  useContext, useRef } from 'react'
-import { Formik, Form} from 'formik'
+import React, { useContext, useRef } from 'react'
+import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { useHistory, Link } from 'react-router-dom'
 import { USERS } from '../Database'
 import { DataContext } from '../../context/DataContext'
 import { editData, editAddresses } from '../../context/DataActions'
-import FormButton from '../StyledComponents/FormButton'
-import FormContainer from '../StyledComponents/FormContainer'
-import StyledField from '../StyledComponents/StyledField'
+import { FormButton } from '../StyledComponents/Buttons'
+import ErrorText from '../StyledComponents/ErrorText'
+import { FormContainer, StyledField } from '../StyledComponents/FormComponents'
 
 
 const SignIn = () => {
-    const {setData, setIsSignedIn} = useContext(DataContext)
+    const { setData, setIsSignedIn } = useContext(DataContext)
 
     const history = useHistory()
 
@@ -35,8 +35,8 @@ const SignIn = () => {
             e.preventDefault();
         }
     }
-    
-    return ( 
+
+    return (
         <Formik
             initialValues={{
                 signInEmail: '',
@@ -61,23 +61,23 @@ const SignIn = () => {
             {({ errors, touched }) => (
                 <Form onKeyDown={handleKeyDown}>
                     <FormContainer>
-                        <h1 className='header'>Sign In</h1>
+                        <h1>Sign In</h1>
                         <StyledField
                             name='signInEmail' type='email'
                             placeholder="Email" onKeyUp={handleKeyUp}
                         />
-                        {touched.signInEmail && errors.signInEmail && <p className='error'>{errors.signInEmail}</p>}
+                        {touched.signInEmail && errors.signInEmail && <ErrorText>{errors.signInEmail}</ErrorText>}
                         <StyledField
                             name='signInPassword' type="password"
                             placeholder="Password" innerRef={signInPasswordInput} onKeyUp={handleKeyUp}
                         />
-                        {touched.signInPassword && errors.signInPassword && <p className='error'>{errors.signInPassword}</p>}
+                        {touched.signInPassword && errors.signInPassword && <ErrorText>{errors.signInPassword}</ErrorText>}
                         <FormButton ref={signInButton}>
                             Sign In
                         </FormButton>
                         <p>
                             New User?
-                            <Link to='/signup' className='link'> Sign Up </Link>
+                            <Link to='/signup'> <strong> Sign Up </strong> </Link>
                         </p>
                     </FormContainer>
                 </Form>
@@ -85,5 +85,5 @@ const SignIn = () => {
         </Formik>
     )
 }
- 
+
 export default SignIn

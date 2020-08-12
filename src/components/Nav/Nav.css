@@ -1,9 +1,11 @@
 .react-autosuggest__container {
 	width: 60%;
-	margin: 1rem; 
+	margin: auto 5px;
 }
 
 .react-autosuggest__input {
+	font-family: courier;
+	font-size: medium;
 	width: 100%;
 	padding: 0.5rem;
 	border: 0;
@@ -51,118 +53,8 @@
 	background-color: rgba(0,0,0,0.1);
 }
 
-.search{
-	width: 1.2rem;
-	margin-left: -10px;
-	cursor: pointer;
-}
-
-.l-nav {
-	display: flex;
-	font-size: 1.25rem;
-	margin: 1rem 0;
-	cursor: pointer;
-	white-space: nowrap;
-	padding: 0.25rem 1.5rem
-}
-
-.user-action{
-	padding: 0.5rem 0.1rem;
-	font-size: 0.75em;
-	margin: 0;
-	display: flex;
-	justify-content: center;
-}
-
-.user-action img{
-	width: 1rem;
-	margin: 0 0.5rem;
-}
-
-.tooltipNav {
-  position: relative;
-}
-
-.tooltipNav .tooltipTextNav {
-  visibility: hidden;
-  width: 9rem;
-  background-color: #fff;
-  text-align: center;
-  border-radius: 3px;
-  padding: 0;
-  position: absolute;
-  z-index: 12;
-  left: 50%;
-  top: 120%;
-  margin-left: -4.5rem;
-  box-shadow: 0px 10px 12px 0px rgba(0,0,0,0.2);
-}
-
-.tooltipNav .tooltipTextNav::after {
-  content: "";
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent white transparent;
-}
-
-.tooltipNav:hover .tooltipTextNav {
-  visibility: visible;
-}
-
-.tooltipTextNav div:hover {
-	background: rgba(0,0,0,0.05);
-}
-
-#signout:hover{
-	color: red
-}
-
-.cart{
-	width: 1.15rem;
-	margin-left: 5px;
-}
-
-.s-circle{
-	color: red;
-	border-radius: 50%;
-	background:white;
-	align-items: center;
-	justify-content: center;
-	display: flex;
-	height: 0.9rem;
-	width: 0.9rem;
-	font-size: 0.75rem;
-	margin-top: -0.45rem;
-	margin-left:-0.6rem ; 
-}
-
-.hide{
-	visibility: hidden;
-}
-
-@media screen and (max-width: 780px){
-	.l-nav {
-		font-size: 1rem;
-		padding-top: 0.5rem;
-	}
-
+@media (max-width: 780px){
 	.react-autosuggest__container{
 		width: 50%;
-	}
-}
-
-@media screen and (max-width: 600px){
-	.l-nav {
-		font-size: 0.75rem;
-		white-space:normal;
-	}
-
-	.tooltipNav .tooltipTextNav{
-		width: 7.5rem;
-		margin-left: -3.75rem;
 	}
 }

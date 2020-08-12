@@ -9,14 +9,15 @@ export const ProfileContainer = styled.div`
 	margin-bottom: 3rem;
 	padding: 0.5rem 1rem;
 	background: white;
+
     h3{
         text-align:left;
     }
 `
-export const ProfileDetails = styled.div `
+export const ProfileDetails = styled.div`
     
-    width: ${props => props.changePassword? '':'45%'};
-    margin: ${props => props.changePassword ? '2.5rem 0.5rem': ''};
+    width: ${props => props.changePassword ? '' : '45%'};
+    margin: ${props => props.changePassword ? '2.5rem 0.5rem' : ''};
     pointer-events:${props => props.readOnly ? 'none' : ''};
 
     p{
@@ -31,17 +32,16 @@ export const ProfileDetails = styled.div `
         border-bottom: 1px solid grey;
         font-size: 20px;
         outline: none;
-        color : ${props => props.readOnly? '#555752': 'black'};
+        color : ${props => props.readOnly ? '#555752' : 'black'};
     }
-`
 
-export const ProfileText = styled.h6 `
-    color: ${props => props.error ? 'red' : '#555752'};
-    font-size: 12px;
-    text-align: left;
-    font-weight:normal;
-    margin: 5px 0;
-    font-style:${props => props.error ?'':'italic'}
+    h6{
+        color: #555752;
+        font-size: 12px;
+        text-align: left;
+        margin: 5px 0;
+        font-style:'italic'
+    }
 `
 
 export const ProfileButton = styled.button`
@@ -70,6 +70,7 @@ export const ChangePasswordContainer = styled.div`
 
     & > div {
         line-height: 12px;
+        
         p{
             font-size: 10px;
         }

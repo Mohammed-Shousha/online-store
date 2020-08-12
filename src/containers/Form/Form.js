@@ -1,31 +1,26 @@
-import React, {Fragment} from 'react'
-import Particles from 'react-particles-js'
-import {particles} from  '../../components/Database'
+import React, { Fragment } from 'react'
 import SignIn from '../../components/SignIn/SignIn'
 import SignUp from '../../components/SignUp/SignUp'
-import { Link, useLocation } from 'react-router-dom'
-import './Form.css'
+import { useLocation } from 'react-router-dom'
 import back from '../../components/Icons/prev.svg'
+import { LinkText, ParticlesBG } from '../../components/StyledComponents/FormComponents'
 
-const Form =()=>{
+const Form = () => {
 
 	let location = useLocation()
 
-	return(
+	return (
 		<Fragment>
-		<Link to='/' className='back-to-home' >
-			<img src={back} alt='back' />
-			<h2> Home </h2>
-		</Link>
-		<Particles
-			className='absolute top-0 left-0 w-100 h-100'
-			params={particles} 
-		/>
-		{location.pathname === '/signin'?
-			<SignIn/>
-		:
-			<SignUp/>
-		}
+			<LinkText to='/'>
+				<img src={back} alt='back' />
+				<h2> Home </h2>
+			</LinkText>
+			<ParticlesBG />
+			{location.pathname === '/signin' ?
+				<SignIn />
+			:
+				<SignUp />
+			}
 		</Fragment>
 	)
 }

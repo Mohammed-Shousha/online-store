@@ -1,18 +1,18 @@
 import React, {Fragment, lazy, Suspense} from 'react'
 import {BrowserRouter as Router, Switch,  Route, Redirect} from 'react-router-dom'
-import PrivateRoute from './components/PrivateRoute/PrivateRoute'
-import Loading from './components/StyledComponents/Loading'
-const Home = lazy(()=> import('./containers/Home/Home')) 
-const Cart = lazy(()=> import('./containers/Cart/Cart')) 
-const Form = lazy(()=> import('./containers/Form/Form'))
-const Checkout = lazy(()=> import('./containers/Checkout/Checkout'))  
-const StoreItems = lazy(()=> import('./containers/StoreItems/StoreItems')) 
-const SearchResults = lazy(()=> import('./containers/SearchResults/SearchResults')) 
-const Orders= lazy(()=> import('./containers/Orders/Orders')) 
-const Profile= lazy(()=> import('./containers/Profile/Profile')) 
-const Nav = lazy(()=> import('./components/Nav/Nav')) 
-const SNav = lazy(()=> import('./components/SNav/SNav')) 
-const Footer = lazy(()=> import('./components/Footer/Footer')) 
+import PrivateRoute from './Containers/PrivateRoute/PrivateRoute'
+import Loading from './Components/Loading'
+const Home = lazy(()=> import('./Pages/Home/Home')) 
+const Cart = lazy(()=> import('./Pages/Cart/Cart')) 
+const Form = lazy(()=> import('./Pages/Form/Form'))
+const Checkout = lazy(()=> import('./Pages/Checkout/Checkout'))  
+const StoreItems = lazy(()=> import('./Pages/StoreItems/StoreItems')) 
+const SearchResults = lazy(()=> import('./Pages/SearchResults/SearchResults')) 
+const Orders= lazy(()=> import('./Pages/Orders/Orders')) 
+const Profile= lazy(()=> import('./Pages/Profile/Profile')) 
+const Nav = lazy(()=> import('./Containers/Nav/Nav')) 
+const SNav = lazy(()=> import('./Containers/SNav/SNav')) 
+const Footer = lazy(()=> import('./Containers/Footer/Footer')) 
 
 
 const App =()=> {

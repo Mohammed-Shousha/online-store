@@ -5,9 +5,9 @@ export const MapTitle = styled.h3 `
     font-weight:normal;
 	text-align: left;
 	padding: 0.75rem 1rem;
-	width: 85vw;
 	margin: auto;
 	margin-top: 1.75rem;
+	width: 83vw;
 	background: #342b38;
 	color: white;
 	border-radius: 5px 5px 0 0;
@@ -17,6 +17,7 @@ export const MapContainer = styled.div `
     display: flex;
 	align-items: center;
 	justify-content: center;
+	margin:auto;
     margin-bottom: 1.5rem;
 `
 

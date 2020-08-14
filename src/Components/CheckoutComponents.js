@@ -21,12 +21,14 @@ export const CheckoutStep = styled.div `
 `
 
 export const NumCircle = styled.div `
+    display:flex;
+    justify-content:center;
+    align-items:center;
     border-radius: 50%;
 	background:${props => props.active ? '#2196f3' : 'transparent'};
 	color: ${props => props.active ? 'white' : 'grey'};
 	border: ${props => props.active ? 'none' :'1px grey solid'};
-	height: 1.5rem;
-	width: 1.5rem;
+	height:24px;
+	width:24px;
 	margin: 0 1rem;
-    padding: 0.2rem;
 `

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Form, Field } from 'formik'
+import { Field } from 'formik'
 import {Link} from 'react-router-dom'
 import Particles from 'react-particles-js'
 import { particles } from '../Data/Database'
@@ -32,17 +32,16 @@ export const StyledField = styled(Field)`
     margin: 10px 0;
 `
 
-export const ActiveForm = styled(Form) `
-    visibility:${props => props.active ? '': 'hidden'};
+export const VisibleDiv = styled.div `
+    visibility: ${props => props.visible ? '' : 'hidden'};
 `
 
-export const FormMap = styled.div `
+export const FormMap = styled(VisibleDiv) `
     position: absolute;
     top:2rem;
     right: 0;
     left: 0;
     z-index: 999;
-    visibility: ${props => props.active ? '': 'hidden'};
 `
 
 export const LinkText = styled(Link) `

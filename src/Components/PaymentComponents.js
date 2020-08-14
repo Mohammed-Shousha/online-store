@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const PaymentButton = styled.button `
     outline: none;
-	border:${props => props.active ? '1.2px solid #2196f3' : '1px solid grey'};
+	border: solid ${props => props.active ? '1.2px #2196f3' : '1px grey'};
 	border-radius: 3px;
 	background: #f7f7ee;
 	color:${props => props.active? 'black' :'grey'};

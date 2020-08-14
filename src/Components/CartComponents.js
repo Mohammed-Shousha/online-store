@@ -8,7 +8,7 @@ export const CartButton = styled.button `
 	align-content: center;
     width:${props => props.checkout ? '100%': '60%'};
 	cursor: pointer;
-	padding:${props => props.checkout ? '15px 50px': '10px 50px'} ;
+	padding:${props => props.checkout ? '15px': '10px'} 50px ;
 	margin: auto;
     margin-top:${props => props.checkout ? '25px' : ''};
 	border:none;

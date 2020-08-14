@@ -1,10 +1,10 @@
 import React, { Fragment, useState, useContext, useRef } from 'react'
-import { Formik } from 'formik'
+import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { useHistory, Link } from 'react-router-dom'
 import { FormButton } from '../../Components/Buttons'
 import ErrorText from '../../Components/ErrorText'
-import { ActiveForm, FormMap, FormContainer, StyledField } from '../../Components/FormComponents'
+import { FormMap, FormContainer, StyledField, VisibleDiv } from '../../Components/FormComponents'
 import GMap from '../GMap/GMap'
 import { DataContext } from '../../Data/DataContext'
 import { editData, editAddresses } from '../../Data/DataActions'
@@ -84,7 +84,8 @@ const SignUp = () => {
 				}}
 				validationSchema={Yup.object({
 					name: Yup.string()
-						.required(<ErrorText>Required</ErrorText>),
+						.min(2, 'Too Short')
+						.required('Required'),
 					signUpEmail: Yup.string()
 						.email('Invalid Email')
 						.required('Required'),
@@ -105,51 +106,53 @@ const SignUp = () => {
 				}}
 			>
 				{({ errors, touched }) => (
-					<ActiveForm onKeyDown={handleKeyDown} active={!detectAddress}>
-						<FormContainer >
-							<h1>Create Account</h1>
-							<StyledField
-								name="name" type="text"
-								placeholder="Name" innerRef={nameInput} onKeyUp={handleKeyUp}
-							/>
-							{touched.name && errors.name && <ErrorText>{errors.name}</ErrorText>}
-							<StyledField
-								name="signUpEmail" type="Email" id='sign-up-email'
-								placeholder="Email" innerRef={emailInput} onKeyUp={handleKeyUp}
-							/>
-							{touched.signUpEmail && errors.signUpEmail && <ErrorText>{errors.signUpEmail}</ErrorText>}
-							<StyledField
-								name="signUpPassword" type="password" id='sign-up-password'
-								placeholder='Password' innerRef={passwordInput} onKeyUp={handleKeyUp}
-							/>
-							{touched.signUpPassword && errors.signUpPassword && <ErrorText>{errors.signUpPassword}</ErrorText>}
-							<StyledField
-								name="phone" type="tel"
-								placeholder="01234567890" innerRef={phoneInput} onKeyUp={handleKeyUp}
-							/>
-							{touched.phone && errors.phone && <ErrorText>{errors.phone}</ErrorText>}
-							<StyledField
-								name="address" type="text" as='textarea' value={undefined}
-								placeholder="Address (Optional)" ref={addressInput} onKeyUp={handleKeyUp}
-								onClick={() => setAddressFocused(true)}
-							/>
-							{addressFocused &&
-								<FormButton type='button' grey onClick={() => setDetectAddress(true)}>
-									Detect My Location
+					<VisibleDiv visible={!detectAddress}>
+						<Form onKeyDown={handleKeyDown} >
+							<FormContainer >
+								<h1>Create Account</h1>
+								<StyledField
+									name="name" type="text"
+									placeholder="Name" innerRef={nameInput} onKeyUp={handleKeyUp}
+								/>
+								{touched.name && errors.name && <ErrorText>{errors.name}</ErrorText>}
+								<StyledField
+									name="signUpEmail" type="Email" id='sign-up-email'
+									placeholder="Email" innerRef={emailInput} onKeyUp={handleKeyUp}
+								/>
+								{touched.signUpEmail && errors.signUpEmail && <ErrorText>{errors.signUpEmail}</ErrorText>}
+								<StyledField
+									name="signUpPassword" type="password" id='sign-up-password'
+									placeholder='Password' innerRef={passwordInput} onKeyUp={handleKeyUp}
+								/>
+								{touched.signUpPassword && errors.signUpPassword && <ErrorText>{errors.signUpPassword}</ErrorText>}
+								<StyledField
+									name="phone" type="tel"
+									placeholder="Phone " innerRef={phoneInput} onKeyUp={handleKeyUp}
+								/>
+								{touched.phone && errors.phone && <ErrorText>{errors.phone}</ErrorText>}
+								<StyledField
+									name="address" type="text" as='textarea' value={undefined}
+									placeholder="Address (Optional)" ref={addressInput} onKeyUp={handleKeyUp}
+									onClick={() => setAddressFocused(true)}
+								/>
+								{addressFocused &&
+									<FormButton type='button' grey onClick={() => setDetectAddress(true)}>
+										Detect My Location
+									</FormButton>
+								}
+								<FormButton ref={signUpButton}>
+									Sign Up
 								</FormButton>
-							}
-							<FormButton ref={signUpButton}>
-								Sign Up
-							</FormButton>
-							<p> Have Account?
-								<Link to='signin'> <strong> Sign In </strong> </Link>
-							</p>
-						</FormContainer>
-					</ActiveForm>
+								<p> Have Account?
+									<Link to='signin'> <strong> Sign In </strong> </Link>
+								</p>
+							</FormContainer>
+						</Form>
+					</VisibleDiv>
 				)}
 			</Formik>
 
-			<FormMap active={detectAddress}>
+			<FormMap visible={detectAddress}>
 				<GMap
 					marker={marker}
 					setMarker={setMarker}

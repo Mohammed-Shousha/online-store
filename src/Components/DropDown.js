@@ -25,15 +25,17 @@ const DropDown = styled.div `
 
     div{
         position:absolute;
+        right:0;
+        left:0;
         display: none;
         background-image: linear-gradient(to right, #434343 0%, black 100%);
-        min-width: 170px;
+        min-width: 8em;
         box-shadow: 0px 10px 12px 0px rgba(0,0,0,0.2);
         border-radius: 2px;
         padding: 0.5rem 20px;
         z-index: 1;
         margin: 0;
-        font-size: 0.8em;
+        font-size: 1em;
 
         p{
             color: #b8b0b0;

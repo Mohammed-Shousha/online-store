@@ -24,7 +24,7 @@ export const FormContainer = styled.div`
 `
 
 export const StyledField = styled(Field)`
-    font-size:15px;
+    font-size:medium;
     border-radius:10px;
     background-color: #eee;
     border: none;

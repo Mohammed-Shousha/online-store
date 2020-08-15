@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useContext, useRef } from 'react'
-import { Formik, Form } from 'formik'
+import { Formik, Form, useFormikContext } from 'formik'
 import * as Yup from 'yup'
 import { useHistory, Link } from 'react-router-dom'
 import { FormButton } from '../../Components/Buttons'
@@ -14,35 +14,22 @@ import { passwordRegex } from '../../Data/Constants'
 
 const SignUp = () => {
 
-	const { setIsSignedIn, data, setData } = useContext(DataContext)
-
+	const { setIsSignedIn, setData } = useContext(DataContext)
+	
 	const { marker, setMarker } = useContext(LocationContext)
-
+	
 	let history = useHistory()
 
 	const [detectAddress, setDetectAddress] = useState(false)
 	const [addressFocused, setAddressFocused] = useState(false)
 
-
+	
 	const nameInput = useRef(null)
 	const emailInput = useRef(null)
 	const passwordInput = useRef(null)
 	const phoneInput = useRef(null)
 	const addressInput = useRef(null)
 	const signUpButton = useRef(null)
-
-	const handleAddressConfirm = () => {
-		setDetectAddress(false)
-		setData(editAddresses(
-			[{
-				name: nameInput.current.value,
-				address: `lat:${marker.lat}  lng:${marker.lng}`,
-				phone: phoneInput.current.value
-			}]
-		))
-		addressInput.current.value = `lat:${marker.lat}  lng:${marker.lng}`
-		setMarker({ lat: '', lng: '' })
-	}
 
 	const handleKeyUp = (e) => {
 		if (e.keyCode === 13) {
@@ -70,6 +57,23 @@ const SignUp = () => {
 		if ((e.charCode || e.keyCode) === 13) {
 			e.preventDefault();
 		}
+	}
+
+	const ConfirmButton = ()=>{
+		
+		const {setFieldValue} = useFormikContext()
+
+		const addressConfirm =()=>{
+			setFieldValue('address', `lat:${marker.lat}  lng:${marker.lng}`)
+			setDetectAddress(false)
+			setMarker({ lat: '', lng: '' })
+		}
+
+		return(
+			<FormButton grey onClick={addressConfirm}>
+				Confirm
+			</FormButton>
+		)
 	}
 
 	return (
@@ -100,12 +104,11 @@ const SignUp = () => {
 					history.push('/')
 					setIsSignedIn(true)
 					setData(editData(name, signUpEmail, signUpPassword, phone))
-					if (!data.addresses[0].address) {
-						setData(editAddresses([{ name: name, address: address, phone: phone }]))
-					}
+					setData(editAddresses([{ name, address, phone }]))
 				}}
 			>
-				{({ errors, touched }) => (
+				{({ errors, touched, values, handleChange }) => (
+					<>
 					<VisibleDiv visible={!detectAddress}>
 						<Form onKeyDown={handleKeyDown} >
 							<FormContainer >
@@ -116,12 +119,12 @@ const SignUp = () => {
 								/>
 								{touched.name && errors.name && <ErrorText>{errors.name}</ErrorText>}
 								<StyledField
-									name="signUpEmail" type="Email" id='sign-up-email'
+									name="signUpEmail" type="Email"
 									placeholder="Email" innerRef={emailInput} onKeyUp={handleKeyUp}
 								/>
 								{touched.signUpEmail && errors.signUpEmail && <ErrorText>{errors.signUpEmail}</ErrorText>}
 								<StyledField
-									name="signUpPassword" type="password" id='sign-up-password'
+									name="signUpPassword" type="password"
 									placeholder='Password' innerRef={passwordInput} onKeyUp={handleKeyUp}
 								/>
 								{touched.signUpPassword && errors.signUpPassword && <ErrorText>{errors.signUpPassword}</ErrorText>}
@@ -131,7 +134,7 @@ const SignUp = () => {
 								/>
 								{touched.phone && errors.phone && <ErrorText>{errors.phone}</ErrorText>}
 								<StyledField
-									name="address" type="text" as='textarea' value={undefined}
+									name="address" type="text" as='textarea' value={values.address} onChange={handleChange}
 									placeholder="Address (Optional)" ref={addressInput} onKeyUp={handleKeyUp}
 									onClick={() => setAddressFocused(true)}
 								/>
@@ -148,19 +151,17 @@ const SignUp = () => {
 								</p>
 							</FormContainer>
 						</Form>
-					</VisibleDiv>
+						</VisibleDiv>
+						<FormMap visible={detectAddress}>
+						<GMap 
+							marker={marker}
+							setMarker={setMarker}
+						/>
+						<ConfirmButton/>
+						</FormMap>
+					</>
 				)}
 			</Formik>
-
-			<FormMap visible={detectAddress}>
-				<GMap
-					marker={marker}
-					setMarker={setMarker}
-				/>
-				<FormButton grey onClick={handleAddressConfirm}>
-					Confirm
-				</FormButton>
-			</FormMap>
 		</Fragment>
 	)
 }

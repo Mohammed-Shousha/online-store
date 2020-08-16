@@ -20,7 +20,7 @@ const Orders = () => {
 				<div>
 					<Icon src={box} alt='box' />
 					<h1> You Don't Have Any Orders Yet</h1>
-					{cartItems.every(x => x === 0) ?
+					{cartItems.every(item => item[1] === 0) ?
 						<Fragment>
 							<p> What are you waiting for ? </p>
 							<LinkButton to='/'>
@@ -38,15 +38,16 @@ const Orders = () => {
 				</div>
 				:
 				<Fragment>
-					{orders.map((order, i) => (
+					{orders.map(({order, time}, i) => (
 						<Fragment key={i}>
-							<h2>Order Time: {order[2]}</h2>
-							{order[0].map(x =>
+							<h2>Order Time: {time}</h2>
+							{order.map(item =>
 								<FlexContainer center>
 									<CartItem
-										key={x[0]} productId={x[0]}
+										key={item[0]}
+										productId={item[0]}
 										editable={false}
-										cartItems={order[1]}
+										order={order}
 									/>
 								</FlexContainer>)}
 						</Fragment>

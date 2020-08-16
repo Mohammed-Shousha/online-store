@@ -153,8 +153,8 @@ const Nav = () => {
 					Cart
 					<FlexContainer>
 						<img alt='cart' src={cart} />
-						<CartCircle hide={cartItems.every(x => x === 0)}>
-							{cartItems.reduce((t, i) => t + i, 0)}
+						<CartCircle hide={cartItems.every(x => x[1] === 0)}>
+							{cartItems.reduce((t, item) => t + item[1], 0)}
 						</CartCircle>
 					</FlexContainer>
 				</NavText>

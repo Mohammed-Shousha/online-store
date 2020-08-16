@@ -21,8 +21,6 @@ const Cart = () => {
 		setData(clearCart())
 	}
 
-	const cartItemsEntries = Object.entries(cartItems).filter(x => x[1] > 0)
-
 	return (
 		<Fragment>
 			<Title h1> My Cart </Title>
@@ -38,18 +36,15 @@ const Cart = () => {
 				:
 				<FlexContainer around noAlign responsive>
 					<div>
-						{cartItemsEntries.map(x =>
+						{cartItems.map(item =>
 							<CartItem
-								key={x[0]}
-								productId={x[0]}
-								cartItems={cartItems}
+								key={item[0]}
+								productId={item[0]}
 							/>
 						)}
 					</div>
 					<div>
-						<OrderSummary
-							cartItemsEntries={cartItemsEntries}
-						/>
+						<OrderSummary />
 						<CartButton onClick={handleClearCart}>
 							<p>Clear Cart</p>
 							<img src={emptyCartButton} alt='empty-cart' />

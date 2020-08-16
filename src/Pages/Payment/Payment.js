@@ -10,7 +10,7 @@ import credit from '../../Data/Icons/credit.svg'
 import greenCredit from '../../Data/Icons/credit-green.svg'
 
 
-const Payment = ({ cartItemsEntries, cartItems }) => {
+const Payment = ({ cartItems }) => {
 
 	const [cash, setCash] = useState(true)
 
@@ -57,16 +57,16 @@ const Payment = ({ cartItemsEntries, cartItems }) => {
 					</Fragment>
 					<div>
 						<Title h3> Your Order </Title>
-						{cartItemsEntries.map(x =>
-							<CartItem key={x[0]} productId={x[0]}
+						{cartItems.map(item =>
+							<CartItem 
+								key={item[0]} 
+								productId={item[0]}
 								editable={false}
-								cartItems={cartItems}
 							/>
 						)}
 					</div>
 				</div>
 				<OrderSummary
-					cartItemsEntries={cartItemsEntries}
 					checkoutNow={false}
 				/>
 			</FlexContainer>

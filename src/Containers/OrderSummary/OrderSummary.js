@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { CartButton, OrderSummaryContainer } from '../../Components/CartComponents'
+import { DataContext } from '../../Data/DataContext'
 import { ProductsList } from '../../Data/Database'
 
 
-const OrderSummary = ({ cartItemsEntries, checkoutNow = true }) => {
+const OrderSummary = ({ checkoutNow = true }) => {
+
+	const { data } = useContext(DataContext)
+	const { cartItems } = data
 
 	const shippingFee = 100
-	let subtotal = cartItemsEntries.reduce((t, i) => t + Number(ProductsList[i[0]].price) * i[1], 0)
+	let subtotal = cartItems.reduce((t, item) => t + Number(ProductsList[item[0]].price) * item[1], 0)
 	let total = subtotal + shippingFee
 
 	return (

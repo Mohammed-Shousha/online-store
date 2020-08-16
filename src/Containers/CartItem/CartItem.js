@@ -6,13 +6,21 @@ import { editItem } from '../../Data/DataActions'
 import { ProductsList } from '../../Data/Database'
 import remove from '../../Data/Icons/delete.svg'
 
-const CartItem = ({ productId, editable = true }) => {
+
+const CartItem = ({ productId, editable = true, order }) => {
 
 	const { data, setData } = useContext(DataContext)
 	const { cartItems } = data
 
 	const onRemovingItem = (productId) => {
 		setData(editItem(productId, false))
+	}
+
+	let product = []
+	if(order){
+		product = order.find(item => item[0] === productId)
+	}else{
+		product = cartItems.find(item=> item[0] === productId)
 	}
 
 
@@ -28,7 +36,7 @@ const CartItem = ({ productId, editable = true }) => {
 					</ProductDetails>
 				</FlexContainer>
 				<ProductActions>
-					<h3>x{cartItems[productId]}</h3>
+					<h3>x{product[1]}</h3>
 					<br />
 					{editable &&
 						<img

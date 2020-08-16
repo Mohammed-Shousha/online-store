@@ -28,7 +28,7 @@ const Shipping = ({ newAddress, setNewAddress }) => {
 		setNewAddress(false)
 		setData(editAddresses(
 			[...addresses,
-			{ name: name, address: `lat:${marker.lat} lng:${marker.lng}`, phone: phone }
+			{ name, address: `lat:${marker.lat} lng:${marker.lng}`, phone }
 			]
 		))
 		setMarker({ lat: '', lng: '' })
@@ -68,8 +68,8 @@ const Shipping = ({ newAddress, setNewAddress }) => {
 						<p>Add a New Address</p>
 					</ShippingDetails>
 				</FlexContainer>
-
-			: 	<Fragment>
+			: 	
+				<Fragment>
 					<BackTitle onClick={() => setNewAddress(false)}>
 						<img src={prev} alt='back' />
 						Back to Addresses

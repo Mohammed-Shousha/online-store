@@ -13,7 +13,6 @@ const Checkout = () => {
 	const { data, setData } = useContext(DataContext)
 	const { cartItems } = data
 
-	const cartItemsEntries = Object.entries(cartItems).filter(x => x[1] > 0)
 
 	const [step, setStep] = useState(1)
 
@@ -28,7 +27,7 @@ const Checkout = () => {
 	const placeOrder = () => {
 		handleNext()
 		setData(editOrders(
-			[cartItemsEntries, cartItems, orderTime()]
+			{order: cartItems, time: orderTime()}
 		))
 	}
 
@@ -66,7 +65,6 @@ const Checkout = () => {
 				<Fragment>
 					<Payment
 						cartItems={cartItems}
-						cartItemsEntries={cartItemsEntries}
 					/>
 					<Button onClick={placeOrder}>
 						Place Order

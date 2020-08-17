@@ -16,27 +16,29 @@ const CartItem = ({ productId, editable = true, order }) => {
 		setData(editItem(productId, false))
 	}
 
-	let product = []
+	let qty = 0 
 	if(order){
-		product = order.find(item => item[0] === productId)
+		qty = order.find(item => item[0] === productId)[1]
 	}else{
-		product = cartItems.find(item=> item[0] === productId)
+		qty = cartItems.find(item=> item[0] === productId)[1]
 	}
+
+	let product = ProductsList.find(product => product.id === productId)
 
 
 	return (
 		<CartItemsContainer>
 			<div>
 				<FlexContainer noAlign >
-					<img src={ProductsList[productId].photos[0]} alt={ProductsList[productId].name} />
+					<img src={product.photos[0]} alt={product.name} />
 					<ProductDetails>
-						<h2> {ProductsList[productId].name}</h2>
-						<h3> {ProductsList[productId].price} EGP </h3>
-						<p> {ProductsList[productId].description} </p>
+						<h2> {product.name}</h2>
+						<h3> {product.price} EGP </h3>
+						<p> {product.description} </p>
 					</ProductDetails>
 				</FlexContainer>
 				<ProductActions>
-					<h3>x{product[1]}</h3>
+					<h3>x{qty}</h3>
 					<br />
 					{editable &&
 						<img

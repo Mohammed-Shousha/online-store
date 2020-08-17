@@ -12,26 +12,26 @@ export const ProductsContainer = styled.div `
     display:flex;
     justify-content:center;
 
-    & >div{
+    @media(max-width: 1280px){
+        flex-direction:column;
+    }
+
+    >div{
         display:flex;
         justify-content:center;
-        margin:1.25rem 0;
 
-        @media(max-width: 1280px){
+        @media(max-width: 700px){
             flex-direction:column;
         }
-
-        & >div{
-        display:flex;
-        justify-content:center;
-
-            @media(max-width: 700px){
-                flex-direction:column;
-            }
-        }
-
-
     }
+`
+
+export const Product = styled.div `
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin:1rem 0;
 `
 
 export const AddToCart = styled.button `

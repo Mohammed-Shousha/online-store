@@ -1,6 +1,6 @@
 import React, { useState, useContext, Fragment } from 'react'
 import { ProductCard } from 'react-ui-cards'
-import { ProductsContainer, ProductsTitle, AddToCart } from '../../Components/ProductsComponenets'
+import { ProductsContainer, ProductsTitle, AddToCart, Product } from '../../Components/ProductsComponenets'
 import Alert from '../../Components/Alert'
 import { DataContext } from '../../Data/DataContext'
 import { editItem } from '../../Data/DataActions'
@@ -36,13 +36,12 @@ const Products = ({ title = '', num = '', products }) => {
 	return (
 		<Fragment>
 			<ProductsTitle title={title.length}>{title.toUpperCase()}</ProductsTitle>
-			<ProductsContainer>
 				{PRODUCTS.map((PRO, i) => (
-					<div key={i}>
+					<ProductsContainer key={i}>
 						{PRO.map((P, i) => (
 							<div key={i}>
 								{P.map(product => (
-									<div key={product.id}>
+									<Product key={product.id}>
 										<ProductCard
 											photos={product.photos}
 											price={`${product.price} EGP`}
@@ -55,13 +54,12 @@ const Products = ({ title = '', num = '', products }) => {
 										>
 											ADD TO CART
 										</AddToCart>
-									</div>
+									</Product>
 								))}
 							</div>
 						))}
-					</div>
+					</ProductsContainer>
 				))}
-			</ProductsContainer>
 			{alert && <Alert setAlert={setAlert} />}
 		</Fragment>
 	)

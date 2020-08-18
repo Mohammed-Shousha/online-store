@@ -1,19 +1,24 @@
 import styled from 'styled-components'
 
+const gradient = 'linear-gradient(45deg, #93a5cf 0%, #e4efe9 100%)'
+
 export const CategoriesContainer = styled.div `
     margin: 150px 0;
+    text-align:center;
     h1{
-        text-align:center;
-
+        width:250px;
+        margin: 10px auto;
+        
         &:hover{
-            color:#1e3c72;
+            color:#93a5cf;
         }
     }
 `
 
+
 export const Square = styled.div `
     border-radius:6px;
-	background-image: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%);
+	background-image: ${gradient};
     color: white;
     display: flex;
     align-items:center;
@@ -24,6 +29,7 @@ export const Square = styled.div `
 	padding: 4rem 0rem;
 	font-size: 3rem;
 	cursor: pointer;
+    box-shadow: -7px 7px 10px rgba(0,0,0,0.2);
 	transition-duration: .7s;
     @media (max-width: 1150px) {
         margin:2rem;
@@ -31,6 +37,10 @@ export const Square = styled.div `
     
     &:hover{
         transform: scale(1.05);
+    }
+
+    img{
+        width:150px;
     }
 `
 

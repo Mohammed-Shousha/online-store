@@ -45,6 +45,16 @@ import whatsapp from './Icons/whatsapp.svg'
 import fb from './Icons/facebook.svg'
 import instagram from './Icons/instagram.svg'
 
+import jbl from './Icons/jbl.svg'
+import beats from './Icons/beats.svg'
+import sony from './Icons/sony.svg'
+import bose from './Icons/bose.svg'
+import apple from './Icons/apple.svg'
+import samsung from './Icons/samsung.svg'
+import huawei from './Icons/huawei.svg'
+import xiaomi from './Icons/xiaomi.svg'
+import fitbit from './Icons/fitbit.svg'
+
 export const slideShowImages = [img1, img2, img3, img4, img5, img6, img7]
 
 export let USERS=[{
@@ -118,19 +128,60 @@ export const STEPS=[{
 
 export const CATEGORIES = [{
 	category:'Headphones',
-	items:['Beats', 'JBL', 'Sony']
+	items: [{
+		name: 'Beats',
+		img: beats
+	},
+	{
+		name: 'Jbl',
+		img: jbl
+	},
+	{
+		name: 'Sony',
+		img: sony
+	}
+	]
 },
 {
 	category:'Speakers',
-	items:['JBL', 'Bose']
+	items: [{
+		name: 'Jbl',
+		img: jbl
+	},
+	{
+		name: 'Bose',
+		img: bose
+	}]
 },
 {
 	category:'Covers',
-	items:['Apple', 'Samsung', 'Huawei']	
+	items: [{
+		name: 'Apple',
+		img: apple
+	},
+	{
+		name: 'Samsung',
+		img: samsung
+	},
+	{
+		name: 'Huawei',
+		img: huawei
+	}]	
 },
 {
 	category:'Smart Watches',
-	items:['Apple', 'Fitbit', 'Mi']
+	items: [{
+		name: 'Apple',
+		img: apple
+	},
+	{
+		name: 'Fitbit',
+		img: fitbit
+	},
+	{
+		name: 'Xiaomi',
+		img: xiaomi
+	}]
 },
 {
 	category:'Power Banks',
@@ -331,8 +382,8 @@ export const ProductsList = [{
 {
 	id: 16,
 	type:'smart watches',
-	brand:'mi',
-	name: 'Mi Watch',
+	brand:'xiaomi',
+	name: 'Xiaomi Watch',
 	price: 1000,
 	photos: [miSmartwatch1],
 	description: 'blah blah blah',

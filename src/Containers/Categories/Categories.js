@@ -29,14 +29,16 @@ const Categories = () => {
 	return (
 		<CategoriesContainer>
 			<Link to={`/categories/${category}`}>
-				<h1>{category}</h1>
+				<h1>{category.toUpperCase()}</h1>
 			</Link>
 			<FlexContainer center>
 				<Arrow alt='prev' src={prev} onClick={prevCategory} />
 				<FlexContainer responsive center>
-					{items.map(item =>
-						<Link to={`/categories/${category}-${item}`} key={item}>
-							<Square key={item}> {item} </Square>
+					{items.map(({name, img})=>
+						<Link to={`/categories/${category.toLowerCase()}-${name.toLowerCase()}`} key={name}>
+							<Square>
+								<img src={img} alt={img}/>
+							</Square>
 						</Link>
 					)}
 				</FlexContainer>

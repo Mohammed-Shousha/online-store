@@ -1,9 +1,10 @@
 import styled from 'styled-components'
 
+const gradient = 'linear-gradient(to top, #c1dfc4 0%, #deecdd 100%)'
+
 const DropDown = styled.div `
     display: inline-block;
     font-size: 1.1rem;
-    cursor: pointer;
     width: 170px;
 
     @media (max-width:780px){
@@ -15,7 +16,9 @@ const DropDown = styled.div `
     }
     &:hover{
         div{
-            display:block;
+            display:flex;
+            justify-content:space-around;
+            align-items:center;
         }
     }
 
@@ -28,7 +31,7 @@ const DropDown = styled.div `
         right:0;
         left:0;
         display: none;
-        background-image: linear-gradient(to right, #434343 0%, black 100%);
+        background-image: ${gradient};
         min-width: 8em;
         box-shadow: 0px 10px 12px 0px rgba(0,0,0,0.2);
         border-radius: 2px;
@@ -37,16 +40,9 @@ const DropDown = styled.div `
         margin: 0;
         font-size: 1em;
 
-        p{
-            color: #b8b0b0;
-            padding: 0.25rem 0;
-            /* text-align: left; */
-            margin: 0;
-            cursor: pointer;
-
-            &:hover{
-                color: white;
-            }
+        img{
+            width:40px;
+            padding: 10px;
         }
     }
 `

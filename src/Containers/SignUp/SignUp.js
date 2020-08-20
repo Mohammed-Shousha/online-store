@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext, useRef } from 'react'
+import React, { useState, useContext, useRef } from 'react'
 import { Formik, Form, useFormikContext } from 'formik'
 import * as Yup from 'yup'
 import { useHistory, Link } from 'react-router-dom'
@@ -77,7 +77,7 @@ const SignUp = () => {
 	}
 
 	return (
-		<Fragment>
+		<>
 			<Formik
 				initialValues={{
 					name: '',
@@ -162,7 +162,7 @@ const SignUp = () => {
 					</>
 				)}
 			</Formik>
-		</Fragment>
+		</>
 	)
 }
 

@@ -1,4 +1,4 @@
-import React, { useRef, useState, Fragment } from 'react'
+import React, { useRef, useState } from 'react'
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api"
 // import Geocode from "react-geocode"
 import Loading from '../../Components/Loading'
@@ -93,7 +93,7 @@ const GMap = ({ marker, setMarker }) => {
 	if (!isLoaded) return <Loading />
 
 	return (
-		<Fragment>
+		<>
 			<MapTitle> Add New Address </MapTitle>
 			<MapContainer>
 				<GoogleMap
@@ -132,7 +132,7 @@ const GMap = ({ marker, setMarker }) => {
 					}
 				</GoogleMap>
 			</MapContainer>
-		</Fragment>
+		</>
 	)
 }
 

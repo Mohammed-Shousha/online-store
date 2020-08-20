@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import Slideshow from '../../Containers/Slideshow/Slideshow'
 import Products from '../../Containers/Products/Products'
 import Categories from '../../Containers/Categories/Categories'
@@ -7,7 +7,7 @@ import { ProductsList } from '../../Data/Database'
 
 
 const Home = () => (
-	<Fragment>
+	<>
 		<Slideshow />
 		<Products
 			title='Most Popular'
@@ -16,7 +16,7 @@ const Home = () => (
 		/>
 		<Categories />
 		<Features />
-	</Fragment>
+	</>
 )
 
 export default Home

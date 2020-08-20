@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import GMap from '../../Containers/GMap/GMap'
 import Title from '../../Components/Title'
 import FlexContainer from '../../Components/FlexContainer'
@@ -11,18 +11,12 @@ import add from '../../Data/Icons/add.svg'
 import prev from '../../Data/Icons/prev.svg'
 
 
-const Shipping = ({ newAddress, setNewAddress }) => {
+const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }) => {
 
 	const { marker, setMarker } = useContext(LocationContext)
 
 	const { data, setData } = useContext(DataContext)
 	const { name, addresses, phone } = data
-
-	const [selectedAddress, setSelectedAddress] = useState(0)
-
-	const handleAddressSelect = (id) => {
-		setSelectedAddress(id)
-	}
 
 	const handleAddingAddress = () => {
 		setNewAddress(false)
@@ -37,15 +31,15 @@ const Shipping = ({ newAddress, setNewAddress }) => {
 	const filteredAddresses = addresses.filter(a => a.address !== '')
 
 	return (
-		<Fragment>
-			<Title h2> Shipping Address </Title>
+		<>
+			<Title h2> Shipping </Title>
 			{!newAddress ?
 				<FlexContainer>
 					{filteredAddresses.map((a, i) => (
 						<ShippingDetails
 							key={i}
-							onClick={() => handleAddressSelect(i)}
-							active={i === selectedAddress}
+							onClick={() => setActiveAddress(a)}
+							active={a === activeAddress}
 						>
 							<h3>Address {i + 1}</h3>
 							<div>
@@ -69,7 +63,7 @@ const Shipping = ({ newAddress, setNewAddress }) => {
 					</ShippingDetails>
 				</FlexContainer>
 			: 	
-				<Fragment>
+				<>
 					<BackTitle onClick={() => setNewAddress(false)}>
 						<img src={prev} alt='back' />
 						Back to Addresses
@@ -81,9 +75,9 @@ const Shipping = ({ newAddress, setNewAddress }) => {
 					<MapButton grey onClick={handleAddingAddress}>
 						Confirm
 					</MapButton>
-				</Fragment>
+				</>
 			}
-		</Fragment>
+		</>
 	)
 }
 

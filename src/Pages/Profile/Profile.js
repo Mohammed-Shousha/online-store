@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useRef, useContext } from 'react'
+import React, { useState, useRef, useContext } from 'react'
 import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
 import FlexContainer from '../../Components/FlexContainer'
@@ -51,7 +51,7 @@ const Profile = () => {
 	}
 
 	return (
-		<Fragment>
+		<>
 			<Title h1> Profile </Title>
 			<ProfileContainer>
 				<h3> General Information </h3>
@@ -165,8 +165,9 @@ const Profile = () => {
 							)}
 						</Formik>
 					</ChangePasswordContainer>
-				</Modal>}
-		</Fragment>
+				</Modal>
+			}
+		</>
 	)
 }
 

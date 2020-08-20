@@ -1,6 +1,6 @@
 import React from 'react'
-import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 import x from '../Data/Icons/x.svg'
 
 
@@ -25,14 +25,18 @@ const AlertContainer = styled.div `
     }
 `
 
-const Alert = ({ setAlert }) => (
+const Alert = ({ setAlert, checkout }) => (
 	<AlertContainer>
 		<img src={x} alt='x' onClick={() => setAlert(false)} />
-		<p>In Order to Add Items to Your Cart <br />
-			<Link to='/signin'>
-				<strong>SignIn or SignUp</strong>
-			</Link>
-		</p>
+		{!checkout?
+			<p>In Order to Add Items to Your Cart <br />
+				<Link to='/signin'>
+					<strong>SignIn or SignUp</strong>
+				</Link>
+			</p>
+		:
+			<h4> Please Select an Address</h4>
+		}
 	</AlertContainer>
 )
 

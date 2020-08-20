@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { Navbar } from '../../Components/Navbar'
 import FlexContainer from '../../Components/FlexContainer'
@@ -9,7 +9,7 @@ import back from '../../Data/Icons/prev.svg'
 import check from '../../Data/Icons/check.svg'
 
 const CONav = ({ step, handleBack }) => (
-	<Fragment>
+	<>
 		<Navbar>
 			<Link to={step === 1 ? '/cart' : location => location} onClick={handleBack}>
 				<BackDiv>
@@ -33,7 +33,7 @@ const CONav = ({ step, handleBack }) => (
 				</CheckoutStep>
 			))}
 		</FlexContainer>
-	</Fragment>
+	</>
 )
 
 

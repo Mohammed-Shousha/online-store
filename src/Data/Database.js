@@ -112,7 +112,7 @@ export const particles = {
 
 export const STEPS=[{
 	id:1,
-	name:'Shipping Address',
+	name:'Shipping',
 	back:'Cart'
 },
 {
@@ -122,7 +122,7 @@ export const STEPS=[{
 },
 {
 	id:3,
-	name:'Order Placed',
+	name:'Done',
 	back:'Payment'
 }]
 

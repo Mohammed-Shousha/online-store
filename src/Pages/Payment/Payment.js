@@ -1,25 +1,27 @@
-import React, { Fragment, useState } from 'react'
+import React, { useContext } from 'react'
 import CartItem from '../../Containers/CartItem/CartItem'
 import OrderSummary from '../../Containers/OrderSummary/OrderSummary'
 import Title from '../../Components/Title'
 import FlexContainer from '../../Components/FlexContainer'
 import { PaymentButton, CashPayment } from '../../Components/PaymentComponents'
+import { DataContext } from '../../Data/DataContext'
 import money from '../../Data/Icons/cash.svg'
 import greenMoney from '../../Data/Icons/cash-green.svg'
 import credit from '../../Data/Icons/credit.svg'
 import greenCredit from '../../Data/Icons/credit-green.svg'
 
 
-const Payment = ({ cartItems }) => {
+const Payment = ({ cash, setCash }) => {
 
-	const [cash, setCash] = useState(true)
+	const { data } = useContext(DataContext)
+	const { cartItems } = data 
 
 	return (
-		<Fragment>
+		<>
 			<Title h2> Payment</Title>
 			<FlexContainer around responsive>
 				<div>
-					<Fragment>
+					<>
 						<Title h3> Payment Method </Title>
 						<FlexContainer center>
 							<PaymentButton
@@ -54,7 +56,7 @@ const Payment = ({ cartItems }) => {
 								</CashPayment>
 							}
 						</FlexContainer>
-					</Fragment>
+					</>
 					<div>
 						<Title h3> Your Order </Title>
 						{cartItems.map(item =>
@@ -70,7 +72,7 @@ const Payment = ({ cartItems }) => {
 					checkoutNow={false}
 				/>
 			</FlexContainer>
-		</Fragment>
+		</>
 	)
 }
 

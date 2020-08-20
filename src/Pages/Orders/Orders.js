@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react'
+import React, { useContext } from 'react'
 import CartItem from '../../Containers/CartItem/CartItem'
 import Title from '../../Components/Title'
 import Icon from '../../Components/Icon'
@@ -14,32 +14,32 @@ const Orders = () => {
 	const { cartItems, orders } = data
 
 	return (
-		<Fragment>
+		<>
 			<Title h1> Orders </Title>
 			{!orders.length ?
 				<div>
 					<Icon src={box} alt='box' />
 					<h1> You Don't Have Any Orders Yet</h1>
 					{cartItems.every(item => item[1] === 0) ?
-						<Fragment>
+						<>
 							<p> What are you waiting for ? </p>
 							<LinkButton to='/'>
 								Continue Shopping
 							</LinkButton>
-						</Fragment>
+						</>
 					:
-						<Fragment>
+						<>
 							<p>But there is some items in your cart </p>
 							<LinkButton to='/checkout'>
 								Checkout Now
 							</LinkButton>
-						</Fragment>
+						</>
 					}
 				</div>
 				:
-				<Fragment>
-					{orders.map(({order, time}, i) => (
-						<Fragment key={i}>
+				<>
+					{orders.map(({id, order, time}) => (
+						<div  key={id}>
 							<h2>Order Time: {time}</h2>
 							{order.map(item =>
 								<FlexContainer center>
@@ -49,12 +49,13 @@ const Orders = () => {
 										editable={false}
 										order={order}
 									/>
-								</FlexContainer>)}
-						</Fragment>
+								</FlexContainer>
+							)}
+						</div>
 					))}
-				</Fragment>
+				</>
 			}
-		</Fragment>
+		</>
 	)
 }
 

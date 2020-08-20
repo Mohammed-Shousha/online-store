@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { useLocation } from 'react-router-dom'
 import SignIn from '../../Containers/SignIn/SignIn'
 import SignUp from '../../Containers/SignUp/SignUp'
@@ -10,7 +10,7 @@ const Form = () => {
 	let location = useLocation()
 
 	return (
-		<Fragment>
+		<>
 			<LinkText to='/'>
 				<img src={back} alt='back' />
 				<h2> Home </h2>
@@ -21,7 +21,7 @@ const Form = () => {
 			:
 				<SignUp />
 			}
-		</Fragment>
+		</>
 	)
 }
 

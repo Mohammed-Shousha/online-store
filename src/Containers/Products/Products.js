@@ -1,4 +1,4 @@
-import React, { useState, useContext, Fragment } from 'react'
+import React, { useState, useContext } from 'react'
 import { ProductCard } from 'react-ui-cards'
 import { ProductsContainer, ProductsTitle, AddToCart, Product } from '../../Components/ProductsComponenets'
 import Alert from '../../Components/Alert'
@@ -34,7 +34,7 @@ const Products = ({ title = '', num = '', products }) => {
 	}
 
 	return (
-		<Fragment>
+		<>
 			<ProductsTitle title={title.length}>{title.toUpperCase()}</ProductsTitle>
 				{PRODUCTS.map((PRO, i) => (
 					<ProductsContainer key={i}>
@@ -61,7 +61,7 @@ const Products = ({ title = '', num = '', products }) => {
 					</ProductsContainer>
 				))}
 			{alert && <Alert setAlert={setAlert} />}
-		</Fragment>
+		</>
 	)
 }
 

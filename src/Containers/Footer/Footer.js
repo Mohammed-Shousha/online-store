@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { FooterContainer, Contact } from '../../Components/FooterComponents'
 import { CONTACT } from '../../Data/Database'
 
 
 const Footer = () => (
-	<Fragment>
+	<>
 		<Contact>
 			<h2>Contact Us</h2>
 			{CONTACT.map(c => (
@@ -21,7 +21,7 @@ const Footer = () => (
 			<span>Terms of Use</span>
 			</p>
 		</FooterContainer>
-	</Fragment>
+	</>
 )
 
 export default Footer

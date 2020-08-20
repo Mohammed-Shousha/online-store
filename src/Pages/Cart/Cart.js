@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react'
+import React, { useContext } from 'react'
 import CartItem from '../../Containers/CartItem/CartItem'
 import OrderSummary from '../../Containers/OrderSummary/OrderSummary'
 import Title from '../../Components/Title'
@@ -22,17 +22,17 @@ const Cart = () => {
 	}
 
 	return (
-		<Fragment>
+		<>
 			<Title h1> My Cart </Title>
 			{cartItems.every(x => x === 0) ?
-				<Fragment>
+				<>
 					<Icon src={emptyCart} alt='cart' />
 					<h1> Your Cart Is Empty</h1>
 					<p> What are you waiting for ? </p>
 					<LinkButton to='/'>
 						Start Shopping
 					</LinkButton>
-				</Fragment>
+				</>
 				:
 				<FlexContainer around noAlign responsive>
 					<div>
@@ -52,7 +52,7 @@ const Cart = () => {
 					</div>
 				</FlexContainer>
 			}
-		</Fragment>
+		</>
 	)
 }
 

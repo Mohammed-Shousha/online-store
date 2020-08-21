@@ -3,8 +3,9 @@ import styled from 'styled-components'
 const FlexContainer = styled.div`
     &&{
         display:flex;
-        justify-content:${props => props.around ? 'space-around' 
-        : props.flexEnd? 'flex-end'
+        justify-content:${props => 
+        props.around ? 'space-around' 
+        :props.flexEnd? 'flex-end'
         :props.center? 'center'
         :props.between? 'space-between'
         :props.start? 'flex-start':''};

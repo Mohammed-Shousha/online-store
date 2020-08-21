@@ -1,25 +1,29 @@
 .react-autosuggest__container {
-	margin: auto 5px;
+	width:50%;
+	margin: auto 7px;
 }
 
 .react-autosuggest__input {
-	font-size: medium;
-	width: 55vw;
-	padding: 0.5rem;
+	font-size: 0.9em;
+	width: 100%;
+	padding: 0.3em;
 	border: 0;
 	border-radius: 1rem;
 	outline: none;
 }
 
+
 .react-autosuggest__input--open {
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
 	border-bottom: 1px grey solid;
-	margin-top: 15px;
+	margin-top: 12px;
 }
 
 .react-autosuggest__suggestions-container {
 	display: none;
+	font-size: 0.8em;
+	width:103.75%;
 	border-bottom-left-radius: 1rem;
 	border-bottom-right-radius: 1rem;
 }
@@ -37,7 +41,6 @@
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
-	
 }
 
 .react-autosuggest__suggestion:last-child{
@@ -54,8 +57,44 @@
 	background-color: rgba(0,0,0,0.1);
 }
 
-@media (max-width: 780px){
+@media (min-width:30em){
+	.react-autosuggest__suggestions-container{
+		width: 103%;
+	}
+}
+
+@media (min-width:40em){
+	.react-autosuggest__suggestions-container{
+		width: 102.5%;
+	}
+}
+
+@media (min-width:48em){
+	.react-autosuggest__suggestions-container{
+		width: 102%;
+	}
+}
+
+@media (min-width:64em){
 	.react-autosuggest__input{
-		width: 40vw;
+		font-size: 1.2em;
+		padding: 0.35em;
+	}
+	
+	.react-autosuggest__suggestions-container{
+		font-size: 1em;
+		width: 102.5%;
+	}
+}
+
+@media (min-width:75em){
+	.react-autosuggest__suggestions-container{
+		width: 102%;
+	}
+}
+
+@media (min-width:95em){
+	.react-autosuggest__suggestions-container{
+		width: 101.75%;
 	}
 }

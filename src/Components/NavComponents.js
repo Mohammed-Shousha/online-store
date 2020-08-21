@@ -1,66 +1,91 @@
 import styled from 'styled-components'
+import search from '../Data/Icons/search.svg'
+import { device } from '../Data/Constants'
 
 export const NavText = styled.div `
     display: flex;
-	font-size: 1.25rem;
+	font-size: 0.8em;
 	cursor: pointer;
-    padding: 0.25rem 1.5rem;
+    padding: 0 0.5em;
     position: ${props => props.relative? 'relative': ''};
 
-    img{
-        width:20px;
-        margin: 0 7px;
+    @media ${device.tablet}{
+		font-size: 1em;
     }
 
-    @media (max-width: 780px){
-		font-size: 1rem;
+    @media ${device.laptopS}{
+		font-size: 1.2em;
     }
 
-    @media (max-width: 600px){
-		font-size: 0.75rem;
+    @media ${device.laptop}{
+		font-size: 1.5em;
     }
 
+    @media ${device.desktop}{
+		font-size: 1.7em;
+    }
+`
+
+export const SearchIcon = styled.img.attrs(props => ({
+    src: search,
+    alt: 'search'
+}))`
+    &&{
+        cursor:pointer;
+
+        @media ${device.tablet}{
+            margin-left: -1%;
+        }
+        
+        @media ${device.laptopS}{
+            margin-left: -3%;
+        }
+
+        @media ${device.laptop}{
+            margin-left: -4%;
+        }
+    }
+`
+
+export const CartCircle = styled.div `
+    &&{
+        border-radius: 50%;
+        color: red;
+        background:white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 1em;
+        width: 1em;
+        font-size: 12px;
+        margin-left:-0.75rem; 
+        margin-top: -1.2rem;
+        visibility:${props => props.hide? 'hidden' : ''};
+
+        @media ${device.desktop}{
+            font-size:15px;
+            margin-left:-0.8rem; 
+            margin-top: -1.6rem;
+        }
+    }
 `
 
 export const UserAction = styled.div `
 	display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0.5rem 0.1rem;
-	font-size: 0.75em;
-    margin: 0;
-    
-    img{
-        width:20px;
-        margin-right:7px;
+	font-size: 0.8em;
+    padding: 0.5em 0;
+    color:${props => props.signOut? 'red': ''};
 
-        @media (max-width:780px){
-            width:15px;
-        }
+    @media ${device.laptop}{
+        font-size: 1rem;
+        padding: 0.75rem 0;
     }
-
-    &:hover{
-        color:${props => props.signOut? 'red': ''}
-    }
-`
-
-export const CartCircle = styled.div `
-    border-radius: 50%;
-	color: red;
-	background:white;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 1rem;
-	width: 1rem;
-	font-size: 0.75rem;
-	margin-left:-0.9rem ; 
-    margin-top: -1.3rem;
-    visibility:${props => props.hide? 'hidden' : ''};
 `
 
 export const UserActionsContainer = styled.div `
-    width: 10rem;
+    width: 7em;
     background-color: #fff;
     text-align: center;
     border-radius: 3px;
@@ -68,16 +93,18 @@ export const UserActionsContainer = styled.div `
     position: absolute;
     z-index: 12;
     left: 50%;
-    top: 120%;
-    margin-left: -5rem;
+    top: 160%;
+    margin-left: -3.5em;
     box-shadow: 0px 10px 12px 0px rgba(0,0,0,0.2);
-    font-size:20px;
 
-        @media (max-width:780px){
-            width: 7.5rem;
-            margin-left: -3.75rem;
-            font-size:15px;
-        }
+    @media ${device.tablet}{
+        top:155%;
+    }
+
+    @media ${device.desktop}{
+        top:140%;
+    }
+
 
     &::after {
         content: "";

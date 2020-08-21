@@ -4,7 +4,7 @@ import Autosuggest from 'react-autosuggest'
 import Logo from '../../Components/Logo'
 import { MainNav } from '../../Components/Navbar'
 import FlexContainer from '../../Components/FlexContainer'
-import { NavText, UserAction, CartCircle, UserActionsContainer } from '../../Components/NavComponents'
+import { NavText, UserAction, CartCircle, UserActionsContainer, SearchIcon } from '../../Components/NavComponents'
 import { DataContext } from '../../Data/DataContext'
 import { signOut } from '../../Data/DataActions'
 import { ProductsList } from '../../Data/Database'
@@ -12,7 +12,6 @@ import cart from '../../Data/Icons/cart.svg'
 import user from '../../Data/Icons/user.svg'
 import list from '../../Data/Icons/list.svg'
 import signout from '../../Data/Icons/signout.svg'
-import search from '../../Data/Icons/search.svg'
 import './Nav.css'
 
 
@@ -46,6 +45,7 @@ const Nav = () => {
 		if (value) {
 			history.push(`/search?q=${value}`)
 		}
+		setValue('')
 	}
 
 	const onKeyUp = (e) => {
@@ -105,19 +105,17 @@ const Nav = () => {
 		<MainNav>
 			<Logo />
 
-			<Autosuggest
-				suggestions={suggestions}
-				inputProps={inputProps}
-				onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-				onSuggestionsClearRequested={onSuggestionsClearRequested}
-				getSuggestionValue={getSuggestionValue}
-				renderSuggestion={renderSuggestion}
-			/>
-
-			<img
-				src={search} alt='search'
-				onClick={() => searchItem(value)}
-			/>
+				<Autosuggest
+					suggestions={suggestions}
+					inputProps={inputProps}
+					onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+					onSuggestionsClearRequested={onSuggestionsClearRequested}
+					getSuggestionValue={getSuggestionValue}
+					renderSuggestion={renderSuggestion}
+				/>
+				<SearchIcon
+					onClick={() => searchItem(value)}
+				/>
 
 			<NavText
 				relative
@@ -150,8 +148,8 @@ const Nav = () => {
 
 			<Link to={isSignedIn ? '/cart' : '/'}>
 				<NavText>
-					Cart
 					<FlexContainer>
+						Cart
 						<img alt='cart' src={cart} />
 						<CartCircle hide={cartItems.every(x => x[1] === 0)}>
 							{cartItems.reduce((t, item) => t + item[1], 0)}

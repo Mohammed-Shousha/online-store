@@ -1,19 +1,13 @@
 import styled from 'styled-components'
+import { device } from '../Data/Constants'
 
 const gradient = 'linear-gradient(to top, #c1dfc4 0%, #deecdd 100%)'
 
 const DropDown = styled.div `
     display: inline-block;
-    font-size: 1.1rem;
     width: 170px;
 
-    @media (max-width:780px){
-        font-size: 0.85rem
-    }
 
-    @media (max-width:600px){
-        font-size: 0.65rem
-    }
     &:hover{
         div{
             display:flex;
@@ -23,7 +17,13 @@ const DropDown = styled.div `
     }
 
     p{
+        font-size:1em;
         margin: 0.5rem 1rem;
+        white-space:nowrap;
+
+        @media ${device.laptopL}{
+            font-size:1.25em;
+        }
     }
 
     div{

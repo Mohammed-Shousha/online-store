@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
+import { device } from '../Data/Constants'
 
 export const Button = styled.button `
     border:none;
@@ -26,22 +27,33 @@ export const FormButton = styled.button.attrs(props => ({
 	type: props.type || 'submit',
 
 }))`
-    border-radius: 20px;
+    border-radius: 10px;
     border: none;
     background-color: ${props => props.grey ? '#342b38' : '#4bb1bd'};
     color: #FFFFFF;
-    font-size: 12px;
+    font-size: 0.7em;
     font-weight: bold;
-    padding: 12px 45px;
+    padding: 0.75em;
     letter-spacing: 1px;
     cursor: pointer;
     text-transform: uppercase;
     transition: transform 80ms ease-in;
-    margin: 0px 5px 5px;
+    margin-bottom : 5px;
     outline: none;
+
     &:active{
         transform: scale(0.95);
     }
+
+    @media ${device.tablet}{
+        font-size:0.85em;
+    }
+
+    @media ${device.desktop}{
+        font-size:1em;
+    }
+
+
 `
 
 export const MapButton = styled(FormButton)`

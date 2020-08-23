@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const SlideContainer = styled.div `
     width: 60%;
-    margin: auto;
+    margin: 80px auto;
 `
 
 export const SlidePhoto = styled.img `

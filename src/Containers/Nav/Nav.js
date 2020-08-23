@@ -1,10 +1,11 @@
 import React, { useContext, useState, useRef, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import Autosuggest from 'react-autosuggest'
+import Sidebar from '../Sidebar/Sidebar'
 import Logo from '../../Components/Logo'
 import { MainNav } from '../../Components/Navbar'
 import FlexContainer from '../../Components/FlexContainer'
-import { NavText, UserAction, CartCircle, UserActionsContainer, SearchIcon } from '../../Components/NavComponents'
+import { NavText, UserAction, CartCircle, UserActionsContainer, SearchIcon, MenuIcon } from '../../Components/NavComponents'
 import { DataContext } from '../../Data/DataContext'
 import { signOut } from '../../Data/DataActions'
 import { ProductsList } from '../../Data/Database'
@@ -81,6 +82,7 @@ const Nav = () => {
 	}
 
 	const [show, setShow] = useState(false)
+	const [sidebar, setSidebar] = useState(false)
 
 	const toggleShow = () => {
 		setShow(!show)
@@ -103,6 +105,15 @@ const Nav = () => {
 
 	return (
 		<MainNav>
+
+			<MenuIcon onClick={()=> setSidebar(true)}/>
+
+			{sidebar &&
+				<Sidebar 
+					setSidebar={setSidebar}
+				/>
+			}
+
 			<Logo />
 
 				<Autosuggest

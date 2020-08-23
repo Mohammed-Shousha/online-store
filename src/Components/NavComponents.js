@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import search from '../Data/Icons/search.svg'
+import menu from '../Data/Icons/menu.svg'
 import { device } from '../Data/Constants'
 
 export const NavText = styled.div `
@@ -18,7 +19,7 @@ export const NavText = styled.div `
     }
 
     @media ${device.laptop}{
-		font-size: 1.5em;
+		font-size: 1.4em;
     }
 
     @media ${device.desktop}{
@@ -32,19 +33,23 @@ export const SearchIcon = styled.img.attrs(props => ({
 }))`
     &&{
         cursor:pointer;
+    }
+`
 
-        @media ${device.tablet}{
-            margin-left: -1%;
-        }
-        
-        @media ${device.laptopS}{
-            margin-left: -3%;
-        }
+export const MenuIcon = styled.img.attrs(props => ({
+    src: menu,
+    alt: 'menu'
+}))`
+    &&{
+        width: 1.25rem;
+        margin: 0 1em;
+        outline:none;
 
-        @media ${device.laptop}{
-            margin-left: -4%;
+         @media ${device.laptop}{
+            display:none;
         }
     }
+    
 `
 
 export const CartCircle = styled.div `

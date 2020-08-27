@@ -30,7 +30,7 @@ const CartItem = ({ productId, editable = true, order }) => {
 		<CartItemsContainer>
 			<div>
 				<FlexContainer noAlign >
-					<img src={product.photos[0]} alt={product.name} />
+					<img src={product.photo} alt={product.name} />
 					<ProductDetails>
 						<h2> {product.name}</h2>
 						<h3> {product.price} EGP </h3>

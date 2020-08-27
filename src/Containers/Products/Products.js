@@ -1,10 +1,9 @@
 import React, { useState, useContext } from 'react'
-import { ProductCard } from 'react-ui-cards'
 import { ProductsContainer, ProductsTitle, AddToCart, Product } from '../../Components/ProductsComponenets'
+import ProductCard from '../../Components/ProductCard'
 import Alert from '../../Components/Alert'
 import { DataContext } from '../../Data/DataContext'
 import { editItem } from '../../Data/DataActions'
-import './Products.css'
 
 
 const Products = ({ title = '', num = '', products }) => {
@@ -43,10 +42,10 @@ const Products = ({ title = '', num = '', products }) => {
 								{P.map(product => (
 									<Product key={product.id}>
 										<ProductCard
-											photos={product.photos}
+											name={product.name}
 											price={`${product.price} EGP`}
-											productName={product.name}
-											description='blah blah blah blah'
+											photo={product.photo}
+											details='blah blah blah blah'
 										/>
 										<AddToCart 
 											onClick={isSignedIn ? () => onAddingItems(product.id) 

@@ -2,35 +2,26 @@ import img1 from './Photos/1.jpg'
 import img2 from './Photos/2.jpg'
 import img3 from './Photos/3.jpg'
 import img4 from './Photos/4.jpg'
-import img5 from './Photos/5.jpg'
-import img6 from './Photos/6.jpg'
-import img7 from './Photos/7.jpg'
 
-import beatsHeadset1 from './Photos/headset-beats-1.jpg'
-import jblHeadset1 from './Photos/headset-jbl-1.jpg'
-import jblHeadset2 from './Photos/headset-jbl-2.jpg'
-import sonyHeadset1 from './Photos/headset-sony-1.jpg'
-import sonyHeadset2 from './Photos/headset-sony-2.jpg'
+import beatsHeadset from './Photos/headset-beats.jpg'
+import jblHeadset from './Photos/headset-jbl.jpg'
+import sonyHeadset from './Photos/headset-sony.jpg'
 
-import jblSpeaker1 from './Photos/speaker-jbl-1.jpg'
-import jblSpeaker2 from './Photos/speaker-jbl-2.jpg'
+import jblSpeaker from './Photos/speaker-jbl.jpg'
 import boseSpeaker1 from './Photos/speaker-bose-1.jpg'
 import boseSpeaker2 from './Photos/speaker-bose-2.jpg'
 
 import appleCover1 from './Photos/cover-iphone-1.jpg'
 import appleCover2 from './Photos/cover-iphone-2.jpg'
 import appleCover3 from './Photos/cover-iphone-3.jpg'
-import appleCover4 from './Photos/cover-iphone-4.jpg'
 import samsungCover1 from './Photos/cover-samsung-1.jpg'
 import samsungCover2 from './Photos/cover-samsung-2.jpg'
 import huaweiCover1 from './Photos/cover-huawei-1.jpg'
 import huaweiCover2 from './Photos/cover-huawei-2.jpg'
 
-import appleSmartwatch1 from './Photos/smartwatch-apple-1.jpg'
-import appleSmartwatch2 from './Photos/smartwatch-apple-2.jpg'
-import fitbitSmartwatch1 from './Photos/smartwatch-fitbit-1.jpg'
-import fitbitSmartwatch2 from './Photos/smartwatch-fitbit-2.jpg'
-import miSmartwatch1 from './Photos/smartwatch-mi-1.jpg'
+import appleSmartwatch from './Photos/smartwatch-apple.jpg'
+import fitbitSmartwatch from './Photos/smartwatch-fitbit.jpg'
+import miSmartwatch from './Photos/smartwatch-mi.jpg'
 
 import powerbank1 from './Photos/powerbank-1.jpg'
 import powerbank2 from './Photos/powerbank-2.jpg'
@@ -55,7 +46,6 @@ import huawei from './Icons/huawei.svg'
 import xiaomi from './Icons/xiaomi.svg'
 import fitbit from './Icons/fitbit.svg'
 
-export const slideShowImages = [img1, img2, img3, img4, img5, img6, img7]
 
 export let USERS=[{
 	name:'mo', 
@@ -78,6 +68,8 @@ export let USERS=[{
 	phone: '01234567890',
 	addresses:[{name:'', address:'', phone:''}]
 }]
+
+export const slideShowImages = [img1, appleCover1, img2, img3, beatsHeadset, img4]
 
 export const properties = {
   duration: 3500,
@@ -242,7 +234,7 @@ export const ProductsList = [{
 	brand:'beats',
 	name : 'Beats Headset',
 	price: 350,
-	photos: [img6, beatsHeadset1],
+	photo: beatsHeadset,
 	description: 'blah blah blah',
 },
 {
@@ -251,7 +243,7 @@ export const ProductsList = [{
 	brand:'apple',
 	name: 'IPhone11 Cover',
 	price: 100,
-	photos:[img2],
+	photo: appleCover1,
 	description: 'blah blah blah',
 },
 {
@@ -260,7 +252,7 @@ export const ProductsList = [{
 	brand:'bose',
 	name: 'Bose Speaker',
 	price: 800,
-	photos: [boseSpeaker2, boseSpeaker1],
+	photo: boseSpeaker2,
 	description: 'blah blah blah',
 },
 {
@@ -269,7 +261,7 @@ export const ProductsList = [{
 	brand:'apple',
 	name: 'Apple Watch',
 	price: 5000,
-	photos: [appleSmartwatch1, appleSmartwatch2],
+	photo: appleSmartwatch,
 	description: 'blah blah blah',
 },
 {
@@ -278,7 +270,7 @@ export const ProductsList = [{
 	brand:'samsung',
 	name: 'Samsung Cover',
 	price: 120,
-	photos: [samsungCover2, samsungCover1],
+	photo: samsungCover2,
 	description: 'blah blah blah',
 },
 {
@@ -287,7 +279,7 @@ export const ProductsList = [{
 	brand:'sony',
 	name: 'Sony Headset',
 	price: 300,
-	photos: [sonyHeadset1, sonyHeadset2],
+	photo: sonyHeadset,
 	description: 'blah blah blah',
 },
 {
@@ -296,7 +288,7 @@ export const ProductsList = [{
 	brand:'apple',
 	name: 'IPhone X Cover',
 	price: 200,
-	photos: [appleCover3, appleCover4],
+	photo: appleCover3,
 	description: 'blah blah blah',
 },
 {
@@ -304,7 +296,7 @@ export const ProductsList = [{
 	type:'power banks',
 	name: 'Power Bank',
 	price: 400,
-	photos: [powerbank1],
+	photo: powerbank1,
 	description: 'blah blah blah',
 },
 {
@@ -313,7 +305,7 @@ export const ProductsList = [{
 	brand:'fitbit',
 	name: 'Fitbit Watch',
 	price: 4000,
-	photos: [fitbitSmartwatch1, fitbitSmartwatch2],
+	photo: fitbitSmartwatch,
 	description: 'blah blah blah',
 },
 {
@@ -322,7 +314,7 @@ export const ProductsList = [{
 	brand:'jbl',
 	name: 'Jbl Headset',
 	price: 300,
-	photos: [jblHeadset1, jblHeadset2],
+	photo: jblHeadset,
 	description: 'blah blah blah',
 },
 {
@@ -331,7 +323,7 @@ export const ProductsList = [{
 	brand:'huawei',
 	name: 'Huawei Cover',
 	price: 100,
-	photos: [huaweiCover1, huaweiCover2],
+	photo: huaweiCover1,
 	description: 'blah blah blah',
 },
 {
@@ -340,7 +332,7 @@ export const ProductsList = [{
 	brand:'jbl',
 	name: 'Jbl Speaker',
 	price: 700,
-	photos: [jblSpeaker1, jblSpeaker2],
+	photo: jblSpeaker,
 	description: 'blah blah blah',
 },
 {
@@ -349,7 +341,7 @@ export const ProductsList = [{
 	brand:'apple',
 	name: 'IPhone11 Cover',
 	price: 200,
-	photos: [appleCover1, appleCover2],
+	photo: appleCover2,
 	description: 'blah blah blah',
 },
 {
@@ -358,7 +350,7 @@ export const ProductsList = [{
 	brand:'bose',
 	name: 'Bose Speaker',
 	price: 800,
-	photos: [boseSpeaker1, boseSpeaker2],
+	photo: boseSpeaker1,
 	description: 'blah blah blah',
 },
 {
@@ -367,7 +359,7 @@ export const ProductsList = [{
 	brand:'huawei',
 	name: 'Huawei Cover',
 	price: 100,
-	photos: [huaweiCover2, huaweiCover1],
+	photo: huaweiCover2,
 	description: 'blah blah blah',
 },
 {
@@ -376,7 +368,7 @@ export const ProductsList = [{
 	brand:'samsung',
 	name: 'Samsung Cover',
 	price: 120,
-	photos: [samsungCover1, samsungCover2],
+	photo: samsungCover1,
 	description: 'blah blah blah',
 },
 {
@@ -385,7 +377,7 @@ export const ProductsList = [{
 	brand:'xiaomi',
 	name: 'Xiaomi Watch',
 	price: 1000,
-	photos: [miSmartwatch1],
+	photo: miSmartwatch,
 	description: 'blah blah blah',
 },
 {
@@ -393,6 +385,6 @@ export const ProductsList = [{
 	type:'power banks',
 	name: 'Solar Power Bank',
 	price: 800,
-	photos: [powerbank2],
+	photo: powerbank2,
 	description: 'blah blah blah',
 },]

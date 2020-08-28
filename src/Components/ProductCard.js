@@ -22,6 +22,11 @@ const Card = styled.div`
         width:300px;
     }
 
+    @media ${device.laptopL}{
+        width:325px;
+        height:450px;
+    }
+
     img{
         position: relative;
         display: flex;

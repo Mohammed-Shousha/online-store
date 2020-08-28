@@ -14,7 +14,7 @@ export const ProductsContainer = styled.div `
     justify-content:center;
     flex-direction:column;
 
-    @media ${device.laptopL}{
+    @media (min-width: 84em ){
         flex-direction:row;
     }
 
@@ -53,6 +53,10 @@ export const AddToCart = styled.button `
 
     @media ${device.laptop}{
         width:300px;
+    }
+
+    @media ${device.laptopL}{
+        width:325px;
     }
     
     &:hover{

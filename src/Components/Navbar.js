@@ -8,15 +8,14 @@ export const Navbar = styled.div `
     display: ${props => props.small ? 'none' :'flex'};
     align-items:center;
     justify-content: space-between;
-    height: ${props => props.small ? '1.75em' : '3em'};
+    height: 3em;
     width:100vw;
     background-image: ${props => props.small ? whiteGradient : blueGradient};
-    margin:${props => props.small ? '3em 0 ' : ''};
 
     @media ${device.laptop}{
-        height: ${props => props.small ? '2.25em' : '3.75em'};
-        margin:${props => props.small ? '3.75em 0 ' : ''};
         display: flex;
+        height: ${props => props.small ? '2.25em' : '3.75em'};
+        margin-top: ${props => props.small ? '3.75em' : '0'};
     }
 `
 

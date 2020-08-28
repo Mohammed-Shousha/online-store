@@ -6,16 +6,16 @@ import { CATEGORIES as CAT } from '../../Data/Database'
 import prev from '../../Data/Icons/prev.svg'
 import next from '../../Data/Icons/next.svg'
 
-const CATEGORIES = CAT.filter(c => c.items.length > 0)
-
 
 const Categories = () => {
+	
+	const CATEGORIES = CAT.filter(c => c.items.length > 0)
 
 	const [index, setIndex] = useState(0)
 	const [state, setState] = useState(CATEGORIES[index])
 	const { category, items } = state
 	const len = CATEGORIES.length
-
+	
 	const nextCategory = () => {
 		setIndex(index + 1)
 		setState(CATEGORIES[(index + 1) % len])
@@ -31,9 +31,9 @@ const Categories = () => {
 			<Link to={`/categories/${category}`}>
 				<h1>{category.toUpperCase()}</h1>
 			</Link>
-			<FlexContainer center>
+			<FlexContainer around>
 				<Arrow alt='prev' src={prev} onClick={prevCategory} />
-				<FlexContainer responsive center>
+				<FlexContainer responsive>
 					{items.map(({name, img})=>
 						<Link to={`/categories/${category.toLowerCase()}-${name.toLowerCase()}`} key={name}>
 							<Square>

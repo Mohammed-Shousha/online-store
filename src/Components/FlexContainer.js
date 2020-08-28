@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { device } from '../Data/Constants'
 
 const FlexContainer = styled.div`
     &&{
@@ -11,9 +12,10 @@ const FlexContainer = styled.div`
         :props.start? 'flex-start':''};
         margin: ${props => props.margin};
         align-items:${props => props.noAlign ? 'none':'center'};
+        flex-direction:${props => props.responsive? 'column': ''};
         
-        @media (max-width: 1150px) {
-            flex-direction: ${props => props.responsive ? 'column':'row'};
+        @media ${device.laptopS} {
+            flex-direction: ${props => props.responsive ? 'row':''};
         }
     }
 `

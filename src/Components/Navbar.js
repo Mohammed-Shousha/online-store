@@ -9,7 +9,6 @@ export const Navbar = styled.div `
     align-items:center;
     justify-content: space-between;
     height: 3em;
-    width:100vw;
     background-image: ${props => props.small ? whiteGradient : blueGradient};
 
     @media ${device.laptop}{

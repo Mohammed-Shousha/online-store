@@ -5,7 +5,7 @@ const gradient = 'linear-gradient(to top, #c1dfc4 0%, #deecdd 100%)'
 
 const DropDown = styled.div `
     display: inline-block;
-    width: 170px;
+    width: 10em;
 
 
     &:hover{

@@ -7,18 +7,22 @@ const Footer = () => (
 	<>
 		<Contact>
 			<h2>Contact Us</h2>
-			{CONTACT.map(c => (
-				<a key={c.id} href={c.link}>
-					<img src={c.img} alt='contact' />
-				</a>
-			))}
+			<div>
+				{CONTACT.map(c => (
+					<a key={c.id} href={c.link}>
+						<img src={c.img} alt='contact' />
+					</a>
+				))}
+			</div>
 		</Contact>
 		<FooterContainer>
-			<h1> © 2020 . All Rights Reserved</h1>
+			<h1> © 2020. All Rights Reserved</h1>
 			<p>
-				<span>About Us</span> |
-			<span>Privacy Policy</span> |
-			<span>Terms of Use</span>
+				<span>About Us</span>
+				&nbsp;|&nbsp;
+				<span>Privacy Policy</span>
+				&nbsp;|&nbsp;
+				<span>Terms of Use</span>
 			</p>
 		</FooterContainer>
 	</>

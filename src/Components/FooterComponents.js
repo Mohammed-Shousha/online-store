@@ -1,55 +1,112 @@
 import styled from 'styled-components'
+import { device } from '../Data/Constants'
 
 export const Contact = styled.div `
 	background: #c3cfe2;
-    
+
+    div{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
     h2{
-        padding: 1.25rem 0 0.25rem;
+        padding-top: 1em;
+        font-size: 1em;
+
+        @media ${device.tablet}{
+            font-size:1.15em;
+        }
+
+        @media ${device.laptopS}{
+            font-size:1.25em;
+        }
+
+        @media ${device.laptop}{
+            font-size:1.5em;
+        }
+
+        @media ${device.laptopL}{
+            font-size:1.75em;
+        }
+
+        @media ${device.desktop}{
+            font-size:2em;
+        }
     }
 
     img{
-        width: 2.5rem;
-        margin:0 2rem 1rem;
+        width: 1.5em;
+        margin: 1em 0;
 
-        @media (max-width: 460px){
-            width: 1.25rem;
+        @media ${device.tablet}{
+            width: 2em;
+        }
+
+        @media ${device.laptopS}{
+            width: 2.25em;
+        }
+
+        @media ${device.laptop}{
+            width: 2.5em;
+        }
+
+        @media ${device.laptopL}{
+            width: 2.75em;
+        }
+
+        @media ${device.desktop}{
+            width: 3em;
         }
     }
 `
 
 export const FooterContainer = styled.footer `
-    display: flex;
-    justify-content: center;
-    align-items:center;
+    height:2.5em;
 	background: black;
 	color: white;
 	white-space: nowrap;
-	position: relative;
-	bottom: 0;
-	right: 0;
-    left: 0;
+
+    @media ${device.laptopS}{
+        display: flex;
+        justify-content: space-evenly;
+        align-items:center;
+        height:2em;
+    }
+
+    @media ${device.laptopL}{
+        height:2.5em;
+    }
     
     h1{
-        font-size: 0.8rem;
-        margin: 0 3rem;
-        font-weight: bold;
-        
-        @media (max-width: 600px){
-            font-size: 0.6rem;
+        font-size: 0.75em;
+        margin:0;
+        padding-top: 0.25em;
+
+        @media ${device.laptopS}{
+            font-size:0.8em;
+        }
+
+        @media ${device.laptopL}{
+            font-size: 0.9em;
         }
 
     }
 
     p{
-        font-size: 0.75rem;
+        font-size: 0.55em;
+        cursor: pointer;
 
-        @media (max-width: 600px){
-            font-size: 0.4rem;
+        @media ${device.laptopS}{
+            font-size:0.65em;
+        }
+
+        @media ${device.laptopL}{
+            font-size: 0.75em;
         }
 
         span:hover{
             color: grey;
-            cursor: pointer;
         }
     }
 

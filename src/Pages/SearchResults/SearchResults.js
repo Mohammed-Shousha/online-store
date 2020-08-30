@@ -19,8 +19,9 @@ const SearchResults = () => {
 		<>
 			{products.length ?
 				<>
-					<h1> Seatch Results for {name} </h1>
-					<Products products={products} />
+					<Products
+						title={`Search Results for ${name}`}
+						products={products} />
 				</>
 			:
 				<>

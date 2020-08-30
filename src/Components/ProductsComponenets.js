@@ -2,11 +2,25 @@ import styled from 'styled-components'
 import { device } from '../Data/Constants'
 
 export const ProductsTitle = styled.h2 `
-    width:85vw;
-	margin: auto;
+    width:90vw;
+    font-size: 1.25em;
+	margin: 3.75em auto 0;
 	text-align: left;
 	color: rgba(0,0,0,0.8);
-	border-bottom:${props => props.title ? '0.1rem solid rgba(0,0,0,0.8)': 'none' };
+	border-bottom: 0.1rem solid rgba(0,0,0,0.8);
+
+    @media ${device.tablet}{
+        font-size: 1.35em;
+    }
+
+    @media ${device.laptop}{
+        font-size: 1.4em;
+        margin: 1.5em auto 0;
+    }
+
+    @media ${device.laptopL}{
+        font-size: 1.5em;
+    }
 `
 
 export const ProductsContainer = styled.div `

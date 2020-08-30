@@ -37,10 +37,10 @@ const Sidebar = ({ setSidebar })=>{
                     hide={!activeCategory}
                 >
                     <img src={prev} alt='prev'/>
-                    <p> Back </p>
+                    <p> BACK </p>
                 </BackContainer>
                 <img src={x} alt='x' onClick={() => setSidebar(false)} />
-                <h2>{activeCategory || 'Categories'}</h2>
+                <h2>{activeCategory || 'CATEGORIES'}</h2>
                 {!activeCategory?
                     CATEGORIES.map(({ category, items }, i) => (
                         <FlexContainer between key={i}>
@@ -49,12 +49,12 @@ const Sidebar = ({ setSidebar })=>{
                                     <h4> {category.toUpperCase()} </h4>
                                 </Link>
                                 {items.length > 1 &&
-                                    <img src={next} alt='next' onClick={()=> setActiveCategory(category)}/>
+                                    <img src={next} alt='next' onClick={()=> setActiveCategory(category.toUpperCase())}/>
                                 }
                             </>
                         </FlexContainer>
                     ))
-                :   CATEGORIES.find(x => x.category === activeCategory).items.map(({ name })=>(
+                :   CATEGORIES.find(x => x.category.toLowerCase() === activeCategory.toLowerCase()).items.map(({ name })=>(
                         <Link
                             key={name}
                             onClick={() => setSidebar(false)}

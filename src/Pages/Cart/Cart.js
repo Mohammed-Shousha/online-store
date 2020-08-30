@@ -46,8 +46,10 @@ const Cart = () => {
 					<div>
 						<OrderSummary />
 						<CartButton onClick={handleClearCart}>
-							<p>Clear Cart</p>
-							<img src={emptyCartButton} alt='empty-cart' />
+							<div>
+								<p>Clear Cart</p>
+								<img src={emptyCartButton} alt='empty-cart' />
+							</div>
 						</CartButton>
 					</div>
 				</FlexContainer>

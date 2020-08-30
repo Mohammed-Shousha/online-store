@@ -21,15 +21,56 @@ export const SidebarContainer = styled.div `
         width:30%;
     }
 
+    /* x */
     > img{
         position: absolute;
         top: 0.5rem;
         right: 0.5rem;
     }
 
+    /*categories*/
+    h2 {
+        font-size: 1.15em;
+
+        @media (min-width: 24em){
+            font-size: 1.25em;
+        }
+
+        @media ${device.tablet}{
+            font-size: 1.35em;
+        }
+
+        @media ${device.laptopS}{
+            font-size: 1.5em;
+        }
+    }
+
+    /*category*/
     h4 {
         text-align:left;
         margin:2rem 1rem;
+        font-size: 0.8em;
+
+        @media (min-width: 24em){
+            font-size: 0.9em;
+        }
+
+        @media ${device.tablet}{
+            font-size: 1em;
+        }
+
+        @media ${device.laptopS}{
+            font-size: 1.15em;
+        }
+    }
+
+    /* > */
+    img{
+        width:0.85em;
+
+        @media ${device.laptopS}{
+            width: 1.15em;
+        }
     }
 `
 
@@ -37,14 +78,33 @@ export const BackContainer = styled(FlexContainer) `
     visibility:${props => props.hide ? 'hidden' : '' };
     width:50%;
 
+
+    /*back*/
     p{
-        font-size:1em;
+        font-size: 0.8em;
         font-weight:bold;
         margin:0.5rem 0;
+
+        @media (min-width: 24em){
+            font-size: 0.9em;
+        }
+
+        @media ${device.tablet}{
+            font-size: 1em;
+        }
+
+        @media ${device.laptopS}{
+            font-size: 1.15em;
+        } 
     }
 
+    /* < */
     img{
-        width:0.75rem;
+        width:0.85em;
+
+        @media ${device.laptopS}{
+            width: 1.15em;
+        }
     }
 
 `

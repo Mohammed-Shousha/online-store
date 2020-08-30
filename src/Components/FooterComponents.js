@@ -3,6 +3,10 @@ import { device } from '../Data/Constants'
 
 export const Contact = styled.div `
 	background: #c3cfe2;
+    /* position: absolute;
+    left:0;
+    right:0;
+    bottom:2.5em; */
 
     div{
         display: flex;
@@ -10,6 +14,7 @@ export const Contact = styled.div `
         align-items: center;
     }
 
+    /*contact us */
     h2{
         padding-top: 1em;
         font-size: 1em;
@@ -29,12 +34,9 @@ export const Contact = styled.div `
         @media ${device.laptopL}{
             font-size:1.75em;
         }
-
-        @media ${device.desktop}{
-            font-size:2em;
-        }
     }
 
+    /* social icons */
     img{
         width: 1.5em;
         margin: 1em 0;
@@ -54,10 +56,6 @@ export const Contact = styled.div `
         @media ${device.laptopL}{
             width: 2.75em;
         }
-
-        @media ${device.desktop}{
-            width: 3em;
-        }
     }
 `
 
@@ -66,6 +64,10 @@ export const FooterContainer = styled.footer `
 	background: black;
 	color: white;
 	white-space: nowrap;
+    /* position: absolute;
+    bottom:0;
+    right:0;
+    left:0; */
 
     @media ${device.laptopS}{
         display: flex;
@@ -78,6 +80,7 @@ export const FooterContainer = styled.footer `
         height:2.5em;
     }
     
+    /* all right reserved */
     h1{
         font-size: 0.75em;
         margin:0;
@@ -93,6 +96,7 @@ export const FooterContainer = styled.footer `
 
     }
 
+    /* about us */
     p{
         font-size: 0.55em;
         cursor: pointer;

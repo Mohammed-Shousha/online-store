@@ -34,7 +34,7 @@ const Products = ({ title = '', num = '', products }) => {
 
 	return (
 		<>
-			<ProductsTitle title={title.length}>{title.toUpperCase()}</ProductsTitle>
+			<ProductsTitle>{title.toUpperCase()}</ProductsTitle>
 				{PRODUCTS.map((PRO, i) => (
 					<ProductsContainer key={i}>
 						{PRO.map((P, i) => (

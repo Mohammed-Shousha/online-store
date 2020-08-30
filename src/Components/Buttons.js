@@ -7,13 +7,27 @@ export const Button = styled.button `
     border:none;
 	background: #2196f3;
 	color: white;
+    font-size:0.7em;
 	font-weight: bold;
 	border-radius: 5px;
-	margin: 1rem 0;
-	padding: 0.75rem 1.25rem;
+	margin: 0.75em 0;
+	padding: 0.75em 1.25em;
 	outline: none;
 	cursor: pointer;
 	visibility: ${props =>props.hide? 'hidden':''};
+
+    @media ${device.tablet}{
+        font-size:0.8em;
+    }
+
+    @media ${device.laptopS}{
+        font-size:0.85em;
+    }
+
+    @media ${device.laptopL}{
+        font-size:0.9em;
+        padding: 0.85em 1.5em;
+    }
 `
 export const LinkButton = ({children, to})=>(
     <Link to={to}>
@@ -33,7 +47,7 @@ export const FormButton = styled.button.attrs(props => ({
     color: #FFFFFF;
     font-size: 0.7em;
     font-weight: bold;
-    padding: 0.75em;
+	padding: 0.75em 1.25em;
     letter-spacing: 1px;
     cursor: pointer;
     text-transform: uppercase;
@@ -46,11 +60,16 @@ export const FormButton = styled.button.attrs(props => ({
     }
 
     @media ${device.tablet}{
-        font-size:0.85em;
+        font-size:0.8em;
+    }
+
+    @media ${device.laptopS}{
+        font-size: 0.85em;
     }
 
     @media ${device.desktop}{
-        font-size:1em;
+        font-size: 0.9em;
+        padding: 0.85em 1.5em;
     }
 
 

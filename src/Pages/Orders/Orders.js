@@ -2,8 +2,8 @@ import React, { useContext } from 'react'
 import CartItem from '../../Containers/CartItem/CartItem'
 import Title from '../../Components/Title'
 import Icon from '../../Components/Icon'
+import { OrdersContainer, OrdersTitle } from '../../Components/OrdersComponents'
 import { LinkButton } from '../../Components/Buttons'
-import FlexContainer from '../../Components/FlexContainer'
 import { DataContext } from '../../Data/DataContext'
 import box from '../../Data/Icons/box.svg'
 
@@ -39,19 +39,20 @@ const Orders = () => {
 				:
 				<>
 					{orders.map(({id, order, time}) => (
-						<div  key={id}>
-							<h2>Order Time: {time}</h2>
+						<OrdersContainer key={id}>
+							<OrdersTitle>
+								<h3>Order id: {id}</h3>
+								<h2>Order Time: {time}</h2>
+							</OrdersTitle>
 							{order.map(item =>
-								<FlexContainer center>
-									<CartItem
-										key={item[0]}
-										productId={item[0]}
-										editable={false}
-										order={order}
-									/>
-								</FlexContainer>
+								<CartItem
+									key={item[0]}
+									productId={item[0]}
+									editable={false}
+									order={order}
+								/>
 							)}
-						</div>
+						</OrdersContainer>
 					))}
 				</>
 			}

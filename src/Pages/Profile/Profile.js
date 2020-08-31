@@ -71,7 +71,7 @@ const Profile = () => {
 				>
 					{({ errors, touched }) => (
 						<Form onKeyDown={handleKeyDown}>
-							<FlexContainer around>
+							<FlexContainer around responsive>
 								<ProfileDetails>
 									<p> Name </p>
 									<Field name='name' onKeyUp={handleKeyUp} />
@@ -93,7 +93,7 @@ const Profile = () => {
 
 			<ProfileContainer>
 				<h3> Security </h3>
-				<FlexContainer around>
+				<FlexContainer around noAlign responsive>
 					<ProfileDetails readOnly>
 						<p> Email </p>
 						<input type='email' value={data.email} readOnly />

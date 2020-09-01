@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import CartItem from '../../Containers/CartItem/CartItem'
 import OrderSummary from '../../Containers/OrderSummary/OrderSummary'
-import Title from '../../Components/Title'
+import { CheckoutTitle } from '../../Components/Title'
 import FlexContainer from '../../Components/FlexContainer'
 import { PaymentButton, CashPayment } from '../../Components/PaymentComponents'
 import { DataContext } from '../../Data/DataContext'
@@ -18,55 +18,54 @@ const Payment = ({ cash, setCash }) => {
 
 	return (
 		<>
-			<Title h2> Payment</Title>
+			<CheckoutTitle h1> Payment</CheckoutTitle>
+
+			<CheckoutTitle h2> Payment Method </CheckoutTitle>
+			<FlexContainer center>
+				<PaymentButton
+					active={!cash}
+					onClick={() => setCash(false)}
+				>
+					<img src={cash ? credit : greenCredit} alt='credit' />
+					<p> Pay with Card </p>
+				</PaymentButton>
+
+				<PaymentButton
+					active={cash}
+					onClick={() => setCash(true)}
+				>
+					<img src={cash ? greenMoney : money} alt='money' />
+					<p> Pay with Cash </p>
+				</PaymentButton>
+			</FlexContainer>
+			<FlexContainer center>
+				{cash ?
+					<CashPayment>
+						<p>Please note there is a non-refundable fee of 10.00 EGP for our cash on delivery service. </p>
+						<p>To save on this amount,&nbsp;
+					<strong onClick={() => setCash(false)}>
+								please proceed with debit/credit card.
+					</strong>
+						</p>
+					</CashPayment>
+					:
+					<CashPayment>
+						<p> To Be Card Payment // Stripe </p>
+					</CashPayment>
+				}
+			</FlexContainer>
+					
+			<CheckoutTitle h2> Your Order </CheckoutTitle>
 			<FlexContainer around responsive>
 				<div>
-					<>
-						<Title h3> Payment Method </Title>
-						<FlexContainer center>
-							<PaymentButton
-								active={!cash}
-								onClick={() => setCash(false)}
-							>
-								<img src={cash ? credit : greenCredit} alt='credit' />
-								Pay with Card
-							</PaymentButton>
-
-							<PaymentButton
-								active={cash}
-								onClick={() => setCash(true)}
-							>
-								<img src={cash ? greenMoney : money} alt='money' />
-								Pay with Cash
-							</PaymentButton>
-						</FlexContainer>
-						<FlexContainer center>
-							{cash ?
-								<CashPayment>
-									<p>Please note there is a non-refundable fee of 10.00 EGP for our cash on delivery service. </p>
-									<p>To save on this amount,&nbsp;
-								<strong onClick={() => setCash(false)}>
-											please proceed with debit/credit card.
-								</strong>
-									</p>
-								</CashPayment>
-								:
-								<CashPayment>
-									<p> To Be Card Payment // Stripe </p>
-								</CashPayment>
-							}
-						</FlexContainer>
-					</>
-					<div>
-						<Title h3> Your Order </Title>
-						{cartItems.map(item =>
-							<CartItem 
-								key={item[0]} 
-								productId={item[0]}
-								editable={false}
-							/>
-						)}
-					</div>
+					{cartItems.map(item =>
+						<CartItem 
+							key={item[0]} 
+							productId={item[0]}
+							editable={false}
+							checkout={true}
+						/>
+					)}
 				</div>
 				<OrderSummary
 					checkoutNow={false}

@@ -7,7 +7,7 @@ import { ProductsList } from '../../Data/Database'
 import remove from '../../Data/Icons/delete.svg'
 
 
-const CartItem = ({ productId, editable = true, order }) => {
+const CartItem = ({ productId, editable = true, order, checkout = false }) => {
 
 	const { data, setData } = useContext(DataContext)
 	const { cartItems } = data
@@ -27,7 +27,7 @@ const CartItem = ({ productId, editable = true, order }) => {
 
 
 	return (
-		<CartItemsContainer>
+		<CartItemsContainer checkout={checkout}>
 			<div>
 				<FlexContainer noAlign >
 					<img src={product.photo} alt={product.name} />

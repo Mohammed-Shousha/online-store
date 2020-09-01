@@ -28,6 +28,10 @@ export const Button = styled.button `
         font-size:0.9em;
         padding: 0.85em 1.5em;
     }
+
+    @media ${device.desktop}{
+        font-size: 1em;
+    }
 `
 export const LinkButton = ({children, to})=>(
     <Link to={to}>

@@ -17,7 +17,7 @@ const Checkout = () => {
 
 	const [step, setStep] = useState(1)
 	const [activeAddress, setActiveAddress] = useState(null)
-	const [cash, setCash] = useState(false)
+	const [cash, setCash] = useState(true)
 	
 	const [newAddress, setNewAddress] = useState(false)
 	const [alert, setAlert] = useState(false)

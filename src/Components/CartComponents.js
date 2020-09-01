@@ -6,19 +6,21 @@ const fc = '#d6efc7', bc = '#184d47'
 export const CartItemsContainer = styled.div `
     display: flex;
     flex-direction: column;
-    width: 95%;
+    width: 95vw;
     margin: auto;
 
     @media ${device.tablet}{
-        width: 80%;
+        width: 80vw;
     }
 
     @media ${device.laptopS}{
         width: 60vw;
+        margin-left: ${props => props.checkout ? '1em' : '' };
     }
 
     @media ${device.laptopL}{
         width: 65vw;
+        margin-left: ${props => props.checkout ? '2em' : '' };
     }
 
     > div{
@@ -176,11 +178,11 @@ export const ProductActions = styled.div`
 `
 
 export const OrderSummaryContainer = styled.div `
-	width: 95%;
+	width: 95vw;
     margin: auto;
 
     @media ${device.tablet}{
-        width: 80%;
+        width: 80vw;
     }
 
     @media ${device.laptopS}{

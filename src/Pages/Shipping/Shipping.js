@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import GMap from '../../Containers/GMap/GMap'
-import Title from '../../Components/Title'
+import { CheckoutTitle } from '../../Components/Title'
 import FlexContainer from '../../Components/FlexContainer'
 import { ShippingDetails, BackTitle } from '../../Components/ShippingComponents'
 import { MapButton } from '../../Components/Buttons'
@@ -32,26 +32,26 @@ const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }
 
 	return (
 		<>
-			<Title h2> Shipping </Title>
+			<CheckoutTitle h1> Shipping </CheckoutTitle>
 			{!newAddress ?
-				<FlexContainer>
+				<FlexContainer responsive>
 					{filteredAddresses.map((a, i) => (
 						<ShippingDetails
 							key={i}
 							onClick={() => setActiveAddress(a)}
 							active={a === activeAddress}
 						>
-							<h3>Address {i + 1}</h3>
+							<h3> Address {i + 1} </h3>
 							<div>
-								Name
+								<h4> Name </h4>
 								<p><strong>{a.name}</strong></p>
 							</div>
 							<div>
-								Address
+								<h4> Address </h4>
 								<p>{a.address}</p>
 							</div>
 							<div>
-								Phone
+								<h4> Phone </h4>
 								<p>{a.phone}</p>
 							</div>
 						</ShippingDetails>

@@ -66,7 +66,10 @@ const Checkout = () => {
 
 	return (
 		<>
-			<CONav step={step} handleBack={handleBack} />
+			<CONav
+				step={step}
+			 	handleBack={handleBack} 
+			/>
 			{step === 1 ?
 				<>
 					<Shipping

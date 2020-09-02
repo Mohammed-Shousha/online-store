@@ -1,12 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+import { device } from '../Data/Constants'
 import x from '../Data/Icons/x.svg'
 
-
 const AlertContainer = styled.div `
+	width: 70%;
+	padding: 0.5em 1em;
     position: fixed;
-	top: 0.5rem;
+	top: 0.5em;
 	right: 0;
 	left: 0;
 	z-index: 69;
@@ -14,15 +16,51 @@ const AlertContainer = styled.div `
 	background: #ecf0f1;
 	border:1px solid #cf1b1b ;
 	border-radius: 3px;
-	max-width: 400px;
     line-height: 2rem;
+
+	@media ${device.tablet}{
+		width: 19em;
+	}
+
+	@media ${device.laptopS}{
+		width: 22em;
+	}
+
+	@media ${device.laptopL}{
+		width: 25em;
+	}
     
     img {
-        width: 1rem;
         position: absolute;
         right: 0;
-        margin: 0.25rem;
+		top: 0;
+        width: 1em;
+        margin: 0.25em;
+
+		@media ${device.laptopS}{
+			width: 1.15em;
+		}
+
+		@media ${device.laptopL}{
+			width: 1.25em;
+		}
     }
+
+	h4 , p{
+		font-size: 0.85em;
+
+		@media ${device.tablet}{
+			font-size: 0.9em;
+		}
+
+		@media ${device.laptopS}{
+			font-size: 1em;
+		}
+
+		@media ${device.laptopL}{
+			font-size: 1.15em;
+		}
+	}
 `
 
 const Alert = ({ setAlert, checkout }) => (
@@ -35,7 +73,7 @@ const Alert = ({ setAlert, checkout }) => (
 				</Link>
 			</p>
 		:
-			<h4> Please Select an Address</h4>
+			<h4> Please Select an Address </h4>
 		}
 	</AlertContainer>
 )

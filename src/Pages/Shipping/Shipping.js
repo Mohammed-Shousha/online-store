@@ -66,7 +66,7 @@ const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }
 				<>
 					<BackTitle onClick={() => setNewAddress(false)}>
 						<img src={prev} alt='back' />
-						Back to Addresses
+						<h3>Back to Addresses </h3>
 					</BackTitle>
 					<GMap
 						marker={marker}

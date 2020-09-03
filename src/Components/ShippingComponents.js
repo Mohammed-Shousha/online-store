@@ -100,15 +100,48 @@ export const ShippingDetails = styled.div `
 
 `
 
-export const BackTitle = styled.h3 `
-    text-align: left;
-	cursor: pointer;
+export const BackTitle = styled.div `
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; 
+    margin: 1.5em auto -16px;
     width:85vw;
-    margin:2.5rem auto 0;
+    text-align: left;
+    cursor: pointer;
+
+    /* back to addresses */
+    h3{
+        font-size: 1em;
+        margin: 0;
+        margin-left: 0.35em;
+
+        @media ${device.tablet}{
+            font-size: 1.05em;
+        }
+
+        @media ${device.laptopS}{
+            font-size: 1.1em;
+        }
+
+        @media ${device.laptopL}{
+            font-size: 1.2em;
+        }
+
+        @media ${device.desktop}{
+            font-size: 1.25em;
+        }
+    }
 
     /* < */
     img{
-        width: 1rem;
-        margin: 0 0.5rem -0.1rem 0;
+        width: 0.75em;
+
+        @media ${device.laptopS}{
+            width: 0.85em;
+        }
+
+        @media ${device.laptopL}{
+            width: 1em;
+        }
     }
 `

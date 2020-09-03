@@ -152,12 +152,13 @@ const SignUp = () => {
 							</FormContainer>
 						</Form>
 						</VisibleDiv>
+
 						<FormMap visible={detectAddress}>
-						<GMap 
-							marker={marker}
-							setMarker={setMarker}
-						/>
-						<ConfirmButton/>
+							<GMap 
+								marker={marker}
+								setMarker={setMarker}
+							/>
+							<ConfirmButton/>
 						</FormMap>
 					</>
 				)}

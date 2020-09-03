@@ -96,7 +96,7 @@ export const FormMap = styled(VisibleDiv) `
 
 export const LinkText = styled(Link) `
     position: absolute;
-    font-size:0.7em;
+    font-size:0.75em;
     top:0;
     left:0;
     display: flex;
@@ -112,16 +112,28 @@ export const LinkText = styled(Link) `
         font-size:0.9em;
     }
 
+    @media ${device.laptop}{
+        font-size: 1em;
+    }
+
+    @media ${device.laptopL}{
+        font-size: 1.1em;
+    }
+
     @media ${device.desktop}{
-        font-size:1.25em;
+        font-size:1.2em;
     }
 
     img{
         margin: 0 0.25rem;
         width: 1em;
 
-        @media ${device.laptops}{
-            width:1.2em;
+        @media ${device.laptopS}{
+            width:1.1em;
+        }
+
+        @media ${device.laptop}{
+            width:1.15em;
         }
     }
 `

@@ -5,15 +5,16 @@ const gradient = 'linear-gradient(45deg, #93a5cf 0%, #e4efe9 100%)'
 
 export const CategoriesContainer = styled.div `
     margin: 12em 0;
-    text-align:center;
+    text-align: center;
 
+    /* category */
     h1{
-        font-size:1.5em;
-        width:250px;
+        font-size: 1.5em;
+        width: 250px;
         margin: 0.5em auto;
 
         &:hover{
-            color:#93a5cf;
+            color: #93a5cf;
         }
 
         @media ${device.tablet}{
@@ -28,9 +29,9 @@ export const CategoriesContainer = styled.div `
 
 export const Square = styled.div `
     display: flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:6px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
 	background-image: ${gradient};
     color: white;
 	width: 12em;
@@ -38,7 +39,7 @@ export const Square = styled.div `
 	margin: 1.5em 0;
 	cursor: pointer;
     box-shadow: -7px 7px 10px rgba(0,0,0,0.2);
-	transition-duration: .7s;
+	transition-duration: 0.7s;
 
     @media ${device.tablet}{
         width: 15em;
@@ -73,8 +74,9 @@ export const Square = styled.div `
         transform: scale(1.05);
     }
 
+    /* category img */
     img{
-        width:5em;
+        width: 5em;
 
         @media ${device.tablet}{
             width: 6em;
@@ -100,7 +102,7 @@ export const Square = styled.div `
 
 export const Arrow = styled.img `
     width: 1.5em;
-    cursor:pointer;
+    cursor: pointer;
 
     @media ${device.tablet}{
         width: 2em;

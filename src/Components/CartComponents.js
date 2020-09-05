@@ -53,7 +53,7 @@ export const CartItemsContainer = styled.div `
         /* product img */
         > div > img{
             border-radius: 0.5rem 0 0 0.5rem; 
-            width:7em;
+            width: 7em;
 
             @media ${device.laptopS}{
                 width: 9em;
@@ -85,15 +85,15 @@ export const ProductDetails = styled.div `
 
     /* name*/ 
     h2{ 
-        font-size:1em;
-        white-space:nowrap;
+        font-size: 1em;
+        white-space: nowrap;
 
         @media ${device.tablet}{
-            font-size:1.15em;
+            font-size: 1.15em;
         }
 
         @media ${device.laptop}{
-            font-size:1.25em;
+            font-size: 1.25em;
         }
 
         @media ${device.desktop}{
@@ -103,27 +103,27 @@ export const ProductDetails = styled.div `
 
     /*price*/
     h3{
-        font-size:0.85em;
+        font-size: 0.85em;
 
         @media ${device.tablet}{
-            font-size:1em;
+            font-size: 1em;
         }
 
         @media ${device.laptop}{
-            font-size:1.15em;
+            font-size: 1.15em;
         }
 
         @media ${device.desktop}{
-            font-size:1.25em;
+            font-size: 1.25em;
         }
     }
 
     /*description*/
     p{
-        font-size:0.65em;
+        font-size: 0.65em;
 
         @media ${device.tablet}{
-            font-size:0.85em;
+            font-size: 0.85em;
         }
 
         @media ${device.laptop}{
@@ -164,14 +164,14 @@ export const ProductActions = styled.div`
         /*bin*/
         img{
             cursor: pointer;
-            width:1.5em;
+            width: 1.5em;
 
             @media ${device.laptop}{
-                width:1.75em;
+                width: 1.75em;
             }
 
             @media ${device.desktop}{
-                width:2em;
+                width: 2em;
             }
         }
     }
@@ -205,48 +205,48 @@ export const OrderSummaryContainer = styled.div `
         text-align: left;
         white-space: nowrap;
         padding: 2em 2.5em ;
-        background:${bc} ;
+        background: ${bc} ;
         color: ${fc};
-        margin:0.5em 0;
+        margin: 0.5em 0;
         border-radius: 0.5rem;
 
         /*order summary */
         h1{
-            text-align:center;
-            font-size:1.25em;
+            text-align: center;
+            font-size: 1.25em;
 
             @media ${device.tablet}{
-                font-size:1.5em;
+                font-size: 1.5em;
             }
 
             @media ${device.desktop}{
-                font-size:1.75em;
+                font-size: 1.75em;
             }
         }
 
         /*total*/
         h2{
-            font-size:1.15em;
+            font-size: 1.15em;
 
             @media ${device.tablet}{
-                font-size:1.25em;
+                font-size: 1.25em;
             }
 
             @media ${device.desktop}{
-                font-size:1.5em;
+                font-size: 1.5em;
             }
         }
         
         /*shipping & subtotal */
         h3{
-            font-size:1em;
+            font-size: 1em;
 
             @media ${device.tablet}{
-                font-size:1.15em;
+                font-size: 1.15em;
             }
 
             @media ${device.desktop}{
-                font-size:1.25em;
+                font-size: 1.25em;
             }
         }
 

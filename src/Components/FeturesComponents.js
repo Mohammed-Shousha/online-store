@@ -3,10 +3,10 @@ import { device } from '../Data/Constants'
 
 export const Circle = styled.div `
     position: relative;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     color: white;
     background: ${props=> props.color};
     border-radius: 50%;
@@ -17,36 +17,33 @@ export const Circle = styled.div `
     width: 10em;
     padding: 1em;
 
-    &:hover p{
-        visibility: visible;
-    }
-
     @media ${device.tablet}{
-        width:13em;
-        height:13em;
+        width: 13em;
+        height: 13em;
     }
 
     @media ${device.laptopS}{
-        width:10em;
-        height:10em;
+        width: 10em;
+        height: 10em;
     }
 
     @media ${device.laptop}{
-        width:13em;
-        height:13em;
+        width: 13em;
+        height: 13em;
     }
 
     @media ${device.laptopL}{
-        width:16em;
-        height:16em;
+        width: 16em;
+        height: 16em;
     }
 
     @media ${device.desktop}{
-        width:19em;
-        height:19em;
+        width: 19em;
+        height: 19em;
     }
 
-     h1{
+    /* feature */
+    h1{
         font-size: 1.5em;
         word-spacing: -0.25em;
 
@@ -71,10 +68,15 @@ export const Circle = styled.div `
         }
     }
 
+    /* feature details */
+    &:hover p{
+        visibility: visible;
+    }
+
     p{
         visibility: hidden;
         font-size: 0.75em;
-        color:${props => props.color};
+        color: ${props => props.color};
         width: 16em;
         margin-left: -8em;
         line-height: 120%;
@@ -89,24 +91,24 @@ export const Circle = styled.div `
         bottom: 93%;
 
         @media ${device.tablet}{
-            font-size:0.85em;
-            width:20em;
-            margin-left:-10em;
+            font-size: 0.85em;
+            width: 20em;
+            margin-left: -10em;
         }
 
         @media ${device.laptopS}{
-            width:16em;
-            margin-left:-8em;
+            width: 16em;
+            margin-left: -8em;
         }
 
         @media ${device.laptop}{
-            font-size:1em;
-            width:20em;
-            margin-left:-10em;
+            font-size: 1em;
+            width: 20em;
+            margin-left: -10em;
         }
 
         @media ${device.desktop}{
-            font-size:1.25em;
+            font-size: 1.25em;
         }
         
         &::after {
@@ -121,11 +123,12 @@ export const Circle = styled.div `
         }
     }
 
+    /* feature icon */
     img{
         width: 4em;
 
         @media ${device.laptopL}{
-            width:5em;
+            width: 5em;
         }
     }
 `

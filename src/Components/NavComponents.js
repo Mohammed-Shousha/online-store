@@ -3,12 +3,12 @@ import search from '../Data/Icons/search.svg'
 import menu from '../Data/Icons/menu.svg'
 import { device } from '../Data/Constants'
 
-export const NavText = styled.div `
+export const NavText = styled.div`
     display: flex;
 	font-size: 0.8em;
 	cursor: pointer;
     padding: 0 0.5em;
-    position: ${props => props.relative? 'relative': ''};
+    position: ${props => props.relative ? 'relative' : ''};
 
     @media ${device.tablet}{
 		font-size: 1em;
@@ -32,7 +32,7 @@ export const SearchIcon = styled.img.attrs(props => ({
     alt: 'search'
 }))`
     &&{
-        cursor:pointer;
+        cursor: pointer;
     }
 `
 
@@ -43,20 +43,20 @@ export const MenuIcon = styled.img.attrs(props => ({
     &&{
         width: 1.25rem;
         margin: 0 1em;
-        outline:none;
+        outline: none;
 
          @media ${device.laptop}{
-            display:none;
+            display: none;
         }
     }
     
 `
 
-export const CartCircle = styled.div `
+export const CartCircle = styled.div`
     &&{
         border-radius: 50%;
         color: red;
-        background:white;
+        background: white;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -65,23 +65,23 @@ export const CartCircle = styled.div `
         font-size: 12px;
         margin-left:-0.75rem; 
         margin-top: -1.2rem;
-        visibility:${props => props.hide? 'hidden' : ''};
+        visibility: ${props => props.hide ? 'hidden' : ''};
 
         @media ${device.desktop}{
-            font-size:15px;
-            margin-left:-0.8rem; 
+            font-size: 15px;
+            margin-left: -0.8rem; 
             margin-top: -1.6rem;
         }
     }
 `
 
-export const UserAction = styled.div `
+export const UserAction = styled.div`
 	display: flex;
     justify-content: center;
     align-items: center;
 	font-size: 0.8em;
     padding: 0.5em 0;
-    color:${props => props.signOut? 'red': ''};
+    color: ${props => props.signOut ? 'red' : ''};
 
     @media ${device.laptop}{
         font-size: 1rem;
@@ -89,7 +89,7 @@ export const UserAction = styled.div `
     }
 `
 
-export const UserActionsContainer = styled.div `
+export const UserActionsContainer = styled.div`
     width: 7em;
     background-color: #fff;
     text-align: center;
@@ -103,11 +103,11 @@ export const UserActionsContainer = styled.div `
     box-shadow: 0px 10px 12px 0px rgba(0,0,0,0.2);
 
     @media ${device.tablet}{
-        top:155%;
+        top: 155%;
     }
 
     @media ${device.desktop}{
-        top:140%;
+        top: 140%;
     }
 
 

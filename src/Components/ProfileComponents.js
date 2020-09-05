@@ -163,25 +163,26 @@ export const ChangePasswordContainer = styled.div`
         width: 30em;
     }
 
-    /* change password */
-    h3{
-        font-size: 0.9em;
 
-        @media ${device.tablet}{
-            font-size: 1.15em;
-        }
-
-        @media ${device.laptop}{
-            font-size: 1.25em;
-        }
-
-        @media ${device.laptopL}{
-            font-size: 1.45em;
-        }
-    }
-
-    & > div {
+    > div {
         line-height: 1em;
+        
+        /* change password */
+        h3{
+            font-size: 0.9em;
+
+            @media ${device.tablet}{
+                font-size: 1.15em;
+            }
+
+            @media ${device.laptop}{
+                font-size: 1.25em;
+            }
+
+            @media ${device.laptopL}{
+                font-size: 1.45em;
+            }
+        }
         
         p{
             font-size: 0.65em;
@@ -198,7 +199,7 @@ export const ChangePasswordContainer = styled.div`
 `
 
 export const ChangePasswordButton = styled(ProfileButton)`
-    width:45%;
+    width: 45%;
     padding: 1em;
     margin: 1em ;
 

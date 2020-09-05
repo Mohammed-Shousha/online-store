@@ -6,7 +6,7 @@ const whiteGradient = 'linear-gradient(0deg, #fdfbfb 0%, #ebedee 100%)'
 
 export const Navbar = styled.div `
     display: ${props => props.small ? 'none' :'flex'};
-    align-items:center;
+    align-items: center;
     justify-content: space-between;
     height: 3em;
     background-image: ${props => props.small ? whiteGradient : blueGradient};
@@ -21,8 +21,8 @@ export const Navbar = styled.div `
 export const MainNav = styled(Navbar) `
     position: fixed;
 	top: 0;
-    right:0;
-    left:0;
+    right: 0;
+    left: 0;
 	z-index: 50;
     justify-content: space-around;
 

@@ -6,11 +6,11 @@ export const PaymentButton = styled.button `
 	margin: 0 1em;
 	padding: 0.75em 0.5em;
 	font-weight: bold;
-	font-size:1em;
+	font-size: 1em;
 	border-radius: 3px;
 	border: solid ${props => props.active ? '1.2px #2196f3' : '1px grey'};
 	background: #f7f7ee;
-	color:${props => props.active? 'black' :'grey'};
+	color: ${props => props.active? 'black' :'grey'};
     outline: none;
     cursor: pointer;
 
@@ -25,7 +25,7 @@ export const PaymentButton = styled.button `
 	/* pay with */
 	p{
 		margin: 0;
-		font-size:0.85em;
+		font-size: 0.85em;
 
 		@media ${device.tablet}{
 			font-size: 0.9em
@@ -40,6 +40,7 @@ export const PaymentButton = styled.button `
 		}
 	}
     
+	/* cash || card */
     img{
         width: 2em;
 
@@ -82,6 +83,6 @@ export const CashPayment = styled.div `
 	}
     
     strong{
-        cursor:pointer;
+        cursor: pointer;
     }
 `

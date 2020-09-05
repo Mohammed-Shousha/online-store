@@ -11,7 +11,7 @@ export const DoneContainer = styled.div `
 
     /*address label */
     p{
-        color:#6e6d6d;
+        color: #6e6d6d;
         font-size: 0.85em;
 
         @media ${device.tablet}{

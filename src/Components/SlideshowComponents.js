@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 import { device } from '../Data/Constants'
 
-export const SlideContainer = styled.div `
+export const SlideContainer = styled.div`
     width: 75vw;
     margin: 80px auto;
 `
 
-export const SlidePhoto = styled.img `
+export const SlidePhoto = styled.img`
     justify-content: center;
     align-items: center;
     height: auto;
@@ -31,5 +31,4 @@ export const SlidePhoto = styled.img `
     @media ${device.desktop}{
         width: 500px;
     }
-    
 `

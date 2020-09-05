@@ -15,8 +15,8 @@ export const mapContainerStyle = {
 export const MapTitle = styled.h3 `
 	width: 85vw;
 	font-size: 1em;
-	padding:0.3em 0;
-    font-weight:normal;
+	padding: 0.3em 0;
+    font-weight: normal;
 	text-align: center;
 	margin: auto;
 	margin-top: 1.75em;
@@ -50,7 +50,7 @@ export const LocateMe = styled.button `
 	height: 2.5em;
 	padding: 1.5em;
 	font-size: 0.8em;
-	white-space:nowrap;
+	white-space: nowrap;
 	background: white;
 	border: 1px solid black;
 	border-radius: 4rem;
@@ -78,22 +78,23 @@ export const LocateMe = styled.button `
 		font-size: 1.05em;
 	}
 
-        img{
-            width: 1em;
-            margin-right: 0.25rem;
+	/* pin */
+	img{
+		width: 1em;
+		margin-right: 0.25rem;
 
-			@media ${device.laptopS}{
-				width: 1.15em;
-			}
+		@media ${device.laptopS}{
+			width: 1.15em;
+		}
 
-			@media ${device.laptopL}{
-				width: 1.2em;
-			}
+		@media ${device.laptopL}{
+			width: 1.2em;
+		}
 
-			@media ${device.desktop}{
-				width: 1.25em;
-			}
-        }
+		@media ${device.desktop}{
+			width: 1.25em;
+		}
+	}
 `
 
 export const AddressWindow = styled(InfoWindow).attrs(props=>({

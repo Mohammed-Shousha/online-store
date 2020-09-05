@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom'
 import { device } from '../Data/Constants'
 
 
-const LogoImg = styled.img.attrs(props =>({
-    src : logo,
-    alt:'logo'
-})) `
+const LogoImg = styled.img.attrs(props => ({
+    src: logo,
+    alt: 'logo'
+}))`
     &&{
         width: 1.5rem;
         margin: 0 1em;
-        outline:none;
+        outline: none;
 
          @media ${device.laptop}{
             width: 2rem;
@@ -24,9 +24,9 @@ const LogoImg = styled.img.attrs(props =>({
     }
 `
 
-const Logo = ()=>(
+const Logo = () => (
     <Link to='/'>
-        <LogoImg/>
+        <LogoImg />
     </Link>
 )
 

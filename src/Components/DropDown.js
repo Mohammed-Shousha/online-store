@@ -10,26 +10,27 @@ const DropDown = styled.div `
 
     &:hover{
         div{
-            display:flex;
-            justify-content:space-around;
-            align-items:center;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
         }
     }
 
+    /* category */
     p{
-        font-size:1em;
+        font-size: 1em;
         margin: 0.5rem 1rem;
-        white-space:nowrap;
+        white-space: nowrap;
 
         @media ${device.laptopL}{
-            font-size:1.25em;
+            font-size: 1.25em;
         }
     }
 
     div{
-        position:absolute;
-        right:0;
-        left:0;
+        position: absolute;
+        right: 0;
+        left: 0;
         display: none;
         background-image: ${gradient};
         min-width: 8em;
@@ -40,8 +41,9 @@ const DropDown = styled.div `
         margin: 0;
         font-size: 1em;
 
+        /* category img */
         img{
-            width:40px;
+            width: 40px;
             padding: 10px;
         }
     }

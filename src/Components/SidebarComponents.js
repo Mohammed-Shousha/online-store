@@ -4,7 +4,7 @@ import { device } from '../Data/Constants'
 
 const greenGradient = 'linear-gradient(to top, #c1dfc4 0%, #deecdd 100%)'
 
-export const SidebarContainer = styled.div `
+export const SidebarContainer = styled.div`
     height: 100%;
     width: 40%;
     position: fixed;
@@ -14,11 +14,11 @@ export const SidebarContainer = styled.div `
     background: ${greenGradient};
 
     @media ${device.tablet}{
-        width:35%;
+        width: 35%;
     }
 
     @media ${device.laptopS}{
-        width:30%;
+        width: 30%;
     }
 
     /* x */
@@ -47,8 +47,8 @@ export const SidebarContainer = styled.div `
 
     /*category*/
     h4 {
-        text-align:left;
-        margin:2rem 1rem;
+        text-align: left;
+        margin: 2rem 1rem;
         font-size: 0.8em;
 
         @media (min-width: 24em){
@@ -66,7 +66,7 @@ export const SidebarContainer = styled.div `
 
     /* > */
     img{
-        width:0.85em;
+        width: 0.85em;
 
         @media ${device.laptopS}{
             width: 1.15em;
@@ -74,16 +74,15 @@ export const SidebarContainer = styled.div `
     }
 `
 
-export const BackContainer = styled(FlexContainer) `
-    visibility:${props => props.hide ? 'hidden' : '' };
-    width:50%;
-
+export const BackContainer = styled(FlexContainer)`
+    visibility: ${props => props.hide ? 'hidden' : ''};
+    width: 50%;
 
     /*back*/
     p{
         font-size: 0.8em;
-        font-weight:bold;
-        margin:0.5rem 0;
+        font-weight: bold;
+        margin: 0.5rem 0;
 
         @media (min-width: 24em){
             font-size: 0.9em;
@@ -100,11 +99,10 @@ export const BackContainer = styled(FlexContainer) `
 
     /* < */
     img{
-        width:0.85em;
+        width: 0.85em;
 
         @media ${device.laptopS}{
             width: 1.15em;
         }
     }
-
 `

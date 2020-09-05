@@ -2,11 +2,13 @@ import styled from 'styled-components'
 import { device } from '../Data/Constants'
 
 export const BackDiv = styled.div `
+    /* back link */
     a{
         display: flex;
         align-items: center;
     }
-
+    
+    /* checkout , back title */
     &  ~ h3, h3{
         font-size: 1em;
 
@@ -23,9 +25,10 @@ export const BackDiv = styled.div `
         }
     }
 
+    /* < */
     img{
         width: 1em;
-        margin:0 0.25rem 0 0.75rem;
+        margin: 0 0.25rem 0 0.75rem;
 
         @media ${device.tablet}{
             width: 1.15em;
@@ -42,10 +45,11 @@ export const BackDiv = styled.div `
 `
 
 export const CheckoutStep = styled.div `
-    display:flex;
+    display: flex;
     align-items: center;
     font-weight: ${props => props.active? 'bold': ''};
     
+    /* check img / */
     img{
         width: 1em;
 	    margin: 0 9px; 
@@ -61,11 +65,11 @@ export const CheckoutStep = styled.div `
 `
 
 export const NumCircle = styled.div `
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 50%;
-	background:${props => props.active ? '#2196f3' : 'transparent'};
+	background: ${props => props.active ? '#2196f3' : 'transparent'};
 	color: ${props => props.active ? 'white' : 'grey'};
 	border: ${props => props.active ? '#2196f3' :'grey'} 1px solid;
 	height: 1.25em;

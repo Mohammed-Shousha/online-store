@@ -3,19 +3,19 @@ import { device } from '../Data/Constants'
 
 const activeStyle = '1.2px solid #2196f3'
 
-export const ShippingDetails = styled.div `
+export const ShippingDetails = styled.div`
 	width: 70%;
     min-height: 15em;
 	margin: 1.5em 0rem;
 	padding: 1em 0.5em ;
-    border: ${props => props.active? activeStyle :'1px solid grey'};
+    border: ${props => props.active ? activeStyle : '1px solid grey'};
 	border-radius: 3px;
 	box-shadow: -5px 5px 5px 1px #b1b493;
 	background: #f7f7ee;
     cursor: pointer;
-    display:${props => props.new ? 'flex' : ''};
-    justify-content:center;
-    align-items:center;
+    display: ${props => props.new ? 'flex' : ''};
+    justify-content: center;
+    align-items: center;
 
     @media ${device.tablet}{
         width: 20em;
@@ -35,7 +35,7 @@ export const ShippingDetails = styled.div `
         border: ${activeStyle};
     }
 
-    /* address */
+    /* address name */
     h3{
         text-align: center;
         text-transform: uppercase;
@@ -64,26 +64,26 @@ export const ShippingDetails = styled.div `
         margin: 0;
 
         @media ${device.tablet}{
-            font-size:1.1em;
+            font-size: 1.1em;
         }
 
         @media ${device.laptop}{
-            font-size:1.15em;
+            font-size: 1.15em;
         }
     }
 
     /* details */
     p{
-        color:black;
+        color: black;
         margin: 0.5em 0 0.75em 0;
         font-size: 0.9em;
 
         @media ${device.tablet}{
-            font-size:1em;
+            font-size: 1em;
         }
 
         @media ${device.laptop}{
-            font-size:1.05em;
+            font-size: 1.05em;
         }
         
         /* name */
@@ -100,7 +100,7 @@ export const ShippingDetails = styled.div `
 
 `
 
-export const BackTitle = styled.div `
+export const BackTitle = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center; 

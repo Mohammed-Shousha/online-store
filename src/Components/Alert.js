@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { device } from '../Data/Constants'
 import x from '../Data/Icons/x.svg'
 
-const AlertContainer = styled.div `
+const AlertContainer = styled.div`
 	width: 70%;
 	padding: 0.5em 1em;
     position: fixed;
@@ -14,7 +14,7 @@ const AlertContainer = styled.div `
 	z-index: 69;
 	margin: auto;
 	background: #ecf0f1;
-	border:1px solid #cf1b1b ;
+	border: 1px solid #cf1b1b;
 	border-radius: 3px;
     line-height: 2rem;
 
@@ -30,6 +30,7 @@ const AlertContainer = styled.div `
 		width: 25em;
 	}
     
+	/* x */
     img {
         position: absolute;
         right: 0;
@@ -66,13 +67,13 @@ const AlertContainer = styled.div `
 const Alert = ({ setAlert, checkout }) => (
 	<AlertContainer>
 		<img src={x} alt='x' onClick={() => setAlert(false)} />
-		{!checkout?
+		{!checkout ?
 			<p>In Order to Add Items to Your Cart <br />
 				<Link to='/signin'>
 					<strong>SignIn or SignUp</strong>
 				</Link>
 			</p>
-		:
+			:
 			<h4> Please Select an Address </h4>
 		}
 	</AlertContainer>

@@ -2,9 +2,9 @@ import styled from 'styled-components'
 import { device } from '../Data/Constants'
 
 export const OrdersContainer = styled.div `
-    display:flex;
+    display: flex;
     flex-direction: column;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
     margin-bottom: 2.5em;
 
@@ -33,9 +33,9 @@ export const OrdersTitle = styled.div`
     /* time */
     h2{
         font-size: 1em;
-        margin:0;
+        margin: 0;
         padding: 0 0 0.5em;
-        border-bottom:1px solid #2F4858;
+        border-bottom: 1px solid #2F4858;
 
         @media ${device.tablet}{
             font-size: 1.15em;

@@ -15,18 +15,19 @@ const Card = styled.div`
     box-shadow: none;
 
     @media ${device.laptopS}{
-        width:275px;
+        width: 275px;
     }
 
     @media ${device.laptop}{
-        width:300px;
+        width: 300px;
     }
 
     @media ${device.laptopL}{
-        width:325px;
-        height:450px;
+        width: 325px;
+        height: 450px;
     }
 
+    /* product img */
     img{
         position: relative;
         display: flex;
@@ -34,21 +35,21 @@ const Card = styled.div`
         flex: 0 0 auto;
         height: 50%;
         overflow: hidden;
-        border-radius: .25rem .25rem 0 0;
+        border-radius: 0.25rem 0.25rem 0 0;
     }
 `
 
-const PriceTag = styled.div `
+const PriceTag = styled.div`
     position: absolute;
-    background-color: rgba(44,62,80,.95);
+    background-color: rgba(44,62,80,0.95);
     color: #ecf0f1;
-    border-radius: .25rem;
-    padding: .125rem .5rem;
+    border-radius: 0.25rem;
+    padding: 0.125rem 0.5rem;
     top: 1rem;
     left: 1rem;
 `
 
-const Description = styled.div `
+const Description = styled.div`
     display: flex;
     flex-flow: column;
     justify-content: flex-start;
@@ -58,6 +59,7 @@ const Description = styled.div `
     box-sizing: border-box;
     background-color: #ecf0f1;
 
+    /* product name */
     h1{
         text-transform: uppercase;
         font-size: 1.5rem;
@@ -67,23 +69,24 @@ const Description = styled.div `
         margin: 1em 0;
     }
 
+    /* product details */ 
     p{
         color: #95a5a6;
-        font-size: .75rem;
+        font-size: 0.75rem;
         letter-spacing: 2px;
     }
 `
 
 
-const ProductCard = ({ photo, price, name, details })=>(
+const ProductCard = ({ photo, price, name, details }) => (
     <Card>
-        <img src={photo} alt={photo}/>
+        <img src={photo} alt={photo} />
         <PriceTag> {price} </PriceTag>
         <Description>
             <h1>{name}</h1>
             <p>{details}</p>
         </Description>
     </Card>
-) 
+)
 
 export default ProductCard

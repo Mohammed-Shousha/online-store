@@ -3,10 +3,6 @@ import { device } from '../Data/Constants'
 
 export const Contact = styled.div `
 	background: #c3cfe2;
-    /* position: absolute;
-    left:0;
-    right:0;
-    bottom:2.5em; */
 
     div{
         display: flex;
@@ -20,19 +16,19 @@ export const Contact = styled.div `
         font-size: 1em;
 
         @media ${device.tablet}{
-            font-size:1.15em;
+            font-size: 1.15em;
         }
 
         @media ${device.laptopS}{
-            font-size:1.25em;
+            font-size: 1.25em;
         }
 
         @media ${device.laptop}{
-            font-size:1.5em;
+            font-size: 1.5em;
         }
 
         @media ${device.laptopL}{
-            font-size:1.75em;
+            font-size: 1.75em;
         }
     }
 
@@ -60,40 +56,35 @@ export const Contact = styled.div `
 `
 
 export const FooterContainer = styled.footer `
-    height:2.5em;
+    height: 2.5em;
 	background: black;
 	color: white;
 	white-space: nowrap;
-    /* position: absolute;
-    bottom:0;
-    right:0;
-    left:0; */
 
     @media ${device.laptopS}{
         display: flex;
         justify-content: space-evenly;
-        align-items:center;
-        height:2em;
+        align-items: center;
+        height: 2em;
     }
 
     @media ${device.laptopL}{
-        height:2.5em;
+        height: 2.5em;
     }
     
     /* all right reserved */
     h1{
         font-size: 0.75em;
-        margin:0;
+        margin: 0;
         padding-top: 0.25em;
 
         @media ${device.laptopS}{
-            font-size:0.8em;
+            font-size: 0.8em;
         }
 
         @media ${device.laptopL}{
             font-size: 0.9em;
         }
-
     }
 
     /* about us */
@@ -102,7 +93,7 @@ export const FooterContainer = styled.footer `
         cursor: pointer;
 
         @media ${device.laptopS}{
-            font-size:0.65em;
+            font-size: 0.65em;
         }
 
         @media ${device.laptopL}{
@@ -113,5 +104,4 @@ export const FooterContainer = styled.footer `
             color: grey;
         }
     }
-
 `

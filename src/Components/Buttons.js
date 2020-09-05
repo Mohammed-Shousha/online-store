@@ -1,31 +1,31 @@
 import React from 'react'
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { device } from '../Data/Constants'
 
-export const Button = styled.button `
-    border:none;
+export const Button = styled.button`
+    border: none;
 	background: #2196f3;
 	color: white;
-    font-size:0.7em;
+    font-size: 0.7em;
 	font-weight: bold;
 	border-radius: 5px;
 	margin: 0.75em 0;
 	padding: 0.75em 1.25em;
 	outline: none;
 	cursor: pointer;
-	visibility: ${props =>props.hide? 'hidden':''};
+	visibility: ${props => props.hide ? 'hidden' : ''};
 
     @media ${device.tablet}{
-        font-size:0.8em;
+        font-size: 0.8em;
     }
 
     @media ${device.laptopS}{
-        font-size:0.85em;
+        font-size: 0.85em;
     }
 
     @media ${device.laptopL}{
-        font-size:0.9em;
+        font-size: 0.9em;
         padding: 0.85em 1.5em;
     }
 
@@ -33,7 +33,7 @@ export const Button = styled.button `
         font-size: 1em;
     }
 `
-export const LinkButton = ({children, to})=>(
+export const LinkButton = ({ children, to }) => (
     <Link to={to}>
         <Button>
             {children}
@@ -42,7 +42,7 @@ export const LinkButton = ({children, to})=>(
 )
 
 export const FormButton = styled.button.attrs(props => ({
-	type: props.type || 'submit',
+    type: props.type || 'submit',
 
 }))`
     border-radius: 10px;
@@ -64,7 +64,7 @@ export const FormButton = styled.button.attrs(props => ({
     }
 
     @media ${device.tablet}{
-        font-size:0.8em;
+        font-size: 0.8em;
     }
 
     @media ${device.laptopS}{

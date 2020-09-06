@@ -56,7 +56,7 @@ export const FormButton = styled.button.attrs(props => ({
     cursor: pointer;
     text-transform: uppercase;
     transition: transform 80ms ease-in;
-    margin-bottom : 5px;
+    margin: 5px 0;
     outline: none;
 
     &:active{

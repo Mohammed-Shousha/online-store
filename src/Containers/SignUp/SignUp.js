@@ -53,9 +53,17 @@ const SignUp = () => {
 		}
 	}
 
+	const telKeyUp = (e) => {
+		if(e.keyCode === 9){
+			addressInput.current.focus()
+			setAddressFocused(true)
+			e.preventDefault()
+		}
+	}
+
 	const handleKeyDown = (e) => {
 		if ((e.charCode || e.keyCode) === 13) {
-			e.preventDefault();
+			e.preventDefault()
 		}
 	}
 
@@ -130,7 +138,7 @@ const SignUp = () => {
 								{touched.signUpPassword && errors.signUpPassword && <ErrorText>{errors.signUpPassword}</ErrorText>}
 								<StyledField
 									name="phone" type="tel"
-									placeholder="Phone " innerRef={phoneInput} onKeyUp={handleKeyUp}
+									placeholder="Phone " innerRef={phoneInput} onKeyUp={handleKeyUp} onKeyDown={telKeyUp}
 								/>
 								{touched.phone && errors.phone && <ErrorText>{errors.phone}</ErrorText>}
 								<StyledField

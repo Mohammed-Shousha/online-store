@@ -44,7 +44,12 @@ const DropDown = styled.div `
         /* category img */
         img{
             width: 40px;
-            padding: 10px;
+            padding: 25px;
+
+            @media ${device.laptopL}{
+                width: 45px;
+                padding: 30px;
+            }
         }
     }
 `

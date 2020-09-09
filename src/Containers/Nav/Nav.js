@@ -106,27 +106,27 @@ const Nav = () => {
 	return (
 		<MainNav>
 
-			<MenuIcon onClick={()=> setSidebar(true)}/>
+			<MenuIcon onClick={() => setSidebar(true)} />
 
 			{sidebar &&
-				<Sidebar 
+				<Sidebar
 					setSidebar={setSidebar}
 				/>
 			}
 
 			<Logo />
 
-				<Autosuggest
-					suggestions={suggestions}
-					inputProps={inputProps}
-					onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-					onSuggestionsClearRequested={onSuggestionsClearRequested}
-					getSuggestionValue={getSuggestionValue}
-					renderSuggestion={renderSuggestion}
-				/>
-				<SearchIcon
-					onClick={() => searchItem(value)}
-				/>
+			<Autosuggest
+				suggestions={suggestions}
+				inputProps={inputProps}
+				onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+				onSuggestionsClearRequested={onSuggestionsClearRequested}
+				getSuggestionValue={getSuggestionValue}
+				renderSuggestion={renderSuggestion}
+			/>
+			<SearchIcon
+				onClick={() => searchItem(value)}
+			/>
 
 			<NavText
 				relative
@@ -157,17 +157,19 @@ const Nav = () => {
 					</UserActionsContainer>}
 			</NavText>
 
-			<Link to={isSignedIn ? '/cart' : '/'}>
-				<NavText>
-					<FlexContainer>
-						Cart
-						<img alt='cart' src={cart} />
-						<CartCircle hide={cartItems.every(x => x[1] === 0)}>
-							{cartItems.reduce((t, item) => t + item[1], 0)}
-						</CartCircle>
-					</FlexContainer>
-				</NavText>
-			</Link>
+			{isSignedIn &&
+				<Link to='/cart'>
+					<NavText>
+						<FlexContainer>
+							Cart
+							<img alt='cart' src={cart} />
+							<CartCircle hide={cartItems.every(x => x[1] === 0)}>
+								{cartItems.reduce((t, item) => t + item[1], 0)}
+							</CartCircle>
+						</FlexContainer>
+					</NavText>
+				</Link>
+			}
 		</MainNav>
 	)
 }

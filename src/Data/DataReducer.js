@@ -6,8 +6,8 @@ export const initData = {
     addresses: [],
     cartItems: [],
     orders: []
-
 }
+
 export const DataReducer = (data, action) => {
     switch (action.type) {
         case 'EDIT_DATA':
@@ -29,15 +29,15 @@ export const DataReducer = (data, action) => {
             let productIndex = data.cartItems.indexOf(product)
 
             if (action.payload.addItem) {
-                if(data.cartItems.some(x => x[0] === action.payload.productId)){
+                if (data.cartItems.some(x => x[0] === action.payload.productId)) {
                     product[1]++
-                }else{
+                } else {
                     newCartItems.push([action.payload.productId, 1])
                 }
             } else {
-                if(product[1]===1){
+                if (product[1] === 1) {
                     newCartItems.splice(productIndex, 1)
-                }else{
+                } else {
                     product[1]--
                 }
             }

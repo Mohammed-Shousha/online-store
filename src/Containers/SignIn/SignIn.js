@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { useHistory, Link } from 'react-router-dom'
@@ -7,7 +7,6 @@ import ErrorText from '../../Components/ErrorText'
 import { FormContainer, StyledField } from '../../Components/FormComponents'
 import { DataContext } from '../../Data/DataContext'
 import { editData, editAddresses } from '../../Data/DataActions'
-import { USERS } from '../../Data/Database'
 
 
 const SignIn = () => {
@@ -15,6 +14,7 @@ const SignIn = () => {
 
     const history = useHistory()
 
+    const [wrongData, setWrongData] = useState(false)
     const signInPasswordInput = useRef(null)
     const signInButton = useRef(null)
 
@@ -39,23 +39,36 @@ const SignIn = () => {
     return (
         <Formik
             initialValues={{
-                signInEmail: '',
-                signInPassword: '',
+                email: '',
+                password: '',
             }}
             validationSchema={Yup.object({
-                signInEmail: Yup.string()
+                email: Yup.string()
                     .required('Required')
-                    .test('match', 'Wrong Email', (signInEmail) => (USERS.some(user => user.email === signInEmail))),
-                signInPassword: Yup.string()
+                    .email('Invalid Email'),
+                password: Yup.string()
                     .required('Required')
-                    .test('match', 'Wrong Password', (signInPassword) => (USERS.some(user => user.password === signInPassword))),
             })}
-            onSubmit={(data) => {
-                setIsSignedIn(true)
-                history.push('/')
-                const { name, email, password, phone, addresses } = USERS.find(user => user.email === data.signInEmail)
-                setData(editData(name, email, password, phone))
-                setData(editAddresses(addresses))
+            onSubmit={async ({ email, password }) => {
+                const response = await fetch('http://localhost:8888/signin', {
+                    method: 'post',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    })
+                })
+                const user = await response.json()
+                if (user._id) {
+                    history.push('/')
+                    setIsSignedIn(true)
+                    const { name, email, password, phone, addresses } = user
+                    setData(editData(name, email, password, phone))
+                    setData(editAddresses(addresses))
+                } else {
+                    setWrongData(true)
+                }
+
             }}
         >
             {({ errors, touched }) => (
@@ -63,15 +76,16 @@ const SignIn = () => {
                     <FormContainer>
                         <h1>Sign In</h1>
                         <StyledField
-                            name='signInEmail' type='email'
+                            name='email' type='email'
                             placeholder="Email" onKeyUp={handleKeyUp}
                         />
-                        {touched.signInEmail && errors.signInEmail && <ErrorText>{errors.signInEmail}</ErrorText>}
+                        {touched.email && errors.email && <ErrorText>{errors.email}</ErrorText>}
                         <StyledField
-                            name='signInPassword' type="password"
+                            name='password' type="password"
                             placeholder="Password" innerRef={signInPasswordInput} onKeyUp={handleKeyUp}
                         />
-                        {touched.signInPassword && errors.signInPassword && <ErrorText>{errors.signInPassword}</ErrorText>}
+                        {touched.password && errors.password && <ErrorText>{errors.password}</ErrorText>}
+                        {wrongData && <ErrorText>Wrong Email or Password</ErrorText>}
                         <FormButton ref={signInButton}>
                             Sign In
                         </FormButton>

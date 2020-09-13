@@ -131,9 +131,18 @@ const Nav = () => {
 			<NavText
 				relative
 				ref={userActions}
-				onClick={isSignedIn ? toggleShow : () => history.push('/signin')}
+				onClick={isSignedIn ? toggleShow : null }
 			>
-				{isSignedIn ? `Hi ${newName}` : 'SignIn or SignUp'}
+				{isSignedIn ? 
+					`Hi ${newName}` 
+				:
+					<p>
+					<Link to='/signin'>SignIn</Link>
+					&nbsp;
+					or
+					&nbsp;
+					<Link to='/signup'>SignUp</Link></p>
+				}
 				{isSignedIn && show &&
 					<UserActionsContainer>
 						<Link to='/orders'>

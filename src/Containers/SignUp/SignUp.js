@@ -108,7 +108,7 @@ const SignUp = () => {
 						.matches(/^\d{11}$/, 'Invalid Phone')
 						.required('Required'),
 				})}
-				onSubmit={async ({ name, email, password, phone, address }) => {
+				onSubmit={ async ({ name, email, password, phone, address }) => {
 					const response = await fetch('http://localhost:8888/signup', {
 						method: 'post',
 						headers: { 'Content-Type': 'application/json' },

@@ -56,7 +56,10 @@ const Profile = () => {
 			<ProfileContainer>
 				<h3> General Information </h3>
 				<Formik
-					initialValues={{ name: data.name, phone: data.phone }}
+					initialValues={{
+						name: data.name,
+						phone: data.phone
+					}}
 					validationSchema={Yup.object({
 						name: Yup.string()
 							.min(2, 'Too Short')
@@ -65,8 +68,20 @@ const Profile = () => {
 							.matches(/^\d{11}$/, 'Invalid Phone')
 							.required("Can't Be Empty"),
 					})}
-					onSubmit={({ name, phone }) => {
-						setData(editData(name, data.email, data.password, phone))
+					onSubmit={ async ({ name, phone }) => {
+						const response = await fetch('http://localhost:8888/changedata', {
+							method: 'put',
+							headers: { 'Content-Type': 'application/json' },
+							body: JSON.stringify({
+								email: data.email,
+								name,
+								phone,
+							})
+						})
+						const result = await response.json()
+						if (result.nModified){
+							setData(editData(name, data.email, data.password, phone))
+						}
 					}}
 				>
 					{({ errors, touched }) => (
@@ -124,14 +139,26 @@ const Profile = () => {
 									.test('match', 'Wrong Password', (password) => (password === data.password)),
 								newPassword: Yup.string()
 									.required('Required')
+									.test('new', 'You Need to Write a New Password', (newPassword) => newPassword !== data.password )
 									.matches(passwordRegex, 'Password must contain at least one letter, at least one number, and be longer than 8 charaters'),
 								confirmPassword: Yup.string()
 									.required('Required')
 									.oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
 							})}
-							onSubmit={({ newPassword }) => {
-								setData(editData(data.name, data.email, newPassword, data.phone))
-								setChangePassword(false)
+							onSubmit={ async ({ newPassword }) => {
+								const response = await fetch('http://localhost:8888/changepassword', {
+									method: 'put',
+									headers: { 'Content-Type': 'application/json' },
+									body: JSON.stringify({
+										email: data.email,
+										password: newPassword
+									})
+								})
+								const result = await response.json()
+								if (result.nModified) {
+									setData(editData(data.name, data.email, newPassword, data.phone))
+									setChangePassword(false)
+								}
 							}}
 						>
 							{({ errors, touched }) => (

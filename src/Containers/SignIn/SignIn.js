@@ -67,8 +67,8 @@ const SignIn = () => {
                     setData(editAddresses(addresses))
                 } else {
                     setWrongData(true)
+                    setTimeout(()=> setWrongData(false), 3000)
                 }
-
             }}
         >
             {({ errors, touched }) => (

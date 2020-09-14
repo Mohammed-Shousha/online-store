@@ -23,7 +23,7 @@ export const ShippingDetails = styled.div`
 
     @media ${device.laptopS}{
         width: 25%;
-        height: 17em;
+        min-height: 17em;
         margin: 1.5em 2em 2em;
     }
 
@@ -92,12 +92,41 @@ export const ShippingDetails = styled.div`
         }
     }
 
+    /* field */
+    input{
+        width: 100%;
+        font-size: 1em;
+        margin: 0.5em 0;
+        border: none;
+        border-bottom: 1px solid grey;
+        outline: none;
+        background: #f7f7ee;
+
+        @media ${device.tablet}{
+            font-size: 1.05em;
+        }
+
+        @media ${device.laptop}{
+            font-size: 1.1em;
+        }
+    }
+
     /* + */
     img{
         width: 1em;
         margin: 0 0.75em;
     }
 
+`
+
+export const AddressActions = styled.div `
+    &&{
+        position: relative;
+        display: flex; 
+        justify-content: flex-end;
+        align-items: center;
+        margin: 0;
+    }
 `
 
 export const BackTitle = styled.div`

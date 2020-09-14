@@ -4,7 +4,7 @@ import FlexContainer from '../../Components/FlexContainer'
 import { DataContext } from '../../Data/DataContext'
 import { editItem } from '../../Data/DataActions'
 import { ProductsList } from '../../Data/Database'
-import remove from '../../Data/Icons/delete.svg'
+import bin from '../../Data/Icons/bin.svg'
 
 
 const CartItem = ({ productId, editable = true, order, checkout = false }) => {
@@ -42,7 +42,7 @@ const CartItem = ({ productId, editable = true, order, checkout = false }) => {
 					<br />
 					{editable &&
 						<img
-							src={remove} alt='remove'
+							src={bin} alt='bin'
 							onClick={() => onRemovingItem(productId)}
 						/>
 					}

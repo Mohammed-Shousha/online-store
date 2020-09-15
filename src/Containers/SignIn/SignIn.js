@@ -6,7 +6,7 @@ import { FormButton } from '../../Components/Buttons'
 import ErrorText from '../../Components/ErrorText'
 import { FormContainer, StyledField } from '../../Components/FormComponents'
 import { DataContext } from '../../Data/DataContext'
-import { editData, editAddresses } from '../../Data/DataActions'
+import { editData, editAddresses, editCartItems } from '../../Data/DataActions'
 
 
 const SignIn = () => {
@@ -62,9 +62,10 @@ const SignIn = () => {
                 if (user._id) {
                     history.push('/')
                     setIsSignedIn(true)
-                    const { name, email, password, phone, addresses } = user
+                    const { name, email, password, phone, addresses, cartItems } = user
                     setData(editData(name, email, password, phone))
                     setData(editAddresses(addresses))
+                    setData(editCartItems(cartItems))
                 } else {
                     setWrongData(true)
                     setTimeout(()=> setWrongData(false), 3000)

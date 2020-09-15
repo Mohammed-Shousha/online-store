@@ -8,9 +8,9 @@ export const editAddresses = (address) => ({
     payload: address
 })
 
-export const editItem = (productId, addItem) => ({
-    type: 'EDIT_ITEM',
-    payload: { productId, addItem }
+export const editCartItems = (cartItems) => ({
+    type: 'EDIT_CARTITEMS',
+    payload: cartItems
 })
 
 export const clearCart = () => ({

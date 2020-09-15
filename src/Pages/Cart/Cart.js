@@ -24,7 +24,7 @@ const Cart = () => {
 	return (
 		<>
 			<Title h1> My Cart </Title>
-			{cartItems.every(x => x === 0) ?
+			{cartItems.every(item => item.qty === 0) ?
 				<>
 					<Icon src={emptyCart} alt='cart' />
 					<h1> Your Cart Is Empty</h1>
@@ -36,10 +36,10 @@ const Cart = () => {
 				:
 				<FlexContainer around noAlign responsive>
 					<div>
-						{cartItems.map(item =>
+						{cartItems.map(({ productId }) =>
 							<CartItem
-								key={item[0]}
-								productId={item[0]}
+								key={productId}
+								productId={productId}
 							/>
 						)}
 					</div>

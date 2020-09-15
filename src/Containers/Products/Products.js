@@ -3,12 +3,13 @@ import { ProductsContainer, ProductsTitle, AddToCart, Product } from '../../Comp
 import ProductCard from '../../Components/ProductCard'
 import Alert from '../../Components/Alert'
 import { DataContext } from '../../Data/DataContext'
-import { editItem } from '../../Data/DataActions'
+import { editCartItems } from '../../Data/DataActions'
 
 
 const Products = ({ title = '', num = '', products }) => {
 
-	const { isSignedIn, setData } = useContext(DataContext)
+	const { isSignedIn, setData, data } = useContext(DataContext)
+	const { email } = data
 
 	let P = [...products]
 
@@ -28,8 +29,19 @@ const Products = ({ title = '', num = '', products }) => {
 
 	const [alert, setAlert] = useState(false)
 
-	const onAddingItems = (productId) => {
-		setData(editItem(productId, true))
+	const onAddingItems = async(productId) => {
+		const response = await fetch('http://localhost:8888/additem', {
+			method: 'put',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				email,
+				productId
+			})
+		})
+		const { result, user } = await response.json()
+		if (result.nModified) {
+			setData(editCartItems(user.cartItems))
+		}
 	}
 
 	return (

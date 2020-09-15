@@ -7,7 +7,7 @@ import ErrorText from '../../Components/ErrorText'
 import { FormMap, FormContainer, StyledField, VisibleDiv } from '../../Components/FormComponents'
 import GMap from '../GMap/GMap'
 import { DataContext } from '../../Data/DataContext'
-import { editData, editAddresses } from '../../Data/DataActions'
+import { editData, editAddresses, editCartItems } from '../../Data/DataActions'
 import { LocationContext } from '../../Data/LocationContext'
 import { passwordRegex } from '../../Data/Constants'
 
@@ -124,9 +124,10 @@ const SignUp = () => {
 					if (user._id) {
 						history.push('/')
 						setIsSignedIn(true)
-						const { name, email, password, phone, addresses } = user
+						const { name, email, password, phone, addresses, cartItems } = user
 						setData(editData(name, email, password, phone))
 						setData(editAddresses(addresses))
+						setData(editCartItems(cartItems))
 					} else {
 						setUsedEmail(true)
 					}

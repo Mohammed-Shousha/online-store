@@ -58,10 +58,10 @@ const Payment = ({ cash, setCash }) => {
 			<CheckoutTitle h2> Your Order </CheckoutTitle>
 			<FlexContainer around responsive>
 				<div>
-					{cartItems.map(item =>
+					{cartItems.map(({productId}) =>
 						<CartItem 
-							key={item[0]} 
-							productId={item[0]}
+							key={productId} 
+							productId={productId}
 							editable={false}
 							checkout={true}
 						/>

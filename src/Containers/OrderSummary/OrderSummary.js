@@ -11,7 +11,7 @@ const OrderSummary = ({ checkoutNow = true }) => {
 	const { cartItems } = data
 
 	const shippingFee = 100
-	let subtotal = cartItems.reduce((t, item) => t + Number(ProductsList.find(product => product.id === item[0]).price) * item[1], 0)
+	let subtotal = cartItems.reduce((t, item) => t + Number(ProductsList.find(product => product.id === item.productId).price) * item.qty, 0)
 	let total = subtotal + shippingFee
 
 	return (

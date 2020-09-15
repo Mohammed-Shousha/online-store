@@ -23,10 +23,10 @@ const Done = ({ activeAddress, cash })=>{
             <CheckoutTitle h3 >Order ID: {id}</CheckoutTitle>
             <FlexContainer around noAlign responsive>
                 <div>
-                    {order.map(item =>
+                    {order.map(({productId}) =>
                         <CartItem
-                            key={item[0]}
-                            productId={item[0]}
+                            key={productId}
+                            productId={productId}
                             editable={false}
                             checkout={true}
                         />

@@ -20,7 +20,7 @@ const Orders = () => {
 				<div>
 					<Icon src={box} alt='box' />
 					<h1> You Don't Have Any Orders Yet</h1>
-					{cartItems.every(item => item[1] === 0) ?
+					{cartItems.every(item => item.qty === 0) ?
 						<>
 							<p> What are you waiting for ? </p>
 							<LinkButton to='/'>
@@ -44,10 +44,10 @@ const Orders = () => {
 								<h3>Order id: {id}</h3>
 								<h2>Order Time: {time}</h2>
 							</OrdersTitle>
-							{order.map(item =>
+							{order.map(({productId}) =>
 								<CartItem
-									key={item[0]}
-									productId={item[0]}
+									key={productId}
+									productId={productId}
 									editable={false}
 									order={order}
 								/>

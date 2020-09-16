@@ -78,9 +78,10 @@ const Profile = () => {
 								phone,
 							})
 						})
-						const result = await response.json()
-						if (result.nModified){
-							setData(editData(name, data.email, data.password, phone))
+						const { result, user } = await response.json()
+						if (result.nModified) {
+							const { name, email, password, phone } = user
+							setData(editData(name, email, password, phone))
 						}
 					}}
 				>
@@ -154,9 +155,10 @@ const Profile = () => {
 										password: newPassword
 									})
 								})
-								const result = await response.json()
+								const { result, user } = await response.json()
 								if (result.nModified) {
-									setData(editData(data.name, data.email, newPassword, data.phone))
+									const { name, email, password, phone} = user
+									setData(editData(name, email, password, phone))
 									setChangePassword(false)
 								}
 							}}

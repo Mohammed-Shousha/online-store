@@ -124,10 +124,9 @@ const SignUp = () => {
 					if (user._id) {
 						history.push('/')
 						setIsSignedIn(true)
-						const { name, email, password, phone, addresses, cartItems } = user
+						const { name, email, password, phone, addresses } = user
 						setData(editData(name, email, password, phone))
 						setData(editAddresses(addresses))
-						setData(editCartItems(cartItems))
 					} else {
 						setUsedEmail(true)
 					}

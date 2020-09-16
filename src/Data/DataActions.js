@@ -13,13 +13,9 @@ export const editCartItems = (cartItems) => ({
     payload: cartItems
 })
 
-export const clearCart = () => ({
-    type: 'CLEAR_CART'
-})
-
-export const editOrders = (order) => ({
+export const editOrders = (orders) => ({
     type: 'EDIT_ORDERS',
-    payload: order
+    payload: orders
 })
 
 export const signOut = () => ({

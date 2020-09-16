@@ -62,11 +62,9 @@ const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }
 				address: `lat:${marker.lat} lng:${marker.lng}`
 			})
 		})
-		const { result, user } = await response.json()
+		const { result, addresses } = await response.json()
 		if (result.nModified) {
-			setData(editAddresses(
-				user.addresses
-			))
+			setData(editAddresses(addresses))
 			setNewAddress(false)
 			setMarker({ lat: '', lng: '' })
 		}
@@ -81,11 +79,9 @@ const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }
 				addressId: addresses[i].id
 			})
 		})
-		const { result, user } = await response.json()
+		const { result, addresses } = await response.json()
 		if (result.nModified) {
-			setData(editAddresses(
-				user.addresses
-			))
+			setData(editAddresses(addresses))
 		}
 	}
 
@@ -131,11 +127,9 @@ const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }
 											phone,
 										})
 									})
-									const { result, user } = await response.json()
+									const { result, addresses } = await response.json()
 									if (result.nModified) {
-										setData(editAddresses(
-											user.addresses
-										))
+										setData(editAddresses(addresses))
 										setActiveForm(null)
 									}
 								}}

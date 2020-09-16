@@ -28,15 +28,10 @@ export const DataReducer = (data, action) => {
                 ...data,
                 cartItems: action.payload
             }
-        case 'CLEAR_CART':
-            return {
-                ...data,
-                cartItems: initData.cartItems
-            }
         case 'EDIT_ORDERS':
             return {
                 ...data,
-                orders: [...data.orders, action.payload]
+                orders: action.payload
             }
         case 'SIGN_OUT':
             return initData

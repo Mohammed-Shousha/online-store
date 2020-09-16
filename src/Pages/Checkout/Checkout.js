@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+ import React, { useContext, useState } from 'react'
 import CONav from '../../Containers/CONav/CONav'
 import Shipping from '../Shipping/Shipping'
 import Payment from '../Payment/Payment'
@@ -13,7 +13,7 @@ import { DataContext } from '../../Data/DataContext'
 const Checkout = () => {
 
 	const { data, setData } = useContext(DataContext)
-	const { cartItems } = data
+	const { email } = data
 
 	const [step, setStep] = useState(1)
 	const [activeAddress, setActiveAddress] = useState(null)
@@ -35,33 +35,19 @@ const Checkout = () => {
 		setStep(step - 1)
 	}
 
-	const placeOrder = () => {
-		handleNext()
-		setData(editOrders(
-			{id: orderId(), order: cartItems, time: orderTime()}
-		))
-	}
-
-	const orderTime = () => {
-		let date = new Date()
-		let today = date.getDate() + '/'
-			+ (date.getMonth() + 1) + '/'
-			+ date.getFullYear()
-		let hours = date.getHours()
-		let minutes = date.getMinutes()
-		let ampm = hours >= 12 ? 'pm' : 'am'
-		hours = hours % 12
-		hours = hours ? hours : 12
-		minutes = minutes < 10 ? '0' + minutes : minutes
-		let now = hours + ':' + minutes + ' ' + ampm
-		return today + ' ' + now
-	}
-
-	const orderId = ()=>{
-		let date = new Date()
-		let today = '' + date.getDate() + '' + (date.getMonth() + 1) + date.getFullYear()
-		let now = '' + date.getHours() + '' + date.getMinutes() + date.getSeconds()
-		return now + today
+	const placeOrder = async () => {
+		const response = await fetch('http://localhost:8888/addorder', {
+			method: 'put',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				email
+			})
+		})
+		const { result, orders } = await response.json()
+		if (result.nModified) {
+			setData(editOrders(orders))
+			handleNext()
+		}
 	}
 
 	return (

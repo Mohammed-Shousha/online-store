@@ -16,9 +16,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
     "react-slideshow-image": "^1.5.3",
-    "react-ui-cards": "^2.0.0",
     "styled-components": "^5.1.1",
-    "tachyons": "^4.12.0",
     "yup": "^0.29.1"
   },
   "scripts": {

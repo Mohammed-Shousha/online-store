@@ -21,9 +21,9 @@ const CartItem = ({ productId, editable = true, order, checkout = false }) => {
 				productId
 			})
 		})
-		const { result, user } = await response.json()
+		const { result, cartItems } = await response.json()
 		if (result.nModified) {
-			setData(editCartItems(user.cartItems))
+			setData(editCartItems(cartItems))
 		}
 	}
 

@@ -7,7 +7,7 @@ import { LinkButton } from '../../Components/Buttons'
 import { CartButton } from '../../Components/CartComponents'
 import Icon from '../../Components/Icon'
 import { DataContext } from '../../Data/DataContext'
-import { clearCart } from '../../Data/DataActions'
+import { editCartItems } from '../../Data/DataActions'
 import emptyCart from '../../Data/Icons/empty-cart.svg'
 import emptyCartButton from '../../Data/Icons/empty-cart-button.svg'
 
@@ -15,10 +15,20 @@ import emptyCartButton from '../../Data/Icons/empty-cart-button.svg'
 const Cart = () => {
 
 	const { data, setData } = useContext(DataContext)
-	const { cartItems } = data
+	const { cartItems, email } = data
 
-	const handleClearCart = () => {
-		setData(clearCart())
+	const handleClearCart = async () => {
+		const response = await fetch('http://localhost:8888/clearcart', {
+			method: 'put',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				email
+			})
+		})
+		const { result, cartItems } = await response.json()
+		if (result.nModified) {
+			setData(editCartItems(cartItems))
+		}
 	}
 
 	return (

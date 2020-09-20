@@ -16,6 +16,10 @@ const Profile = () => {
 	const { data, setData } = useContext(DataContext)
 
 	const [changePassword, setChangePassword] = useState(false)
+	const [wrongPassword, setWrongPassword] = useState(false)
+	const [samePassword, setSamePassword] = useState(false)
+
+	const passwordValue = '•'.repeat(data.password.length)
 
 	const handleKeyDown = (e) => {
 		if ((e.charCode || e.keyCode) === 13) {
@@ -80,8 +84,8 @@ const Profile = () => {
 						})
 						const { result, user } = await response.json()
 						if (result.nModified) {
-							const { name, email, password, phone } = user
-							setData(editData(name, email, password, phone))
+							const { name, email, phone } = user
+							setData(editData(name, email, data.password, phone))
 						}
 					}}
 				>
@@ -117,7 +121,7 @@ const Profile = () => {
 					</ProfileDetails>
 					<ProfileDetails readOnly>
 						<p> Password </p>
-						<input type='password' value={data.password} readOnly />
+						<input type='password' value={passwordValue} readOnly />
 					</ProfileDetails>
 				</FlexContainer>
 				<FlexContainer flexEnd>
@@ -136,30 +140,35 @@ const Profile = () => {
 							initialValues={{ password: '', newPassword: '', confirmPassword: '' }}
 							validationSchema={Yup.object({
 								password: Yup.string()
-									.required('Required')
-									.test('match', 'Wrong Password', (password) => (password === data.password)),
+									.required('Required'),
 								newPassword: Yup.string()
 									.required('Required')
-									.test('new', 'You Need to Write a New Password', (newPassword) => newPassword !== data.password )
 									.matches(passwordRegex, 'Password must contain at least one letter, at least one number, and be longer than 8 charaters'),
 								confirmPassword: Yup.string()
 									.required('Required')
 									.oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
 							})}
-							onSubmit={ async ({ newPassword }) => {
+							onSubmit={ async ({ password, confirmPassword }) => {
 								const response = await fetch('http://localhost:8888/changepassword', {
 									method: 'put',
 									headers: { 'Content-Type': 'application/json' },
 									body: JSON.stringify({
 										email: data.email,
-										password: newPassword
+										password, 
+										newPassword: confirmPassword
 									})
 								})
-								const { result, user } = await response.json()
-								if (result.nModified) {
-									const { name, email, password, phone} = user
+								const result = await response.json()
+								if (result.user) {
+									const { name, email, password, phone} = result.user
 									setData(editData(name, email, password, phone))
 									setChangePassword(false)
+								}else if(result.wrongPassword){
+									setWrongPassword(true)
+									setTimeout(() => setWrongPassword(false), 2500)
+								}else{
+									setSamePassword(true)
+									setTimeout(() => setSamePassword(false), 2500)
 								}
 							}}
 						>
@@ -169,6 +178,7 @@ const Profile = () => {
 										<p> Current Password </p>
 										<Field name='password' type='password' onKeyUp={handleKeyUp} />
 										{touched.password && errors.password && <ErrorText>{errors.password}</ErrorText>}
+										{wrongPassword && <ErrorText> Wrong Password </ErrorText>}
 									</ProfileDetails>
 									<ProfileDetails changePassword>
 										<p> New Password </p>
@@ -177,6 +187,7 @@ const Profile = () => {
 											innerRef={newPasswordInput} onKeyUp={handleKeyUp}
 										/>
 										{touched.newPassword && errors.newPassword && <ErrorText>{errors.newPassword}</ErrorText>}
+										{samePassword && <ErrorText>You Need to Write a New Password</ErrorText>}
 									</ProfileDetails>
 									<ProfileDetails changePassword>
 										<p>Confirm New Password </p>

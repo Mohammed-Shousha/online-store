@@ -1,16 +1,16 @@
 import styled from 'styled-components'
 import { device } from '../Data/Constants'
 
-const activeStyle = '1.2px solid #2196f3'
+const activeStyle = '1.5px solid #2196f3'
 
 export const ShippingDetails = styled.div`
 	width: 70%;
     min-height: 15em;
 	margin: 1.5em 0rem;
 	padding: 1em 0.5em ;
-    border: ${props => props.active ? activeStyle : '1px solid grey'};
+    border: ${props => props.active ? activeStyle : '1.5px solid grey'};
+    box-shadow: ${props => props.active ? 'none' :'-5px 5px 5px 1px #b1b493' };
 	border-radius: 3px;
-	box-shadow: -5px 5px 5px 1px #b1b493;
 	background: #f7f7ee;
     cursor: pointer;
     display: ${props => props.new ? 'flex' : ''};
@@ -33,6 +33,7 @@ export const ShippingDetails = styled.div`
     
     &:hover{
         border: ${activeStyle};
+        box-shadow: none;
     }
 
     /* address name */

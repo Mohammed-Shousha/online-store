@@ -70,13 +70,13 @@ const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }
 		}
 	}
 
-	const handleDeletingAddress = async (i) => {
+	const handleDeletingAddress = async (id) => {
 		const response = await fetch('http://localhost:8888/deleteaddress', {
 			method: 'delete',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
 				email,
-				addressId: addresses[i].id
+				addressId: id
 			})
 		})
 		const { result, newAddresses } = await response.json()
@@ -92,13 +92,13 @@ const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }
 				<FlexContainer responsive>
 					{addresses.map((a, i) => (
 						<ShippingDetails
-							key={i}
+							key={a.id}
 							onClick={() => setActiveAddress(a)}
 							active={a === activeAddress}
 						>
 							<AddressActions>
-								<img onClick={() => handleDeletingAddress(i)} src={bin} alt='bin' />
-								<img onClick={() => setActiveForm(i)} src={edit} alt='edit' />
+								<img onClick={() => handleDeletingAddress(a.id)} src={bin} alt='bin' />
+								<img onClick={() => setActiveForm(a.id)} src={edit} alt='edit' />
 							</AddressActions>
 							<Formik
 								initialValues={{
@@ -121,7 +121,7 @@ const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }
 										method: 'put',
 										headers: { 'Content-Type': 'application/json' },
 										body: JSON.stringify({
-											addressId: addresses[i].id,
+											addressId: a.id,
 											name,
 											address,
 											phone,
@@ -139,9 +139,9 @@ const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }
 										<h3> Address {i + 1} </h3>
 										<div>
 											<h4> Name </h4>
-											{activeForm === i ?
+											{activeForm === a.id ?
 												<>
-													<Field name='name' onKeyUp={handleKeyUp}/>
+													<Field name='name' onKeyUp={handleKeyUp} />
 													{touched.name && errors.name && <ErrorText>{errors.name}</ErrorText>}
 												</>
 												:
@@ -150,9 +150,9 @@ const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }
 										</div>
 										<div>
 											<h4> Address </h4>
-											{activeForm === i ?
+											{activeForm === a.id ?
 												<>
-													<Field name='address' innerRef={addressInput} onKeyUp={handleKeyUp}/>
+													<Field name='address' innerRef={addressInput} onKeyUp={handleKeyUp} />
 													{touched.address && errors.address && <ErrorText>{errors.address}</ErrorText>}
 												</>
 												:
@@ -161,16 +161,16 @@ const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }
 										</div>
 										<div>
 											<h4> Phone </h4>
-											{activeForm === i ?
+											{activeForm === a.id ?
 												<>
-													<Field name='phone' innerRef={phoneInput} onKeyUp={handleKeyUp}/>
+													<Field name='phone' innerRef={phoneInput} onKeyUp={handleKeyUp} />
 													{touched.phone && errors.phone && <ErrorText>{errors.phone}</ErrorText>}
 												</>
 												:
 												<p>{a.phone}</p>
 											}
 										</div>
-										{activeForm === i &&
+										{activeForm === a.id &&
 											<FlexContainer around>
 												<Button type='button' onClick={() => setActiveForm(false)}> Cancel </Button>
 												<Button type='submit' ref={saveButton}> Save </Button>

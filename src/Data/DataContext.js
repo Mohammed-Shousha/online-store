@@ -1,14 +1,17 @@
-import React, { createContext, useState, useReducer } from "react"
+import React, { createContext } from "react"
 import { initData, DataReducer } from './DataReducer'
+import usePersistedState from './usePersistedState'
+import createPersistedReducer from 'use-persisted-reducer'
 
+const usePersistedReducer = createPersistedReducer('Data')//, window.sessionStorage)
 
 export const DataContext = createContext()
 
 export const DataProvider = ({ children }) => {
 
-	const [isSignedIn, setIsSignedIn] = useState(false)
+	const [isSignedIn, setIsSignedIn] = usePersistedState('isSignedIn', false)
 
-	const [data, setData] = useReducer(DataReducer, initData)
+	const [data, setData] = usePersistedReducer(DataReducer, initData)
 
 	return (
 		<DataContext.Provider value={{ isSignedIn, setIsSignedIn, data, setData }}>

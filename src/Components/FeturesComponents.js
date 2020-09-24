@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { device } from '../Data/Constants'
 
+
 export const Circle = styled.div `
     position: relative;
     display: flex;
@@ -89,6 +90,7 @@ export const Circle = styled.div `
         z-index: 1;
         left: 47.5%;
         bottom: 93%;
+        /* top: 93%; */
 
         @media ${device.tablet}{
             font-size: 0.85em;
@@ -115,11 +117,13 @@ export const Circle = styled.div `
             content: "";
             position: absolute;
             top: 100%;
+            /* bottom:100%; */
             left: 50%;
             margin-left: -5px;
             border-width: 5px;
             border-style: solid;
             border-color: white transparent transparent transparent;
+            /* border-color: transparent transparent white transparent; */
         }
     }
 

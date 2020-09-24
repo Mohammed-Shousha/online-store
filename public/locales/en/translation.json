@@ -1,0 +1,46 @@
+{   
+    "Nav":{
+        "Search": "Search",
+        "SignIn": "SignIn",
+        "SignUp": "SignUp",
+        "or": "or",
+        "Cart":"Cart",
+        "Hi": "Hi",
+        "Orders": "Orders",
+        "Profile": "Profile",
+        "Sign Out": "Sign Out"
+    },
+    "SNav": {
+        "SMART WATCHES": "SMART WATCHES",
+        "HEADPHONES": "HEADPHONES",
+        "COVERS": "COVERS",
+        "POWER BANKS": "POWER BANKS",
+        "SPEAKERS": "SPEAKERS"
+    },
+    "Form": {
+        "Home": "Home",
+        "Email": "Email",
+        "Password": "Password",
+        "Name": "Name",
+        "Phone": "Phone",
+        "Address": "Address (Optional)",
+        "Sign In": "Sign In",
+        "Sign Up": "Sign Up",
+        "Required": "Required",
+        "Create Account": "Create Account",
+        "Have Account": "Have Account?",
+        "NameErr": "Too Short",
+        "PassErr": "Password must contain at least one letter, at least one number, and be longer than 8 charaters",
+        "ُEmailErr": "Invalid Email",
+        "EmailErrDb": "This Email Already Have an Account Linked to It",
+        "PhoneErr": "Invalid Phone",
+        "Location": "Detect My Location",
+        "New User": "New User?",
+        "Error": "Wrong Email or Password",
+        "Confirm": "Confirm"
+    },
+    "Map": {
+        "Title": "Add New Address",
+        "Button": "Locate Me"
+    }
+}

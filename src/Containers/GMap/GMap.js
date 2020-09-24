@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api"
 // import Geocode from "react-geocode"
+import { useTranslation } from 'react-i18next'
 import Loading from '../../Components/Loading'
 import { mapContainerStyle, MapTitle, LocateMe, AddressWindow } from '../../Components/MapComponents'
 import { GoogleMapsKey } from '../../Data/Constants'
@@ -15,11 +16,14 @@ const center = {
 const options = {
 	disableDefaultUI: true,
 	zoomControl: true,
-	clickableIcons: false
+	clickableIcons: false,
+	Language: 'ar',
 }
 
 
 const GMap = ({ marker, setMarker }) => {
+
+	const { t } = useTranslation()
 
 	const { isLoaded, loadError } = useLoadScript({
 		googleMapsApiKey: GoogleMapsKey
@@ -89,7 +93,7 @@ const GMap = ({ marker, setMarker }) => {
 
 	return (
 		<>
-			<MapTitle> Add New Address </MapTitle>
+			<MapTitle> {t('Map.Title')} </MapTitle>
 			<GoogleMap
 				mapContainerStyle={mapContainerStyle}
 				zoom={6.15}
@@ -100,7 +104,7 @@ const GMap = ({ marker, setMarker }) => {
 			>
 				<LocateMe onClick={Locate}>
 					<img src={pin} alt='pin' />
-					Locate Me
+					{t('Map.Button')}
 				</LocateMe>
 				<Marker
 					position={{ lat: parseFloat(marker.lat), lng: parseFloat(marker.lng) }}

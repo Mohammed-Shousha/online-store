@@ -97,10 +97,7 @@ export const FormMap = styled(VisibleDiv) `
 `
 
 export const LinkText = styled(Link) `
-    position: absolute;
     font-size: 0.75em;
-    top: 0;
-    left: 0;
     display: flex;
     white-space: nowrap;
     cursor: pointer;
@@ -149,6 +146,7 @@ export const ParticlesBG  = styled(Particles).attrs({
     left: 0;
     right: 0;
     visibility: hidden;
+    z-index: -1;
 
     @media ${device.laptopS}{
         visibility: visible;

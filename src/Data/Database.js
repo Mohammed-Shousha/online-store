@@ -71,14 +71,6 @@ export let USERS=[{
 
 export const slideShowImages = [img1, appleCover1, img2, img3, beatsHeadset, img4]
 
-export const properties = {
-  duration: 3500,
-  transitionDuration: 550,
-  infinite: true,
-  indicators: false,
-  arrows: true,
-  pauseOnHover: true,
-}
 
 export const particles = {
   particles: {

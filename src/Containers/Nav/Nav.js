@@ -1,5 +1,6 @@
 import React, { useContext, useState, useRef, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import Autosuggest from 'react-autosuggest'
 import Sidebar from '../Sidebar/Sidebar'
 import Logo from '../../Components/Logo'
@@ -17,17 +18,29 @@ import './Nav.css'
 
 
 const Nav = () => {
-
+	
 	const { isSignedIn, setIsSignedIn, data, setData } = useContext(DataContext)
 	const { name, cartItems } = data
 	const newName = name.split(' ')[0]
-
+	
 	const onSignOut = () => {
 		setIsSignedIn(false)
 		setData(signOut())
 	}
-
+	
 	let history = useHistory()
+	
+	const { t, i18n } =useTranslation()
+	
+	const changeLanguage = (lng) => {
+		i18n.changeLanguage(lng)
+		if(lng === 'ar'){
+			document.getElementsByTagName('html')[0].setAttribute("dir", "rtl")
+		}else{
+			document.getElementsByTagName('html')[0].setAttribute("dir", "ltr")
+
+		}
+	}
 
 	const getSuggestionValue = (suggestion) => suggestion.name
 
@@ -66,16 +79,16 @@ const Nav = () => {
 			setSuggestions(
 				ProductsList.filter(suggestion => (
 					suggestion.name.toLowerCase().match(inputValue)
-				)))
-		}
-	}
-
+					)))
+				}
+			}
+			
 	const onSuggestionsClearRequested = () => {
 		setSuggestions([])
 	}
 
 	const inputProps = {
-		placeholder: 'Search',
+		placeholder: t('Nav.Search'),
 		value,
 		onChange,
 		onKeyUp,
@@ -96,7 +109,6 @@ const Nav = () => {
 				setShow(false)
 			}
 		}
-
 		document.addEventListener("mousedown", handleClickOutside)
 		return () => {
 			document.removeEventListener("mousedown", handleClickOutside)
@@ -116,6 +128,9 @@ const Nav = () => {
 
 			<Logo />
 
+			{i18n.language === 'en' && <button onClick={()=>changeLanguage('ar')}>AR</button>}
+			{i18n.language === 'ar' && <button onClick={() => changeLanguage('en')}>EN</button>}
+
 			<Autosuggest
 				suggestions={suggestions}
 				inputProps={inputProps}
@@ -134,33 +149,33 @@ const Nav = () => {
 				onClick={isSignedIn ? toggleShow : null }
 			>
 				{isSignedIn ? 
-					`Hi ${newName}` 
+					`${t('Nav.Hi')} ${newName}`
 				:
 					<p>
-					<Link to='/signin'>SignIn</Link>
+					<Link to='/signin'>{t('Nav.SignIn')}</Link>
 					&nbsp;
-					or
+					{t('Nav.or')}
 					&nbsp;
-					<Link to='/signup'>SignUp</Link></p>
+					<Link to='/signup'>{t('Nav.SignUp')}</Link></p>
 				}
 				{isSignedIn && show &&
 					<UserActionsContainer>
 						<Link to='/orders'>
 							<UserAction>
 								<img src={list} alt='list' />
-								<p> Orders </p>
+								<p> {t('Nav.Orders')} </p>
 							</UserAction>
 						</Link>
 						<Link to='/profile'>
 							<UserAction>
 								<img src={user} alt='user' />
-								<p> Profile </p>
+								<p> {t('Nav.Profile')} </p>
 							</UserAction>
 						</Link>
 						<Link to='/' onClick={onSignOut} >
 							<UserAction signOut>
 								<img src={signout} alt='signout' />
-								<p> Sign Out </p>
+								<p> {t('Nav.Sign Out')} </p>
 							</UserAction>
 						</Link>
 					</UserActionsContainer>}
@@ -170,7 +185,7 @@ const Nav = () => {
 				<Link to='/cart'>
 					<NavText>
 						<FlexContainer>
-							Cart
+							{t('Nav.Cart')}
 							<img alt='cart' src={cart} />
 							<CartCircle hide={cartItems.every(item => item.qty === 0)}>
 								{cartItems.reduce((t, item) => t + item.qty, 0)}

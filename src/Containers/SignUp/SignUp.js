@@ -2,6 +2,7 @@ import React, { useState, useContext, useRef } from 'react'
 import { Formik, Form, useFormikContext } from 'formik'
 import * as Yup from 'yup'
 import { useHistory, Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { FormButton } from '../../Components/Buttons'
 import ErrorText from '../../Components/ErrorText'
 import { FormMap, FormContainer, StyledField, VisibleDiv } from '../../Components/FormComponents'
@@ -13,12 +14,13 @@ import { passwordRegex } from '../../Data/Constants'
 
 
 const SignUp = () => {
-
+	
 	const { setIsSignedIn, setData } = useContext(DataContext)
 	const { marker, setMarker } = useContext(LocationContext)
-
+	
 	let history = useHistory()
-
+	const { t } = useTranslation()
+	
 	const [detectAddress, setDetectAddress] = useState(false)
 	const [addressFocused, setAddressFocused] = useState(false)
 	const [usedEmail, setUsedEmail] = useState(false)
@@ -79,7 +81,7 @@ const SignUp = () => {
 
 		return (
 			<FormButton grey onClick={addressConfirm}>
-				Confirm
+				{t('Form.Confirm')}
 			</FormButton>
 		)
 	}
@@ -96,17 +98,17 @@ const SignUp = () => {
 				}}
 				validationSchema={Yup.object({
 					name: Yup.string()
-						.min(2, 'Too Short')
-						.required('Required'),
+						.min(2, t('Form.NameErr'))
+						.required(t('Form.Required')),
 					email: Yup.string()
-						.email('Invalid Email')
-						.required('Required'),
+						.email(t('Form.EmailErr'))
+						.required(t('Form.Required')),
 					password: Yup.string()
-						.matches(passwordRegex, 'Password must contain at least one letter, at least one number, and be longer than 8 charaters')
-						.required('Required'),
+						.matches(passwordRegex, t('Form.PassErr'))
+						.required(t('Form.Required')),
 					phone: Yup.string()
-						.matches(/^\d{11}$/, 'Invalid Phone')
-						.required('Required'),
+						.matches(/^\d{11}$/, t('Form.PhoneErr'))
+						.required(t('Form.Required')),
 				})}
 				onSubmit={ async ({ name, email, password, phone, address }) => {
 					const response = await fetch('http://localhost:8888/signup', {
@@ -137,43 +139,43 @@ const SignUp = () => {
 						<VisibleDiv visible={!detectAddress}>
 							<Form onKeyDown={handleKeyDown} >
 								<FormContainer >
-									<h1>Create Account</h1>
+									<h1>{t('Form.Create Account')}</h1>
 									<StyledField
 										name="name" type="text"
-										placeholder="Name" innerRef={nameInput} onKeyUp={handleKeyUp}
+										placeholder={t('Form.Name')} innerRef={nameInput} onKeyUp={handleKeyUp}
 									/>
 									{touched.name && errors.name && <ErrorText>{errors.name}</ErrorText>}
 									<StyledField
 										name="email" type="Email"
-										placeholder="Email" innerRef={emailInput} onKeyUp={handleKeyUp}
+										placeholder={t('Form.Email')} innerRef={emailInput} onKeyUp={handleKeyUp}
 									/>
 									{touched.email && errors.email && <ErrorText>{errors.email}</ErrorText>}
-									{usedEmail && <ErrorText>This Email Already Have an Account Linked to It</ErrorText>}
+									{usedEmail && <ErrorText>{t('Form.EmailErrDb')}</ErrorText>}
 									<StyledField
 										name="password" type="password"
-										placeholder='Password' innerRef={passwordInput} onKeyUp={handleKeyUp}
+										placeholder={t('Form.Password')} innerRef={passwordInput} onKeyUp={handleKeyUp}
 									/>
 									{touched.password && errors.password && <ErrorText>{errors.password}</ErrorText>}
 									<StyledField
 										name="phone" type="tel"
-										placeholder="Phone " innerRef={phoneInput} onKeyUp={handleKeyUp} onKeyDown={telKeyUp}
+										placeholder={t('Form.Phone')} innerRef={phoneInput} onKeyUp={handleKeyUp} onKeyDown={telKeyUp}
 									/>
 									{touched.phone && errors.phone && <ErrorText>{errors.phone}</ErrorText>}
 									<StyledField
 										name="address" type="text" as='textarea' value={values.address} onChange={handleChange}
-										placeholder="Address (Optional)" ref={addressInput} onKeyUp={handleKeyUp}
+										placeholder={t('Form.Address')} ref={addressInput} onKeyUp={handleKeyUp}
 										onClick={() => setAddressFocused(true)}
 									/>
 									{addressFocused &&
 										<FormButton type='button' grey onClick={() => setDetectAddress(true)}>
-											Detect My Location
+											{t('Form.Location')}
 									</FormButton>
 									}
 									<FormButton ref={signUpButton}>
-										Sign Up
+										{t('Form.Sign Up')}
 								</FormButton>
-									<p> Have Account?
-									<Link to='signin'> <strong> Sign In </strong> </Link>
+									<p> {t('Form.Have Account')}
+										<Link to='signin'> <strong> {t('Form.Sign In')} </strong> </Link>
 									</p>
 								</FormContainer>
 							</Form>

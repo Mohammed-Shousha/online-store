@@ -1,7 +1,7 @@
-import React, { lazy, Suspense } from 'react'
+import React, { lazy, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import PrivateRoute from './Containers/PrivateRoute/PrivateRoute'
-import Loading from './Components/Loading'
 const Home = lazy(() => import('./Pages/Home/Home'))
 const Cart = lazy(() => import('./Pages/Cart/Cart'))
 const Form = lazy(() => import('./Pages/Form/Form'))
@@ -48,22 +48,26 @@ const App = () => {
 		</>
 	)
 
+	const { i18n } = useTranslation()
+	useEffect(() => {
+		if (i18n.language === 'ar') {
+			document.getElementsByTagName('html')[0].setAttribute("dir", "rtl")
+		}
+	}, [i18n.language])
 	return (
 		<Router>
-			<Suspense fallback={<Loading />}>
-				<Switch>
-					<Route path={['/signin', '/signup']}>
-						<Form />
-					</Route>
-					<PrivateRoute path='/checkout'>
-						<Checkout />
-					</PrivateRoute>
-					<Route path='/notfound'>
-						<h1> 404 Not Found </h1>
-					</Route>
-					<NavRoutes />
-				</Switch>
-			</Suspense>
+			<Switch>
+				<Route path={['/signin', '/signup']}>
+					<Form />
+				</Route>
+				<PrivateRoute path='/checkout'>
+					<Checkout />
+				</PrivateRoute>
+				<Route path='/notfound'>
+					<h1> 404 Not Found </h1>
+				</Route>
+				<NavRoutes />
+			</Switch>
 		</Router>
 	)
 }

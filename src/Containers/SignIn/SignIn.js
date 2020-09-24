@@ -2,6 +2,7 @@ import React, { useContext, useRef, useState } from 'react'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { useHistory, Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { FormButton } from '../../Components/Buttons'
 import ErrorText from '../../Components/ErrorText'
 import { FormContainer, StyledField } from '../../Components/FormComponents'
@@ -13,6 +14,8 @@ const SignIn = () => {
     const { setData, setIsSignedIn } = useContext(DataContext)
 
     const history = useHistory()
+
+    const { t } = useTranslation()
 
     const [wrongData, setWrongData] = useState(false)
     const signInPasswordInput = useRef(null)
@@ -32,7 +35,7 @@ const SignIn = () => {
 
     const handleKeyDown = (e) => {
         if ((e.charCode || e.keyCode) === 13) {
-            e.preventDefault();
+            e.preventDefault()
         }
     }
 
@@ -44,10 +47,10 @@ const SignIn = () => {
             }}
             validationSchema={Yup.object({
                 email: Yup.string()
-                    .required('Required')
-                    .email('Invalid Email'),
+                    .required(t('Form.Required'))
+                    .email(t('Form.EmailErr')),
                 password: Yup.string()
-                    .required('Required')
+                    .required(t('Form.Required'))
             })}
             onSubmit={async ({ email, password }) => {
                 const response = await fetch('http://localhost:8888/signin', {
@@ -76,24 +79,24 @@ const SignIn = () => {
             {({ errors, touched }) => (
                 <Form onKeyDown={handleKeyDown}>
                     <FormContainer>
-                        <h1>Sign In</h1>
+                        <h1>{t('Form.Sign In')}</h1>
                         <StyledField
                             name='email' type='email'
-                            placeholder="Email" onKeyUp={handleKeyUp}
+                            placeholder={t("Form.Email")} onKeyUp={handleKeyUp}
                         />
                         {touched.email && errors.email && <ErrorText>{errors.email}</ErrorText>}
                         <StyledField
                             name='password' type="password"
-                            placeholder="Password" innerRef={signInPasswordInput} onKeyUp={handleKeyUp}
+                            placeholder={t("Form.Password")} innerRef={signInPasswordInput} onKeyUp={handleKeyUp}
                         />
                         {touched.password && errors.password && <ErrorText>{errors.password}</ErrorText>}
-                        {wrongData && <ErrorText>Wrong Email or Password</ErrorText>}
+                        {wrongData && <ErrorText>{t('Form.Error')}</ErrorText>}
                         <FormButton ref={signInButton}>
-                            Sign In
+                            {t('Form.Sign In')}
                         </FormButton>
                         <p>
-                            New User?
-                            <Link to='/signup'> <strong> Sign Up </strong> </Link>
+                            {t('Form.New User')}
+                            <Link to='/signup'> <strong> {t('Form.Sign Up')} </strong> </Link>
                         </p>
                     </FormContainer>
                 </Form>

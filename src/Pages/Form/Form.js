@@ -12,7 +12,6 @@ const Form = () => {
 	let location = useLocation()
 	const { i18n, t } = useTranslation()
 
-
 	return (
 		<>
 			<LinkText to='/'>

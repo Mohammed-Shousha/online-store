@@ -49,11 +49,13 @@ const App = () => {
 	)
 
 	const { i18n } = useTranslation()
+	
 	useEffect(() => {
 		if (i18n.language === 'ar') {
 			document.getElementsByTagName('html')[0].setAttribute("dir", "rtl")
 		}
 	}, [i18n.language])
+
 	return (
 		<Router>
 			<Switch>

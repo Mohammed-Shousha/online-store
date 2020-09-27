@@ -18,10 +18,6 @@ export const PaymentButton = styled.button `
 		width: 35%;
 	}
 
-	@media ${device.laptop}{
-		width: 30%;
-	}
-
 	/* pay with */
 	p{
 		margin: 0;
@@ -54,9 +50,9 @@ export const PaymentButton = styled.button `
     }
 `
 
-export const CashPayment = styled.div `
+export const PaymentContainer = styled.div `
 	font-size: 0.8em;
-	width: 75%;
+	width: 77%;
 	margin: 1.5em auto; 
 	padding: 0.75em 1.75em;
     text-align: left;
@@ -70,11 +66,10 @@ export const CashPayment = styled.div `
 	}
 
 	@media ${device.laptopS}{
-		width: 65%;
+		width: 68%;
 	}
 
 	@media ${device.laptop}{
-		width: 60%;
 		font-size: 1em;
 	}
 
@@ -85,4 +80,14 @@ export const CashPayment = styled.div `
     strong{
         cursor: pointer;
     }
+`
+
+export const StripeForm = styled.form `
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+
+	> div {
+		margin: 1em 0;
+	}
 `

@@ -15,9 +15,9 @@ const Checkout = () => {
 	const { data, setData } = useContext(DataContext)
 	const { email } = data
 
-	const [step, setStep] = useState(1)
+	const [step, setStep] = useState(2)
 	const [activeAddress, setActiveAddress] = useState(null)
-	const [cash, setCash] = useState(true)
+	const [cash, setCash] = useState(false)
 	
 	const [newAddress, setNewAddress] = useState(false)
 	const [alert, setAlert] = useState(false)

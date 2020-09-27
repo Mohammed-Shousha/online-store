@@ -1,15 +1,20 @@
 import React, { useContext } from 'react'
+import { loadStripe } from "@stripe/stripe-js"
+import { Elements } from "@stripe/react-stripe-js"
+import PaymentForm from '../../Containers/PaymentForm/PaymentForm'
 import CartItem from '../../Containers/CartItem/CartItem'
 import OrderSummary from '../../Containers/OrderSummary/OrderSummary'
 import { CheckoutTitle } from '../../Components/Title'
 import FlexContainer from '../../Components/FlexContainer'
-import { PaymentButton, CashPayment } from '../../Components/PaymentComponents'
+import { PaymentButton, PaymentContainer } from '../../Components/PaymentComponents'
 import { DataContext } from '../../Data/DataContext'
 import money from '../../Data/Icons/cash.svg'
 import greenMoney from '../../Data/Icons/cash-green.svg'
 import credit from '../../Data/Icons/credit.svg'
 import greenCredit from '../../Data/Icons/credit-green.svg'
 
+
+const promise = loadStripe("pk_test_51HVa76KSon2LsBHhXeMkqSJSSmE5ZDAejg6K0DmxFppRgFXJBeZcojemAUXZ2PrQvyRkynin3TS6GZ8iUCQJpiRu00IPu5tsoN")
 
 const Payment = ({ cash, setCash }) => {
 
@@ -40,18 +45,20 @@ const Payment = ({ cash, setCash }) => {
 			</FlexContainer>
 			<FlexContainer center>
 				{cash ?
-					<CashPayment>
+					<PaymentContainer>
 						<p>Please note there is a non-refundable fee of 10.00 EGP for our cash on delivery service. </p>
 						<p>To save on this amount,&nbsp;
 					<strong onClick={() => setCash(false)}>
 								please proceed with debit/credit card.
 					</strong>
 						</p>
-					</CashPayment>
+					</PaymentContainer>
 					:
-					<CashPayment>
-						<p> To Be Card Payment // Stripe </p>
-					</CashPayment>
+					<PaymentContainer>
+						<Elements stripe={promise}>
+							<PaymentForm />
+						</Elements>
+					</PaymentContainer>
 				}
 			</FlexContainer>
 					

@@ -5,9 +5,9 @@ import { device } from '../Data/Constants'
 
 export const Button = styled.button`
     border: none;
-	background: #2196f3;
-	color: white;
-    font-size: 0.7em;
+	background:${props => props.disabled ? '#eeeeee' : '#2196f3'};
+	color: ${props => props.disabled? '#1010104D':  'white'};
+    font-size: 0.8em;
 	font-weight: bold;
 	border-radius: 5px;
 	margin: 0.75em 0;
@@ -15,10 +15,6 @@ export const Button = styled.button`
 	outline: none;
 	cursor: pointer;
 	visibility: ${props => props.hide ? 'hidden' : ''};
-
-    @media ${device.tablet}{
-        font-size: 0.8em;
-    }
 
     @media ${device.laptopS}{
         font-size: 0.85em;
@@ -75,8 +71,6 @@ export const FormButton = styled.button.attrs(props => ({
         font-size: 0.9em;
         padding: 0.85em 1.5em;
     }
-
-
 `
 
 export const MapButton = styled(FormButton)`

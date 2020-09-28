@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useEffect, useContext, useLayoutEffect } from "react"
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import { Button } from '../../Components/Buttons'
 import ErrorText from '../../Components/ErrorText'
@@ -6,7 +6,7 @@ import { StripeForm } from '../../Components/PaymentComponents'
 import { DataContext } from '../../Data/DataContext'
 
 
-const PaymentForm = () => {
+const PaymentForm = ({ placeOrder }) => {
 
     const { data } = useContext(DataContext)
     const { email } = data
@@ -15,6 +15,7 @@ const PaymentForm = () => {
     const [processing, setProcessing] = useState('')
     const [disabled, setDisabled] = useState(true)
     const [clientSecret, setClientSecret] = useState('')
+    const [fontSize , setFontSize] = useState(16)
     const stripe = useStripe()
     const elements = useElements()
 
@@ -24,7 +25,7 @@ const PaymentForm = () => {
                 color: "#000000",
                 fontFamily: 'Courier, monospace',
                 fontSmoothing: "antialiased",
-                fontSize: '20px',
+                fontSize: `${fontSize}px`,
                 "::placeholder": {
                     color: "#32325d"
                 }
@@ -37,12 +38,10 @@ const PaymentForm = () => {
     }
 
     const handleChange = async (e) => {
-        // Listen for changes in the CardElement
-        // and display any errors as the customer types their card details
         setDisabled(e.empty)
         setError(e.error ? e.error.message : "")
     }
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault()
         setProcessing(true)
@@ -59,9 +58,10 @@ const PaymentForm = () => {
             setError(null)
             setProcessing(false)
             setSucceeded(true)
+            placeOrder()
         }
     }
-
+    
     useEffect(() => {
         async function fetchData() {
             const response = await fetch("http://localhost:8888/payment", {
@@ -77,19 +77,35 @@ const PaymentForm = () => {
         }
         fetchData()
     }, [email])
-
+    
+    useLayoutEffect(() => {
+        const updateFontSize = () => {
+            let width = window.innerWidth
+            if (width < 480) {
+                setFontSize(16)
+            }else{
+                setFontSize(20)
+            }
+            if (width > 1200){
+                setFontSize(23)
+            }
+        }
+        window.addEventListener('resize', updateFontSize)
+        updateFontSize()
+        return () => window.removeEventListener('resize', updateFontSize)
+    }, [])
+    
     return (
         <StripeForm onSubmit={handleSubmit}>
-                <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
+            <CardElement options={cardStyle} onChange={handleChange} />
             <Button
                 disabled={processing || disabled || succeeded}
             >
-                Pay
+                Place Order
             </Button>
             {error &&
                 <ErrorText> {error} </ErrorText>
             }
-            {/* Show a success message upon completion */}
             {succeeded &&
                 <p>
                     Payment succeeded, see the result in your

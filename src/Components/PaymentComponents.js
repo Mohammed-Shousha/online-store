@@ -51,6 +51,9 @@ export const PaymentButton = styled.button `
 `
 
 export const PaymentContainer = styled.div `
+	display: flex;
+	flex-direction: column;
+	align-content: center;
 	font-size: 0.8em;
 	width: 77%;
 	margin: 1.5em auto; 
@@ -86,7 +89,7 @@ export const StripeForm = styled.form `
 	display: flex;
 	flex-direction: column;
 	align-content: center;
-
+	
 	> div {
 		margin: 1em 0;
 	}

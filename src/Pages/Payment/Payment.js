@@ -5,9 +5,11 @@ import PaymentForm from '../../Containers/PaymentForm/PaymentForm'
 import CartItem from '../../Containers/CartItem/CartItem'
 import OrderSummary from '../../Containers/OrderSummary/OrderSummary'
 import { CheckoutTitle } from '../../Components/Title'
+import { Button } from '../../Components/Buttons'
 import FlexContainer from '../../Components/FlexContainer'
 import { PaymentButton, PaymentContainer } from '../../Components/PaymentComponents'
 import { DataContext } from '../../Data/DataContext'
+import { editOrders } from '../../Data/DataActions'
 import money from '../../Data/Icons/cash.svg'
 import greenMoney from '../../Data/Icons/cash-green.svg'
 import credit from '../../Data/Icons/credit.svg'
@@ -16,10 +18,25 @@ import greenCredit from '../../Data/Icons/credit-green.svg'
 
 const promise = loadStripe("pk_test_51HVa76KSon2LsBHhXeMkqSJSSmE5ZDAejg6K0DmxFppRgFXJBeZcojemAUXZ2PrQvyRkynin3TS6GZ8iUCQJpiRu00IPu5tsoN")
 
-const Payment = ({ cash, setCash }) => {
+const Payment = ({ cash, setCash, handleNext }) => {
 
-	const { data } = useContext(DataContext)
-	const { cartItems } = data 
+	const { data, setData } = useContext(DataContext)
+	const { cartItems, email } = data 
+
+	const placeOrder = async () => {
+		const response = await fetch('http://localhost:8888/addorder', {
+			method: 'put',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				email
+			})
+		})
+		const { result, orders } = await response.json()
+		if (result.nModified) {
+			setData(editOrders(orders))
+			handleNext()
+		}
+	}
 
 	return (
 		<>
@@ -47,23 +64,28 @@ const Payment = ({ cash, setCash }) => {
 				{cash ?
 					<PaymentContainer>
 						<p>Please note there is a non-refundable fee of 10.00 EGP for our cash on delivery service. </p>
-						<p>To save on this amount,&nbsp;
-					<strong onClick={() => setCash(false)}>
-								please proceed with debit/credit card.
-					</strong>
+						<p>To save this amount, {""}
+						<strong onClick={() => setCash(false)}>
+							please proceed with debit/credit card.
+						</strong>
 						</p>
+						<Button onClick={placeOrder}>
+							Place Order
+						</Button>
 					</PaymentContainer>
 					:
 					<PaymentContainer>
 						<Elements stripe={promise}>
-							<PaymentForm />
+							<PaymentForm 
+								placeOrder={placeOrder} 
+							/>
 						</Elements>
 					</PaymentContainer>
 				}
 			</FlexContainer>
 					
 			<CheckoutTitle h2> Your Order </CheckoutTitle>
-			<FlexContainer around responsive>
+			<FlexContainer around noAlign responsive>
 				<div>
 					{cartItems.map(({productId}) =>
 						<CartItem 

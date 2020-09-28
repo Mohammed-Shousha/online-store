@@ -12,10 +12,9 @@ import { DataContext } from '../../Data/DataContext'
 
 const Checkout = () => {
 
-	const { data, setData } = useContext(DataContext)
-	const { email } = data
+	const { data } = useContext(DataContext)
 
-	const [step, setStep] = useState(2)
+	const [step, setStep] = useState(1)
 	const [activeAddress, setActiveAddress] = useState(null)
 	const [cash, setCash] = useState(false)
 	
@@ -33,21 +32,6 @@ const Checkout = () => {
 
 	const handleBack = () => {
 		setStep(step - 1)
-	}
-
-	const placeOrder = async () => {
-		const response = await fetch('http://localhost:8888/addorder', {
-			method: 'put',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				email
-			})
-		})
-		const { result, orders } = await response.json()
-		if (result.nModified) {
-			setData(editOrders(orders))
-			handleNext()
-		}
 	}
 
 	return (
@@ -73,10 +57,8 @@ const Checkout = () => {
 					<Payment
 						cash={cash}
 						setCash={setCash}
+						handleNext={handleNext}
 					/>
-					<Button onClick={placeOrder}>
-						Place Order
-					</Button>
 				</>
 			:
 				<Done

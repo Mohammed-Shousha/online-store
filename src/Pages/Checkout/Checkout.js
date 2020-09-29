@@ -1,4 +1,4 @@
- import React, { useContext, useState } from 'react'
+ import React, { useState } from 'react'
 import CONav from '../../Containers/CONav/CONav'
 import Shipping from '../Shipping/Shipping'
 import Payment from '../Payment/Payment'
@@ -6,13 +6,9 @@ import Done from '../Done/Done'
 import Footer from '../../Containers/Footer/Footer'
 import { Button } from '../../Components/Buttons'
 import Alert from '../../Components/Alert'
-import { editOrders } from '../../Data/DataActions'
-import { DataContext } from '../../Data/DataContext'
 
 
 const Checkout = () => {
-
-	const { data } = useContext(DataContext)
 
 	const [step, setStep] = useState(1)
 	const [activeAddress, setActiveAddress] = useState(null)

@@ -30,17 +30,21 @@ const Products = ({ title = '', num = '', products }) => {
 	const [alert, setAlert] = useState(false)
 
 	const onAddingItems = async(productId) => {
-		const response = await fetch('http://localhost:8888/additem', {
-			method: 'put',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				email,
-				productId
+		if(isSignedIn){
+			const response = await fetch('http://localhost:8888/additem', {
+				method: 'put',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					email,
+					productId
+				})
 			})
-		})
-		const { result, cartItems } = await response.json()
-		if (result.nModified) {
-			setData(editCartItems(cartItems))
+			const { result, cartItems } = await response.json()
+			if (result.nModified) {
+				setData(editCartItems(cartItems))
+			}
+		} else{
+			setAlert(true)
 		}
 	}
 
@@ -60,8 +64,7 @@ const Products = ({ title = '', num = '', products }) => {
 											details='blah blah blah blah'
 										/>
 										<AddToCart 
-											onClick={isSignedIn ? () => onAddingItems(product.id) 
-											: () => setAlert(true)}
+											onClick={() => onAddingItems(product.id)}
 										>
 											ADD TO CART
 										</AddToCart>

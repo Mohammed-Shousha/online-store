@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { device } from '../Data/Constants'
 import x from '../Data/Icons/x.svg'
+import { DataContext } from '../Data/DataContext'
 
 const AlertContainer = styled.div`
 	width: 70%;
@@ -62,21 +63,47 @@ const AlertContainer = styled.div`
 			font-size: 1.15em;
 		}
 	}
+
+	strong{
+		cursor: pointer;
+	}
 `
 
-const Alert = ({ setAlert, checkout }) => (
-	<AlertContainer>
-		<img src={x} alt='x' onClick={() => setAlert(false)} />
-		{!checkout ?
-			<p>In Order to Add Items to Your Cart <br />
-				<Link to='/signin'>
-					<strong>SignIn or SignUp</strong>
-				</Link>
-			</p>
-			:
-			<h4> Please Select an Address </h4>
+const Alert = ({ setAlert, confirm, address }) => {
+	const { data, setConfirmNav } = useContext(DataContext)
+	const { email } = data
+
+	const resendEmail = async () =>{
+		const response = await fetch('http://localhost:8888/resendemail', {
+			method: 'post',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ email })
+		})
+		const result = await response.json()
+		if(result === 'Success'){
+			setConfirmNav(true)
+			setAlert(false)
 		}
-	</AlertContainer>
-)
+
+	}
+	return(
+		<AlertContainer>
+			<img src={x} alt='x' onClick={() => setAlert(false)} />
+			{address ?
+				<h4> Please Select an Address </h4>
+			:confirm ?
+				<p> To Checkout You Need To Confirm Your Email<br />
+					<strong onClick={resendEmail}>Resend Confirmation Email</strong>
+				</p>
+			:
+				<p>In Order to Add Items to Your Cart <br />
+					<Link to='/signin'>
+						<strong>SignIn or SignUp</strong>
+					</Link>
+				</p>
+			}
+		</AlertContainer>
+	)
+}
 
 export default Alert

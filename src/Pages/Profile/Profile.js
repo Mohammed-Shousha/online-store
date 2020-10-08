@@ -87,9 +87,10 @@ const Profile = () => {
 							const { name, email, phone } = user
 							setData(editData(name, email, data.password, phone))
 						}
+						console.log('Clicked')
 					}}
 				>
-					{({ errors, touched }) => (
+					{({ errors, touched, isSubmitting }) => (
 						<Form onKeyDown={handleKeyDown}>
 							<FlexContainer around responsive>
 								<ProfileDetails>
@@ -104,7 +105,13 @@ const Profile = () => {
 								</ProfileDetails>
 							</FlexContainer>
 							<FlexContainer flexEnd>
-								<ProfileButton type='submit' ref={saveButton}> SAVE </ProfileButton>
+								<ProfileButton
+									type='submit'
+									ref={saveButton}
+									disabled={isSubmitting}
+								>
+									SAVE
+								</ProfileButton>
 							</FlexContainer>
 						</Form>
 					)}
@@ -125,7 +132,11 @@ const Profile = () => {
 					</ProfileDetails>
 				</FlexContainer>
 				<FlexContainer flexEnd>
-					<ProfileButton onClick={() => setChangePassword(true)}> CHANGE PASSWORD </ProfileButton>
+					<ProfileButton 
+						onClick={() => setChangePassword(true)}
+					>
+						CHANGE PASSWORD
+					</ProfileButton>
 				</FlexContainer>
 			</ProfileContainer>
 
@@ -172,7 +183,7 @@ const Profile = () => {
 								}
 							}}
 						>
-							{({ errors, touched }) => (
+							{({ errors, touched, isSubmitting }) => (
 								<Form onKeyDown={handleKeyDown}>
 									<ProfileDetails changePassword>
 										<p> Current Password </p>
@@ -198,8 +209,16 @@ const Profile = () => {
 										{touched.confirmPassword && errors.confirmPassword && <ErrorText>{errors.confirmPassword}</ErrorText>}
 									</ProfileDetails>
 									<FlexContainer around>
-										<ChangePasswordButton color='#555752' type='button' onClick={() => setChangePassword(false)}> CANCEL </ChangePasswordButton>
-										<ChangePasswordButton color='blue' type='submit' ref={OKButton}> OK </ChangePasswordButton>
+										<ChangePasswordButton
+											color='#555752' type='button'
+											onClick={() => setChangePassword(false)}
+										>
+											CANCEL
+										</ChangePasswordButton>
+										<ChangePasswordButton
+											color='blue' type='submit'
+											ref={OKButton} disabled={isSubmitting}
+										> OK </ChangePasswordButton>
 									</FlexContainer>
 								</Form>
 							)}

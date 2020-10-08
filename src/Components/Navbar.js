@@ -39,3 +39,8 @@ export const MainNav = styled(Navbar) `
         }
     }
 `
+
+export const ConfirmNav = styled(MainNav) `
+    margin-bottom: 2em;
+    justify-content: center;
+`

@@ -3,6 +3,10 @@ export const editData = (name, email, password, phone) => ({
     payload: { name, email, password, phone }
 })
 
+export const confirm = () => ({
+    type:'CONFIRM_EMAIL'
+})
+
 export const editAddresses = (address) => ({
     type: 'EDIT_ADDRESSES',
     payload: address

@@ -3,6 +3,10 @@ import { device } from '../Data/Constants'
 
 export const Contact = styled.div `
 	background: #c3cfe2;
+    position:${props => props.bottom && 'absolute'} ;
+    bottom: 2.5em;
+    right:0;
+    left:0;
 
     div{
         display: flex;
@@ -60,6 +64,10 @@ export const FooterContainer = styled.footer `
 	background: black;
 	color: white;
 	white-space: nowrap;
+    position:${props => props.bottom && 'absolute'} ;
+    bottom:0;
+    right:0;
+    left:0;
 
     @media ${device.laptopS}{
         display: flex;

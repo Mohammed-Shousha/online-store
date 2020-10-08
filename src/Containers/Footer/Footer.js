@@ -3,9 +3,9 @@ import { FooterContainer, Contact } from '../../Components/FooterComponents'
 import { CONTACT } from '../../Data/Database'
 
 
-const Footer = () => (
+const Footer = ({bottom}) => (
 	<>
-		<Contact>
+		<Contact bottom={bottom}>
 			<h2>Contact Us</h2>
 			<div>
 				{CONTACT.map(c => (
@@ -15,7 +15,7 @@ const Footer = () => (
 				))}
 			</div>
 		</Contact>
-		<FooterContainer>
+		<FooterContainer bottom={bottom}>
 			<h1> © 2020. All Rights Reserved</h1>
 			<p>
 				<span>About Us</span>

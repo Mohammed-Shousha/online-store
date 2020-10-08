@@ -1,6 +1,7 @@
 export const initData = {
     name: '',
     email: '',
+    confirmed: false,
     password: '',
     phone: '',
     addresses: [],
@@ -17,6 +18,11 @@ export const DataReducer = (data, action) => {
                 email: action.payload.email,
                 password: action.payload.password,
                 phone: action.payload.phone,
+            }
+        case 'CONFIRM_EMAIL':
+            return{
+                ...data,
+                confirmed: true
             }
         case 'EDIT_ADDRESSES':
             return {

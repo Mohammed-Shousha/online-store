@@ -47,8 +47,8 @@ const SignIn = () => {
             }}
             validationSchema={Yup.object({
                 email: Yup.string()
-                    .required(t('Form.Required'))
-                    .email(t('Form.EmailErr')),
+                    .email(t('Form.EmailErr'))
+                    .required(t('Form.Required')),
                 password: Yup.string()
                     .required(t('Form.Required'))
             })}
@@ -76,7 +76,7 @@ const SignIn = () => {
                 }
             }}
         >
-            {({ errors, touched }) => (
+            {({ errors, touched, isSubmitting }) => (
                 <Form onKeyDown={handleKeyDown}>
                     <FormContainer>
                         <h1>{t('Form.Sign In')}</h1>
@@ -91,7 +91,7 @@ const SignIn = () => {
                         />
                         {touched.password && errors.password && <ErrorText>{errors.password}</ErrorText>}
                         {wrongData && <ErrorText>{t('Form.Error')}</ErrorText>}
-                        <FormButton ref={signInButton}>
+                        <FormButton ref={signInButton} disabled={isSubmitting}>
                             {t('Form.Sign In')}
                         </FormButton>
                         <p>

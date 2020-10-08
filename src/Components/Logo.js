@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { device } from '../Data/Constants'
 
 
-const LogoImg = styled.img.attrs(props => ({
+export const LogoImg = styled.img.attrs(props => ({
     src: logo,
     alt: 'logo'
 }))`

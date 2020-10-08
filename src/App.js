@@ -5,6 +5,7 @@ import PrivateRoute from './Containers/PrivateRoute/PrivateRoute'
 const Home = lazy(() => import('./Pages/Home/Home'))
 const Cart = lazy(() => import('./Pages/Cart/Cart'))
 const Form = lazy(() => import('./Pages/Form/Form'))
+const Confirm = lazy(() => import('./Pages/Confirm/Confirm'))
 const Checkout = lazy(() => import('./Pages/Checkout/Checkout'))
 const StoreItems = lazy(() => import('./Pages/StoreItems/StoreItems'))
 const SearchResults = lazy(() => import('./Pages/SearchResults/SearchResults'))
@@ -64,7 +65,12 @@ const App = () => {
 				</Route>
 				<PrivateRoute path='/checkout'>
 					<Checkout />
+					<Footer />
 				</PrivateRoute>
+				<Route path="/confirm/:id">
+					<Confirm />
+					<Footer bottom={true}/>
+				</Route>
 				<Route path='/notfound'>
 					<h1> 404 Not Found </h1>
 				</Route>

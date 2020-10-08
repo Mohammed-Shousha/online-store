@@ -3,7 +3,6 @@ import CONav from '../../Containers/CONav/CONav'
 import Shipping from '../Shipping/Shipping'
 import Payment from '../Payment/Payment'
 import Done from '../Done/Done'
-import Footer from '../../Containers/Footer/Footer'
 import { Button } from '../../Components/Buttons'
 import Alert from '../../Components/Alert'
 
@@ -62,8 +61,7 @@ const Checkout = () => {
 					cash ={cash}
 				/>
 			}
-			{alert &&<Alert setAlert={setAlert} checkout/>}
-			<Footer />
+			{alert &&<Alert setAlert={setAlert} address/>}
 		</>
 	)
 }

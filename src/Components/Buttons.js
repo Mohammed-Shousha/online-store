@@ -6,7 +6,7 @@ import { device } from '../Data/Constants'
 export const Button = styled.button`
     border: none;
 	background:${props => props.disabled ? '#eeeeee' : '#2196f3'};
-	color: ${props => props.disabled? '#1010104D':  'white'};
+	color: ${props => props.disabled ? '#1010104D':  'white'};
     font-size: 0.8em;
 	font-weight: bold;
 	border-radius: 5px;
@@ -39,12 +39,11 @@ export const LinkButton = ({ children, to }) => (
 
 export const FormButton = styled.button.attrs(props => ({
     type: props.type || 'submit',
-
 }))`
     border-radius: 10px;
     border: none;
-    background-color: ${props => props.grey ? '#342b38' : '#4bb1bd'};
-    color: #FFFFFF;
+    background-color: ${props => props.grey ? '#342b38' : props.disabled ? '#eeeeee' :'#4bb1bd'};
+	color: ${props => props.disabled ? '#1010104D' : 'white'};
     font-size: 0.7em;
     font-weight: bold;
 	padding: 0.75em 1.25em;

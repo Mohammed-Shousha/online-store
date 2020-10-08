@@ -15,7 +15,7 @@ import { passwordRegex } from '../../Data/Constants'
 
 const SignUp = () => {
 	
-	const { setIsSignedIn, setData } = useContext(DataContext)
+	const { setIsSignedIn, setData, setConfirmNav } = useContext(DataContext)
 	const { marker, setMarker } = useContext(LocationContext)
 	
 	let history = useHistory()
@@ -24,8 +24,8 @@ const SignUp = () => {
 	const [detectAddress, setDetectAddress] = useState(false)
 	const [addressFocused, setAddressFocused] = useState(false)
 	const [usedEmail, setUsedEmail] = useState(false)
-
-
+	const [invalidEmail, setInvalidEmail] = useState(false)
+	
 	const nameInput = useRef(null)
 	const emailInput = useRef(null)
 	const passwordInput = useRef(null)
@@ -122,19 +122,26 @@ const SignUp = () => {
 							address
 						})
 					})
-					const user = await response.json()
-					if (user._id) {
+					const result = await response.json()
+					if (result.user) {
 						history.push('/')
 						setIsSignedIn(true)
-						const { name, email, password, phone, addresses } = user
+						const { name, email, password, phone, addresses } = result.user
 						setData(editData(name, email, password, phone))
 						setData(editAddresses(addresses))
-					} else {
+						if(result.emailSent){
+							setConfirmNav(true)
+						}
+					} else if(result.invalidEmail) {
+						setTimeout(() => setInvalidEmail(false), 2500)
+						setInvalidEmail(true)
+					} else{
 						setUsedEmail(true)
+						setTimeout(() => setUsedEmail(false), 2500)
 					}
 				}}
 			>
-				{({ errors, touched, values, handleChange }) => (
+				{({ errors, touched, values, handleChange, isSubmitting }) => (
 					<>
 						<VisibleDiv visible={!detectAddress}>
 							<Form onKeyDown={handleKeyDown} >
@@ -151,6 +158,7 @@ const SignUp = () => {
 									/>
 									{touched.email && errors.email && <ErrorText>{errors.email}</ErrorText>}
 									{usedEmail && <ErrorText>{t('Form.EmailErrDb')}</ErrorText>}
+									{invalidEmail && <ErrorText> Invalid Email</ErrorText>}
 									<StyledField
 										name="password" type="password"
 										placeholder={t('Form.Password')} innerRef={passwordInput} onKeyUp={handleKeyUp}
@@ -169,11 +177,11 @@ const SignUp = () => {
 									{addressFocused &&
 										<FormButton type='button' grey onClick={() => setDetectAddress(true)}>
 											{t('Form.Location')}
-									</FormButton>
+										</FormButton>
 									}
-									<FormButton ref={signUpButton}>
+									<FormButton ref={signUpButton} disabled={isSubmitting}>
 										{t('Form.Sign Up')}
-								</FormButton>
+									</FormButton>
 									<p> {t('Form.Have Account')}
 										<Link to='signin'> <strong> {t('Form.Sign In')} </strong> </Link>
 									</p>

@@ -7,6 +7,7 @@ import Logo from '../../Components/Logo'
 import { MainNav } from '../../Components/Navbar'
 import FlexContainer from '../../Components/FlexContainer'
 import { NavText, UserAction, CartCircle, UserActionsContainer, SearchIcon, MenuIcon } from '../../Components/NavComponents'
+import { ConfirmNav } from '../../Components/ConfirmComponents'
 import { DataContext } from '../../Data/DataContext'
 import { signOut } from '../../Data/DataActions'
 import { ProductsList } from '../../Data/Database'
@@ -14,13 +15,14 @@ import cart from '../../Data/Icons/cart.svg'
 import user from '../../Data/Icons/user.svg'
 import list from '../../Data/Icons/list.svg'
 import signout from '../../Data/Icons/signout.svg'
+import x from '../../Data/Icons/x-white.svg'
 import './Nav.css'
 
 
 const Nav = () => {
 	
-	const { isSignedIn, setIsSignedIn, data, setData } = useContext(DataContext)
-	const { name, cartItems } = data
+	const { isSignedIn, setIsSignedIn, data, setData, confirmNav, setConfirmNav } = useContext(DataContext)
+	const { name, email, cartItems } = data
 	const newName = name.split(' ')[0]
 	
 	const onSignOut = () => {
@@ -116,6 +118,13 @@ const Nav = () => {
 	}, [show])
 
 	return (
+		<>
+		{confirmNav &&
+			<ConfirmNav>
+				<p> An Email Has Been Sent To{" "}<strong>{email}</strong>{" "}Check Your Email To Confirm Your Account</p>
+				<img src={x} alt='x' onClick={() => setConfirmNav(false)} />
+			</ConfirmNav>
+		}
 		<MainNav>
 
 			<MenuIcon onClick={() => setSidebar(true)} />
@@ -146,7 +155,7 @@ const Nav = () => {
 			<NavText
 				relative
 				ref={userActions}
-				onClick={isSignedIn ? toggleShow : null }
+				onClick={isSignedIn && toggleShow }
 			>
 				{isSignedIn ? 
 					`${t('Nav.Hi')} ${newName}`
@@ -195,6 +204,7 @@ const Nav = () => {
 				</Link>
 			}
 		</MainNav>
+		</>
 	)
 }
 

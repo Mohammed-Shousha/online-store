@@ -1,18 +1,21 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { CartItemsContainer, ProductDetails, ProductActions } from '../../Components/CartComponents'
 import FlexContainer from '../../Components/FlexContainer'
 import { DataContext } from '../../Data/DataContext'
 import { editCartItems } from '../../Data/DataActions'
 import { ProductsList } from '../../Data/Database'
 import bin from '../../Data/Icons/bin.svg'
+import greyBin from '../../Data/Icons/greyBin.svg'
 
 
 const CartItem = ({ productId, editable = true, order, checkout = false }) => {
 
 	const { data, setData } = useContext(DataContext)
 	const { email, cartItems } = data
+	const [isSubmitting, setIsSumbitting] = useState(null)
 
 	const onRemovingItem = async (productId) => {
+		setIsSumbitting(productId)
 		const response = await fetch('http://localhost:8888/removeitem', {
 			method: 'put',
 			headers: { 'Content-Type': 'application/json' },
@@ -24,6 +27,7 @@ const CartItem = ({ productId, editable = true, order, checkout = false }) => {
 		const { result, cartItems } = await response.json()
 		if (result.nModified) {
 			setData(editCartItems(cartItems))
+			setIsSumbitting(null)
 		}
 	}
 
@@ -53,8 +57,8 @@ const CartItem = ({ productId, editable = true, order, checkout = false }) => {
 					<br />
 					{editable &&
 						<img
-							src={bin} alt='bin'
-							onClick={() => onRemovingItem(productId)}
+							src={isSubmitting !== productId? bin: greyBin} alt='bin'
+							onClick={() => isSubmitting !== productId && onRemovingItem(productId)}
 						/>
 					}
 				</ProductActions>

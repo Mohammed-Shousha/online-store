@@ -42,5 +42,8 @@
     "Map": {
         "Title": "Add New Address",
         "Button": "Locate Me"
+    },
+    "Products": {
+        "Popular": "Most Popular"
     }
 }

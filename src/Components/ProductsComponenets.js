@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 import { device } from '../Data/Constants'
 
+
 export const ProductsTitle = styled.h2`
     width: 90vw;
     font-size: 1.25em;
 	margin: 3.75em auto 0;
-	text-align: left;
+	text-align: ${props => props.align};
 	color: rgba(0,0,0,0.8);
 	border-bottom: 0.1rem solid rgba(0,0,0,0.8);
 
@@ -54,8 +55,8 @@ export const Product = styled.div`
 export const AddToCart = styled.button`
     width: 250px;
 	height: 40px;
-	background-color: rgba(44,62,80,.75);
-	color: white;
+	background-color:${props => props.disabled ? "white" : "rgba(44, 62, 80, .75)"} ;
+	color: ${props => props.disabled ? "rgba(44, 62, 80, .75)" : "white"};
 	border: 0;
 	border-radius: 0.25rem;
 	padding: 5px 0 0 0 ;
@@ -74,6 +75,6 @@ export const AddToCart = styled.button`
     }
     
     &:hover{
-        background-color: rgba(44,62,80,0.95)
+        background-color:${props => props.disabled ? "none" : "rgba(44,62,80,0.95)" } 
     }
 `

@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react'
+import { useTranslation } from 'react-i18next'
 import { ProductsContainer, ProductsTitle, AddToCart, Product } from '../../Components/ProductsComponenets'
 import ProductCard from '../../Components/ProductCard'
 import Alert from '../../Components/Alert'
@@ -10,6 +11,9 @@ const Products = ({ title = '', num = '', products }) => {
 
 	const { isSignedIn, setData, data } = useContext(DataContext)
 	const { email } = data
+	const [ isSubmitting, setIsSumbitting] = useState(null)
+	
+	const { i18n } = useTranslation()
 
 	let P = [...products]
 
@@ -31,6 +35,7 @@ const Products = ({ title = '', num = '', products }) => {
 
 	const onAddingItems = async(productId) => {
 		if(isSignedIn){
+			setIsSumbitting(productId)
 			const response = await fetch('http://localhost:8888/additem', {
 				method: 'put',
 				headers: { 'Content-Type': 'application/json' },
@@ -42,6 +47,7 @@ const Products = ({ title = '', num = '', products }) => {
 			const { result, cartItems } = await response.json()
 			if (result.nModified) {
 				setData(editCartItems(cartItems))
+				setIsSumbitting(null)
 			}
 		} else{
 			setAlert(true)
@@ -50,7 +56,7 @@ const Products = ({ title = '', num = '', products }) => {
 
 	return (
 		<>
-			<ProductsTitle>{title.toUpperCase()}</ProductsTitle>
+			<ProductsTitle align= {i18n.language === 'ar'? 'right': 'left'}>{title.toUpperCase()}</ProductsTitle>
 				{PRODUCTS.map((PRO, i) => (
 					<ProductsContainer key={i}>
 						{PRO.map((P, i) => (
@@ -65,6 +71,7 @@ const Products = ({ title = '', num = '', products }) => {
 										/>
 										<AddToCart 
 											onClick={() => onAddingItems(product.id)}
+											disabled = {isSubmitting === product.id}
 										>
 											ADD TO CART
 										</AddToCart>

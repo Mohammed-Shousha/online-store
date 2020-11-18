@@ -47,28 +47,6 @@ import xiaomi from './Icons/xiaomi.svg'
 import fitbit from './Icons/fitbit.svg'
 
 
-export let USERS=[{
-	name:'mo', 
-	email:'mo@g.co',
-	password:'123b123b',
-	phone: '01234567890',
-	addresses:[{name:'', address:'', phone:''}]
-},
-{
-	name:'mohammed', 
-	email:'mo@h.co',
-	password:'123b123b',
-	phone: '01234567890',
-	addresses:[{name:'', address:'', phone:''}]
-},
-{
-	name:'m', 
-	email:'mo@f.co',
-	password:'123b123b',
-	phone: '01234567890',
-	addresses:[{name:'', address:'', phone:''}]
-}]
-
 export const slideShowImages = [img1, appleCover1, img2, img3, beatsHeadset, img4]
 
 
@@ -379,4 +357,5 @@ export const ProductsList = [{
 	price: 800,
 	photo: powerbank2,
 	description: 'blah blah blah',
-},]
+},
+]

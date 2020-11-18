@@ -133,8 +133,8 @@ const SignUp = () => {
 							setConfirmNav(true)
 						}
 					} else if(result.invalidEmail) {
-						setTimeout(() => setInvalidEmail(false), 2500)
 						setInvalidEmail(true)
+						setTimeout(() => setInvalidEmail(false), 2500)
 					} else{
 						setUsedEmail(true)
 						setTimeout(() => setUsedEmail(false), 2500)

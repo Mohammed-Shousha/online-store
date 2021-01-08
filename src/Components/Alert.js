@@ -93,7 +93,7 @@ const Alert = ({ setAlert, confirm, address }) => {
 				<h4> Please Select an Address </h4>
 			:confirm ?
 				<p> To Checkout You Need To Confirm Your Email<br />
-					<strong onClick={resendEmail}>Resend Confirmation Email</strong>
+					<strong onClick={()=> resendEmail()}>Resend Confirmation Email</strong>
 				</p>
 			:
 				<p>In Order to Add Items to Your Cart <br />

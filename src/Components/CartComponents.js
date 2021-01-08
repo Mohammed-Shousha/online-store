@@ -269,8 +269,8 @@ export const CartButton = styled.button `
     margin-top:${props => props.checkout ? '2em' : ''};
 	border:none;
 	border-radius: 5px;
-	background: ${props => props.checkout ? fc :bc};
-	color: ${props => props.checkout ? bc : fc};
+	background: ${props => props.checkout || props.disabled ? fc :bc};
+	color: ${props => props.checkout || props.disabled  ? bc : fc};
 	cursor: pointer;
 	outline: none;
 

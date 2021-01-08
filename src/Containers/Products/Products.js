@@ -1,17 +1,12 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ProductsContainer, ProductsTitle, AddToCart, Product } from '../../Components/ProductsComponenets'
 import ProductCard from '../../Components/ProductCard'
 import Alert from '../../Components/Alert'
-import { DataContext } from '../../Data/DataContext'
-import { editCartItems } from '../../Data/DataActions'
 
 
 const Products = ({ title = '', num = '', products }) => {
-
-	const { isSignedIn, setData, data } = useContext(DataContext)
-	const { email } = data
-	const [ isSubmitting, setIsSumbitting] = useState(null)
 	
 	const { i18n } = useTranslation()
 
@@ -33,27 +28,6 @@ const Products = ({ title = '', num = '', products }) => {
 
 	const [alert, setAlert] = useState(false)
 
-	const onAddingItems = async(productId) => {
-		if(isSignedIn){
-			setIsSumbitting(productId)
-			const response = await fetch('http://localhost:8888/additem', {
-				method: 'put',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
-					email,
-					productId
-				})
-			})
-			const { result, cartItems } = await response.json()
-			if (result.nModified) {
-				setData(editCartItems(cartItems))
-				setIsSumbitting(null)
-			}
-		} else{
-			setAlert(true)
-		}
-	}
-
 	return (
 		<>
 			<ProductsTitle align= {i18n.language === 'ar'? 'right': 'left'}>{title.toUpperCase()}</ProductsTitle>
@@ -63,18 +37,18 @@ const Products = ({ title = '', num = '', products }) => {
 							<div key={i}>
 								{P.map(product => (
 									<Product key={product.id}>
+										<Link to={`/product/${product.id}`}>
 										<ProductCard
 											name={product.name}
 											price={`${product.price} EGP`}
 											photo={product.photo}
 											details='blah blah blah blah'
 										/>
+										</Link>
 										<AddToCart 
-											onClick={() => onAddingItems(product.id)}
-											disabled = {isSubmitting === product.id}
-										>
-											ADD TO CART
-										</AddToCart>
+											productId={product.id}
+											setAlert={setAlert}
+										/>
 									</Product>
 								))}
 							</div>

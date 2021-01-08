@@ -1,4 +1,7 @@
 import styled from 'styled-components'
+import React, { useContext, useState } from 'react'
+import { DataContext } from '../Data/DataContext'
+import { editCartItems } from '../Data/DataActions'
 import { device } from '../Data/Constants'
 
 
@@ -52,7 +55,7 @@ export const Product = styled.div`
     margin: 1rem 0;
 `
 
-export const AddToCart = styled.button`
+export const AddToCartButton = styled.button`
     width: 250px;
 	height: 40px;
 	background-color:${props => props.disabled ? "white" : "rgba(44, 62, 80, .75)"} ;
@@ -78,3 +81,41 @@ export const AddToCart = styled.button`
         background-color:${props => props.disabled ? "none" : "rgba(44,62,80,0.95)" } 
     }
 `
+
+export const AddToCart = ({ productId, setAlert })=>{
+    
+    const { isSignedIn, setData, data } = useContext(DataContext)
+    const { email } = data
+    const [isSubmitting, setIsSumbitting] = useState(null)
+
+
+    const onAddingItems = async (productId) => {
+        if (isSignedIn) {
+            setIsSumbitting(productId)
+            const response = await fetch('http://localhost:8888/additem', {
+                method: 'put',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email,
+                    productId
+                })
+            })
+            const { result, cartItems } = await response.json()
+            if (result.nModified) {
+                setData(editCartItems(cartItems))
+                setIsSumbitting(null)
+            }
+        } else {
+            setAlert(true)
+        }
+    }
+
+    return(
+        <AddToCartButton 
+            onClick={()=> onAddingItems(productId)}
+            disabled={isSubmitting === productId}
+        >
+            ADD TO CART
+        </AddToCartButton>
+    )
+}

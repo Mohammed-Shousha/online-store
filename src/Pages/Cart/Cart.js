@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import CartItem from '../../Containers/CartItem/CartItem'
 import OrderSummary from '../../Containers/OrderSummary/OrderSummary'
 import Title from '../../Components/Title'
@@ -16,8 +16,10 @@ const Cart = () => {
 
 	const { data, setData } = useContext(DataContext)
 	const { cartItems, email } = data
+	const [isSubmitting, setIsSumbitting] = useState(false)
 
 	const handleClearCart = async () => {
+		setIsSumbitting(true)
 		const response = await fetch('http://localhost:8888/clearcart', {
 			method: 'put',
 			headers: { 'Content-Type': 'application/json' },
@@ -28,6 +30,7 @@ const Cart = () => {
 		const { result, cartItems } = await response.json()
 		if (result.nModified) {
 			setData(editCartItems(cartItems))
+			setIsSumbitting(false)
 		}
 	}
 
@@ -55,7 +58,7 @@ const Cart = () => {
 					</div>
 					<div>
 						<OrderSummary />
-						<CartButton onClick={handleClearCart}>
+						<CartButton onClick={handleClearCart} disabled={isSubmitting}>
 							<div>
 								<p>Clear Cart</p>
 								<img src={emptyCartButton} alt='empty-cart' />

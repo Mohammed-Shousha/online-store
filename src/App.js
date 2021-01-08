@@ -11,6 +11,7 @@ const StoreItems = lazy(() => import('./Pages/StoreItems/StoreItems'))
 const SearchResults = lazy(() => import('./Pages/SearchResults/SearchResults'))
 const Orders = lazy(() => import('./Pages/Orders/Orders'))
 const Profile = lazy(() => import('./Pages/Profile/Profile'))
+const ProductPage = lazy(() => import('./Pages/ProductPage/ProductPage'))
 const Nav = lazy(() => import('./Containers/Nav/Nav'))
 const SNav = lazy(() => import('./Containers/SNav/SNav'))
 const Footer = lazy(() => import('./Containers/Footer/Footer'))
@@ -40,6 +41,9 @@ const App = () => {
 				</Route>
 				<Route path="/search">
 					<SearchResults />
+				</Route>
+				<Route path="/product/:id">
+					<ProductPage />
 				</Route>
 				<Route path='*'>
 					<Redirect to='/notfound' />

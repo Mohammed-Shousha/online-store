@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { loadStripe } from "@stripe/stripe-js"
 import { Elements } from "@stripe/react-stripe-js"
+import { gql, useMutation } from '@apollo/client'
 import PaymentForm from '../../Containers/PaymentForm/PaymentForm'
 import CartItem from '../../Containers/CartItem/CartItem'
 import OrderSummary from '../../Containers/OrderSummary/OrderSummary'
@@ -23,19 +24,45 @@ const Payment = ({ cash, setCash, handleNext }) => {
 	const { data, setData } = useContext(DataContext)
 	const { cartItems, email } = data 
 
-	const placeOrder = async () => {
-		const response = await fetch('http://localhost:8888/addorder', {
-			method: 'put',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				email
-			})
-		})
-		const { result, orders } = await response.json()
-		if (result.nModified) {
-			setData(editOrders(orders))
-			handleNext()
+	const HANDLE_ADDING_ORDER = gql`
+		mutation handleAddingOrder($email: String!){
+			handleAddingOrder(email: $email){
+				result
+				orders{
+					id
+					order{
+						productId
+						qty
+					}
+					time
+				}
+			}
 		}
+	`
+
+	const [handleAddingOrder] = useMutation(HANDLE_ADDING_ORDER, {
+		onCompleted({ handleAddingOrder }) {
+			if (handleAddingOrder.result) {
+				setData(editOrders(handleAddingOrder.orders))
+				handleNext()
+			}
+		}
+	})
+
+	const placeOrder = async () => {
+		handleAddingOrder({variables: {email}})
+		// const response = await fetch('http://localhost:8888/addorder', {
+		// 	method: 'put',
+		// 	headers: { 'Content-Type': 'application/json' },
+		// 	body: JSON.stringify({
+		// 		email
+		// 	})
+		// })
+		// const { result, orders } = await response.json()
+		// if (result.nModified) {
+		// 	setData(editOrders(orders))
+		// 	handleNext()
+		// }
 	}
 
 	return (

@@ -155,7 +155,7 @@ const Nav = () => {
 			<NavText
 				relative
 				ref={userActions}
-				onClick={isSignedIn && toggleShow }
+				onClick={isSignedIn ? toggleShow : undefined }
 			>
 				{isSignedIn ? 
 					`${t('Nav.Hi')} ${newName}`

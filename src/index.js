@@ -1,8 +1,7 @@
 import React, { Suspense } from 'react'
-import ReactDOM from 'react-dom'
+import { render } from 'react-dom'
 import './index.css'
 import App from './App'
-import Test from './Test'
 import Loading from './Components/Loading'
 import * as serviceWorker from './serviceWorker'
 import ContextProvider from './Data/ContextProvider'
@@ -15,7 +14,7 @@ import {
 } from "@apollo/client"
 
 const link = createHttpLink({
-  uri: 'http://localhost:4000/graphql',
+  uri: "http://localhost:4000/graphql",
 });
 
 const client = new ApolloClient({
@@ -24,7 +23,7 @@ const client = new ApolloClient({
 });
 
 
-ReactDOM.render(
+render(
   <React.StrictMode>
     <Suspense fallback={<Loading />}>
       <ApolloProvider client={client}>

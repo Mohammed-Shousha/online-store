@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import { gql, useMutation } from '@apollo/client'
 import { CartItemsContainer, ProductDetails, ProductActions } from '../../Components/CartComponents'
 import FlexContainer from '../../Components/FlexContainer'
 import { DataContext } from '../../Data/DataContext'
@@ -14,21 +15,43 @@ const CartItem = ({ productId, editable = true, order, checkout = false }) => {
 	const { email, cartItems } = data
 	const [isSubmitting, setIsSumbitting] = useState(null)
 
+	const HANDLE_REMOVING_ITEMS = gql`
+		mutation HandleRemovingItems($email: String!, $productId: Int!){
+			handleRemovingItems(email: $email, productId: $productId){
+				result
+				cartItems{
+					productId
+					qty
+				}
+			}
+		}
+	`
+
+	const [handleRemovingItems] = useMutation(HANDLE_REMOVING_ITEMS, {
+		onCompleted({ handleRemovingItems }) {
+			if (handleRemovingItems.result) {
+				setData(editCartItems(handleRemovingItems.cartItems))
+				setIsSumbitting(false)
+			}
+		}
+	})
+
 	const onRemovingItem = async (productId) => {
 		setIsSumbitting(productId)
-		const response = await fetch('http://localhost:8888/removeitem', {
-			method: 'put',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				email,
-				productId
-			})
-		})
-		const { result, cartItems } = await response.json()
-		if (result.nModified) {
-			setData(editCartItems(cartItems))
-			setIsSumbitting(null)
-		}
+		handleRemovingItems({ variables: { email, productId } })
+		// const response = await fetch('http://localhost:8888/removeitem', {
+		// 	method: 'put',
+		// 	headers: { 'Content-Type': 'application/json' },
+		// 	body: JSON.stringify({
+		// 		email,
+		// 		productId
+		// 	})
+		// })
+		// const { result, cartItems } = await response.json()
+		// if (result.nModified) {
+		// 	setData(editCartItems(cartItems))
+		// 	setIsSumbitting(null)
+		// }
 	}
 
 	let qty = 0

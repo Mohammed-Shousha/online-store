@@ -1,6 +1,7 @@
 import React, { useState, useRef, useContext } from 'react'
 import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
+import { gql, useMutation } from '@apollo/client'
 import FlexContainer from '../../Components/FlexContainer'
 import Title from '../../Components/Title'
 import Modal from '../../Components/Modal'
@@ -14,10 +15,10 @@ import { passwordRegex } from '../../Data/Constants'
 const Profile = () => {
 
 	const { data, setData } = useContext(DataContext)
+	const { email } = data
 
 	const [changePassword, setChangePassword] = useState(false)
-	const [wrongPassword, setWrongPassword] = useState(false)
-	const [samePassword, setSamePassword] = useState(false)
+	const [passwordError, setPasswordError] = useState('')
 
 	const passwordValue = '•'.repeat(data.password.length)
 
@@ -54,6 +55,59 @@ const Profile = () => {
 		}
 	}
 
+	const HANDLE_CHANGE_DATA = gql`
+		mutation HandleChangeData($email: String!, $name: String!, $phone: String!){
+			handleChangeData(email: $email, name: $name, phone: $phone){
+				result
+				user{
+					name
+					email
+					phone
+				}
+			}
+		}
+	`
+	const [handleChangeData] = useMutation(HANDLE_CHANGE_DATA, {
+		onCompleted({ handleChangeData }) {
+			if (handleChangeData.result) {
+				const { name, email, phone } = handleChangeData.user
+				setData(editData(name, email, data.password, phone))
+			}
+		}
+	})
+
+	const HANDLE_CHANGE_PASSWORD = gql`
+		mutation HandleChangePassword($email: String!, $password: String!, $newPassword: String!){
+			handleChangePassword(email: $email, password: $password, newPassword: $newPassword){
+				... on Error{
+					message
+				}
+				... on User{
+					email
+					name
+					phone
+					password{
+						hash
+						length
+					}
+				}
+			}
+		}
+	`
+
+	const [handleChangePassword] = useMutation(HANDLE_CHANGE_PASSWORD, {
+		onCompleted({ handleChangePassword }) {
+			if (handleChangePassword.email) {
+				const { name, email, password, phone } = handleChangePassword
+				setData(editData(name, email, password, phone))
+				setChangePassword(false)
+			} else if (handleChangePassword.message) {
+				setPasswordError(handleChangePassword.message)
+				setTimeout(() => setPasswordError(''), 2500)
+			} 
+		}
+	})
+
 	return (
 		<>
 			<Title h1> Profile </Title>
@@ -73,21 +127,21 @@ const Profile = () => {
 							.required("Can't Be Empty"),
 					})}
 					onSubmit={ async ({ name, phone }) => {
-						const response = await fetch('http://localhost:8888/changedata', {
-							method: 'put',
-							headers: { 'Content-Type': 'application/json' },
-							body: JSON.stringify({
-								email: data.email,
-								name,
-								phone,
-							})
-						})
-						const { result, user } = await response.json()
-						if (result.nModified) {
-							const { name, email, phone } = user
-							setData(editData(name, email, data.password, phone))
-						}
-						console.log('Clicked')
+						handleChangeData({ variables: { email, name, phone } })
+						// const response = await fetch('http://localhost:8888/changedata', {
+						// 	method: 'put',
+						// 	headers: { 'Content-Type': 'application/json' },
+						// 	body: JSON.stringify({
+						// 		email: data.email,
+						// 		name,
+						// 		phone,
+						// 	})
+						// })
+						// const { result, user } = await response.json()
+						// if (result.nModified) {
+						// 	const { name, email, phone } = user
+						// 	setData(editData(name, email, data.password, phone))
+						// }
 					}}
 				>
 					{({ errors, touched, isSubmitting }) => (
@@ -123,7 +177,7 @@ const Profile = () => {
 				<FlexContainer around noAlign responsive>
 					<ProfileDetails readOnly>
 						<p> Email </p>
-						<input type='email' value={data.email} readOnly />
+						<input type='email' value={email} readOnly />
 						<h6> You can't change your email </h6>
 					</ProfileDetails>
 					<ProfileDetails readOnly>
@@ -160,27 +214,29 @@ const Profile = () => {
 									.oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
 							})}
 							onSubmit={ async ({ password, confirmPassword }) => {
-								const response = await fetch('http://localhost:8888/changepassword', {
-									method: 'put',
-									headers: { 'Content-Type': 'application/json' },
-									body: JSON.stringify({
-										email: data.email,
-										password, 
-										newPassword: confirmPassword
-									})
-								})
-								const result = await response.json()
-								if (result.user) {
-									const { name, email, password, phone} = result.user
-									setData(editData(name, email, password, phone))
-									setChangePassword(false)
-								}else if(result.wrongPassword){
-									setWrongPassword(true)
-									setTimeout(() => setWrongPassword(false), 2500)
-								}else{
-									setSamePassword(true)
-									setTimeout(() => setSamePassword(false), 2500)
-								}
+								handleChangePassword({ variables: { 
+									email,
+									password,
+									newPassword: confirmPassword
+								} })
+								// const response = await fetch('http://localhost:8888/changepassword', {
+								// 	method: 'put',
+								// 	headers: { 'Content-Type': 'application/json' },
+								// 	body: JSON.stringify({
+								// 		email,
+								// 		password, 
+								// 		newPassword: confirmPassword
+								// 	})
+								// })
+								// const result = await response.json()
+								// if (result.user) {
+								// 	const { name, email, password, phone} = result.user
+								// 	setData(editData(name, email, password, phone))
+								// 	setChangePassword(false)
+								// }else if(result.message){
+								// 	setPasswordError(result.message)
+								// 	setTimeout(() => setWrongPassword(''), 2500)
+								// }
 							}}
 						>
 							{({ errors, touched, isSubmitting }) => (
@@ -189,7 +245,7 @@ const Profile = () => {
 										<p> Current Password </p>
 										<Field name='password' type='password' onKeyUp={handleKeyUp} />
 										{touched.password && errors.password && <ErrorText>{errors.password}</ErrorText>}
-										{wrongPassword && <ErrorText> Wrong Password </ErrorText>}
+										{passwordError === 'Wrong Password' && <ErrorText> {passwordError} </ErrorText>}
 									</ProfileDetails>
 									<ProfileDetails changePassword>
 										<p> New Password </p>
@@ -198,7 +254,7 @@ const Profile = () => {
 											innerRef={newPasswordInput} onKeyUp={handleKeyUp}
 										/>
 										{touched.newPassword && errors.newPassword && <ErrorText>{errors.newPassword}</ErrorText>}
-										{samePassword && <ErrorText>You Need to Write a New Password</ErrorText>}
+										{passwordError === 'You Need to Write a New Password' && <ErrorText> {passwordError} </ErrorText>}
 									</ProfileDetails>
 									<ProfileDetails changePassword>
 										<p>Confirm New Password </p>

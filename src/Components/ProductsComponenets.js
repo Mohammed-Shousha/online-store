@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import React, { useContext, useState } from 'react'
+import { gql, useMutation } from '@apollo/client'
 import { DataContext } from '../Data/DataContext'
 import { editCartItems } from '../Data/DataActions'
 import { device } from '../Data/Constants'
@@ -88,23 +89,45 @@ export const AddToCart = ({ productId, setAlert })=>{
     const { email } = data
     const [isSubmitting, setIsSumbitting] = useState(null)
 
+    const HANDLE_ADDING_ITEMS = gql`
+		mutation HandleAddingItems($email: String!, $productId: Int!){
+			handleAddingItems(email: $email, productId: $productId){
+				result
+				cartItems{
+					productId
+					qty
+				}
+			}
+		}
+	`
+
+    const [handleAddingItems] = useMutation(HANDLE_ADDING_ITEMS, {
+        onCompleted({ handleAddingItems }) {
+            if (handleAddingItems.result) {
+                setData(editCartItems(handleAddingItems.cartItems))
+                setIsSumbitting(null)
+            }
+        }
+    })
+
 
     const onAddingItems = async (productId) => {
         if (isSignedIn) {
             setIsSumbitting(productId)
-            const response = await fetch('http://localhost:8888/additem', {
-                method: 'put',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    email,
-                    productId
-                })
-            })
-            const { result, cartItems } = await response.json()
-            if (result.nModified) {
-                setData(editCartItems(cartItems))
-                setIsSumbitting(null)
-            }
+            handleAddingItems({ variables: { email, productId } })
+            // const response = await fetch('http://localhost:8888/additem', {
+            //     method: 'put',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({
+            //         email,
+            //         productId
+            //     })
+            // })
+            // const { result, cartItems } = await response.json()
+            // if (result.nModified) {
+            //     setData(editCartItems(cartItems))
+            //     setIsSumbitting(null)
+            // }
         } else {
             setAlert(true)
         }

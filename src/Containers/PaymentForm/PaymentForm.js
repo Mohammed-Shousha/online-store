@@ -64,7 +64,7 @@ const PaymentForm = ({ placeOrder }) => {
     
     useEffect(() => {
         async function fetchData() {
-            const response = await fetch("http://localhost:8888/payment", {
+            const response = await fetch("http://localhost:4000/payment", {
                 method: "post",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

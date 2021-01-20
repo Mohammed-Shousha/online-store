@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { gql, useMutation } from '@apollo/client'
 import { device } from '../Data/Constants'
 import x from '../Data/Icons/x.svg'
 import { DataContext } from '../Data/DataContext'
@@ -73,19 +74,34 @@ const Alert = ({ setAlert, confirm, address }) => {
 	const { data, setConfirmNav } = useContext(DataContext)
 	const { email } = data
 
-	const resendEmail = async () =>{
-		const response = await fetch('http://localhost:8888/resendemail', {
-			method: 'post',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ email })
-		})
-		const result = await response.json()
-		if(result === 'Success'){
-			setConfirmNav(true)
-			setAlert(false)
-		}
+	const HANDLE_RESEND_EMAIL = gql`
+        mutation HandleResendEmail($email: String!){
+            handleResendEmail(email: $email)
+        }
+    `
 
-	}
+	const [handleResendEmail] = useMutation(HANDLE_RESEND_EMAIL, {
+		onCompleted({ handleResendEmail }) {
+			if (handleResendEmail === 'Success') { //Success or Failed
+				setConfirmNav(true)
+				setAlert(false)
+			}
+		}
+	})
+
+	// const resendEmail = async () =>{
+	// 	const response = await fetch('http://localhost:8888/resendemail', {
+	// 		method: 'post',
+	// 		headers: { 'Content-Type': 'application/json' },
+	// 		body: JSON.stringify({ email })
+	// 	})
+	// 	const result = await response.json()
+	// 	if(result === 'Success'){
+	// 		setConfirmNav(true)
+	// 		setAlert(false)
+	// 	}
+	// }
+
 	return(
 		<AlertContainer>
 			<img src={x} alt='x' onClick={() => setAlert(false)} />
@@ -93,7 +109,7 @@ const Alert = ({ setAlert, confirm, address }) => {
 				<h4> Please Select an Address </h4>
 			:confirm ?
 				<p> To Checkout You Need To Confirm Your Email<br />
-					<strong onClick={()=> resendEmail()}>Resend Confirmation Email</strong>
+						<strong onClick={() => handleResendEmail({ variables: { email } })}>Resend Confirmation Email</strong>
 				</p>
 			:
 				<p>In Order to Add Items to Your Cart <br />

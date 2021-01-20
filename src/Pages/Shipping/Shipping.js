@@ -1,6 +1,7 @@
 import React, { useContext, useState, useRef } from 'react'
 import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
+import { gql, useMutation } from '@apollo/client'
 import GMap from '../../Containers/GMap/GMap'
 import { CheckoutTitle } from '../../Components/Title'
 import FlexContainer from '../../Components/FlexContainer'
@@ -51,40 +52,106 @@ const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }
 		}
 	}
 
-	const handleAddingAddress = async () => {
-		const response = await fetch('http://localhost:8888/addaddress', {
-			method: 'put',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				email,
-				name,
-				phone,
-				address: `lat:${marker.lat} lng:${marker.lng}`
-			})
-		})
-		const { result, newAddresses } = await response.json()
-		if (result.nModified) {
-			setData(editAddresses(newAddresses))
-			setNewAddress(false)
-			setMarker({ lat: '', lng: '' })
+	const HANDLE_ADDING_ADDRESS = gql`
+		mutation HandleAddingAddress($email: String!, $name: String!, $phone: String!, $address: String!){
+			handleAddingAddress(email: $email, name: $name, phone: $phone, address: $address){
+				result
+				addresses{
+					id
+					name
+					address
+					phone
+				}
+			}
 		}
-	}
-
-	const handleDeletingAddress = async (id) => {
-		const response = await fetch('http://localhost:8888/deleteaddress', {
-			method: 'delete',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				email,
-				addressId: id
-			})
-		})
-		const { result, newAddresses } = await response.json()
-		if (result.nModified) {
-			setData(editAddresses(newAddresses))
+	`
+	const [handleAddingAddress] = useMutation(HANDLE_ADDING_ADDRESS, {
+		onCompleted({ handleAddingAddress }) {
+			if (handleAddingAddress.result) {
+				setData(editAddresses(handleAddingAddress.addresses))
+				setNewAddress(false)
+				setMarker({ lat: '', lng: '' })
+			}
 		}
-	}
+	})
 
+	// const handleAddingAddress = async () => {
+		// const response = await fetch('http://localhost:8888/addaddress', {
+		// 	method: 'put',
+		// 	headers: { 'Content-Type': 'application/json' },
+		// 	body: JSON.stringify({
+		// 		email,
+		// 		name,
+		// 		phone,
+		// 		address: `lat:${marker.lat} lng:${marker.lng}`
+		// 	})
+		// })
+		// const { result, newAddresses } = await response.json()
+		// if (result.nModified) {
+		// 	setData(editAddresses(newAddresses))
+		// 	setNewAddress(false)
+		// 	setMarker({ lat: '', lng: '' })
+		// }
+	// }
+
+	const HANDLE_DELETING_ADDRESS = gql`
+		mutation HandleDeletingAddress($email: String!, $addressId: ID!){
+			handleDeletingAddress(email: $email, addressId: $addressId){
+				result
+				addresses{
+					id
+					name
+					address
+					phone
+				}
+			}
+		}
+	`
+	const [handleDeletingAddress] = useMutation(HANDLE_DELETING_ADDRESS, {
+		onCompleted({ handleDeletingAddress }) {
+			if (handleDeletingAddress.result) {
+				setData(editAddresses(handleDeletingAddress.addresses))
+			}
+		}
+	})
+	
+	// const handleDeletingAddress = async (id) => {
+		// const response = await fetch('http://localhost:8888/deleteaddress', {
+		// 	method: 'delete',
+		// 	headers: { 'Content-Type': 'application/json' },
+		// 	body: JSON.stringify({
+		// 		email,
+		// 		addressId: id
+		// 	})
+		// })
+		// const { result, newAddresses } = await response.json()
+		// if (result.nModified) {
+		// 	setData(editAddresses(newAddresses))
+		// }
+	// }
+	
+	const HANDLE_UPDATING_ADDRESS = gql`
+		mutation HandleUpdatingAddress($addressId: ID!, $name: String!, $phone: String!, $address: String!){
+			handleUpdatingAddress(addressId: $addressId, name: $name, phone: $phone, address: $address){
+				result
+				addresses{
+					id
+					name
+					address
+					phone
+				}
+			}
+		}
+	`
+	const [handleUpdatingAddress] = useMutation(HANDLE_UPDATING_ADDRESS, {
+		onCompleted({ handleUpdatingAddress }) {
+			if (handleUpdatingAddress.result) {
+				setData(editAddresses(handleUpdatingAddress.addresses))
+				setActiveForm(null)
+			}
+		}
+	})
+	
 	return (
 		<>
 			<CheckoutTitle h1> Shipping </CheckoutTitle>
@@ -92,12 +159,12 @@ const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }
 				<FlexContainer responsive>
 					{addresses.map((a, i) => (
 						<ShippingDetails
-							key={a.id}
+							key={i}
 							onClick={() => setActiveAddress(a)}
 							active={a === activeAddress}
 						>
 							<AddressActions>
-								<img onClick={() => handleDeletingAddress(a.id)} src={bin} alt='bin' />
+								<img onClick={() => handleDeletingAddress({ variables: { email, addressId: a.id } })} src={bin} alt='bin' />
 								<img onClick={() => setActiveForm(a.id)} src={edit} alt='edit' />
 							</AddressActions>
 							<Formik
@@ -117,21 +184,22 @@ const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }
 										.required("Can't Be Empty"),
 								})}
 								onSubmit={async ({ name, address, phone }) => {
-									const response = await fetch('http://localhost:8888/updateaddress', {
-										method: 'put',
-										headers: { 'Content-Type': 'application/json' },
-										body: JSON.stringify({
-											addressId: a.id,
-											name,
-											address,
-											phone,
-										})
-									})
-									const { result, newAddresses } = await response.json()
-									if (result.nModified) {
-										setData(editAddresses(newAddresses))
-										setActiveForm(null)
-									}
+									handleUpdatingAddress({ variables: { addressId: a.id, name, phone, address }})
+									// const response = await fetch('http://localhost:8888/updateaddress', {
+									// 	method: 'put',
+									// 	headers: { 'Content-Type': 'application/json' },
+									// 	body: JSON.stringify({
+									// 		addressId: a.id,
+									// 		name,
+									// 		address,
+									// 		phone,
+									// 	})
+									// })
+									// const { result, newAddresses } = await response.json()
+									// if (result.nModified) {
+									// 	setData(editAddresses(newAddresses))
+									// 	setActiveForm(null)
+									// }
 								}}
 							>
 								{({ errors, touched }) => (
@@ -197,7 +265,7 @@ const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }
 						marker={marker}
 						setMarker={setMarker}
 					/>
-					<MapButton grey onClick={handleAddingAddress}>
+					<MapButton grey onClick={() => handleAddingAddress({ variables: { email, name, phone, address: `lat:${marker.lat} lng:${marker.lng}` }})}>
 						Confirm
 					</MapButton>
 				</>

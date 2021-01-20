@@ -3,6 +3,7 @@ import { Formik, Form, useFormikContext } from 'formik'
 import * as Yup from 'yup'
 import { useHistory, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { gql, useMutation } from '@apollo/client'
 import { FormButton } from '../../Components/Buttons'
 import ErrorText from '../../Components/ErrorText'
 import { FormMap, FormContainer, StyledField, VisibleDiv } from '../../Components/FormComponents'
@@ -86,6 +87,62 @@ const SignUp = () => {
 		)
 	}
 
+	const HANDLE_SIGN_UP = gql`
+        mutation HandleSignIn($name: String! ,$email: String!, $password: String!, $phone: String!, $address: String ){
+            handleSignUp(name: $name, email: $email, password: $password, phone: $phone, address: $address){
+                ... on Result {
+                    user{
+						_id
+						name
+						email
+						password{
+							length
+						}
+						phone
+						addresses{
+							address
+							name
+							phone
+						}
+						cartItems{
+							productId
+							qty
+						}
+						orders{
+							id
+							time
+							order{
+							productId
+							qty
+							}
+						}
+					}
+					emailSent
+                }
+                ... on Error {
+                    message
+                }
+            }
+        }
+	`
+	const [handleSignUp] = useMutation(HANDLE_SIGN_UP, {
+		onCompleted({handleSignUp}){
+			if (handleSignUp.user) {
+				history.push('/')
+				setIsSignedIn(true)
+				const { name, email, password, phone, addresses } = handleSignUp.user
+				setData(editData(name, email, password, phone))
+				setData(editAddresses(addresses))
+				if (handleSignUp.emailSent) {
+					setConfirmNav(true)
+				}
+			} else if (handleSignUp.message) {
+				setUsedEmail(true)
+				setTimeout(() => setInvalidEmail(false), 2500)
+			}
+		}
+	})
+
 	return (
 		<>
 			<Formik
@@ -111,34 +168,41 @@ const SignUp = () => {
 						.required(t('Form.Required')),
 				})}
 				onSubmit={ async ({ name, email, password, phone, address }) => {
-					const response = await fetch('http://localhost:8888/signup', {
-						method: 'post',
-						headers: { 'Content-Type': 'application/json' },
-						body: JSON.stringify({
-							name,
-							email,
-							password,
-							phone,
-							address
-						})
-					})
-					const result = await response.json()
-					if (result.user) {
-						history.push('/')
-						setIsSignedIn(true)
-						const { name, email, password, phone, addresses } = result.user
-						setData(editData(name, email, password, phone))
-						setData(editAddresses(addresses))
-						if(result.emailSent){
-							setConfirmNav(true)
-						}
-					} else if(result.invalidEmail) {
-						setInvalidEmail(true)
-						setTimeout(() => setInvalidEmail(false), 2500)
-					} else{
-						setUsedEmail(true)
-						setTimeout(() => setUsedEmail(false), 2500)
-					}
+					handleSignUp({variables: {
+						name,
+						email,
+						password,
+						phone,
+						address
+					}})
+					// const response = await fetch('http://localhost:8888/signup', {
+					// 	method: 'post',
+					// 	headers: { 'Content-Type': 'application/json' },
+					// 	body: JSON.stringify({
+					// 		name,
+					// 		email,
+					// 		password,
+					// 		phone,
+					// 		address
+					// 	})
+					// })
+					// const result = await response.json()
+					// if (result.user) {
+					// 	history.push('/')
+					// 	setIsSignedIn(true)
+					// 	const { name, email, password, phone, addresses } = result.user
+					// 	setData(editData(name, email, password, phone))
+					// 	setData(editAddresses(addresses))
+					// 	if(result.emailSent){
+					// 		setConfirmNav(true)
+					// 	}
+					// } else if(result.invalidEmail) {
+					// 	setInvalidEmail(true)
+					// 	setTimeout(() => setInvalidEmail(false), 2500)
+					// } else{
+					// 	setUsedEmail(true)
+					// 	setTimeout(() => setUsedEmail(false), 2500)
+					// }
 				}}
 			>
 				{({ errors, touched, values, handleChange, isSubmitting }) => (

@@ -3,11 +3,12 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { useHistory, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { gql, useMutation } from '@apollo/client'
 import { FormButton } from '../../Components/Buttons'
 import ErrorText from '../../Components/ErrorText'
 import { FormContainer, StyledField } from '../../Components/FormComponents'
 import { DataContext } from '../../Data/DataContext'
-import { editData, editAddresses, editCartItems, editOrders } from '../../Data/DataActions'
+import { editData, editAddresses, editCartItems, editOrders, confirm } from '../../Data/DataActions'
 
 
 const SignIn = () => {
@@ -39,6 +40,60 @@ const SignIn = () => {
         }
     }
 
+    const HANDLE_SIGN_IN = gql `
+        mutation HandleSignIn($email: String!, $password: String!){
+            handleSignIn(email: $email, password: $password){
+                ... on User {
+                    _id
+                    name
+                    email
+                   password{
+                        length
+                    }
+                    phone
+                    confirmed
+                    addresses{
+                        address
+                        name
+                        phone
+                    }
+                    cartItems{
+                        productId
+                        qty
+                    }
+                    orders{
+                        id
+                        time
+                        order{
+                        productId
+                        qty
+                        }
+                    }
+                }
+                ... on Error {
+                    message
+                }
+            }
+        }
+    `
+    const [handleSignIn] = useMutation(HANDLE_SIGN_IN,{
+        onCompleted({ handleSignIn }) {
+            if(handleSignIn._id) {
+                history.push('/')
+                setIsSignedIn(true)
+                const { name, email, password, phone, addresses, cartItems, orders, confirmed } = handleSignIn
+                setData(editData(name, email, password, phone))
+                setData(editAddresses(addresses))
+                setData(editCartItems(cartItems))
+                setData(editOrders(orders))
+                if(confirmed) setData(confirm())
+            } else if (handleSignIn.message) {
+                setWrongData(true)
+                setTimeout(() => setWrongData(false), 3000)
+            }
+        }
+    }) 
+
     return (
         <Formik
             initialValues={{
@@ -53,27 +108,29 @@ const SignIn = () => {
                     .required(t('Form.Required'))
             })}
             onSubmit={async ({ email, password }) => {
-                const response = await fetch('http://localhost:8888/signin', {
-                    method: 'post',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        email: email,
-                        password: password
-                    })
-                })
-                const user = await response.json()
-                if (user._id) {
-                    history.push('/')
-                    setIsSignedIn(true)
-                    const { name, email, password, phone, addresses, cartItems, orders } = user
-                    setData(editData(name, email, password, phone))
-                    setData(editAddresses(addresses))
-                    setData(editCartItems(cartItems))
-                    setData(editOrders(orders))
-                } else {
-                    setWrongData(true)
-                    setTimeout(()=> setWrongData(false), 3000)
-                }
+                handleSignIn({ variables: { email, password } })
+                // const response = await fetch('http://localhost:8888/signin', {
+                //     method: 'post',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify({
+                //         email: email,
+                //         password: password
+                //     })
+                // })
+                // const user = await response.json()
+                // if (signInData.handleSignIn._id) {
+                //     history.push('/')
+                //     setIsSignedIn(true)
+                //     const { name, email, password, phone, addresses, cartItems, orders } = signInData.handleSignIn
+                //     setData(editData(name, email, password, phone))
+                //     setData(editAddresses(addresses))
+                //     setData(editCartItems(cartItems))
+                //     setData(editOrders(orders))
+                // } else if (signInData.handleSignIn.message) {
+                //     console.log('a7a')
+                //     setWrongData(true)
+                //     setTimeout(()=> setWrongData(false), 3000)
+                // }
             }}
         >
             {({ errors, touched, isSubmitting }) => (

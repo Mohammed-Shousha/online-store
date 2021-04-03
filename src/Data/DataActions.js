@@ -25,3 +25,8 @@ export const editOrders = (orders) => ({
 export const signOut = () => ({
     type: 'SIGN_OUT'
 })
+
+export const editUser = (user) => ({
+    type: 'EDIT_USER',
+    payload: user
+})

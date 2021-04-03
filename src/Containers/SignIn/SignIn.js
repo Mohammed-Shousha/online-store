@@ -8,7 +8,7 @@ import { FormButton } from '../../Components/Buttons'
 import ErrorText from '../../Components/ErrorText'
 import { FormContainer, StyledField } from '../../Components/FormComponents'
 import { DataContext } from '../../Data/DataContext'
-import { editData, editAddresses, editCartItems, editOrders, confirm } from '../../Data/DataActions'
+import { editData, editAddresses, editCartItems, editOrders, confirm, editUser } from '../../Data/DataActions'
 
 
 const SignIn = () => {
@@ -81,12 +81,13 @@ const SignIn = () => {
             if(handleSignIn._id) {
                 history.push('/')
                 setIsSignedIn(true)
-                const { name, email, password, phone, addresses, cartItems, orders, confirmed } = handleSignIn
-                setData(editData(name, email, password, phone))
-                setData(editAddresses(addresses))
-                setData(editCartItems(cartItems))
-                setData(editOrders(orders))
-                if(confirmed) setData(confirm())
+                setData(editUser(handleSignIn))
+                // const { name, email, password, phone, addresses, cartItems, orders, confirmed } = handleSignIn
+                // setData(editData(name, email, password, phone))
+                // setData(editAddresses(addresses))
+                // setData(editCartItems(cartItems))
+                // setData(editOrders(orders))
+                // if(confirmed) setData(confirm())
             } else if (handleSignIn.message) {
                 setWrongData(true)
                 setTimeout(() => setWrongData(false), 3000)
@@ -127,7 +128,6 @@ const SignIn = () => {
                 //     setData(editCartItems(cartItems))
                 //     setData(editOrders(orders))
                 // } else if (signInData.handleSignIn.message) {
-                //     console.log('a7a')
                 //     setWrongData(true)
                 //     setTimeout(()=> setWrongData(false), 3000)
                 // }

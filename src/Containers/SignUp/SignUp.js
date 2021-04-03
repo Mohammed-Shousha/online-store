@@ -9,7 +9,7 @@ import ErrorText from '../../Components/ErrorText'
 import { FormMap, FormContainer, StyledField, VisibleDiv } from '../../Components/FormComponents'
 import GMap from '../GMap/GMap'
 import { DataContext } from '../../Data/DataContext'
-import { editData, editAddresses } from '../../Data/DataActions'
+import { editData, editAddresses, editUser } from '../../Data/DataActions'
 import { LocationContext } from '../../Data/LocationContext'
 import { passwordRegex } from '../../Data/Constants'
 
@@ -130,9 +130,10 @@ const SignUp = () => {
 			if (handleSignUp.user) {
 				history.push('/')
 				setIsSignedIn(true)
-				const { name, email, password, phone, addresses } = handleSignUp.user
-				setData(editData(name, email, password, phone))
-				setData(editAddresses(addresses))
+				setData(editUser(handleSignUp.user))
+				// const { name, email, password, phone, addresses } = handleSignUp.user
+				// setData(editData(name, email, password, phone))
+				// setData(editAddresses(addresses))
 				if (handleSignUp.emailSent) {
 					setConfirmNav(true)
 				}

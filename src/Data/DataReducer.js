@@ -41,6 +41,8 @@ export const DataReducer = (data, action) => {
             }
         case 'SIGN_OUT':
             return initData
+        case 'EDIT_USER':
+            return action.payload
         default:
             return data
     }

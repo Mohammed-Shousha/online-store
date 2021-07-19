@@ -36,7 +36,7 @@ const Categories = () => {
 				<FlexContainer responsive>
 					{items.map(({name, img})=>
 						<Link to={`/categories/${category.toLowerCase()}-${name.toLowerCase()}`} key={name}>
-							<Square>
+							<Square data-aos='zoom-in' data-aos-duration='1000' data-aos-delay='200'>
 								<img src={img} alt={img}/>
 							</Square>
 						</Link>

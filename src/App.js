@@ -1,7 +1,11 @@
 import React, { lazy, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import AOS from "aos"
+import "aos/dist/aos.css"
 import PrivateRoute from './Containers/PrivateRoute/PrivateRoute'
+AOS.init()
+
 const Home = lazy(() => import('./Pages/Home/Home'))
 const Cart = lazy(() => import('./Pages/Cart/Cart'))
 const Form = lazy(() => import('./Pages/Form/Form'))
@@ -21,8 +25,8 @@ const App = () => {
 
 	const NavRoutes = () => (
 		<>
-			<Nav />
-			<SNav />
+         <Nav data-aos="fade-up" />
+         <SNav data-aos="fade-up" />
 			<Switch>
 				<Route path='/' exact>
 					<Home />

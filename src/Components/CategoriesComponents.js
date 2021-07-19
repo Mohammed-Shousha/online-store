@@ -28,18 +28,18 @@ export const CategoriesContainer = styled.div `
 `
 
 export const Square = styled.div `
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border-radius: 6px;
 	background-image: ${gradient};
-    color: white;
+   color: white;
 	width: 12em;
 	height: 8em;
 	margin: 1.5em 0;
 	cursor: pointer;
-    box-shadow: -7px 7px 10px rgba(0,0,0,0.2);
-	transition-duration: 0.7s;
+   box-shadow: -7px 7px 10px rgba(0,0,0,0.2);
+	/* transition-duration: 0.7s; */
 
     @media ${device.tablet}{
         width: 15em;
@@ -70,9 +70,9 @@ export const Square = styled.div `
         margin: 1.5em 2em;
     }
     
-    &:hover{
+    /* &:hover{
         transform: scale(1.05);
-    }
+    } */
 
     /* category img */
     img{

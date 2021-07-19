@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { useParams } from "react-router-dom"
 import { gql, useMutation, useQuery } from '@apollo/client'
 import { ConfirmContainer, ConfirmTitle } from '../../Components/ConfirmComponents'

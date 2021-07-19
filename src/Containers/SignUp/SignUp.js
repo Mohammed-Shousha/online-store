@@ -9,7 +9,7 @@ import ErrorText from '../../Components/ErrorText'
 import { FormMap, FormContainer, StyledField, VisibleDiv } from '../../Components/FormComponents'
 import GMap from '../GMap/GMap'
 import { DataContext } from '../../Data/DataContext'
-import { editData, editAddresses, editUser } from '../../Data/DataActions'
+import { editUser } from '../../Data/DataActions'
 import { LocationContext } from '../../Data/LocationContext'
 import { passwordRegex } from '../../Data/Constants'
 
@@ -88,40 +88,40 @@ const SignUp = () => {
 	}
 
 	const HANDLE_SIGN_UP = gql`
-        mutation HandleSignIn($name: String! ,$email: String!, $password: String!, $phone: String!, $address: String ){
+        mutation HandleSignUp($name: String! ,$email: String!, $password: String!, $phone: String!, $address: String ){
             handleSignUp(name: $name, email: $email, password: $password, phone: $phone, address: $address){
-                ... on Result {
-                    user{
-						_id
-						name
-						email
-						password{
-							length
-						}
-						phone
-						addresses{
-							address
-							name
-							phone
-						}
-						cartItems{
-							productId
-							qty
-						}
-						orders{
-							id
-							time
-							order{
-							productId
-							qty
-							}
-						}
-					}
-					emailSent
-                }
-                ... on Error {
-                    message
-                }
+               ... on Result {
+                  user{
+                     _id
+                     name
+                     email
+                     password{
+                        length
+                     }
+                     phone
+                     addresses{
+                        address
+                        name
+                        phone
+						   }
+                     cartItems{
+                        productId
+                        qty
+                     }
+                     orders{
+                        id
+                        time
+                        order{
+                           productId
+                           qty
+                        }
+                     }
+					   }
+                  emailSent
+               }
+               ... on Error {
+                  message
+               }
             }
         }
 	`

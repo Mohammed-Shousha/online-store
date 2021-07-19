@@ -8,7 +8,8 @@ import { FormButton } from '../../Components/Buttons'
 import ErrorText from '../../Components/ErrorText'
 import { FormContainer, StyledField } from '../../Components/FormComponents'
 import { DataContext } from '../../Data/DataContext'
-import { editData, editAddresses, editCartItems, editOrders, confirm, editUser } from '../../Data/DataActions'
+import { editUser } from '../../Data/DataActions'
+import Cookies from 'js-cookie'
 
 
 const SignIn = () => {
@@ -82,6 +83,7 @@ const SignIn = () => {
                 history.push('/')
                 setIsSignedIn(true)
                 setData(editUser(handleSignIn))
+               console.log(Cookies.get('token'))
                 // const { name, email, password, phone, addresses, cartItems, orders, confirmed } = handleSignIn
                 // setData(editData(name, email, password, phone))
                 // setData(editAddresses(addresses))

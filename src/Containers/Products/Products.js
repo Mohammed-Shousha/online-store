@@ -36,7 +36,7 @@ const Products = ({ title = '', num = '', products }) => {
 						{PRO.map((P, i) => (
 							<div key={i}>
 								{P.map(product => (
-									<Product key={product.id}>
+                           <Product key={product.id} data-aos='fade-up' data-aos-duration="2000">
 										<Link to={`/product/${product.id}`}>
 										<ProductCard
 											name={product.name}

@@ -7,14 +7,16 @@ import { CATEGORIES } from '../../Data/Database'
 
 
 const SNav = () => {
+
 	const { t } = useTranslation()
+
 
 	return(
 		<Navbar small>
-			{CATEGORIES.map(({ category, items }, i) => (
+			{CATEGORIES.map(({ name, category, items }, i) => (
 				<DropDown key={i}>
 					<Link to={`/categories/${category.toLowerCase()}`}>
-						<p> {t(`SNav.${category.toUpperCase()}`)} </p>
+						<p> {t(name).toUpperCase()} </p>
 					</Link>
 					{items.length > 1 &&
 						<div>

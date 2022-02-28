@@ -89,7 +89,8 @@ export const STEPS=[{
 }]
 
 export const CATEGORIES = [{
-	category:'Headphones',
+   category:'Headphones',
+	name:'Categories.Headphones',
 	items: [{
 		name: 'Beats',
 		img: beats
@@ -105,7 +106,8 @@ export const CATEGORIES = [{
 	]
 },
 {
-	category:'Speakers',
+   category: "Speakers",
+   name:'Categories.Speakers',
 	items: [{
 		name: 'Jbl',
 		img: jbl
@@ -116,7 +118,8 @@ export const CATEGORIES = [{
 	}]
 },
 {
-	category:'Covers',
+   category:"Covers",
+   name:'Categories.Covers',
 	items: [{
 		name: 'Apple',
 		img: apple
@@ -131,7 +134,8 @@ export const CATEGORIES = [{
 	}]	
 },
 {
-	category:'Smart Watches',
+   category: 'Smart Watches',
+   name:'Categories.Smart Watches',
 	items: [{
 		name: 'Apple',
 		img: apple
@@ -146,7 +150,8 @@ export const CATEGORIES = [{
 	}]
 },
 {
-	category:'Power Banks',
+   category: 'Power Banks',
+   name:'Categories.Power Banks',
 	items:[]
 }]
 
@@ -179,22 +184,22 @@ export const CONTACT = [
 
 export const FEATURES =[
 {
-	tag:'Free Shipping',
+	tag:'Features.Free Shipping',
 	img: shipping,
 	color : '#005c91',
-	description:'All orders of 200.00 EGP or more qualify for FREE Shipping.'
+	description:'Features.Shipping Description'
 },
 {
-	tag:'Cash on Delivery',
+	tag:'Features.Cash on Delivery',
 	img: money,
 	color : '#009124',
-	description:'Pay for your order in cash at the moment the shipment is delivered to your doorstep.'
+   description:'Features.Cash Description'
 },
 {
-	tag:'Free Refund',
+	tag:'Features.Full Refund',
 	img: refund,
 	color:'#ffb726',
-	description:'Changed your mind, you can return your product and get a full refund.'
+   description:'Features.Refund Description'
 }]
 
 

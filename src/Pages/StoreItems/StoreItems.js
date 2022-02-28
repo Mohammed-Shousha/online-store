@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import Products from '../../Containers/Products/Products'
 import { ProductsList } from '../../Data/Database'
@@ -6,6 +7,8 @@ import { ProductsList } from '../../Data/Database'
 
 const StoreItems = () => {
 	let { id } = useParams()
+
+   const { t } = useTranslation()
 
 	let type = id.split('-')[0].toLowerCase()
 
@@ -19,7 +22,7 @@ const StoreItems = () => {
 
 	return (
 		<Products
-			title={id}
+			title={t(id)}
 			products={filteredProducts}
 		/>
 	)

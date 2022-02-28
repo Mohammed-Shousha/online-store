@@ -9,7 +9,6 @@ const Title = styled.h1`
 
     @media ${device.tablet}{
         font-size: ${props => props.h1 ? '1.65em' : props.h2 ? '1.25em' : props.h3 ? '0.9em' : '0.8em'};
-        width: 80%;
         margin-left: auto;
         margin-right: auto;
     }

@@ -11,9 +11,9 @@ import {
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
-  setContext
+//   setContext
 } from "@apollo/client"
-import Cookies from 'js-cookie'
+// import Cookies from 'js-cookie'
 
 const link = createHttpLink({
   uri: "http://localhost:4000/graphql",

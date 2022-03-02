@@ -5,7 +5,7 @@ const ErrorText = styled.p `
     &&{
         font-size: 10px;
         color: red;
-        margin: 3px 0;
+        margin: 0;
 
         @media ${device.tablet}{
             font-size: 11px;

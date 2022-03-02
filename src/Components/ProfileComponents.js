@@ -110,7 +110,6 @@ export const ProfileButton = styled.button`
     border-radius: 2px;
     border:1px solid grey;
     background: white;
-	color: ${props => props.disabled ? '#1010104D' : props.color};
     padding: 0.65em 1.25em;
     outline: none;
     font-size: 0.75em;
@@ -207,3 +206,4 @@ export const ChangePasswordButton = styled(ProfileButton)`
         padding: 1em 0.75em;
     }
 `
+

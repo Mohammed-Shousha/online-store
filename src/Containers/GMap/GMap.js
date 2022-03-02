@@ -4,7 +4,7 @@ import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api"
 import { useTranslation } from 'react-i18next'
 import Loading from '../../Components/Loading'
 import { mapContainerStyle, MapTitle, LocateMe, AddressWindow } from '../../Components/MapComponents'
-import { GoogleMapsKey } from '../../Data/Constants'
+// import { GoogleMapsKey } from '../../Data/Constants'
 import pin from '../../Data/Icons/pin.svg'
 import pin2 from '../../Data/Icons/pin2.svg'
 
@@ -26,7 +26,7 @@ const GMap = ({ marker, setMarker }) => {
 	const { t } = useTranslation()
 
 	const { isLoaded, loadError } = useLoadScript({
-		googleMapsApiKey: GoogleMapsKey
+      googleMapsApiKey: process.env.EACT_APP_GOOGLE_MAPS
 	})
 
 	const mapRef = useRef()

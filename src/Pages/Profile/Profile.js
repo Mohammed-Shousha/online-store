@@ -14,48 +14,49 @@ import { passwordRegex } from '../../Data/Constants'
 
 const Profile = () => {
 
-	const { data, setData } = useContext(DataContext)
-	const { email } = data
+   const { data, setData } = useContext(DataContext)
+   const { email } = data
 
-	const [changePassword, setChangePassword] = useState(false)
-	const [passwordError, setPasswordError] = useState('')
+   const [changePassword, setChangePassword] = useState(false)
+   const [passwordError, setPasswordError] = useState('')
+   const [changeDataDone, setChangeDataDone] = useState(' ')
 
-	const passwordValue = '•'.repeat(data.password.length)
+   const passwordValue = '•'.repeat(data.password.length)
 
-	const handleKeyDown = (e) => {
-		if ((e.charCode || e.keyCode) === 13) {
-			e.preventDefault()
-		}
-	}
+   const handleKeyDown = (e) => {
+      if ((e.charCode || e.keyCode) === 13) {
+         e.preventDefault()
+      }
+   }
 
-	const newPasswordInput = useRef(null)
-	const confirmPasswordInput = useRef(null)
-	const OKButton = useRef(null)
-	const phoneInput = useRef(null)
-	const saveButton = useRef(null)
+   const newPasswordInput = useRef(null)
+   const confirmPasswordInput = useRef(null)
+   const OKButton = useRef(null)
+   const phoneInput = useRef(null)
+   const saveButton = useRef(null)
 
-	const handleKeyUp = (e) => {
-		if (e.keyCode === 13) {
-			switch (e.target.name) {
-				case 'name':
-					phoneInput.current.focus()
-					break
-				case 'phone':
-					saveButton.current.click()
-					break
-				case 'password':
-					newPasswordInput.current.focus()
-					break
-				case 'newPassword':
-					confirmPasswordInput.current.focus()
-					break
-				default:
-					OKButton.current.click()
-			}
-		}
-	}
+   const handleKeyUp = (e) => {
+      if (e.keyCode === 13) {
+         switch (e.target.name) {
+            case 'name':
+               phoneInput.current.focus()
+               break
+            case 'phone':
+               saveButton.current.click()
+               break
+            case 'password':
+               newPasswordInput.current.focus()
+               break
+            case 'newPassword':
+               confirmPasswordInput.current.focus()
+               break
+            default:
+               OKButton.current.click()
+         }
+      }
+   }
 
-	const HANDLE_CHANGE_DATA = gql`
+   const HANDLE_CHANGE_DATA = gql`
 		mutation HandleChangeData($email: String!, $name: String!, $phone: String!){
 			handleChangeData(email: $email, name: $name, phone: $phone){
 				result
@@ -67,16 +68,18 @@ const Profile = () => {
 			}
 		}
 	`
-	const [handleChangeData] = useMutation(HANDLE_CHANGE_DATA, {
-		onCompleted({ handleChangeData }) {
-			if (handleChangeData.result) {
-				const { name, email, phone } = handleChangeData.user
-				setData(editData(name, email, data.password, phone))
-			}
-		}
-	})
+   const [handleChangeData] = useMutation(HANDLE_CHANGE_DATA, {
+      onCompleted({ handleChangeData }) {
+         if (handleChangeData.result) {
+            const { name, email, phone } = handleChangeData.user
+            setData(editData(name, email, data.password, phone))
+            setChangeDataDone('Saved')
+            setTimeout(() => setChangeDataDone(' '), 3000)
+         }
+      }
+   })
 
-	const HANDLE_CHANGE_PASSWORD = gql`
+   const HANDLE_CHANGE_PASSWORD = gql`
 		mutation HandleChangePassword($email: String!, $password: String!, $newPassword: String!){
 			handleChangePassword(email: $email, password: $password, newPassword: $newPassword){
 				... on Error{
@@ -95,195 +98,200 @@ const Profile = () => {
 		}
 	`
 
-	const [handleChangePassword] = useMutation(HANDLE_CHANGE_PASSWORD, {
-		onCompleted({ handleChangePassword }) {
-			if (handleChangePassword.email) {
-				const { name, email, password, phone } = handleChangePassword
-				setData(editData(name, email, password, phone))
-				setChangePassword(false)
-			} else if (handleChangePassword.message) {
-				setPasswordError(handleChangePassword.message)
-				setTimeout(() => setPasswordError(''), 2500)
-			} 
-		}
-	})
+   const [handleChangePassword] = useMutation(HANDLE_CHANGE_PASSWORD, {
+      onCompleted({ handleChangePassword }) {
+         if (handleChangePassword.email) {
+            const { name, email, password, phone } = handleChangePassword
+            setData(editData(name, email, password, phone))
+            setChangePassword(false)
+         } else if (handleChangePassword.message) {
+            setPasswordError(handleChangePassword.message)
+            setTimeout(() => setPasswordError(''), 2500)
+         }
+      }
+   })
 
-	return (
-		<>
-			<Title h1> Profile </Title>
-			<ProfileContainer>
-				<h3> General Information </h3>
-				<Formik
-					initialValues={{
-						name: data.name,
-						phone: data.phone
-					}}
-					validationSchema={Yup.object({
-						name: Yup.string()
-							.min(2, 'Too Short')
-							.required("Can't Be Empty"),
-						phone: Yup.string()
-							.matches(/^\d{11}$/, 'Invalid Phone')
-							.required("Can't Be Empty"),
-					})}
-					onSubmit={ async ({ name, phone }) => {
-						handleChangeData({ variables: { email, name, phone } })
-						// const response = await fetch('http://localhost:8888/changedata', {
-						// 	method: 'put',
-						// 	headers: { 'Content-Type': 'application/json' },
-						// 	body: JSON.stringify({
-						// 		email: data.email,
-						// 		name,
-						// 		phone,
-						// 	})
-						// })
-						// const { result, user } = await response.json()
-						// if (result.nModified) {
-						// 	const { name, email, phone } = user
-						// 	setData(editData(name, email, data.password, phone))
-						// }
-					}}
-				>
-					{({ errors, touched, isSubmitting }) => (
-						<Form onKeyDown={handleKeyDown}>
-							<FlexContainer around responsive>
-								<ProfileDetails>
-									<p> Name </p>
-									<Field name='name' onKeyUp={handleKeyUp} />
-									{touched.name && errors.name && <ErrorText>{errors.name}</ErrorText>}
-								</ProfileDetails>
-								<ProfileDetails>
-									<p> Phone </p>
-									<Field name='phone' innerRef={phoneInput} onKeyUp={handleKeyUp} />
-									{touched.phone && errors.phone && <ErrorText>{errors.phone}</ErrorText>}
-								</ProfileDetails>
-							</FlexContainer>
-							<FlexContainer flexEnd>
-								<ProfileButton
-									type='submit'
-									ref={saveButton}
-									disabled={isSubmitting}
-								>
-									SAVE
-								</ProfileButton>
-							</FlexContainer>
-						</Form>
-					)}
-				</Formik>
-			</ProfileContainer>
+   return (
+      <>
+         <Title h1> Profile </Title>
+         <ProfileContainer>
+            <h3> General Information </h3>
+            <Formik
+               initialValues={{
+                  name: data.name,
+                  phone: data.phone
+               }}
+               validationSchema={Yup.object({
+                  name: Yup.string()
+                     .min(2, 'Too Short')
+                     .required("Can't Be Empty"),
+                  phone: Yup.string()
+                     .matches(/^\d{11}$/, 'Invalid Phone')
+                     .required("Can't Be Empty"),
+               })}
+               onSubmit={({ name, phone }) => {
+                  handleChangeData({ variables: { email, name, phone } })
+                  // const response = await fetch('http://localhost:8888/changedata', {
+                  // 	method: 'put',
+                  // 	headers: { 'Content-Type': 'application/json' },
+                  // 	body: JSON.stringify({
+                  // 		email: data.email,
+                  // 		name,
+                  // 		phone,
+                  // 	})
+                  // })
+                  // const { result, user } = await response.json()
+                  // if (result.nModified) {
+                  // 	const { name, email, phone } = user
+                  // 	setData(editData(name, email, data.password, phone))
+                  // }
+               }}
+            >
+               {({ errors, touched, isSubmitting }) => (
+                  <Form onKeyDown={handleKeyDown}>
+                     <FlexContainer around noAlign responsive>
+                        <ProfileDetails>
+                           <p> Name </p>
+                           <Field name='name' onKeyUp={handleKeyUp} />
+                           {touched.name && errors.name && <ErrorText>{errors.name}</ErrorText>}
 
-			<ProfileContainer>
-				<h3> Security </h3>
-				<FlexContainer around noAlign responsive>
-					<ProfileDetails readOnly>
-						<p> Email </p>
-						<input type='email' value={email} readOnly />
-						<h6> You can't change your email </h6>
-					</ProfileDetails>
-					<ProfileDetails readOnly>
-						<p> Password </p>
-						<input type='password' value={passwordValue} readOnly />
-					</ProfileDetails>
-				</FlexContainer>
-				<FlexContainer flexEnd>
-					<ProfileButton 
-						onClick={() => setChangePassword(true)}
-					>
-						CHANGE PASSWORD
-					</ProfileButton>
-				</FlexContainer>
-			</ProfileContainer>
+                        </ProfileDetails>
+                        <ProfileDetails>
+                           <p> Phone </p>
+                           <Field name='phone' innerRef={phoneInput} onKeyUp={handleKeyUp} />
+                           {touched.phone && errors.phone && <ErrorText>{errors.phone}</ErrorText>}
+                        </ProfileDetails>
+                     </FlexContainer>
+                     <FlexContainer flexEnd>
+                        <ProfileButton
+                           type='submit'
+                           ref={saveButton}
+                        >
+                           SAVE
+                        </ProfileButton>
+                     </FlexContainer>
+                     {changeDataDone && <h4>{changeDataDone}</h4>}
+                  </Form>
+               )}
+            </Formik>
+         </ProfileContainer>
 
-			{changePassword &&
-				<Modal>
-					<ChangePasswordContainer>
-						<div>
-							<h3> Change Password </h3>
-							<p> Enter your current password and new password to change the password </p>
-						</div>
-						<Formik
-							initialValues={{ password: '', newPassword: '', confirmPassword: '' }}
-							validationSchema={Yup.object({
-								password: Yup.string()
-									.required('Required'),
-								newPassword: Yup.string()
-									.required('Required')
-									.matches(passwordRegex, 'Password must contain at least one letter, at least one number, and be longer than 8 charaters'),
-								confirmPassword: Yup.string()
-									.required('Required')
-									.oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
-							})}
-							onSubmit={ async ({ password, confirmPassword }) => {
-								handleChangePassword({ variables: { 
-									email,
-									password,
-									newPassword: confirmPassword
-								} })
-								// const response = await fetch('http://localhost:8888/changepassword', {
-								// 	method: 'put',
-								// 	headers: { 'Content-Type': 'application/json' },
-								// 	body: JSON.stringify({
-								// 		email,
-								// 		password, 
-								// 		newPassword: confirmPassword
-								// 	})
-								// })
-								// const result = await response.json()
-								// if (result.user) {
-								// 	const { name, email, password, phone} = result.user
-								// 	setData(editData(name, email, password, phone))
-								// 	setChangePassword(false)
-								// }else if(result.message){
-								// 	setPasswordError(result.message)
-								// 	setTimeout(() => setWrongPassword(''), 2500)
-								// }
-							}}
-						>
-							{({ errors, touched, isSubmitting }) => (
-								<Form onKeyDown={handleKeyDown}>
-									<ProfileDetails changePassword>
-										<p> Current Password </p>
-										<Field name='password' type='password' onKeyUp={handleKeyUp} />
-										{touched.password && errors.password && <ErrorText>{errors.password}</ErrorText>}
-										{passwordError === 'Wrong Password' && <ErrorText> {passwordError} </ErrorText>}
-									</ProfileDetails>
-									<ProfileDetails changePassword>
-										<p> New Password </p>
-										<Field
-											name='newPassword' type='password'
-											innerRef={newPasswordInput} onKeyUp={handleKeyUp}
-										/>
-										{touched.newPassword && errors.newPassword && <ErrorText>{errors.newPassword}</ErrorText>}
-										{passwordError === 'You Need to Write a New Password' && <ErrorText> {passwordError} </ErrorText>}
-									</ProfileDetails>
-									<ProfileDetails changePassword>
-										<p>Confirm New Password </p>
-										<Field
-											name='confirmPassword' type='password'
-											innerRef={confirmPasswordInput} onKeyUp={handleKeyUp}
-										/>
-										{touched.confirmPassword && errors.confirmPassword && <ErrorText>{errors.confirmPassword}</ErrorText>}
-									</ProfileDetails>
-									<FlexContainer around>
-										<ChangePasswordButton
-											color='#555752' type='button'
-											onClick={() => setChangePassword(false)}
-										>
-											CANCEL
-										</ChangePasswordButton>
-										<ChangePasswordButton
-											color='blue' type='submit'
-											ref={OKButton} disabled={isSubmitting}
-										> OK </ChangePasswordButton>
-									</FlexContainer>
-								</Form>
-							)}
-						</Formik>
-					</ChangePasswordContainer>
-				</Modal>
-			}
-		</>
-	)
+         <ProfileContainer>
+            <h3> Security </h3>
+            <FlexContainer around noAlign responsive>
+               <ProfileDetails readOnly>
+                  <p> Email </p>
+                  <input type='email' value={email} readOnly />
+                  <h6> You can't change your email </h6>
+               </ProfileDetails>
+               <ProfileDetails readOnly>
+                  <p> Password </p>
+                  <input type='password' value={passwordValue} readOnly />
+               </ProfileDetails>
+            </FlexContainer>
+            <FlexContainer flexEnd>
+               <ProfileButton
+                  onClick={() => setChangePassword(true)}
+               >
+                  CHANGE PASSWORD
+               </ProfileButton>
+            </FlexContainer>
+         </ProfileContainer>
+
+         {changePassword &&
+            <Modal>
+               <ChangePasswordContainer>
+                  <div>
+                     <h3> Change Password </h3>
+                     <p> Enter your current password and new password to change the password </p>
+                  </div>
+                  <Formik
+                     initialValues={{ password: '', newPassword: '', confirmPassword: '' }}
+                     validationSchema={Yup.object({
+                        password: Yup.string()
+                           .required('Required'),
+                        newPassword: Yup.string()
+                           .required('Required')
+                           .matches(passwordRegex, 'Password must contain at least one letter, at least one number, and be longer than 8 charaters'),
+                        confirmPassword: Yup.string()
+                           .required('Required')
+                           .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
+                     })}
+                     onSubmit={({ password, confirmPassword }) => {
+                        handleChangePassword({
+                           variables: {
+                              email,
+                              password,
+                              newPassword: confirmPassword
+                           }
+                        })
+                        // const response = await fetch('http://localhost:8888/changepassword', {
+                        // 	method: 'put',
+                        // 	headers: { 'Content-Type': 'application/json' },
+                        // 	body: JSON.stringify({
+                        // 		email,
+                        // 		password, 
+                        // 		newPassword: confirmPassword
+                        // 	})
+                        // })
+                        // const result = await response.json()
+                        // if (result.user) {
+                        // 	const { name, email, password, phone} = result.user
+                        // 	setData(editData(name, email, password, phone))
+                        // 	setChangePassword(false)
+                        // }else if(result.message){
+                        // 	setPasswordError(result.message)
+                        // 	setTimeout(() => setWrongPassword(''), 2500)
+                        // }
+                     }}
+                  >
+                     {({ errors, touched, isSubmitting }) => (
+                        <Form onKeyDown={handleKeyDown}>
+                           <ProfileDetails changePassword>
+                              <p> Current Password </p>
+                              <Field name='password' type='password' onKeyUp={handleKeyUp} />
+                              {touched.password && errors.password && <ErrorText>{errors.password}</ErrorText>}
+                              {passwordError === 'Wrong Password' && <ErrorText> {passwordError} </ErrorText>}
+                           </ProfileDetails>
+                           <ProfileDetails changePassword>
+                              <p> New Password </p>
+                              <Field
+                                 name='newPassword' type='password'
+                                 innerRef={newPasswordInput} onKeyUp={handleKeyUp}
+                              />
+                              {touched.newPassword && errors.newPassword && <ErrorText>{errors.newPassword}</ErrorText>}
+                              {passwordError === 'You Need to Write a New Password' && <ErrorText> {passwordError} </ErrorText>}
+                           </ProfileDetails>
+                           <ProfileDetails changePassword>
+                              <p>Confirm New Password </p>
+                              <Field
+                                 name='confirmPassword' type='password'
+                                 innerRef={confirmPasswordInput} onKeyUp={handleKeyUp}
+                              />
+                              {touched.confirmPassword && errors.confirmPassword && <ErrorText>{errors.confirmPassword}</ErrorText>}
+                           </ProfileDetails>
+                           <FlexContainer around>
+                              <ChangePasswordButton
+                                 color='#555752' type='button'
+                                 onClick={() => setChangePassword(false)}
+                              >
+                                 CANCEL
+                              </ChangePasswordButton>
+                              <ChangePasswordButton
+                                 color='blue' type='submit'
+                                 ref={OKButton} disabled={isSubmitting}
+                              >
+                                 OK
+                              </ChangePasswordButton>
+                           </FlexContainer>
+                        </Form>
+                     )}
+                  </Formik>
+               </ChangePasswordContainer>
+            </Modal>
+         }
+      </>
+   )
 }
 
 export default Profile

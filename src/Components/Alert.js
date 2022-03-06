@@ -1,9 +1,10 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { gql, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import { device } from '../Data/Constants'
 import x from '../Data/Icons/x.svg'
+import { HANDLE_RESEND_EMAIL } from '../Data/Mutations'
 import { DataContext } from '../Data/DataContext'
 
 const AlertContainer = styled.div`
@@ -73,12 +74,6 @@ const AlertContainer = styled.div`
 const Alert = ({ setAlert, confirm, address }) => {
 	const { data, setConfirmNav } = useContext(DataContext)
 	const { email } = data
-
-	const HANDLE_RESEND_EMAIL = gql`
-        mutation HandleResendEmail($email: String!){
-            handleResendEmail(email: $email)
-        }
-    `
 
 	const [handleResendEmail] = useMutation(HANDLE_RESEND_EMAIL, {
 		onCompleted({ handleResendEmail }) {

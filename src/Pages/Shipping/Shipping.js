@@ -1,7 +1,7 @@
 import React, { useContext, useState, useRef } from 'react'
 import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
-import { gql, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import GMap from '../../Containers/GMap/GMap'
 import { CheckoutTitle } from '../../Components/Title'
 import FlexContainer from '../../Components/FlexContainer'
@@ -12,6 +12,7 @@ import { MapButton } from '../../Components/Buttons'
 import { DataContext } from '../../Data/DataContext'
 import { editAddresses } from '../../Data/DataActions'
 import { LocationContext } from '../../Data/LocationContext'
+import { HANDLE_ADDING_ADDRESS, HANDLE_DELETING_ADDRESS, HANDLE_UPDATING_ADDRESS } from '../../Data/Mutations'
 import add from '../../Data/Icons/add.svg'
 import prev from '../../Data/Icons/prev.svg'
 import bin from '../../Data/Icons/bin.svg'
@@ -52,19 +53,7 @@ const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }
 		}
 	}
 
-	const HANDLE_ADDING_ADDRESS = gql`
-		mutation HandleAddingAddress($email: String!, $name: String!, $phone: String!, $address: String!){
-			handleAddingAddress(email: $email, name: $name, phone: $phone, address: $address){
-				result
-				addresses{
-					id
-					name
-					address
-					phone
-				}
-			}
-		}
-	`
+	
 	const [handleAddingAddress] = useMutation(HANDLE_ADDING_ADDRESS, {
 		onCompleted({ handleAddingAddress }) {
 			if (handleAddingAddress.result) {
@@ -94,19 +83,6 @@ const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }
 		// }
 	// }
 
-	const HANDLE_DELETING_ADDRESS = gql`
-		mutation HandleDeletingAddress($email: String!, $addressId: ID!){
-			handleDeletingAddress(email: $email, addressId: $addressId){
-				result
-				addresses{
-					id
-					name
-					address
-					phone
-				}
-			}
-		}
-	`
 	const [handleDeletingAddress] = useMutation(HANDLE_DELETING_ADDRESS, {
 		onCompleted({ handleDeletingAddress }) {
 			if (handleDeletingAddress.result) {
@@ -130,19 +106,7 @@ const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }
 		// }
 	// }
 	
-	const HANDLE_UPDATING_ADDRESS = gql`
-		mutation HandleUpdatingAddress($addressId: ID!, $name: String!, $phone: String!, $address: String!){
-			handleUpdatingAddress(addressId: $addressId, name: $name, phone: $phone, address: $address){
-				result
-				addresses{
-					id
-					name
-					address
-					phone
-				}
-			}
-		}
-	`
+	
 	const [handleUpdatingAddress] = useMutation(HANDLE_UPDATING_ADDRESS, {
 		onCompleted({ handleUpdatingAddress }) {
 			if (handleUpdatingAddress.result) {

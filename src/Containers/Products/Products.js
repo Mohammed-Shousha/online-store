@@ -36,8 +36,8 @@ const Products = ({ title = '', num = '', products }) => {
 						{PRO.map((P, i) => (
 							<div key={i}>
 								{P.map(product => (
-                           <Product key={product.id} data-aos='fade-up' data-aos-duration="2000">
-										<Link to={`/product/${product.id}`}>
+                           <Product key={product._id} data-aos='fade-up' data-aos-duration="2000">
+										<Link to={`/product/${product._id}`}>
 										<ProductCard
 											name={product.name}
 											price={`${product.price} EGP`}
@@ -46,7 +46,7 @@ const Products = ({ title = '', num = '', products }) => {
 										/>
 										</Link>
 										<AddToCart 
-											productId={product.id}
+											productId={product._id}
 											setAlert={setAlert}
 										/>
 									</Product>

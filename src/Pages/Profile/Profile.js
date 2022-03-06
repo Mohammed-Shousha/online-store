@@ -1,7 +1,7 @@
 import React, { useState, useRef, useContext } from 'react'
 import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
-import { gql, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import FlexContainer from '../../Components/FlexContainer'
 import Title from '../../Components/Title'
 import Modal from '../../Components/Modal'
@@ -10,6 +10,7 @@ import { ProfileContainer, ProfileDetails, ProfileButton, ChangePasswordContaine
 import { DataContext } from '../../Data/DataContext'
 import { editData } from '../../Data/DataActions'
 import { passwordRegex } from '../../Data/Constants'
+import { HANDLE_CHANGE_DATA, HANDLE_CHANGE_PASSWORD } from '../../Data/Mutations'
 
 
 const Profile = () => {
@@ -56,18 +57,6 @@ const Profile = () => {
       }
    }
 
-   const HANDLE_CHANGE_DATA = gql`
-		mutation HandleChangeData($email: String!, $name: String!, $phone: String!){
-			handleChangeData(email: $email, name: $name, phone: $phone){
-				result
-				user{
-					name
-					email
-					phone
-				}
-			}
-		}
-	`
    const [handleChangeData] = useMutation(HANDLE_CHANGE_DATA, {
       onCompleted({ handleChangeData }) {
          if (handleChangeData.result) {
@@ -78,25 +67,6 @@ const Profile = () => {
          }
       }
    })
-
-   const HANDLE_CHANGE_PASSWORD = gql`
-		mutation HandleChangePassword($email: String!, $password: String!, $newPassword: String!){
-			handleChangePassword(email: $email, password: $password, newPassword: $newPassword){
-				... on Error{
-					message
-				}
-				... on User{
-					email
-					name
-					phone
-					password{
-						hash
-						length
-					}
-				}
-			}
-		}
-	`
 
    const [handleChangePassword] = useMutation(HANDLE_CHANGE_PASSWORD, {
       onCompleted({ handleChangePassword }) {

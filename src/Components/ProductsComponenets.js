@@ -1,9 +1,10 @@
 import styled from 'styled-components'
 import React, { useContext, useState } from 'react'
-import { gql, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import { DataContext } from '../Data/DataContext'
 import { editCartItems } from '../Data/DataActions'
 import { device } from '../Data/Constants'
+import { HANDLE_ADDING_ITEMS } from '../Data/Mutations'
 
 
 export const ProductsTitle = styled.h2`
@@ -88,18 +89,6 @@ export const AddToCart = ({ productId, setAlert })=>{
     const { isSignedIn, setData, data } = useContext(DataContext)
     const { email } = data
     const [isSubmitting, setIsSumbitting] = useState(null)
-
-    const HANDLE_ADDING_ITEMS = gql`
-		mutation HandleAddingItems($email: String!, $productId: Int!){
-			handleAddingItems(email: $email, productId: $productId){
-				result
-				cartItems{
-					productId
-					qty
-				}
-			}
-		}
-	`
 
     const [handleAddingItems] = useMutation(HANDLE_ADDING_ITEMS, {
         onCompleted({ handleAddingItems }) {

@@ -1,31 +1,3 @@
-import img1 from './Photos/1.jpg'
-import img2 from './Photos/2.jpg'
-import img3 from './Photos/3.jpg'
-import img4 from './Photos/4.jpg'
-
-import beatsHeadset from './Photos/headset-beats.jpg'
-import jblHeadset from './Photos/headset-jbl.jpg'
-import sonyHeadset from './Photos/headset-sony.jpg'
-
-import jblSpeaker from './Photos/speaker-jbl.jpg'
-import boseSpeaker1 from './Photos/speaker-bose-1.jpg'
-import boseSpeaker2 from './Photos/speaker-bose-2.jpg'
-
-import appleCover1 from './Photos/cover-iphone-1.jpg'
-import appleCover2 from './Photos/cover-iphone-2.jpg'
-import appleCover3 from './Photos/cover-iphone-3.jpg'
-import samsungCover1 from './Photos/cover-samsung-1.jpg'
-import samsungCover2 from './Photos/cover-samsung-2.jpg'
-import huaweiCover1 from './Photos/cover-huawei-1.jpg'
-import huaweiCover2 from './Photos/cover-huawei-2.jpg'
-
-import appleSmartwatch from './Photos/smartwatch-apple.jpg'
-import fitbitSmartwatch from './Photos/smartwatch-fitbit.jpg'
-import miSmartwatch from './Photos/smartwatch-mi.jpg'
-
-import powerbank1 from './Photos/powerbank-1.jpg'
-import powerbank2 from './Photos/powerbank-2.jpg'
-
 import money from './Icons/money.svg'
 import refund from './Icons/refund.svg'
 import shipping from './Icons/shipping.svg'
@@ -46,9 +18,35 @@ import huawei from './Icons/huawei.svg'
 import xiaomi from './Icons/xiaomi.svg'
 import fitbit from './Icons/fitbit.svg'
 
+const img1 = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v1646320312/Photos/1_md6vka.jpg'
+const img2 = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v1646320406/Photos/2_bpqfed.jpg'
+const img3 = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v1646320310/Photos/3_sxxgsl.jpg'
+const img4 = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v1646320295/Photos/4_qxsmzb.jpg'
+
+const powerbank1 = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v1646320415/Photos/powerbank-1_ymgwl1.jpg'
+const powerbank2 = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v1646320669/Photos/powerbank-3_zcx8le.jpg'
+
+const beatsHeadset = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v1646320347/Photos/headset-beats_axdg4t.jpg'
+const sonyHeadset = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v1646320378/Photos/headset-sony_ersvdc.jpg'
+const jblHeadset = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v1646320383/Photos/headset-jbl_c8fnwk.jpg'
+
+const boseSpeaker1 = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v1646320395/Photos/speaker-bose-1_n59v6r.jpg'
+const boseSpeaker2 = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v1646320398/Photos/speaker-bose-2_ijxmec.jpg'
+const jblSpeaker = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v1646320343/Photos/speaker-jbl_sbp8in.jpg'
+
+const huaweiCover1 = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v1646320302/Photos/cover-huawei-1_sncnk5.jpg'
+const huaweiCover2 = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v1646320336/Photos/cover-huawei-2_g9dbji.jpg'
+const samsungCover1 = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v1646320370/Photos/cover-samsung-1_rdyiad.jpg'
+const samsungCover2 = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v1646320384/Photos/cover-samsung-2_wraivo.jpg'
+const appleCover1 = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v1646320350/Photos/cover-iphone-1_lxpw68.jpg'
+const appleCover2 = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v1646320377/Photos/cover-iphone-2_m91fpd.jpg'
+const appleCover3 = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v1646320371/Photos/cover-iphone-3_q42aeu.jpg'
+
+const appleSmartwatch = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v1646320400/Photos/smartwatch-apple_q1klmq.jpg'
+const miSmartwatch = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v1646320381/Photos/smartwatch-mi_cakz0e.jpg'
+const fitbitSmartwatch = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v1646320390/Photos/smartwatch-fitbit_golbgj.jpg'
 
 export const slideShowImages = [img1, appleCover1, img2, img3, beatsHeadset, img4]
-
 
 export const particles = {
   particles: {
@@ -356,11 +354,12 @@ export const ProductsList = [{
 	description: 'blah blah blah',
 },
 {
-	id: 17,
-	type:'power banks',
-	name: 'Solar Power Bank',
-	price: 800,
-	photo: powerbank2,
-	description: 'blah blah blah',
-},
+   id: 17,
+   type: 'power banks',
+   brand: 'anker',
+   name: 'Anker Power Bank',
+   price: 300,
+   photo: powerbank2,
+   description: 'nothing'
+}
 ]

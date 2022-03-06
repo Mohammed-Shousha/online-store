@@ -2,6 +2,7 @@ import React, { useContext, useState, useRef, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Autosuggest from 'react-autosuggest'
+import { useLazyQuery } from '@apollo/client'
 import Sidebar from '../Sidebar/Sidebar'
 import Logo from '../../Components/Logo'
 import { MainNav } from '../../Components/Navbar'
@@ -10,7 +11,7 @@ import { NavText, UserAction, CartCircle, UserActionsContainer, SearchIcon, Menu
 import { ConfirmNav } from '../../Components/ConfirmComponents'
 import { DataContext } from '../../Data/DataContext'
 import { signOut } from '../../Data/DataActions'
-import { ProductsList } from '../../Data/Database'
+import { PRODUCTS_BY_NAME } from '../../Data/Queries'
 import cart from '../../Data/Icons/cart.svg'
 import user from '../../Data/Icons/user.svg'
 import list from '../../Data/Icons/list.svg'
@@ -20,192 +21,200 @@ import './Nav.css'
 
 
 const Nav = () => {
-	
-	const { isSignedIn, setIsSignedIn, data, setData, confirmNav, setConfirmNav } = useContext(DataContext)
-	const { name, email, cartItems } = data
-	const newName = name.split(' ')[0]
-	
-	const onSignOut = () => {
-		setIsSignedIn(false)
-		setData(signOut())
-	}
-	
-	let history = useHistory()
-	
-	const { t, i18n } =useTranslation()
-	
-	const changeLanguage = (lng) => {
-		i18n.changeLanguage(lng)
-		if(lng === 'ar'){
-			document.getElementsByTagName('html')[0].setAttribute("dir", "rtl")
-		}else{
-			document.getElementsByTagName('html')[0].setAttribute("dir", "ltr")
 
-		}
-	}
+   const { isSignedIn, setIsSignedIn, data, setData, confirmNav, setConfirmNav } = useContext(DataContext)
+   const { name, email, cartItems } = data
+   const newName = name.split(' ')[0]
 
-	const getSuggestionValue = (suggestion) => suggestion.name
+   const onSignOut = () => {
+      setIsSignedIn(false)
+      setData(signOut())
+   }
 
-	const renderSuggestion = (suggestion) => (
-		<div> {suggestion.name} </div>
-	)
+   let history = useHistory()
 
-	const [value, setValue] = useState('')
-	const [suggestions, setSuggestions] = useState([])
+   const { t, i18n } = useTranslation()
 
-	const onChange = (e, { newValue }) => {
-		setValue(newValue)
-	}
 
-	const searchItem = (value) => {
-		if (value) {
-			history.push(`/search?q=${value}`)
-		}
-		setValue('')
-	}
+   const changeLanguage = (lng) => {
+      i18n.changeLanguage(lng)
+      if (lng === 'ar') {
+         document.getElementsByTagName('html')[0].setAttribute("dir", "rtl")
+      } else {
+         document.getElementsByTagName('html')[0].setAttribute("dir", "ltr")
 
-	const onKeyUp = (e) => {
-		if (e.keyCode === 13) {
-			searchItem(value)
-		}
-	}
+      }
+   }
 
-	const onSuggestionsFetchRequested = ({ value }) => {
-		let inputValue = value.trim().toLowerCase()
-		let inputLength = inputValue.length
+   const getSuggestionValue = (suggestion) => suggestion.name
 
-		if (!inputLength) {
-			setSuggestions([])
-		}
-		else {
-			setSuggestions(
-				ProductsList.filter(suggestion => (
-					suggestion.name.toLowerCase().match(inputValue)
-					)))
-				}
-			}
-			
-	const onSuggestionsClearRequested = () => {
-		setSuggestions([])
-	}
+   const renderSuggestion = (suggestion) => (
+      <div> {suggestion.name} </div>
+   )
 
-	const inputProps = {
-		placeholder: t('Nav.Search'),
-		value,
-		onChange,
-		onKeyUp,
-	}
+   const [value, setValue] = useState('')
+   const [suggestions, setSuggestions] = useState([])
 
-	const [show, setShow] = useState(false)
-	const [sidebar, setSidebar] = useState(false)
+   const [productsByName] = useLazyQuery(PRODUCTS_BY_NAME,
+      {
+         onCompleted({ productsByName }) {
+            setSuggestions(productsByName)
+         }
+      })
 
-	const toggleShow = () => {
-		setShow(!show)
-	}
+   const onChange = (e, { newValue }) => {
+      setValue(newValue)
+   }
 
-	const userActions = useRef(null)
+   const searchItem = (value) => {
+      if (value) {
+         history.push(`/search?q=${value}`)
+      }
+      setValue('')
+   }
 
-	useEffect(() => {
-		const handleClickOutside = (e) => {
-			if (userActions.current && !userActions.current.contains(e.target)) {
-				setShow(false)
-			}
-		}
-		document.addEventListener("mousedown", handleClickOutside)
-		return () => {
-			document.removeEventListener("mousedown", handleClickOutside)
-		}
-	}, [show])
+   const onKeyUp = (e) => {
+      if (e.keyCode === 13) {
+         searchItem(value)
+      }
+   }
 
-	return (
-		<>
-		{confirmNav &&
-			<ConfirmNav>
-				<p> An Email Has Been Sent To{" "}<strong>{email}</strong>{" "}Check Your Email To Confirm Your Account</p>
-				<img src={x} alt='x' onClick={() => setConfirmNav(false)} />
-			</ConfirmNav>
-		}
-		<MainNav>
+   const onSuggestionsFetchRequested = ({ value }) => {
+      let inputValue = value.trim().toLowerCase()
+      let inputLength = inputValue.length
 
-			<MenuIcon onClick={() => setSidebar(true)} />
 
-			{sidebar &&
-				<Sidebar
-					setSidebar={setSidebar}
-				/>
-			}
+      if (!inputLength) {
+         setSuggestions([])
+      }
+      else {
+         productsByName({
+            variables: { name: inputValue },
+         })
+      }
+   }
 
-			<Logo />
+   const onSuggestionsClearRequested = () => {
+      setSuggestions([])
+   }
 
-			{i18n.language === 'en' && <button onClick={()=>changeLanguage('ar')}>AR</button>}
-			{i18n.language === 'ar' && <button onClick={() => changeLanguage('en')}>EN</button>}
+   const inputProps = {
+      placeholder: t('Nav.Search'),
+      value,
+      onChange,
+      onKeyUp,
+   }
 
-			<Autosuggest
-				suggestions={suggestions}
-				inputProps={inputProps}
-				onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-				onSuggestionsClearRequested={onSuggestionsClearRequested}
-				getSuggestionValue={getSuggestionValue}
-				renderSuggestion={renderSuggestion}
-			/>
-			<SearchIcon
-				onClick={() => searchItem(value)}
-			/>
+   const [show, setShow] = useState(false)
+   const [sidebar, setSidebar] = useState(false)
 
-			<NavText
-				relative
-				ref={userActions}
-				onClick={isSignedIn ? toggleShow : undefined }
-			>
-				{isSignedIn ? 
-					`${t('Nav.Hi')} ${newName}`
-				:
-					<p>
-					<Link to='/signin'>{t('Nav.SignIn')}</Link>
-					&nbsp;
-					{t('Nav.or')}
-					&nbsp;
-					<Link to='/signup'>{t('Nav.SignUp')}</Link></p>
-				}
-				{isSignedIn && show &&
-					<UserActionsContainer>
-						<Link to='/orders'>
-							<UserAction>
-								<img src={list} alt='list' />
-								<p> {t('Nav.Orders')} </p>
-							</UserAction>
-						</Link>
-						<Link to='/profile'>
-							<UserAction>
-								<img src={user} alt='user' />
-								<p> {t('Nav.Profile')} </p>
-							</UserAction>
-						</Link>
-						<Link to='/' onClick={onSignOut} >
-							<UserAction signOut>
-								<img src={signout} alt='signout' />
-								<p> {t('Nav.Sign Out')} </p>
-							</UserAction>
-						</Link>
-					</UserActionsContainer>}
-			</NavText>
+   const toggleShow = () => {
+      setShow(!show)
+   }
 
-			{isSignedIn &&
-				<Link to='/cart'>
-					<NavText>
-						<FlexContainer>
-							{t('Nav.Cart')}
-							<img alt='cart' src={cart} />
-							<CartCircle hide={cartItems.every(item => item.qty === 0)}>
-								{cartItems.reduce((t, item) => t + item.qty, 0)}
-							</CartCircle>
-						</FlexContainer>
-					</NavText>
-				</Link>
-			}
-		</MainNav>
-		</>
-	)
+   const userActions = useRef(null)
+
+   useEffect(() => {
+      const handleClickOutside = (e) => {
+         if (userActions.current && !userActions.current.contains(e.target)) {
+            setShow(false)
+         }
+      }
+      document.addEventListener("mousedown", handleClickOutside)
+      return () => {
+         document.removeEventListener("mousedown", handleClickOutside)
+      }
+   }, [show])
+
+   return (
+      <>
+         {confirmNav &&
+            <ConfirmNav>
+               <p> An Email Has Been Sent To{" "}<strong>{email}</strong>{" "}Check Your Email To Confirm Your Account</p>
+               <img src={x} alt='x' onClick={() => setConfirmNav(false)} />
+            </ConfirmNav>
+         }
+         <MainNav>
+
+            <MenuIcon onClick={() => setSidebar(true)} />
+
+            {sidebar &&
+               <Sidebar
+                  setSidebar={setSidebar}
+               />
+            }
+
+            <Logo />
+
+            {i18n.language === 'en' && <button onClick={() => changeLanguage('ar')}>AR</button>}
+            {i18n.language === 'ar' && <button onClick={() => changeLanguage('en')}>EN</button>}
+
+            <Autosuggest
+               suggestions={suggestions}
+               inputProps={inputProps}
+               onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+               onSuggestionsClearRequested={onSuggestionsClearRequested}
+               getSuggestionValue={getSuggestionValue}
+               renderSuggestion={renderSuggestion}
+            />
+            <SearchIcon
+               onClick={() => searchItem(value)}
+            />
+
+            <NavText
+               relative
+               ref={userActions}
+               onClick={isSignedIn ? toggleShow : undefined}
+            >
+               {isSignedIn ?
+                  `${t('Nav.Hi')} ${newName}`
+                  :
+                  <p>
+                     <Link to='/signin'>{t('Nav.SignIn')}</Link>
+                     &nbsp;
+                     {t('Nav.or')}
+                     &nbsp;
+                     <Link to='/signup'>{t('Nav.SignUp')}</Link></p>
+               }
+               {isSignedIn && show &&
+                  <UserActionsContainer>
+                     <Link to='/orders'>
+                        <UserAction>
+                           <img src={list} alt='list' />
+                           <p> {t('Nav.Orders')} </p>
+                        </UserAction>
+                     </Link>
+                     <Link to='/profile'>
+                        <UserAction>
+                           <img src={user} alt='user' />
+                           <p> {t('Nav.Profile')} </p>
+                        </UserAction>
+                     </Link>
+                     <Link to='/' onClick={onSignOut} >
+                        <UserAction signOut>
+                           <img src={signout} alt='signout' />
+                           <p> {t('Nav.Sign Out')} </p>
+                        </UserAction>
+                     </Link>
+                  </UserActionsContainer>}
+            </NavText>
+
+            {isSignedIn &&
+               <Link to='/cart'>
+                  <NavText>
+                     <FlexContainer>
+                        {t('Nav.Cart')}
+                        <img alt='cart' src={cart} />
+                        <CartCircle hide={cartItems.every(item => item.qty === 0)}>
+                           {cartItems.reduce((t, item) => t + item.qty, 0)}
+                        </CartCircle>
+                     </FlexContainer>
+                  </NavText>
+               </Link>
+            }
+         </MainNav>
+      </>
+   )
 }
 
 export default Nav

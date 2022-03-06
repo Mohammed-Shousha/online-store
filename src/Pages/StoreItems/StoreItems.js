@@ -1,31 +1,53 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useQuery } from '@apollo/client'
 import { useParams } from 'react-router-dom'
 import Products from '../../Containers/Products/Products'
-import { ProductsList } from '../../Data/Database'
+import Loading from '../../Components/Loading'
+import { PRODUCTS_BY_TYPE, PRODUCTS_BY_BRAND } from '../../Data/Queries'
 
 
 const StoreItems = () => {
-	let { id } = useParams()
+
+   let { id } = useParams()
 
    const { t } = useTranslation()
 
-	let type = id.split('-')[0].toLowerCase()
+   const [products, setProducts] = useState([])
 
-	let filteredProducts = ProductsList.filter(product => product.type === type)
+   let type = id.split('-')[0].toLowerCase()
 
-	let brand = ''
-	if (id.split('-').length > 1) {
-		brand = id.split('-')[1].toLowerCase()
-		filteredProducts = filteredProducts.filter(product => product.brand === brand)
-	}
+   let brand = ''
+   if (id.split('-').length > 1) {
+      brand = id.split('-')[1].toLowerCase()
+   }
 
-	return (
-		<Products
-			title={t(id)}
-			products={filteredProducts}
-		/>
-	)
+   const { loading } = useQuery(PRODUCTS_BY_TYPE, {
+      variables: { type },
+      onCompleted({ productsByType }) {
+         setProducts(productsByType)
+      }
+   })
+
+   useQuery(PRODUCTS_BY_BRAND, {
+      variables: { type, brand },
+      onCompleted(data) {
+         if (brand) {
+            setProducts(data.productsByBrand)
+         }
+      }
+   })
+
+
+   return (
+      loading ?
+         <Loading />
+         :
+         <Products
+            title={t(id)}
+            products={products}
+         />
+   )
 }
 
 export default StoreItems

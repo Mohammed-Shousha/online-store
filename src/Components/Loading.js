@@ -12,7 +12,7 @@ const rotate = keyframes`
 
 const Loading = styled.div`
     display: inline-block;
-    margin: 30vh 46vw;
+    margin: ${props => props.small ? '8em 9em': "30vh 46vw"};
     &:after{
         content: " ";
         display: block;

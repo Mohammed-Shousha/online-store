@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { loadStripe } from "@stripe/stripe-js"
 import { Elements } from "@stripe/react-stripe-js"
-import { gql, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import PaymentForm from '../../Containers/PaymentForm/PaymentForm'
 import CartItem from '../../Containers/CartItem/CartItem'
 import OrderSummary from '../../Containers/OrderSummary/OrderSummary'
@@ -11,6 +11,7 @@ import FlexContainer from '../../Components/FlexContainer'
 import { PaymentButton, PaymentContainer } from '../../Components/PaymentComponents'
 import { DataContext } from '../../Data/DataContext'
 import { editOrders } from '../../Data/DataActions'
+import { HANDLE_ADDING_ORDER } from '../../Data/Mutations'
 import money from '../../Data/Icons/cash.svg'
 import greenMoney from '../../Data/Icons/cash-green.svg'
 import credit from '../../Data/Icons/credit.svg'
@@ -23,22 +24,6 @@ const Payment = ({ cash, setCash, handleNext }) => {
 
 	const { data, setData } = useContext(DataContext)
 	const { cartItems, email } = data 
-
-	const HANDLE_ADDING_ORDER = gql`
-		mutation handleAddingOrder($email: String!){
-			handleAddingOrder(email: $email){
-				result
-				orders{
-					id
-					order{
-						productId
-						qty
-					}
-					time
-				}
-			}
-		}
-	`
 
 	const [handleAddingOrder] = useMutation(HANDLE_ADDING_ORDER, {
 		onCompleted({ handleAddingOrder }) {

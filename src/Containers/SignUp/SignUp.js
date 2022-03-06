@@ -3,8 +3,9 @@ import { Formik, Form, useFormikContext } from 'formik'
 import * as Yup from 'yup'
 import { useHistory, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { gql, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import { useGoogleLogin } from 'react-google-login'
+import FlexContainer from '../../Components/FlexContainer'
 import { FormButton, GoogleIcon } from '../../Components/Buttons'
 import ErrorText from '../../Components/ErrorText'
 import { FormMap, FormContainer, StyledField, VisibleDiv } from '../../Components/FormComponents'
@@ -13,7 +14,7 @@ import { DataContext, } from '../../Data/DataContext'
 import { editUser } from '../../Data/DataActions'
 import { LocationContext } from '../../Data/LocationContext'
 import { passwordRegex } from '../../Data/Constants'
-import FlexContainer from '../../Components/FlexContainer'
+import { HANDLE_SIGN_UP } from '../../Data/Mutations'
 
 
 const SignUp = () => {
@@ -131,44 +132,6 @@ const SignUp = () => {
 
    }
 
-   const HANDLE_SIGN_UP = gql`
-        mutation HandleSignUp($name: String! ,$email: String!, $password: String!, $phone: String!, $address: String ){
-            handleSignUp(name: $name, email: $email, password: $password, phone: $phone, address: $address){
-               ... on Result {
-                  user{
-                     _id
-                     name
-                     email
-                     password{
-                        length
-                     }
-                     phone
-                     addresses{
-                        address
-                        name
-                        phone
-						   }
-                     cartItems{
-                        productId
-                        qty
-                     }
-                     orders{
-                        id
-                        time
-                        order{
-                           productId
-                           qty
-                        }
-                     }
-					   }
-                  emailSent
-               }
-               ... on Error {
-                  message
-               }
-            }
-        }
-	`
    const [handleSignUp] = useMutation(HANDLE_SIGN_UP, {
       onCompleted({ handleSignUp }) {
          if (handleSignUp.user) {

@@ -4,7 +4,7 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { useHistory, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { gql, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import Cookies from 'js-cookie'
 import FlexContainer from '../../Components/FlexContainer'
 import { FormButton, GoogleIcon } from '../../Components/Buttons'
@@ -12,6 +12,7 @@ import ErrorText from '../../Components/ErrorText'
 import { FormContainer, StyledField } from '../../Components/FormComponents'
 import { DataContext } from '../../Data/DataContext'
 import { editUser } from '../../Data/DataActions'
+import { HANDLE_SIGN_IN, HANDLE_GOOGLE_SIGN_IN } from '../../Data/Mutations'
 
 
 const SignIn = () => {
@@ -45,42 +46,7 @@ const SignIn = () => {
       }
    }
 
-   const HANDLE_SIGN_IN = gql`
-        mutation HandleSignIn($email: String!, $password: String!){
-            handleSignIn(email: $email, password: $password){
-                ... on User {
-                    _id
-                    name
-                    email
-                   password{
-                        length
-                    }
-                    phone
-                    confirmed
-                    addresses{
-                        address
-                        name
-                        phone
-                    }
-                    cartItems{
-                        productId
-                        qty
-                    }
-                    orders{
-                        id
-                        time
-                        order{
-                           productId
-                           qty
-                        }
-                    }
-                }
-                ... on Error {
-                    message
-                }
-            }
-        }
-    `
+   
    const [handleSignIn] = useMutation(HANDLE_SIGN_IN, {
       onCompleted({ handleSignIn }) {
          if (handleSignIn._id) {
@@ -101,42 +67,7 @@ const SignIn = () => {
       }
    })
 
-   const HANDLE_GOOGLE_SIGN_IN = gql`
-        mutation HandleGoogleSignIn($email: String!){
-            handleGoogleSignIn(email: $email){
-                ... on User {
-                    _id
-                    name
-                    email
-                   password{
-                        length
-                    }
-                    phone
-                    confirmed
-                    addresses{
-                        address
-                        name
-                        phone
-                    }
-                    cartItems{
-                        productId
-                        qty
-                    }
-                    orders{
-                        id
-                        time
-                        order{
-                           productId
-                           qty
-                        }
-                    }
-                }
-                ... on Error {
-                    message
-                }
-            }
-        }
-    `
+   
    const [handleGoogleSignIn] = useMutation(HANDLE_GOOGLE_SIGN_IN, {
       onCompleted({ handleGoogleSignIn }) {
          if (handleGoogleSignIn._id) {

@@ -10,46 +10,46 @@ import next from '../../Data/Icons/next.svg'
 
 const Slideshow = () => {
 
-	const carouselRef = useRef(null)
-	const { i18n } = useTranslation()
+   const carouselRef = useRef(null)
+   const { i18n } = useTranslation()
 
-	const handleOnDragStart = (e) => e.preventDefault()
+   const handleOnDragStart = (e) => e.preventDefault()
 
-	const nextPhoto = () => {
-		if (i18n.language === 'en') {
-			carouselRef.current.slideNext()
-		} else {
-			carouselRef.current.slidePrev()
-		}
-	}
+   const nextPhoto = () => {
+      if (i18n.language === 'en') {
+         carouselRef.current.slideNext()
+      } else {
+         carouselRef.current.slidePrev()
+      }
+   }
 
-	const prevPhoto = () => {
-		if (i18n.language === 'en') {
-			carouselRef.current.slidePrev()
-		} else {
-			carouselRef.current.slideNext()
-		}
-	}
+   const prevPhoto = () => {
+      if (i18n.language === 'en') {
+         carouselRef.current.slidePrev()
+      } else {
+         carouselRef.current.slideNext()
+      }
+   }
 
-	const photos = slideShowImages.map(img => (
-		<SlidePhoto src={img} alt={img} onDragStart={handleOnDragStart} />
-	))
+   const photos = slideShowImages.map(img => (
+      <SlidePhoto src={img} alt={img} onDragStart={handleOnDragStart} />
+   ))
 
-	return (
-		<SlideContainer>
-			<img src={i18n.language === 'en' ? prev : next} alt='arrow' onClick={prevPhoto} />
-			<AliceCarousel
-				items={photos}
-				ref={carouselRef}
-				buttonsDisabled={true}
-				dotsDisabled={true}
-				autoPlay={true}
-				autoPlayInterval={2500}
-				autoPlayDirection={i18n.language === 'en'? 'ltr': 'rtl'}
-			/>
-			<img src={i18n.language === 'en' ? next : prev} alt='arrow' onClick={nextPhoto} />
-		</SlideContainer>
-	)
+   return (
+      <SlideContainer>
+         <img src={i18n.language === 'en' ? prev : next} alt='arrow' onClick={prevPhoto} />
+         <AliceCarousel
+            items={photos}
+            ref={carouselRef}
+            buttonsDisabled={true}
+            dotsDisabled={true}
+            autoPlay={true}
+            autoPlayInterval={2500}
+            autoPlayDirection={i18n.language === 'en' ? 'ltr' : 'rtl'}
+         />
+         <img src={i18n.language === 'en' ? next : prev} alt='arrow' onClick={nextPhoto} />
+      </SlideContainer>
+   )
 }
 
 export default Slideshow

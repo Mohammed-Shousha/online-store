@@ -5,7 +5,6 @@ import * as Yup from 'yup'
 import { useHistory, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useMutation } from '@apollo/client'
-import Cookies from 'js-cookie'
 import FlexContainer from '../../Components/FlexContainer'
 import { FormButton, GoogleIcon } from '../../Components/Buttons'
 import ErrorText from '../../Components/ErrorText'
@@ -16,6 +15,7 @@ import { HANDLE_SIGN_IN, HANDLE_GOOGLE_SIGN_IN } from '../../Data/Mutations'
 
 
 const SignIn = () => {
+
    const { setData, setIsSignedIn } = useContext(DataContext)
 
    const history = useHistory()
@@ -23,6 +23,7 @@ const SignIn = () => {
    const { t } = useTranslation()
 
    const [wrongData, setWrongData] = useState(false)
+   const [disabled, setDisabled] = useState(false)
    const signInPasswordInput = useRef(null)
    const signInButton = useRef(null)
 
@@ -46,35 +47,31 @@ const SignIn = () => {
       }
    }
 
-   
+
    const [handleSignIn] = useMutation(HANDLE_SIGN_IN, {
       onCompleted({ handleSignIn }) {
-         if (handleSignIn._id) {
+         const { _id, message } = handleSignIn
+         if (_id) {
             history.push('/')
             setIsSignedIn(true)
             setData(editUser(handleSignIn))
-            console.log(Cookies.get('token'))
-            // const { name, email, password, phone, addresses, cartItems, orders, confirmed } = handleSignIn
-            // setData(editData(name, email, password, phone))
-            // setData(editAddresses(addresses))
-            // setData(editCartItems(cartItems))
-            // setData(editOrders(orders))
-            // if(confirmed) setData(confirm())
-         } else if (handleSignIn.message) {
+         } else if (message) {
+            setDisabled(false)
             setWrongData(true)
             setTimeout(() => setWrongData(false), 3000)
          }
       }
    })
 
-   
+
    const [handleGoogleSignIn] = useMutation(HANDLE_GOOGLE_SIGN_IN, {
       onCompleted({ handleGoogleSignIn }) {
-         if (handleGoogleSignIn._id) {
+         const { _id, message } = handleGoogleSignIn
+         if (_id) {
             history.push('/')
             setIsSignedIn(true)
             setData(editUser(handleGoogleSignIn))
-         } else if (handleGoogleSignIn.message) {
+         } else if (message) {
             setWrongData(true)
             setTimeout(() => setWrongData(false), 3000)
          }
@@ -83,10 +80,9 @@ const SignIn = () => {
 
 
    const onSuccess = (res) => {
-      console.log(res)
       const { email } = res.profileObj
       handleGoogleSignIn({
-         variables:{
+         variables: {
             email
          }
       })
@@ -117,7 +113,8 @@ const SignIn = () => {
             password: Yup.string()
                .required(t('Form.Required'))
          })}
-         onSubmit={async ({ email, password }) => {
+         onSubmit={({ email, password }) => {
+            setDisabled(true)
             handleSignIn({ variables: { email, password } })
             // const response = await fetch('http://localhost:8888/signin', {
             //     method: 'post',
@@ -142,7 +139,7 @@ const SignIn = () => {
             // }
          }}
       >
-         {({ errors, touched, isSubmitting }) => (
+         {({ errors, touched }) => (
             <Form onKeyDown={handleKeyDown}>
                <FormContainer>
                   <h1>{t('Form.Sign In')}</h1>
@@ -157,18 +154,21 @@ const SignIn = () => {
                   />
                   {touched.password && errors.password && <ErrorText>{errors.password}</ErrorText>}
                   {wrongData && <ErrorText>{t('Form.Error')}</ErrorText>}
-                  <FormButton ref={signInButton} disabled={isSubmitting}>
+                  <FormButton ref={signInButton} disabled={disabled}>
                      {t('Form.Sign In')}
                   </FormButton>
-                  <FormButton 
+                  <FormButton
                      onClick={signIn}
                      rev
                   >
                      <FlexContainer center>
-                        <GoogleIcon/>
+                        <GoogleIcon />
                         Sign In with Google
                      </FlexContainer>
                   </FormButton>
+                  <p>
+                     <Link to='/forgetpassword'> Forget your password? </Link>
+                  </p>
                   <p>
                      {t('Form.New User')}
                      <Link to='/signup'> <strong> {t('Form.Sign Up')} </strong> </Link>

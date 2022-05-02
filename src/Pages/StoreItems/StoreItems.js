@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { useQuery } from '@apollo/client'
 import { useParams } from 'react-router-dom'
 import Products from '../../Containers/Products/Products'
@@ -11,9 +10,8 @@ const StoreItems = () => {
 
    let { id } = useParams()
 
-   const { t } = useTranslation()
-
-   const [products, setProducts] = useState([])
+   const [byBrandProducts, setByBrandProducts] = useState([])
+   const [byTypeProducts, setByTypeProducts] = useState([])
 
    let type = id.split('-')[0].toLowerCase()
 
@@ -25,27 +23,27 @@ const StoreItems = () => {
    const { loading } = useQuery(PRODUCTS_BY_TYPE, {
       variables: { type },
       onCompleted({ productsByType }) {
-         setProducts(productsByType)
+         setByTypeProducts(productsByType)
       }
    })
 
-   useQuery(PRODUCTS_BY_BRAND, {
+   const data = useQuery(PRODUCTS_BY_BRAND, {
       variables: { type, brand },
-      onCompleted(data) {
+      onCompleted({ productsByBrand }) {
          if (brand) {
-            setProducts(data.productsByBrand)
+            setByBrandProducts(productsByBrand)
          }
       }
    })
 
 
    return (
-      loading ?
+      loading || data.loading ?
          <Loading />
          :
          <Products
-            title={t(id)}
-            products={products}
+            title={id}
+            products={brand ? byBrandProducts : byTypeProducts}
          />
    )
 }

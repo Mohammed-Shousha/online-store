@@ -4,11 +4,11 @@ import { LocationProvider } from './LocationContext'
 
 
 const ContextProvider = ({ children }) => (
-	<DataProvider>
-		<LocationProvider>
-			{children}
-		</LocationProvider>
-	</DataProvider>
+   <DataProvider>
+      <LocationProvider>
+         {children}
+      </LocationProvider>
+   </DataProvider>
 )
 
 export default ContextProvider

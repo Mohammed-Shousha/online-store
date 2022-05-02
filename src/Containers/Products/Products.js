@@ -7,57 +7,57 @@ import Alert from '../../Components/Alert'
 
 
 const Products = ({ title = '', num = '', products }) => {
-	
-	const { i18n } = useTranslation()
 
-	let P = [...products]
+   const { i18n } = useTranslation()
 
-	if (num) {
-		P = P.slice(0, num)
-	}
+   let P = [...products]
 
-	let PRO = []
-	const PRODUCTS = []
-	while (P.length) {
-		while (PRO.length < 2) {
-			PRO.push(P.splice(0, 2))
-		}
-		PRODUCTS.push(PRO)
-		PRO = []
-	}
+   if (num) {
+      P = P.slice(0, num)
+   }
 
-	const [alert, setAlert] = useState(false)
+   let PRO = []
+   const PRODUCTS = []
+   while (P.length) {
+      while (PRO.length < 2) {
+         PRO.push(P.splice(0, 2))
+      }
+      PRODUCTS.push(PRO)
+      PRO = []
+   }
 
-	return (
-		<>
-			<ProductsTitle align= {i18n.language === 'ar'? 'right': 'left'}>{title.toUpperCase()}</ProductsTitle>
-				{PRODUCTS.map((PRO, i) => (
-					<ProductsContainer key={i}>
-						{PRO.map((P, i) => (
-							<div key={i}>
-								{P.map(product => (
-                           <Product key={product._id} data-aos='fade-up' data-aos-duration="2000">
-										<Link to={`/product/${product._id}`}>
-										<ProductCard
-											name={product.name}
-											price={`${product.price} EGP`}
-											photo={product.photo}
-											details='blah blah blah blah'
-										/>
-										</Link>
-										<AddToCart 
-											productId={product._id}
-											setAlert={setAlert}
-										/>
-									</Product>
-								))}
-							</div>
-						))}
-					</ProductsContainer>
-				))}
-			{alert && <Alert setAlert={setAlert} />}
-		</>
-	)
+   const [alert, setAlert] = useState(false)
+
+   return (
+      <>
+         <ProductsTitle align={i18n.language === 'ar' ? 'right' : 'left'}>{title.toUpperCase()}</ProductsTitle>
+         {PRODUCTS.map((PRO, i) => (
+            <ProductsContainer key={i}>
+               {PRO.map((P, i) => (
+                  <div key={i}>
+                     {P.map(product => (
+                        <Product key={product._id} data-aos='fade-up' data-aos-duration="2000">
+                           <Link to={`/product/${product._id}`}>
+                              <ProductCard
+                                 name={product.name}
+                                 price={`${product.price} EGP`}
+                                 photo={product.photo}
+                                 details='blah blah blah blah'
+                              />
+                           </Link>
+                           <AddToCart
+                              productId={product._id}
+                              setAlert={setAlert}
+                           />
+                        </Product>
+                     ))}
+                  </div>
+               ))}
+            </ProductsContainer>
+         ))}
+         {alert && <Alert setAlert={setAlert} />}
+      </>
+   )
 }
 
 export default Products

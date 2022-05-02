@@ -1,5 +1,5 @@
  import React, { useState } from 'react'
-import CONav from '../../Containers/CONav/CONav'
+import CheckoutNav from '../../Containers/CheckoutNav/CheckoutNav'
 import Shipping from '../Shipping/Shipping'
 import Payment from '../Payment/Payment'
 import Done from '../Done/Done'
@@ -31,7 +31,7 @@ const Checkout = () => {
 
 	return (
 		<>
-			<CONav
+			<CheckoutNav
 				step={step}
 			 	handleBack={handleBack} 
 			/>

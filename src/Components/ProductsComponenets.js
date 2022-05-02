@@ -80,54 +80,54 @@ export const AddToCartButton = styled.button`
     }
     
     &:hover{
-        background-color:${props => props.disabled ? "none" : "rgba(44,62,80,0.95)" } 
+        background-color:${props => props.disabled ? "none" : "rgba(44,62,80,0.95)"} 
     }
 `
 
-export const AddToCart = ({ productId, setAlert })=>{
-    
-    const { isSignedIn, setData, data } = useContext(DataContext)
-    const { email } = data
-    const [isSubmitting, setIsSumbitting] = useState(null)
+export const AddToCart = ({ productId, setAlert }) => {
 
-    const [handleAddingItems] = useMutation(HANDLE_ADDING_ITEMS, {
-        onCompleted({ handleAddingItems }) {
-            if (handleAddingItems.result) {
-                setData(editCartItems(handleAddingItems.cartItems))
-                setIsSumbitting(null)
-            }
-        }
-    })
+   const { isSignedIn, setData } = useContext(DataContext)
+   const [disabled, setDisabled] = useState(null)
+
+   const [handleAddingItems] = useMutation(HANDLE_ADDING_ITEMS, {
+      onCompleted({ handleAddingItems }) {
+         const { result, cartItems } = handleAddingItems
+         if (result) {
+            setData(editCartItems(cartItems))
+            setDisabled(null)
+         }
+      }
+   })
 
 
-    const onAddingItems = async (productId) => {
-        if (isSignedIn) {
-            setIsSumbitting(productId)
-            handleAddingItems({ variables: { email, productId } })
-            // const response = await fetch('http://localhost:8888/additem', {
-            //     method: 'put',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify({
-            //         email,
-            //         productId
-            //     })
-            // })
-            // const { result, cartItems } = await response.json()
-            // if (result.nModified) {
-            //     setData(editCartItems(cartItems))
-            //     setIsSumbitting(null)
-            // }
-        } else {
-            setAlert(true)
-        }
-    }
+   const onAddingItems = async (productId) => {
+      if (isSignedIn) {
+         setDisabled(productId)
+         handleAddingItems({ variables: { productId } })
+         // const response = await fetch('http://localhost:8888/additem', {
+         //     method: 'put',
+         //     headers: { 'Content-Type': 'application/json' },
+         //     body: JSON.stringify({
+         //         email,
+         //         productId
+         //     })
+         // })
+         // const { result, cartItems } = await response.json()
+         // if (result.nModified) {
+         //     setData(editCartItems(cartItems))
+         //     setDisabled(null)
+         // }
+      } else {
+         setAlert(true)
+      }
+   }
 
-    return(
-        <AddToCartButton 
-            onClick={()=> onAddingItems(productId)}
-            disabled={isSubmitting === productId}
-        >
-            ADD TO CART
-        </AddToCartButton>
-    )
+   return (
+      <AddToCartButton
+         onClick={() => onAddingItems(productId)}
+         disabled={disabled === productId}
+      >
+         ADD TO CART
+      </AddToCartButton>
+   )
 }

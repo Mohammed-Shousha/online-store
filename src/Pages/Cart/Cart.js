@@ -12,74 +12,31 @@ import { editCartItems } from '../../Data/DataActions'
 import emptyCart from '../../Data/Icons/empty-cart.svg'
 import emptyCartButton from '../../Data/Icons/empty-cart-button.svg'
 import { HANDLE_CLEAR_CART } from '../../Data/Mutations'
-// import { ProductsList } from '../../Data/Database'
 
 
 const Cart = () => {
 
    const { data, setData } = useContext(DataContext)
-   const { cartItems, email } = data
-   const [isSubmitting, setIsSumbitting] = useState(false)
+   const [disabled, setDisabled] = useState(false)
+
+   const { cartItems } = data
+
 
    const [handleClearCart] = useMutation(HANDLE_CLEAR_CART, {
       onCompleted({ handleClearCart }) {
-         setIsSumbitting(true)
-         if (handleClearCart.result) {
-            setData(editCartItems(handleClearCart.cartItems))
-            setIsSumbitting(false)
+         const { result, cartItems } = handleClearCart
+         setDisabled(true)
+         if (result) {
+            setData(editCartItems(cartItems))
+            setDisabled(false)
          }
       }
    })
 
-   // const ADD_PRODUCT = gql`
-   //    mutation addProduct($name: String!, $type: String!, $brand: String, $price: Int!, $photo: String!, $description: String){
-   //       addProduct(name: $name, type: $type, brand: $brand, price: $price, photo: $photo, description: $description){
-   //          _id
-   //          name
-   //          type
-   //          brand
-   //          photo
-   //          price
-   //          description
-   //       }
-   //    }
-   // `
-
-   // const [addProduct] = useMutation(ADD_PRODUCT, {
-   //    onCompleted({ addProduct }) {
-   //       console.log(addProduct)
-   //    }
-   // })
-
-   // const onAddProduct = () => {
-   //    ProductsList.map(product => addProduct({ variables: product }))
-   // }
-
-
-   // const PRODUCTS_BY_TYPE = gql`
-   //    query productsByType($type: String!){
-   //       productsByType(type: $type){
-   //          _id
-   //          name
-   //          type
-   //          brand
-   //          price
-   //          photo
-   //          description
-   //       }
-   //    }
-   // `
-   // const result = useQuery(PRODUCTS_BY_TYPE,
-   //    {
-   //       variables: { type: "headphones" }
-   //    }
-   // )
-   // console.log(result)
-
 
    const onClearCart = () => {
-      setIsSumbitting(true)
-      handleClearCart({ variables: { email } })
+      setDisabled(true)
+      handleClearCart()
       // const response = await fetch('http://localhost:8888/clearcart', {
       // 	method: 'put',
       // 	headers: { 'Content-Type': 'application/json' },
@@ -90,7 +47,7 @@ const Cart = () => {
       // const { result, cartItems } = await response.json()
       // if (result.nModified) {
       // 	setData(editCartItems(cartItems))
-      // 	setIsSumbitting(false)
+      // 	setDisabled(false)
       // }
    }
 
@@ -118,17 +75,12 @@ const Cart = () => {
                </div>
                <div>
                   <OrderSummary />
-                  <CartButton onClick={onClearCart} disabled={isSubmitting}>
+                  <CartButton onClick={onClearCart} disabled={disabled}>
                      <div>
                         <p>Clear Cart</p>
                         <img src={emptyCartButton} alt='empty-cart' />
                      </div>
                   </CartButton>
-                  {/* <CartButton onClick={()=> console.log(result.data)} >
-                     <div>
-                        <p>Add Product</p>
-                     </div>
-                  </CartButton> */}
                </div>
             </FlexContainer>
          }

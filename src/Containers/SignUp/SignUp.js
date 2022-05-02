@@ -29,6 +29,7 @@ const SignUp = () => {
    const [addressFocused, setAddressFocused] = useState(false)
    const [usedEmail, setUsedEmail] = useState(false)
    const [invalidEmail, setInvalidEmail] = useState(false)
+   const [disabled, setDisabled] = useState(false)
 
    const nameInput = useRef(null)
    const emailInput = useRef(null)
@@ -124,7 +125,7 @@ const SignUp = () => {
             rev
          >
             <FlexContainer center>
-            <GoogleIcon/>
+               <GoogleIcon />
                Sign Up with Google
             </FlexContainer>
          </FormButton>
@@ -134,17 +135,16 @@ const SignUp = () => {
 
    const [handleSignUp] = useMutation(HANDLE_SIGN_UP, {
       onCompleted({ handleSignUp }) {
-         if (handleSignUp.user) {
+         const { user, emailSent, message } = handleSignUp
+         if (user) {
             history.push('/')
             setIsSignedIn(true)
-            setData(editUser(handleSignUp.user))
-            // const { name, email, password, phone, addresses } = handleSignUp.user
-            // setData(editData(name, email, password, phone))
-            // setData(editAddresses(addresses))
-            if (handleSignUp.emailSent) {
+            setData(editUser(user))
+            if (emailSent) {
                setConfirmNav(true)
             }
-         } else if (handleSignUp.message) {
+         } else if (message) {
+            setDisabled(false)
             setUsedEmail(true)
             setTimeout(() => setInvalidEmail(false), 2500)
          }
@@ -177,6 +177,7 @@ const SignUp = () => {
                   .required(t('Form.Required')),
             })}
             onSubmit={({ name, email, password, phone, address }) => {
+               setDisabled(true)
                handleSignUp({
                   variables: {
                      name,
@@ -216,7 +217,7 @@ const SignUp = () => {
                // }
             }}
          >
-            {({ errors, touched, values, handleChange, isSubmitting }) => (
+            {({ errors, touched, values, handleChange }) => (
                <>
                   <VisibleDiv visible={!detectAddress}>
                      <Form onKeyDown={handleKeyDown} >
@@ -254,14 +255,9 @@ const SignUp = () => {
                                  {t('Form.Location')}
                               </FormButton>
                            }
-                           <FormButton ref={signUpButton} disabled={isSubmitting}>
+                           <FormButton ref={signUpButton} disabled={disabled}>
                               {t('Form.Sign Up')}
                            </FormButton>
-                           {/* {!googleData.name && !googleData.email &&
-                              <FormButton onClick={signIn}>
-                                 Sign Up with Google
-                              </FormButton>
-                           } */}
                            <GoogleSignUp />
                            <p> {t('Form.Have Account')}
                               <Link to='signin'> <strong> {t('Form.Sign In')} </strong> </Link>

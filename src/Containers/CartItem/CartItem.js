@@ -13,23 +13,33 @@ import greyBin from '../../Data/Icons/greyBin.svg'
 const CartItem = ({ productId, editable = true, order, checkout = false }) => {
 
    const { data, setData } = useContext(DataContext)
-   const { email, cartItems } = data
-   const [isSubmitting, setIsSumbitting] = useState(null)
+   const { cartItems } = data
+   const [disabled, setDisabled] = useState(null)
    const [product, setProduct] = useState({})
+
+   let qty = 0
+
+   if (order) {
+      qty = order.find(item => item.productId === productId).qty
+   } else {
+      qty = cartItems.find(item => item.productId === productId).qty
+   }
+
 
    const [handleRemovingItems] = useMutation(HANDLE_REMOVING_ITEMS, {
       onCompleted({ handleRemovingItems }) {
-         if (handleRemovingItems.result) {
-            setData(editCartItems(handleRemovingItems.cartItems))
-            setIsSumbitting(false)
+         const { result, cartItems } = handleRemovingItems
+         if (result) {  // 1 "Success" || 0 "Failed"
+            setData(editCartItems(cartItems))
+            setDisabled(false)
          }
       }
    })
 
 
-   const onRemovingItem = async (productId) => {
-      setIsSumbitting(productId)
-      handleRemovingItems({ variables: { email, productId } })
+   const onRemovingItem = (productId) => {
+      setDisabled(productId)
+      handleRemovingItems({ variables: { productId } })
       // const response = await fetch('http://localhost:8888/removeitem', {
       // 	method: 'put',
       // 	headers: { 'Content-Type': 'application/json' },
@@ -41,30 +51,19 @@ const CartItem = ({ productId, editable = true, order, checkout = false }) => {
       // const { result, cartItems } = await response.json()
       // if (result.nModified) {
       // 	setData(editCartItems(cartItems))
-      // 	setIsSumbitting(null)
+      // 	setDisabled(null)
       // }
    }
 
    useQuery(PRODUCT_BY_ID,
       {
          variables: { id: productId },
-         onCompleted({ productById }) {
+         onCompleted({ productById }) { //product
             setProduct(productById)
          }
       }
    )
 
-   let qty = 0
-   if (order) {
-      qty = order.find(item => item.productId === productId).qty
-   } else {
-      qty = cartItems.find(item => item.productId === productId).qty
-   }
-
-   // useEffect(() => {
-   //    // productById({ variables: { id: productId } })
-   //    getProduct(productId)
-   // })
 
 
    return (
@@ -83,8 +82,8 @@ const CartItem = ({ productId, editable = true, order, checkout = false }) => {
                <br />
                {editable &&
                   <img
-                     src={isSubmitting !== productId ? bin : greyBin} alt='bin'
-                     onClick={() => isSubmitting !== productId && onRemovingItem(productId)}
+                     src={disabled !== productId ? bin : greyBin} alt='bin'
+                     onClick={() => disabled !== productId && onRemovingItem(productId)}
                   />
                }
             </ProductActions>

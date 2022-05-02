@@ -2,7 +2,7 @@ import React, { useContext, useState, useRef, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Autosuggest from 'react-autosuggest'
-import { useLazyQuery } from '@apollo/client'
+import { useLazyQuery, useMutation } from '@apollo/client'
 import Sidebar from '../Sidebar/Sidebar'
 import Logo from '../../Components/Logo'
 import { MainNav } from '../../Components/Navbar'
@@ -12,6 +12,7 @@ import { ConfirmNav } from '../../Components/ConfirmComponents'
 import { DataContext } from '../../Data/DataContext'
 import { signOut } from '../../Data/DataActions'
 import { PRODUCTS_BY_NAME } from '../../Data/Queries'
+import { HANDLE_SIGN_OUT } from '../../Data/Mutations'
 import cart from '../../Data/Icons/cart.svg'
 import user from '../../Data/Icons/user.svg'
 import list from '../../Data/Icons/list.svg'
@@ -24,12 +25,20 @@ const Nav = () => {
 
    const { isSignedIn, setIsSignedIn, data, setData, confirmNav, setConfirmNav } = useContext(DataContext)
    const { name, email, cartItems } = data
-   const newName = name.split(' ')[0]
 
-   const onSignOut = () => {
-      setIsSignedIn(false)
-      setData(signOut())
-   }
+
+   const [handleSignOut] = useMutation(HANDLE_SIGN_OUT, {
+      onCompleted({ handleSignOut }) {  // 1 "Success" || 0 "Failed"
+         if (handleSignOut) {
+            setIsSignedIn(false)
+            setData(signOut())
+         } else {
+            console.log('error')
+         }
+      }
+   })
+
+   const firstName = name.split(' ')[0]
 
    let history = useHistory()
 
@@ -167,7 +176,7 @@ const Nav = () => {
                onClick={isSignedIn ? toggleShow : undefined}
             >
                {isSignedIn ?
-                  `${t('Nav.Hi')} ${newName}`
+                  `${t('Nav.Hi')} ${firstName}`
                   :
                   <p>
                      <Link to='/signin'>{t('Nav.SignIn')}</Link>
@@ -190,7 +199,7 @@ const Nav = () => {
                            <p> {t('Nav.Profile')} </p>
                         </UserAction>
                      </Link>
-                     <Link to='/' onClick={onSignOut} >
+                     <Link to='/' onClick={handleSignOut} >
                         <UserAction signOut>
                            <img src={signout} alt='signout' />
                            <p> {t('Nav.Sign Out')} </p>

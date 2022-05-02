@@ -5,17 +5,17 @@ import { DataContext } from '../../Data/DataContext'
 
 const PrivateRoute = ({ children }) => {
 
-    const { isSignedIn } = useContext(DataContext)
+   const { isSignedIn } = useContext(DataContext)
 
-    return (
-        <Route>
-            {isSignedIn ?
-                children
+   return (
+      <Route>
+         {isSignedIn ?
+            children
             :
-                <Redirect to='signin' />
-            }
-        </Route>
-    )
+            <Redirect to='signin' />
+         }
+      </Route>
+   )
 }
 
 export default PrivateRoute;

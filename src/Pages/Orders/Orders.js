@@ -10,54 +10,54 @@ import box from '../../Data/Icons/box.svg'
 
 const Orders = () => {
 
-	const { data } = useContext(DataContext)
-	const { cartItems, orders } = data
+   const { data } = useContext(DataContext)
+   const { cartItems, orders } = data
 
-	return (
-		<>
-			<Title h1> Orders </Title>
-			{!orders.length ?
-				<div>
-					<Icon src={box} alt='box' />
-					<h1> You Don't Have Any Orders Yet</h1>
-					{cartItems.every(item => item.qty === 0) ?
-						<>
-							<p> What are you waiting for ? </p>
-							<LinkButton to='/'>
-								Continue Shopping
-							</LinkButton>
-						</>
-					:
-						<>
-							<p>But there is some items in your cart </p>
-							<LinkButton to='/checkout'>
-								Checkout Now
-							</LinkButton>
-						</>
-					}
-				</div>
-				:
-				<>
-					{orders.map(({id, order, time}) => (
-						<OrdersContainer key={id}>
-							<OrdersTitle>
-								<h3>Order id: {id}</h3>
-								<h2>Order Time: {time}</h2>
-							</OrdersTitle>
-							{order.map(({productId}) =>
-								<CartItem
-									key={productId}
-									productId={productId}
-									editable={false}
-									order={order}
-								/>
-							)}
-						</OrdersContainer>
-					))}
-				</>
-			}
-		</>
-	)
+   return (
+      <>
+         <Title h1> Orders </Title>
+         {!orders.length ?
+            <div>
+               <Icon src={box} alt='box' />
+               <h1> You Don't Have Any Orders Yet</h1>
+               {cartItems.every(item => item.qty === 0) ?
+                  <>
+                     <p> What are you waiting for ? </p>
+                     <LinkButton to='/'>
+                        Continue Shopping
+                     </LinkButton>
+                  </>
+                  :
+                  <>
+                     <p>But there is some items in your cart </p>
+                     <LinkButton to='/checkout'>
+                        Checkout Now
+                     </LinkButton>
+                  </>
+               }
+            </div>
+            :
+            <>
+               {orders.map(({ id, order, time }) => (
+                  <OrdersContainer key={id}>
+                     <OrdersTitle>
+                        <h3>Order id: {id}</h3>
+                        <h2>Order Time: {time}</h2>
+                     </OrdersTitle>
+                     {order.map(({ productId }) =>
+                        <CartItem
+                           key={productId}
+                           productId={productId}
+                           editable={false}
+                           order={order}
+                        />
+                     )}
+                  </OrdersContainer>
+               ))}
+            </>
+         }
+      </>
+   )
 }
 
 export default Orders

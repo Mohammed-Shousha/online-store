@@ -11,7 +11,7 @@ import Loading from '../../Components/Loading'
 const OrderSummary = ({ checkoutNow = true }) => {
 
    const { data } = useContext(DataContext)
-   const { cartItems, confirmed } = data
+   const { cartItems, confirmed, orders } = data
 
    let history = useHistory()
 
@@ -36,11 +36,23 @@ const OrderSummary = ({ checkoutNow = true }) => {
       }
    }
 
+
    useEffect(() => {
-      if (products) {
-         setSubtotal(cartItems.reduce((t, item) => t + Number(products.find(product => product._id === item.productId).price) * item.qty, 0))
+
+      const calculateSubtotal = (arr) => {
+         const sum = arr.reduce((t, item) => t + Number(products.find(product => product._id === item.productId).price) * item.qty, 0)
+         return sum
       }
-   }, [cartItems, products])
+
+      if (products) {
+         if (cartItems.length) {
+            setSubtotal(calculateSubtotal(cartItems))
+         } else {
+            const lastOrder = orders[orders.length - 1].order
+            setSubtotal(calculateSubtotal(lastOrder))
+         }
+      }
+   }, [products, cartItems, orders])
 
 
    return (

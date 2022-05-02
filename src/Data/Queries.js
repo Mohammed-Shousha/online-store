@@ -9,6 +9,38 @@ export const USER_BY_ID = gql`
    }
 `
 
+export const USER_BY_TOKEN = gql`
+   query UserByToken{
+      userByToken{
+         _id
+         name
+         email
+         phone
+         confirmed
+         password{
+            length
+         }
+         addresses{
+            address
+            name
+            phone
+         }
+         cartItems{
+            productId
+            qty
+         }
+         orders{
+            id
+            time
+            order{
+               productId
+               qty
+            }
+         }
+      }
+   }
+`
+
 export const PRODUCTS = gql`
    query products {
       products {
@@ -65,7 +97,7 @@ export const PRODUCT_BY_ID = gql`
    }
 `
 
-export const PRODUCTS_BY_NAME = gql `
+export const PRODUCTS_BY_NAME = gql`
    query productsByName($name: String!){
       productsByName(name: $name){
          _id
@@ -78,4 +110,3 @@ export const PRODUCTS_BY_NAME = gql `
       }
    }
 `
-

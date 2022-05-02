@@ -7,29 +7,17 @@ import * as serviceWorker from './serviceWorker'
 import ContextProvider from './Data/ContextProvider'
 import './i18n'
 import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
-//   setContext
+   ApolloClient,
+   InMemoryCache,
+   ApolloProvider,
+   createHttpLink,
 } from "@apollo/client"
-// import Cookies from 'js-cookie'
 
 const link = createHttpLink({
-  uri: "http://localhost:4000/graphql",
-  credentials: 'include'
+   uri: "http://localhost:4000/graphql",
+   credentials: 'include'
 })
 
-// const authLink = setContext((_, { headers }) => {
-//    const token = Cookies.get('token')
-
-//    return {
-//       headers: {
-//          ...headers,
-//          authorization: `Bearer ${token}`
-//       }
-//    }
-// })
 
 const client = new ApolloClient({
    link,
@@ -38,16 +26,16 @@ const client = new ApolloClient({
 
 
 render(
-  <React.StrictMode>
-    <Suspense fallback={<Loading />}>
-      <ApolloProvider client={client}>
-        <ContextProvider>
-          <App />
-        </ContextProvider>
-      </ApolloProvider>
-    </Suspense>
-  </React.StrictMode>,
-  document.getElementById('root')
+   <React.StrictMode>
+      <Suspense fallback={<Loading />}>
+         <ApolloProvider client={client}>
+            <ContextProvider>
+               <App />
+            </ContextProvider>
+         </ApolloProvider>
+      </Suspense>
+   </React.StrictMode>,
+   document.getElementById('root')
 )
 
 // If you want your app to work offline and load faster, you can change

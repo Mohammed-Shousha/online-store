@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react'
-import { useParams } from "react-router-dom"
 import { useMutation, useQuery } from '@apollo/client'
 import { ConfirmContainer, ConfirmTitle } from '../../Components/ConfirmComponents'
 import { Button, LinkButton } from '../../Components/Buttons'
@@ -9,38 +8,39 @@ import Loading from '../../Components/Loading'
 import { DataContext } from '../../Data/DataContext'
 import { confirm } from '../../Data/DataActions'
 import { HANDLE_CONFIRMATION } from '../../Data/Mutations'
-import { USER_BY_ID } from '../../Data/Queries'
+import { USER_BY_TOKEN } from '../../Data/Queries'
 
 
 const Confirm = () => {
 
-   let { id } = useParams()
-   const { data, setData } = useContext(DataContext)
-   const { confirmed } = data
+   const { setData } = useContext(DataContext)
    const [name, setName] = useState(null)
    const [email, setEmail] = useState(null)
    const [processing, setProcessing] = useState(false)
+   const [done, setDone] = useState(false)
 
    const [handleConfirmation] = useMutation(HANDLE_CONFIRMATION, {
       onCompleted({ handleConfirmation }) {
          if (handleConfirmation) { // Int : 1 'Success' , 0 'Failed'
             setData(confirm())
+            setDone(true)
             setProcessing(false)
          }
       }
    })
 
-   const { loading } = useQuery(USER_BY_ID, {
-      variables: { id },
-      onCompleted({ userById }) {
-         setName(userById.name)
-         setEmail(userById.email)
+   const { loading } = useQuery(USER_BY_TOKEN, {
+      onCompleted({ userByToken }) {
+         const { name, email, confirmed } = userByToken
+         setName(name)
+         setEmail(email)
+         setDone(confirmed)
       }
    })
 
    const confirmEmail = () => {
       setProcessing(true)
-      handleConfirmation({ variables: { id } })
+      handleConfirmation()
       // const response = await fetch(`http://localhost:8888/confirm/${id}`, {
       //     method: "post",
       //     headers: { "Content-Type": "application/json" },
@@ -75,7 +75,7 @@ const Confirm = () => {
          </ConfirmNav>
          {loading ?
             <Loading />
-            : !confirmed ?
+            : !done ?
                <ConfirmContainer>
                   <h1>Hi {name},</h1>
                   <h2>Please CLick The Button Below To Confirm that</h2>

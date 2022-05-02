@@ -16,13 +16,15 @@ import { HANDLE_CHANGE_DATA, HANDLE_CHANGE_PASSWORD } from '../../Data/Mutations
 const Profile = () => {
 
    const { data, setData } = useContext(DataContext)
-   const { email } = data
+   const { email, password } = data
+
 
    const [changePassword, setChangePassword] = useState(false)
    const [passwordError, setPasswordError] = useState('')
    const [changeDataDone, setChangeDataDone] = useState(' ')
+   const [disabled, setDisabled] = useState(false)
 
-   const passwordValue = '•'.repeat(data.password.length)
+   const passwordValue = '•'.repeat(password.length)
 
    const handleKeyDown = (e) => {
       if ((e.charCode || e.keyCode) === 13) {
@@ -35,6 +37,7 @@ const Profile = () => {
    const OKButton = useRef(null)
    const phoneInput = useRef(null)
    const saveButton = useRef(null)
+
 
    const handleKeyUp = (e) => {
       if (e.keyCode === 13) {
@@ -59,9 +62,10 @@ const Profile = () => {
 
    const [handleChangeData] = useMutation(HANDLE_CHANGE_DATA, {
       onCompleted({ handleChangeData }) {
-         if (handleChangeData.result) {
-            const { name, email, phone } = handleChangeData.user
-            setData(editData(name, email, data.password, phone))
+         const { result, user } = handleChangeData
+         if (result) {
+            const { name, email, phone } = user
+            setData(editData(name, email, password, phone))
             setChangeDataDone('Saved')
             setTimeout(() => setChangeDataDone(' '), 3000)
          }
@@ -70,12 +74,14 @@ const Profile = () => {
 
    const [handleChangePassword] = useMutation(HANDLE_CHANGE_PASSWORD, {
       onCompleted({ handleChangePassword }) {
-         if (handleChangePassword.email) {
-            const { name, email, password, phone } = handleChangePassword
+         const { email, name, password, phone, message } = handleChangePassword
+         if (email) {
             setData(editData(name, email, password, phone))
             setChangePassword(false)
-         } else if (handleChangePassword.message) {
-            setPasswordError(handleChangePassword.message)
+            setDisabled(false)
+         } else if (message) {
+            setDisabled(false)
+            setPasswordError(message)
             setTimeout(() => setPasswordError(''), 2500)
          }
       }
@@ -100,7 +106,7 @@ const Profile = () => {
                      .required("Can't Be Empty"),
                })}
                onSubmit={({ name, phone }) => {
-                  handleChangeData({ variables: { email, name, phone } })
+                  handleChangeData({ variables: { name, phone } })
                   // const response = await fetch('http://localhost:8888/changedata', {
                   // 	method: 'put',
                   // 	headers: { 'Content-Type': 'application/json' },
@@ -117,7 +123,7 @@ const Profile = () => {
                   // }
                }}
             >
-               {({ errors, touched, isSubmitting }) => (
+               {({ errors, touched }) => (
                   <Form onKeyDown={handleKeyDown}>
                      <FlexContainer around noAlign responsive>
                         <ProfileDetails>
@@ -156,7 +162,7 @@ const Profile = () => {
                </ProfileDetails>
                <ProfileDetails readOnly>
                   <p> Password </p>
-                  <input type='password' value={passwordValue} readOnly />
+                  <input name='password' type='email' value={passwordValue} readOnly />
                </ProfileDetails>
             </FlexContainer>
             <FlexContainer flexEnd>
@@ -188,9 +194,9 @@ const Profile = () => {
                            .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
                      })}
                      onSubmit={({ password, confirmPassword }) => {
+                        setDisabled(true)
                         handleChangePassword({
                            variables: {
-                              email,
                               password,
                               newPassword: confirmPassword
                            }
@@ -215,7 +221,7 @@ const Profile = () => {
                         // }
                      }}
                   >
-                     {({ errors, touched, isSubmitting }) => (
+                     {({ errors, touched }) => (
                         <Form onKeyDown={handleKeyDown}>
                            <ProfileDetails changePassword>
                               <p> Current Password </p>
@@ -249,7 +255,7 @@ const Profile = () => {
                               </ChangePasswordButton>
                               <ChangePasswordButton
                                  color='blue' type='submit'
-                                 ref={OKButton} disabled={isSubmitting}
+                                 ref={OKButton} disabled={disabled}
                               >
                                  OK
                               </ChangePasswordButton>

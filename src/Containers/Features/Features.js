@@ -7,9 +7,9 @@ import { useTranslation } from 'react-i18next'
 
 const Features = () => {
 
-   const { t } = useTranslation() 
+   const { t } = useTranslation()
 
-   return(
+   return (
       <FlexContainer around responsive margin='5em auto'>
          {FEATURES.map(feature => (
             <Circle key={feature.tag} color={feature.color} data-aos='flip-up' data-aos-duration='1000' data-aos-delay='300'>

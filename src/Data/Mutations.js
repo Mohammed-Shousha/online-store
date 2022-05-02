@@ -1,35 +1,5 @@
 import { gql } from '@apollo/client'
 
-export const HANDLE_RESEND_EMAIL = gql`
-   mutation HandleResendEmail($email: String!){
-      handleResendEmail(email: $email)
-   }
-`
-
-export const HANDLE_ADDING_ITEMS = gql`
-   mutation HandleAddingItems($email: String!, $productId: ID!){
-      handleAddingItems(email: $email, productId: $productId){
-         result
-         cartItems{
-            productId
-            qty
-         }
-      }
-   }
-`
-
-export const HANDLE_REMOVING_ITEMS = gql`
-   mutation HandleRemovingItems($email: String!, $productId: ID!){
-      handleRemovingItems(email: $email, productId: $productId){
-         result
-         cartItems{
-            productId
-            qty
-         }
-      }
-   }
-`
-
 export const HANDLE_SIGN_IN = gql`
    mutation HandleSignIn($email: String!, $password: String!){
       handleSignIn(email: $email, password: $password){
@@ -143,11 +113,42 @@ export const HANDLE_SIGN_UP = gql`
    }
 `
 
+export const HANDLE_SIGN_OUT = gql`
+   mutation HandleSignOut{
+      handleSignOut
+   }
+`
+
+
+export const HANDLE_ADDING_ITEMS = gql`
+mutation HandleAddingItems($productId: ID!){
+   handleAddingItems(productId: $productId){
+      result
+      cartItems{
+         productId
+         qty
+      }
+   }
+}
+`
+
+export const HANDLE_REMOVING_ITEMS = gql`
+mutation HandleRemovingItems($productId: ID!){
+   handleRemovingItems(productId: $productId){
+      result
+      cartItems{
+         productId
+         qty
+      }
+   }
+}
+`
+
 export const HANDLE_CLEAR_CART = gql`
-   mutation HandleClearCart($email: String!){
-      handleClearCart(email: $email){
-         result
-         cartItems{
+mutation HandleClearCart{
+   handleClearCart{
+      result
+      cartItems{
             productId
             qty
          }
@@ -155,15 +156,9 @@ export const HANDLE_CLEAR_CART = gql`
    }
 `
 
-export const HANDLE_CONFIRMATION = gql`
-   mutation HandleConfirmation($id: ID!){
-      handleConfirmation(id: $id)
-   }
-`
-
 export const HANDLE_ADDING_ORDER = gql`
-   mutation handleAddingOrder($email: String!){
-      handleAddingOrder(email: $email){
+   mutation handleAddingOrder{
+      handleAddingOrder{
          result
          orders{
             id
@@ -173,13 +168,50 @@ export const HANDLE_ADDING_ORDER = gql`
                qty
             }
          }
+         cartItems{
+            productId
+            qty
+         }
       }
    }
 `
 
+export const HANDLE_CONFIRMATION = gql`
+mutation HandleConfirmation{
+      handleConfirmation
+   }
+`
+
+export const HANDLE_RESEND_EMAIL = gql`
+   mutation HandleResendEmail{
+      handleResendEmail
+   }
+`
+
+export const HANDLE_FORGET_PASSWORD = gql`
+   mutation HandleForgetPassword($email: String!){
+      handleForgetPassword(email: $email){
+         result
+         message
+      }
+   }
+`
+
+export const HANDLE_RESET_PASSWORD = gql`
+   mutation HandleResetPassword($token: String!, $password: String!){
+      handleResetPassword(token: $token, password: $password)
+   }
+`
+
+export const HANDLE_VERIFY_TOKEN = gql`
+   mutation HandleVerifyToken($token: String!){
+      handleVerifyToken(token: $token)
+   }
+`
+
 export const HANDLE_CHANGE_DATA = gql`
-   mutation HandleChangeData($email: String!, $name: String!, $phone: String!){
-      handleChangeData(email: $email, name: $name, phone: $phone){
+   mutation HandleChangeData($name: String!, $phone: String!){
+      handleChangeData( name: $name, phone: $phone){
          result
          user{
             name
@@ -191,8 +223,8 @@ export const HANDLE_CHANGE_DATA = gql`
 `
 
 export const HANDLE_CHANGE_PASSWORD = gql`
-   mutation HandleChangePassword($email: String!, $password: String!, $newPassword: String!){
-      handleChangePassword(email: $email, password: $password, newPassword: $newPassword){
+   mutation HandleChangePassword($password: String!, $newPassword: String!){
+      handleChangePassword(password: $password, newPassword: $newPassword){
          ... on Error{
             message
          }
@@ -210,8 +242,8 @@ export const HANDLE_CHANGE_PASSWORD = gql`
 `
 
 export const HANDLE_ADDING_ADDRESS = gql`
-   mutation HandleAddingAddress($email: String!, $name: String!, $phone: String!, $address: String!){
-      handleAddingAddress(email: $email, name: $name, phone: $phone, address: $address){
+   mutation HandleAddingAddress($name: String!, $phone: String!, $address: String!){
+      handleAddingAddress(name: $name, phone: $phone, address: $address){
          result
          addresses{
             id
@@ -222,9 +254,10 @@ export const HANDLE_ADDING_ADDRESS = gql`
       }
    }
 `
+
 export const HANDLE_DELETING_ADDRESS = gql`
-   mutation HandleDeletingAddress($email: String!, $addressId: ID!){
-      handleDeletingAddress(email: $email, addressId: $addressId){
+   mutation HandleDeletingAddress($addressId: ID!){
+      handleDeletingAddress(addressId: $addressId){
          result
          addresses{
             id
@@ -235,6 +268,7 @@ export const HANDLE_DELETING_ADDRESS = gql`
       }
    }
 `
+
 export const HANDLE_UPDATING_ADDRESS = gql`
    mutation HandleUpdatingAddress($addressId: ID!, $name: String!, $phone: String!, $address: String!){
       handleUpdatingAddress(addressId: $addressId, name: $name, phone: $phone, address: $address){

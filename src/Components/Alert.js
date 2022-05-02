@@ -72,12 +72,12 @@ const AlertContainer = styled.div`
 `
 
 const Alert = ({ setAlert, confirm, address }) => {
-	const { data, setConfirmNav } = useContext(DataContext)
-	const { email } = data
+   
+	const { setConfirmNav } = useContext(DataContext)
 
 	const [handleResendEmail] = useMutation(HANDLE_RESEND_EMAIL, {
 		onCompleted({ handleResendEmail }) {
-			if (handleResendEmail === 'Success') { //Success or Failed
+			if (handleResendEmail) { // 1 "Success" || 0 "Failed"
 				setConfirmNav(true)
 				setAlert(false)
 			}
@@ -104,7 +104,7 @@ const Alert = ({ setAlert, confirm, address }) => {
 				<h4> Please Select an Address </h4>
 			:confirm ?
 				<p> To Checkout You Need To Confirm Your Email<br />
-						<strong onClick={() => handleResendEmail({ variables: { email } })}>Resend Confirmation Email</strong>
+						<strong onClick={() => handleResendEmail()}>Resend Confirmation Email</strong>
 				</p>
 			:
 				<p>In Order to Add Items to Your Cart <br />

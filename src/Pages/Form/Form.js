@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import SignIn from '../../Containers/SignIn/SignIn'
 import SignUp from '../../Containers/SignUp/SignUp'
+import ForgetPassword from '../../Containers/ForgetPassword/ForgetPassword'
 import { LinkText, ParticlesBG } from '../../Components/FormComponents'
 import back from '../../Data/Icons/prev.svg'
 import next from '../../Data/Icons/next.svg'
@@ -22,7 +23,10 @@ const Form = () => {
 			{location.pathname === '/signin' ?
 				<SignIn />
 			:
+         location.pathname === '/signup'?
 				<SignUp />
+         :
+            <ForgetPassword />
 			}
 		</>
 	)

@@ -10,7 +10,7 @@ import instagram from './Icons/instagram.svg'
 
 import jbl from './Icons/jbl.svg'
 import beats from './Icons/beats.svg'
-import sony from './Icons/sony.svg'
+import sony from './Icons/sony.png'
 import bose from './Icons/bose.svg'
 import apple from './Icons/apple.svg'
 import samsung from './Icons/samsung.svg'
@@ -47,28 +47,6 @@ const appleCover1 = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v16463203
 // const fitbitSmartwatch = 'https://res.cloudinary.com/dn8thrc9l/image/upload/v1646320390/Photos/smartwatch-fitbit_golbgj.jpg'
 
 export const slideShowImages = [img1, appleCover1, img2, img3, beatsHeadset, img4]
-
-export const particles = {
-   particles: {
-      number: {
-         value: 300,
-         density: {
-            enable: false,
-            value_area: 800
-         }
-      },
-      color: {
-         value: "#003e45"
-      },
-      line_linked: {
-         enable: true,
-         distance: 120,
-         color: "#003e45",
-         opacity: 0.4,
-         width: 1
-      },
-   }
-}
 
 export const STEPS = [{
    id: 1,

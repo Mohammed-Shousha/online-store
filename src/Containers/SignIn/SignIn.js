@@ -2,7 +2,7 @@ import React, { useContext, useRef, useState } from 'react'
 import { useGoogleLogin } from 'react-google-login'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
-import { useHistory, Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useMutation } from '@apollo/client'
 import FlexContainer from '../../Components/FlexContainer'
@@ -18,7 +18,7 @@ const SignIn = () => {
 
    const { setData, setIsSignedIn } = useContext(DataContext)
 
-   const history = useHistory()
+   const navigate = useNavigate()
 
    const { t } = useTranslation()
 
@@ -52,7 +52,7 @@ const SignIn = () => {
       onCompleted({ handleSignIn }) {
          const { _id, message } = handleSignIn
          if (_id) {
-            history.push('/')
+            navigate('/')
             setIsSignedIn(true)
             setData(editUser(handleSignIn))
          } else if (message) {
@@ -68,7 +68,7 @@ const SignIn = () => {
       onCompleted({ handleGoogleSignIn }) {
          const { _id, message } = handleGoogleSignIn
          if (_id) {
-            history.push('/')
+            navigate('/')
             setIsSignedIn(true)
             setData(editUser(handleGoogleSignIn))
          } else if (message) {
@@ -126,7 +126,7 @@ const SignIn = () => {
             // })
             // const user = await response.json()
             // if (signInData.handleSignIn._id) {
-            //     history.push('/')
+            //     navigate('/')
             //     setIsSignedIn(true)
             //     const { name, email, password, phone, addresses, cartItems, orders } = signInData.handleSignIn
             //     setData(editData(name, email, password, phone))

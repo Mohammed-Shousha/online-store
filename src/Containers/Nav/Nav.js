@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef, useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Autosuggest from 'react-autosuggest'
 import { useLazyQuery, useMutation } from '@apollo/client'
@@ -40,7 +40,7 @@ const Nav = () => {
 
    const firstName = name.split(' ')[0]
 
-   let history = useHistory()
+   let navigate = useNavigate()
 
    const { t, i18n } = useTranslation()
 
@@ -77,7 +77,7 @@ const Nav = () => {
 
    const searchItem = (value) => {
       if (value) {
-         history.push(`/search?q=${value}`)
+         navigate(`/search?q=${value}`)
       }
       setValue('')
    }

@@ -41,8 +41,8 @@ const Slideshow = () => {
          <AliceCarousel
             items={photos}
             ref={carouselRef}
-            buttonsDisabled={true}
-            dotsDisabled={true}
+            disableButtonsControls={true}
+            disableDotsControls={true}
             autoPlay={true}
             autoPlayInterval={2500}
             autoPlayDirection={i18n.language === 'en' ? 'ltr' : 'rtl'}

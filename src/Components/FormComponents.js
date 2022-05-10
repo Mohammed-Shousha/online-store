@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 import { Field } from 'formik'
 import {Link} from 'react-router-dom'
-import Particles from 'react-particles-js'
-import { particles } from '../Data/Database'
 import { device } from '../Data/Constants'
 
 export const FormContainer = styled.div`
@@ -136,20 +134,3 @@ export const LinkText = styled(Link) `
         }
     }
 `
-
-export const ParticlesBG  = styled(Particles).attrs({
-    params: particles
-}) `
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    visibility: hidden;
-    z-index: -1;
-
-    @media ${device.laptopS}{
-        visibility: visible;
-    }
-    `
-

@@ -1,5 +1,5 @@
 import React, { lazy, useEffect } from 'react'
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import AOS from "aos"
 import "aos/dist/aos.css"
@@ -28,37 +28,36 @@ const App = () => {
       <>
          <Nav data-aos="fade-up" />
          <SNav data-aos="fade-up" />
-         <Switch>
-            <Route path='/' exact>
-               <Home />
-            </Route>
-            <PrivateRoute path='/cart'>
-               <Cart />
-            </PrivateRoute>
-            <PrivateRoute path='/orders'>
-               <Orders />
-            </PrivateRoute>
-            <PrivateRoute path='/profile'>
-               <Profile />
-            </PrivateRoute>
-            <Route path="/categories/:id">
-               <StoreItems />
-            </Route>
-            <Route path="/search">
-               <SearchResults />
-            </Route>
-            <Route path="/product/:id">
-               <ProductPage />
-            </Route>
-            <Route path='*'>
-               <Redirect to='/notfound' />
-            </Route>
-         </Switch>
+         <Routes>
+            <Route path='/' exact element={<Home />} />
+            <Route path='/cart' element={
+               <PrivateRoute>
+                  <Cart />
+               </PrivateRoute>
+            } />
+            <Route path='/orders' element={
+               <PrivateRoute>
+                  <Orders />
+               </PrivateRoute>
+            } />
+            <Route path='/profile' element={
+               <PrivateRoute>
+                  <Profile />
+               </PrivateRoute>
+            } />
+            <Route path="/categories/:id" element={<StoreItems />} />
+            <Route path="/search" element={<SearchResults />} />
+            <Route path="/product/:id" element={<ProductPage />} />
+            <Route path='*' element={<Navigate to='/notfound' />} />
+         </Routes>
          <Footer />
       </>
    )
 
    const { i18n } = useTranslation()
+
+   const renderMultiRoutes = ({ element: Element, paths, ...rest }) =>
+      paths.map((path) => <Route key={path} path={path} {...rest} element={Element} />);
 
    useEffect(() => {
       if (i18n.language === 'ar') {
@@ -67,28 +66,41 @@ const App = () => {
    }, [i18n.language])
 
    return (
-      <Router>
-         <Switch>
-            <Route path={['/signin', '/signup', '/forgetpassword']}>
-               <Form />
-            </Route>
-            <PrivateRoute path='/checkout'>
-               <Checkout />
-               <Footer />
-            </PrivateRoute>
-            <Route path="/confirm/:id">
-               <Confirm />
-               <Footer bottom={true} />
-            </Route>
-            <Route path="/resetpassword/:token">
-               <ResetPassword />
-            </Route>
-            <Route path='/notfound'>
-               <h1> 404 Not Found </h1>
-            </Route>
-            <NavRoutes />
-         </Switch>
-      </Router>
+      <>
+         <Router>
+            <Routes>
+               <Route path='*' element={
+                  <NavRoutes />
+               } />
+               {renderMultiRoutes({
+                  paths: ['/signin', '/signup', 'forgetpassword'],
+                  element: <Form />,
+               })}
+
+               <Route path='/checkout' element={
+                  <PrivateRoute>
+                     <Checkout />
+                     <Footer />
+                  </PrivateRoute>
+               }
+               />
+
+               <Route path="/confirm/:id" element={
+                  <>
+                     <Confirm />
+                     <Footer bottom={true} />
+                  </>
+               } />
+               <Route path="/resetpassword/:token" element={
+                  <ResetPassword />
+               } />
+
+               <Route path='/notfound' element={
+                  <h1> 404 Not Found </h1>
+               } />
+            </Routes>
+         </Router>
+      </>
    )
 }
 

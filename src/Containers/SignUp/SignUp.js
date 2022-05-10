@@ -1,7 +1,7 @@
 import React, { useState, useContext, useRef } from 'react'
 import { Formik, Form, useFormikContext } from 'formik'
 import * as Yup from 'yup'
-import { useHistory, Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useMutation } from '@apollo/client'
 import { useGoogleLogin } from 'react-google-login'
@@ -22,7 +22,7 @@ const SignUp = () => {
    const { setIsSignedIn, setData, setConfirmNav } = useContext(DataContext)
    const { marker, setMarker } = useContext(LocationContext)
 
-   let history = useHistory()
+   let navigate = useNavigate()
    const { t } = useTranslation()
 
    const [detectAddress, setDetectAddress] = useState(false)
@@ -137,7 +137,7 @@ const SignUp = () => {
       onCompleted({ handleSignUp }) {
          const { user, emailSent, message } = handleSignUp
          if (user) {
-            history.push('/')
+            navigate('/')
             setIsSignedIn(true)
             setData(editUser(user))
             if (emailSent) {
@@ -200,7 +200,7 @@ const SignUp = () => {
                // })
                // const result = await response.json()
                // if (result.user) {
-               // 	history.push('/')
+               // 	navigate('/')
                // 	setIsSignedIn(true)
                // 	const { name, email, password, phone, addresses } = result.user
                // 	setData(editData(name, email, password, phone))
@@ -260,7 +260,7 @@ const SignUp = () => {
                            </FormButton>
                            <GoogleSignUp />
                            <p> {t('Form.Have Account')}
-                              <Link to='signin'> <strong> {t('Form.Sign In')} </strong> </Link>
+                              <Link to='/signin'> <strong> {t('Form.Sign In')} </strong> </Link>
                            </p>
                         </FormContainer>
                      </Form>

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { CartButton, OrderSummaryContainer } from '../../Components/CartComponents'
 import Alert from '../../Components/Alert'
@@ -13,7 +13,7 @@ const OrderSummary = ({ checkoutNow = true }) => {
    const { data } = useContext(DataContext)
    const { cartItems, confirmed, orders } = data
 
-   let history = useHistory()
+   let navigate = useNavigate()
 
    const [alert, setAlert] = useState(false)
    const [products, setProducts] = useState(null)
@@ -30,7 +30,7 @@ const OrderSummary = ({ checkoutNow = true }) => {
 
    const onCheckout = () => {
       if (confirmed) {
-         history.push('/checkout')
+         navigate('/checkout')
       } else {
          setAlert(true)
       }

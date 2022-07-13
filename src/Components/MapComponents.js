@@ -3,20 +3,20 @@ import { InfoWindow } from '@react-google-maps/api'
 import { device } from '../Data/Constants'
 
 export const mapContainerStyle = {
-	height : '75vh',
-	width : '85vw',
-	display: 'flex',
-	alignItems: 'center',
-	justifyContent: 'center',
-	margin: 'auto',
-	marginBottom: '1.5rem',
+   height: '75vh',
+   width: '85vw',
+   display: 'flex',
+   alignItems: 'center',
+   justifyContent: 'center',
+   margin: 'auto',
+   marginBottom: '1.5rem',
 }
 
-export const MapTitle = styled.h3 `
+export const MapTitle = styled.h3`
 	width: 85vw;
 	font-size: 1em;
 	padding: 0.3em 0;
-    font-weight: normal;
+   font-weight: normal;
 	text-align: center;
 	margin: auto;
 	margin-top: 1.75em;
@@ -42,8 +42,8 @@ export const MapTitle = styled.h3 `
 	}
 `
 
-export const LocateMe = styled.button `
-    position: absolute;
+export const LocateMe = styled.button`
+   position: absolute;
 	top: 1em;
 	right: 1em;
 	width: 8em;
@@ -97,10 +97,10 @@ export const LocateMe = styled.button `
 	}
 `
 
-export const AddressWindow = styled(InfoWindow).attrs(props=>({
-    options:{
-    pixelOffset: new window.google.maps.Size(0, -16),
-    maxWidth: 200
-}
-})) `
+export const AddressWindow = styled(InfoWindow).attrs(props => ({
+   options: {
+      // pixelOffset: new window.google.maps.Size(0, -16),
+      maxWidth: 200
+   }
+}))`
 `

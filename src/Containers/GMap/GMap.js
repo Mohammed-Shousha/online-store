@@ -1,11 +1,10 @@
 import React, { useRef, useState } from 'react'
-import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api"
-// import Geocode from "react-geocode"
+import { GoogleMap, useLoadScript } from "@react-google-maps/api"
+import Geocode from "react-geocode"
 import { useTranslation } from 'react-i18next'
 import Loading from '../../Components/Loading'
 import { mapContainerStyle, MapTitle, LocateMe, AddressWindow } from '../../Components/MapComponents'
 import pin from '../../Data/Icons/pin.svg'
-import pin2 from '../../Data/Icons/pin2.svg'
 
 const center = {
    lat: 26.8,
@@ -20,9 +19,11 @@ const options = {
 }
 
 
-const GMap = ({ marker, setMarker }) => {
+const GMap = ({ address, setAddress }) => {
 
    const { t } = useTranslation()
+
+   const [selected, setSelected] = useState(null)
 
    const { isLoaded, loadError } = useLoadScript({
       googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS
@@ -33,18 +34,13 @@ const GMap = ({ marker, setMarker }) => {
       mapRef.current = map
    }, [])
 
-   const [selected, setSelected] = useState(null)
-
    const onMapClick = (e) => {
-      setMarker({
-         lat: e.latLng.lat(),
-         lng: e.latLng.lng()
-      })
-
       setSelected({
          lat: e.latLng.lat(),
          lng: e.latLng.lng()
       })
+
+      toAddress(e.latLng.lat(), e.latLng.lng())
    }
 
    const panTo = React.useCallback(({ lat, lng }) => {
@@ -55,36 +51,35 @@ const GMap = ({ marker, setMarker }) => {
    const Locate = () => {
       navigator.geolocation.getCurrentPosition(
          ({ coords }) => {
-            setMarker({
-               lat: coords.latitude,
-               lng: coords.longitude
-            })
-
+            const { latitude, longitude } = coords
             setSelected({
-               lat: coords.latitude,
-               lng: coords.longitude
+               lat: latitude,
+               lng: longitude
             })
 
             panTo({
-               lat: coords.latitude,
-               lng: coords.longitude
+               lat: latitude,
+               lng: longitude
             })
+
+            toAddress(latitude, longitude)
          },
          (error) => console.error(error)
       )
    }
 
-   // const toAddress=() =>{
-   // 	Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS)
-   // 	Geocode.fromLatLng(marker.lat, marker.lng).then(
-   // 	  res => {
-   //     	const address = res.results[0].formatted_address
-   // 	    console.log(address)
-   // 	},
-   // 	  error => {
-   // 	    console.error(error)
-   // 	}
-   // )}
+   const toAddress = (lat, lng) => {
+      Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS)
+      Geocode.fromLatLng(lat, lng).then(
+         res => {
+            const address = res.results[0].formatted_address
+            setAddress(address)
+         },
+         error => {
+            console.error(error)
+         }
+      )
+   }
 
 
    if (loadError) return 'ERROR !!'
@@ -105,25 +100,16 @@ const GMap = ({ marker, setMarker }) => {
                <img src={pin} alt='pin' />
                {t('Map.Button')}
             </LocateMe>
-            <Marker
-               position={{ lat: parseFloat(marker.lat), lng: parseFloat(marker.lng) }}
-               animation={window.google.maps.Animation.DROP}
-               icon={{
-                  url: pin2,
-                  origin: new window.google.maps.Point(0, 0),
-                  anchor: new window.google.maps.Point(15, 15),
-                  scaledSize: new window.google.maps.Size(30, 30),
-               }}
-               onClick={() => setSelected(marker)}
-            />
             {selected &&
                <AddressWindow
                   position={{ lat: selected.lat, lng: selected.lng }}
-                  onCloseClick={() => setSelected(null)}
+                  onCloseClick={() => {
+                     setSelected(null)
+                  }}
                >
                   <div>
                      <h3> Address </h3>
-                     <p style={{ 'color': '#636363' }}> address details </p>
+                     <p style={{ 'color': '#636363' }}> {address} </p>
                   </div>
                </AddressWindow>
             }

@@ -21,7 +21,7 @@ import edit from '../../Data/Icons/edit.svg'
 
 const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }) => {
 
-   const { marker, setMarker } = useContext(LocationContext)
+   const { address, setAddress } = useContext(LocationContext)
 
    const { data, setData } = useContext(DataContext)
    const { name, addresses, phone } = data
@@ -60,7 +60,6 @@ const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }
          if (result) {
             setData(editAddresses(addresses))
             setNewAddress(false)
-            setMarker({ lat: '', lng: '' })
          }
       }
    })
@@ -229,10 +228,10 @@ const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }
                   <h3>Back to Addresses </h3>
                </BackTitle>
                <GMap
-                  marker={marker}
-                  setMarker={setMarker}
+                  address={address}
+                  setAddress={setAddress}
                />
-               <MapButton grey onClick={() => handleAddingAddress({ variables: { name, phone, address: `lat:${marker.lat} lng:${marker.lng}` } })}>
+               <MapButton grey onClick={() => handleAddingAddress({ variables: { name, phone, address } })}>
                   Confirm
                </MapButton>
             </>

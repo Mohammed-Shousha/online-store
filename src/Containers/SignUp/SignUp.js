@@ -4,23 +4,25 @@ import * as Yup from 'yup'
 import { useNavigate, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useMutation } from '@apollo/client'
-import { useGoogleLogin } from 'react-google-login'
+import { useGoogleLogin } from '@react-oauth/google'
 import FlexContainer from '../../Components/FlexContainer'
 import { FormButton, GoogleIcon } from '../../Components/Buttons'
 import ErrorText from '../../Components/ErrorText'
-import { FormMap, FormContainer, StyledField, VisibleDiv } from '../../Components/FormComponents'
+import { BackTitle } from '../../Components/ShippingComponents'
+import { FormContainer, StyledField } from '../../Components/FormComponents'
 import GMap from '../GMap/GMap'
 import { DataContext, } from '../../Data/DataContext'
 import { editUser } from '../../Data/DataActions'
 import { LocationContext } from '../../Data/LocationContext'
 import { passwordRegex } from '../../Data/Constants'
 import { HANDLE_SIGN_UP } from '../../Data/Mutations'
+import prev from '../../Data/Icons/prev.svg'
 
 
 const SignUp = () => {
 
    const { setIsSignedIn, setData, setConfirmNav } = useContext(DataContext)
-   const { marker, setMarker } = useContext(LocationContext)
+   const { address, setAddress } = useContext(LocationContext)
 
    let navigate = useNavigate()
    const { t } = useTranslation()
@@ -37,8 +39,6 @@ const SignUp = () => {
    const phoneInput = useRef(null)
    const addressInput = useRef(null)
    const signUpButton = useRef(null)
-
-   const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID
 
    const handleKeyUp = (e) => {
       if (e.keyCode === 13) {
@@ -83,9 +83,8 @@ const SignUp = () => {
       const { setFieldValue } = useFormikContext()
 
       const addressConfirm = () => {
-         setFieldValue('address', `lat:${marker.lat}  lng:${marker.lng}`)
+         setFieldValue('address', address)
          setDetectAddress(false)
-         setMarker({ lat: '', lng: '' })
       }
 
       return (
@@ -100,8 +99,10 @@ const SignUp = () => {
       const { setFieldValue } = useFormikContext()
       const [done, setDone] = useState(false)
 
-      const onSuccess = (res) => {
-         const { name, email } = res.profileObj
+      const onSuccess = async (res) => {
+         const response = await fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${res.access_token}`)
+         const result = await response.json()
+         const { email, name } = result
          setFieldValue('name', name)
          setFieldValue('email', email)
          setDone(true)
@@ -111,11 +112,9 @@ const SignUp = () => {
          console.log(res)
       }
 
-      const { signIn } = useGoogleLogin({
-         clientId,
+      const signIn = useGoogleLogin({
          onSuccess,
          onFailure,
-         cookiePolicy: 'single_host_origin'
       })
 
       return (
@@ -123,6 +122,7 @@ const SignUp = () => {
          <FormButton
             onClick={signIn}
             rev
+            type='button'
          >
             <FlexContainer center>
                <GoogleIcon />
@@ -219,34 +219,34 @@ const SignUp = () => {
          >
             {({ errors, touched, values, handleChange }) => (
                <>
-                  <VisibleDiv visible={!detectAddress}>
+                  {!detectAddress ?
                      <Form onKeyDown={handleKeyDown} >
                         <FormContainer >
                            <h1>{t('Form.Create Account')}</h1>
                            <StyledField
-                              name="name" type="text"
+                              name='name' type='text'
                               placeholder={t('Form.Name')} innerRef={nameInput} onKeyUp={handleKeyUp}
                            />
                            {touched.name && errors.name && <ErrorText>{errors.name}</ErrorText>}
                            <StyledField
-                              name="email" type="Email"
+                              name='email' type='Email'
                               placeholder={t('Form.Email')} innerRef={emailInput} onKeyUp={handleKeyUp}
                            />
                            {touched.email && errors.email && <ErrorText>{errors.email}</ErrorText>}
                            {usedEmail && <ErrorText>{t('Form.EmailErrDb')}</ErrorText>}
                            {invalidEmail && <ErrorText> Invalid Email</ErrorText>}
                            <StyledField
-                              name="password" type="password"
+                              name='password' type='password'
                               placeholder={t('Form.Password')} innerRef={passwordInput} onKeyUp={handleKeyUp}
                            />
                            {touched.password && errors.password && <ErrorText>{errors.password}</ErrorText>}
                            <StyledField
-                              name="phone" type="tel"
+                              name='phone' type='tel'
                               placeholder={t('Form.Phone')} innerRef={phoneInput} onKeyUp={handleKeyUp} onKeyDown={telKeyUp}
                            />
                            {touched.phone && errors.phone && <ErrorText>{errors.phone}</ErrorText>}
                            <StyledField
-                              name="address" type="text" as='textarea' value={values.address} onChange={handleChange}
+                              name='address' type='text' as='textarea' value={values.address} onChange={handleChange}
                               placeholder={t('Form.Address')} ref={addressInput} onKeyUp={handleKeyUp}
                               onClick={() => setAddressFocused(true)}
                            />
@@ -264,15 +264,19 @@ const SignUp = () => {
                            </p>
                         </FormContainer>
                      </Form>
-                  </VisibleDiv>
-
-                  <FormMap visible={detectAddress}>
-                     <GMap
-                        marker={marker}
-                        setMarker={setMarker}
-                     />
-                     <ConfirmButton />
-                  </FormMap>
+                     :
+                     <>
+                        <BackTitle onClick={() => setDetectAddress(false)}>
+                           <img src={prev} alt='back' />
+                           <h3>Back to Sign Up</h3>
+                        </BackTitle>
+                        <GMap
+                           address={address}
+                           setAddress={setAddress}
+                        />
+                        <ConfirmButton />
+                     </>
+                  }
                </>
             )}
          </Formik>

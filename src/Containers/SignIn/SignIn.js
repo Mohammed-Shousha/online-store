@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from 'react'
-import { useGoogleLogin } from 'react-google-login'
+import { useGoogleLogin } from '@react-oauth/google'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { useNavigate, Link } from 'react-router-dom'
@@ -26,8 +26,6 @@ const SignIn = () => {
    const [disabled, setDisabled] = useState(false)
    const signInPasswordInput = useRef(null)
    const signInButton = useRef(null)
-
-   const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID
 
    const handleKeyUp = (e) => {
       if (e.keyCode === 13) {
@@ -80,10 +78,10 @@ const SignIn = () => {
 
 
    const onSuccess = (res) => {
-      const { email } = res.profileObj
+      const token = res.access_token
       handleGoogleSignIn({
          variables: {
-            email
+            token
          }
       })
    }
@@ -92,11 +90,9 @@ const SignIn = () => {
       console.log(res)
    }
 
-   const { signIn } = useGoogleLogin({
-      clientId,
+   const signIn = useGoogleLogin({
       onSuccess,
-      onFailure,
-      cookiePolicy: 'single_host_origin'
+      onFailure
    })
 
 
@@ -145,21 +141,22 @@ const SignIn = () => {
                   <h1>{t('Form.Sign In')}</h1>
                   <StyledField
                      name='email' type='email'
-                     placeholder={t("Form.Email")} onKeyUp={handleKeyUp}
+                     placeholder={t('Form.Email')} onKeyUp={handleKeyUp}
                   />
                   {touched.email && errors.email && <ErrorText>{errors.email}</ErrorText>}
                   <StyledField
-                     name='password' type="password"
-                     placeholder={t("Form.Password")} innerRef={signInPasswordInput} onKeyUp={handleKeyUp}
+                     name='password' type='password'
+                     placeholder={t('Form.Password')} innerRef={signInPasswordInput} onKeyUp={handleKeyUp}
                   />
                   {touched.password && errors.password && <ErrorText>{errors.password}</ErrorText>}
                   {wrongData && <ErrorText>{t('Form.Error')}</ErrorText>}
-                  <FormButton ref={signInButton} disabled={disabled}>
+                  <FormButton ref={signInButton} disabled={disabled} type='submit'>
                      {t('Form.Sign In')}
                   </FormButton>
                   <FormButton
                      onClick={signIn}
                      rev
+                     type='button'
                   >
                      <FlexContainer center>
                         <GoogleIcon />

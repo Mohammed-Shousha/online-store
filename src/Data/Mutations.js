@@ -38,8 +38,8 @@ export const HANDLE_SIGN_IN = gql`
 `
 
 export const HANDLE_GOOGLE_SIGN_IN = gql`
-   mutation HandleGoogleSignIn($email: String!){
-      handleGoogleSignIn(email: $email){
+   mutation HandleGoogleSignIn($token: String!){
+      handleGoogleSignIn(token: $token){
          ... on User {
             _id
             name
@@ -270,7 +270,7 @@ export const HANDLE_DELETING_ADDRESS = gql`
 `
 
 export const HANDLE_UPDATING_ADDRESS = gql`
-   mutation HandleUpdatingAddress($addressId: ID!, $name: String!, $phone: String!, $address: String!){
+   mutation HandleUpdatingAddress($addressId: ID!, $name: String, $phone: String, $address: String){
       handleUpdatingAddress(addressId: $addressId, name: $name, phone: $phone, address: $address){
          result
          addresses{

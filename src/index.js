@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
+import { GoogleOAuthProvider } from '@react-oauth/google'
 import './index.css'
 import App from './App'
 import Loading from './Components/Loading'
@@ -24,6 +25,8 @@ const client = new ApolloClient({
    cache: new InMemoryCache()
 })
 
+const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID
+
 const container = document.getElementById('root')
 const root = createRoot(container)
 
@@ -31,9 +34,11 @@ root.render(
    <React.StrictMode>
       <Suspense fallback={<Loading />}>
          <ApolloProvider client={client}>
+            <GoogleOAuthProvider clientId={clientId}>
             <ContextProvider>
                <App />
             </ContextProvider>
+            </GoogleOAuthProvider>
          </ApolloProvider>
       </Suspense>
    </React.StrictMode>

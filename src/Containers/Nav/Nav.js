@@ -1,9 +1,9 @@
 import React, { useContext, useState, useRef, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import Autosuggest from 'react-autosuggest'
-import { useLazyQuery, useMutation } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import Sidebar from '../Sidebar/Sidebar'
+import AutoComplete from '../AutoComplete/AutoComplete'
 import Logo from '../../Components/Logo'
 import { MainNav } from '../../Components/Navbar'
 import FlexContainer from '../../Components/FlexContainer'
@@ -11,21 +11,30 @@ import { NavText, UserAction, CartCircle, UserActionsContainer, SearchIcon, Menu
 import { ConfirmNav } from '../../Components/ConfirmComponents'
 import { DataContext } from '../../Data/DataContext'
 import { signOut } from '../../Data/DataActions'
-import { PRODUCTS_BY_NAME } from '../../Data/Queries'
+import { PRODUCTS } from '../../Data/Queries'
 import { HANDLE_SIGN_OUT } from '../../Data/Mutations'
 import cart from '../../Data/Icons/cart.svg'
 import user from '../../Data/Icons/user.svg'
 import list from '../../Data/Icons/list.svg'
 import signout from '../../Data/Icons/signout.svg'
 import x from '../../Data/Icons/x-white.svg'
-import './Nav.css'
 
 
 const Nav = () => {
+   
+   let navigate = useNavigate()
+
+   const { t, i18n } = useTranslation()
 
    const { isSignedIn, setIsSignedIn, data, setData, confirmNav, setConfirmNav } = useContext(DataContext)
    const { name, email, cartItems } = data
-
+   const firstName = name.split(' ')[0]
+   
+   const [input, setInput] = useState("")
+   const [suggestions, setSuggestions] = useState([])
+   
+   const [show, setShow] = useState(false)
+   const [sidebar, setSidebar] = useState(false)
 
    const [handleSignOut] = useMutation(HANDLE_SIGN_OUT, {
       onCompleted({ handleSignOut }) {  // 1 "Success" || 0 "Failed"
@@ -37,14 +46,26 @@ const Nav = () => {
          }
       }
    })
+   
+   const toggleShow = () => {
+      setShow(!show)
+   }
 
-   const firstName = name.split(' ')[0]
-
-   let navigate = useNavigate()
-
-   const { t, i18n } = useTranslation()
-
-
+   const searchItem = (value) => {
+      if (value) {
+         navigate(`/search?q=${value}`)
+      }
+      setInput('')
+   }
+   
+   useQuery(PRODUCTS, {
+      onCompleted({ products }) {
+         setSuggestions(products)
+      }
+   })
+   
+   const userActions = useRef(null)
+   
    const changeLanguage = (lng) => {
       i18n.changeLanguage(lng)
       if (lng === 'ar') {
@@ -54,75 +75,7 @@ const Nav = () => {
 
       }
    }
-
-   const getSuggestionValue = (suggestion) => suggestion.name
-
-   const renderSuggestion = (suggestion) => (
-      <div> {suggestion.name} </div>
-   )
-
-   const [value, setValue] = useState('')
-   const [suggestions, setSuggestions] = useState([])
-
-   const [productsByName] = useLazyQuery(PRODUCTS_BY_NAME,
-      {
-         onCompleted({ productsByName }) {
-            setSuggestions(productsByName)
-         }
-      })
-
-   const onChange = (e, { newValue }) => {
-      setValue(newValue)
-   }
-
-   const searchItem = (value) => {
-      if (value) {
-         navigate(`/search?q=${value}`)
-      }
-      setValue('')
-   }
-
-   const onKeyUp = (e) => {
-      if (e.keyCode === 13) {
-         searchItem(value)
-      }
-   }
-
-   const onSuggestionsFetchRequested = ({ value }) => {
-      let inputValue = value.trim().toLowerCase()
-      let inputLength = inputValue.length
-
-
-      if (!inputLength) {
-         setSuggestions([])
-      }
-      else {
-         productsByName({
-            variables: { name: inputValue },
-         })
-      }
-   }
-
-   const onSuggestionsClearRequested = () => {
-      setSuggestions([])
-   }
-
-   const inputProps = {
-      placeholder: t('Nav.Search'),
-      value,
-      onChange,
-      onKeyUp,
-   }
-
-   const [show, setShow] = useState(false)
-   const [sidebar, setSidebar] = useState(false)
-
-   const toggleShow = () => {
-      setShow(!show)
-   }
-
-   const userActions = useRef(null)
-
+   
    useEffect(() => {
       const handleClickOutside = (e) => {
          if (userActions.current && !userActions.current.contains(e.target)) {
@@ -158,16 +111,13 @@ const Nav = () => {
             {i18n.language === 'en' && <button onClick={() => changeLanguage('ar')}>AR</button>}
             {i18n.language === 'ar' && <button onClick={() => changeLanguage('en')}>EN</button>}
 
-            <Autosuggest
-               suggestions={suggestions}
-               inputProps={inputProps}
-               onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-               onSuggestionsClearRequested={onSuggestionsClearRequested}
-               getSuggestionValue={getSuggestionValue}
-               renderSuggestion={renderSuggestion}
+            <AutoComplete
+               suggestions = {suggestions}
+               input= {input}
+               setInput = {setInput}
             />
             <SearchIcon
-               onClick={() => searchItem(value)}
+               onClick={() => searchItem(input)}
             />
 
             <NavText

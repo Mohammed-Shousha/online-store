@@ -160,11 +160,11 @@ const SignIn = () => {
                   >
                      <FlexContainer center>
                         <GoogleIcon />
-                        Sign In with Google
+                        {t("Form.Google Sign In")}
                      </FlexContainer>
                   </FormButton>
                   <p>
-                     <Link to='/forgetpassword'> Forget your password? </Link>
+                     <Link to='/forgetpassword'> {t("Form.Forget")} </Link> {/*Forget your password?*/}
                   </p>
                   <p>
                      {t('Form.New User')}

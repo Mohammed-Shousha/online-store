@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import React, { useContext, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useMutation } from '@apollo/client'
 import { DataContext } from '../Data/DataContext'
 import { editCartItems } from '../Data/DataActions'
@@ -86,6 +87,8 @@ export const AddToCartButton = styled.button`
 
 export const AddToCart = ({ productId, setAlert }) => {
 
+   const { t } = useTranslation()
+
    const { isSignedIn, setData } = useContext(DataContext)
    const [disabled, setDisabled] = useState(null)
 
@@ -127,7 +130,7 @@ export const AddToCart = ({ productId, setAlert }) => {
          onClick={() => onAddingItems(productId)}
          disabled={disabled === productId}
       >
-         ADD TO CART
+         {t("Products.Add")} {/* ADD TO CART*/}
       </AddToCartButton>
    )
 }

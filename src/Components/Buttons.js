@@ -9,10 +9,10 @@ const fgColor = '#f5fcfc'
 const bgColor = '#4bb1bd'
 
 export const Button = styled.button`
-    border: none;
+   border: none;
 	background:${props => props.disabled ? '#eeeeee' : '#2196f3'};
 	color: ${props => props.disabled ? '#1010104D' : 'white'};
-    font-size: 0.8em;
+   font-size: 0.8em;
 	font-weight: bold;
 	border-radius: 5px;
 	margin: 0.75em 0;
@@ -22,16 +22,16 @@ export const Button = styled.button`
 	visibility: ${props => props.hide ? 'hidden' : ''};
 
     @media ${device.laptopS}{
-        font-size: 0.85em;
+      font-size: 0.85em;
     }
 
     @media ${device.laptopL}{
-        font-size: 0.9em;
-        padding: 0.85em 1.5em;
+      font-size: 0.9em;
+      padding: 0.85em 1.5em;
     }
 
     @media ${device.desktop}{
-        font-size: 1em;
+      font-size: 1em;
     }
 `
 export const LinkButton = ({ children, to }) => (
@@ -60,20 +60,20 @@ export const FormButton = styled.button.attrs(props => ({
    outline: none;
 
     &:active{
-        transform: scale(0.95);
+      transform: scale(0.95);
     }
 
     @media ${device.tablet}{
-        font-size: 0.8em;
+      font-size: 0.8em;
     }
 
     @media ${device.laptopS}{
-        font-size: 0.85em;
+      font-size: 0.85em;
     }
 
     @media ${device.desktop}{
-        font-size: 0.9em;
-        padding: 0.85em 1.5em;
+      font-size: 0.9em;
+      padding: 0.85em 1.5em;
     }
 `
 

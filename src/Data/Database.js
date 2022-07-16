@@ -134,27 +134,27 @@ export const CATEGORIES = [{
 export const CONTACT = [
    {
       id: 1,
-      link: 'tel:112',
+      link: '',
       img: phone
    },
    {
       id: 2,
-      link: 'https://wa.me/201202973528',
+      link: '',
       img: whatsapp
    },
    {
       id: 3,
-      link: 'mailto:mohammedshousha2000@gmail.com',
+      link: 'mailto:online.store.project.2020@gmail.com',
       img: email
    },
    {
       id: 4,
-      link: 'https://www.facebook.com/PhoniX.Store101',
+      link: '',
       img: fb
    },
    {
       id: 5,
-      link: 'https://www.instagram.com/phonix.store101/',
+      link: '',
       img: instagram
    },]
 

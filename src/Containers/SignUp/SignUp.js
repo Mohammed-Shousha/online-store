@@ -16,7 +16,8 @@ import { editUser } from '../../Data/DataActions'
 import { LocationContext } from '../../Data/LocationContext'
 import { passwordRegex } from '../../Data/Constants'
 import { HANDLE_SIGN_UP } from '../../Data/Mutations'
-import prev from '../../Data/Icons/prev.svg'
+import back from '../../Data/Icons/prev.svg'
+import next from '../../Data/Icons/next.svg'
 
 
 const SignUp = () => {
@@ -25,7 +26,7 @@ const SignUp = () => {
    const { address, setAddress } = useContext(LocationContext)
 
    let navigate = useNavigate()
-   const { t } = useTranslation()
+   const { t, i18n } = useTranslation()
 
    const [detectAddress, setDetectAddress] = useState(false)
    const [addressFocused, setAddressFocused] = useState(false)
@@ -126,7 +127,7 @@ const SignUp = () => {
          >
             <FlexContainer center>
                <GoogleIcon />
-               Sign Up with Google
+               {t("Form.Google Sign Up")}
             </FlexContainer>
          </FormButton>
       )
@@ -267,8 +268,8 @@ const SignUp = () => {
                      :
                      <>
                         <BackTitle onClick={() => setDetectAddress(false)}>
-                           <img src={prev} alt='back' />
-                           <h3>Back to Sign Up</h3>
+                           <img src={i18n.language === 'ar' ? next : back} alt='back' />
+                           <h3>{t("Form.Back")}</h3> {/* Back to Sign Up*/}
                         </BackTitle>
                         <GMap
                            address={address}

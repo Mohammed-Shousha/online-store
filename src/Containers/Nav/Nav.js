@@ -9,6 +9,7 @@ import { MainNav } from '../../Components/Navbar'
 import FlexContainer from '../../Components/FlexContainer'
 import { NavText, UserAction, CartCircle, UserActionsContainer, SearchIcon, MenuIcon } from '../../Components/NavComponents'
 import { ConfirmNav } from '../../Components/ConfirmComponents'
+import { FormButton } from '../../Components/Buttons'
 import { DataContext } from '../../Data/DataContext'
 import { signOut } from '../../Data/DataActions'
 import { PRODUCTS } from '../../Data/Queries'
@@ -21,7 +22,7 @@ import x from '../../Data/Icons/x-white.svg'
 
 
 const Nav = () => {
-   
+
    let navigate = useNavigate()
 
    const { t, i18n } = useTranslation()
@@ -29,10 +30,10 @@ const Nav = () => {
    const { isSignedIn, setIsSignedIn, data, setData, confirmNav, setConfirmNav } = useContext(DataContext)
    const { name, email, cartItems } = data
    const firstName = name.split(' ')[0]
-   
+
    const [input, setInput] = useState("")
    const [suggestions, setSuggestions] = useState([])
-   
+
    const [show, setShow] = useState(false)
    const [sidebar, setSidebar] = useState(false)
 
@@ -46,7 +47,7 @@ const Nav = () => {
          }
       }
    })
-   
+
    const toggleShow = () => {
       setShow(!show)
    }
@@ -57,15 +58,15 @@ const Nav = () => {
       }
       setInput('')
    }
-   
+
    useQuery(PRODUCTS, {
       onCompleted({ products }) {
          setSuggestions(products)
       }
    })
-   
+
    const userActions = useRef(null)
-   
+
    const changeLanguage = (lng) => {
       i18n.changeLanguage(lng)
       if (lng === 'ar') {
@@ -75,7 +76,7 @@ const Nav = () => {
 
       }
    }
-   
+
    useEffect(() => {
       const handleClickOutside = (e) => {
          if (userActions.current && !userActions.current.contains(e.target)) {
@@ -108,13 +109,27 @@ const Nav = () => {
 
             <Logo />
 
-            {i18n.language === 'en' && <button onClick={() => changeLanguage('ar')}>AR</button>}
-            {i18n.language === 'ar' && <button onClick={() => changeLanguage('en')}>EN</button>}
+            {i18n.language === 'en' &&
+               <FormButton
+                  onClick={() => changeLanguage('ar')}
+                  rev
+               >
+                  AR
+               </FormButton>
+            }
+            {i18n.language === 'ar' &&
+               <FormButton 
+                  onClick={() => changeLanguage('en')}
+                  rev
+               >
+                  EN
+               </FormButton>
+            }
 
             <AutoComplete
-               suggestions = {suggestions}
-               input= {input}
-               setInput = {setInput}
+               suggestions={suggestions}
+               input={input}
+               setInput={setInput}
             />
             <SearchIcon
                onClick={() => searchItem(input)}

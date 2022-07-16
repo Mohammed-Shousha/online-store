@@ -30,14 +30,19 @@
       "Location": "Detect My Location",
       "New User": "New User?",
       "Error": "Wrong Email or Password",
-      "Confirm": "Confirm"
+      "Confirm": "Confirm",
+      "Google Sign In": "Sign In with Google",
+      "Google Sign Up": "Sign Up with Google",
+      "Back": "Back to Sign Up",
+      "Forget": "Forget your password?"
    },
    "Map": {
       "Title": "Add New Address",
       "Button": "Locate Me"
    },
    "Products": {
-      "Popular": "Most Popular"
+      "Popular": "Most Popular",
+      "Add": "ADD TO CART"
    },
    "Features": {
       "Free Shipping": "Free Shipping",
@@ -59,7 +64,14 @@
    "smart watches": "Smart Watches",
    "covers": "Covers",
    "power banks": "Power Banks",
-   "Search Results":{
+   "Search Results": {
       "title": "Search Results for "
-   } 
+   },
+   "Footer": {
+      "Contact Us": "Contact Us",
+      "Rights": "All Rights Reserved",
+      "About": "About Us",
+      "Privacy": "Privacy Policy",
+      "Use": "Terms of Use"
+   }
 }

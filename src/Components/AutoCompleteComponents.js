@@ -83,7 +83,7 @@ export const Suggestion = styled.p`
       border-bottom-left-radius: 1rem;
   	   border-bottom-right-radius: 1rem;
    }
-   :hover{
+   /* :hover{
       background-color: rgba(0, 0, 0, 0.1);
-   }
+   } */
 `

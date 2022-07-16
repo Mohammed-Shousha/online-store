@@ -21,6 +21,7 @@ export const USER_BY_TOKEN = gql`
             length
          }
          addresses{
+            id
             address
             name
             phone

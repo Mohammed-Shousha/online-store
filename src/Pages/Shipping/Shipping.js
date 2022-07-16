@@ -62,7 +62,8 @@ const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }
             setNewAddress(false)
          }
       }
-   })
+   }
+   )
 
    // const handleAddingAddress = async () => {
    // const response = await fetch('http://localhost:8888/addaddress', {
@@ -123,9 +124,9 @@ const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }
          <CheckoutTitle h1> Shipping </CheckoutTitle>
          {!newAddress ?
             <FlexContainer responsive>
-               {addresses.map((a, i) => (
+               {addresses.map((a, i) => ( // named a to not to conflict with address input name
                   <ShippingDetails
-                     key={i}
+                     key={a.id}
                      onClick={() => setActiveAddress(a)}
                      active={a === activeAddress}
                   >
@@ -149,13 +150,13 @@ const Shipping = ({ newAddress, setNewAddress, activeAddress, setActiveAddress }
                               .matches(/^\d{11}$/, 'Invalid Phone')
                               .required("Can't Be Empty"),
                         })}
-                        onSubmit={({ name, address, phone }) => {
+                        onSubmit={({ name, phone, address }) => {
                            handleUpdatingAddress({ variables: { addressId: a.id, name, phone, address } })
                            // const response = await fetch('http://localhost:8888/updateaddress', {
                            // 	method: 'put',
                            // 	headers: { 'Content-Type': 'application/json' },
                            // 	body: JSON.stringify({
-                           // 		addressId: a.id,
+                           // 		addressId: address.id,
                            // 		name,
                            // 		address,
                            // 		phone,

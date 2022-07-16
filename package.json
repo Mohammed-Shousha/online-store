@@ -28,7 +28,6 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
     "styled-components": "^5.3.5",
-    "use-persisted-reducer": "^2.1.0",
     "yup": "^0.32.11"
   },
   "scripts": {

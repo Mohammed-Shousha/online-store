@@ -1,9 +1,8 @@
 import React, { createContext } from "react"
 import { initData, DataReducer } from './DataReducer'
 import usePersistedState from './usePersistedState'
-import createPersistedReducer from 'use-persisted-reducer'
+import usePersistedReducer from './usePersistedReducer'
 
-const usePersistedReducer = createPersistedReducer('Data')//, window.sessionStorage)
 
 export const DataContext = createContext()
 
@@ -13,7 +12,7 @@ export const DataProvider = ({ children }) => {
 
    const [confirmNav, setConfirmNav] = usePersistedState('confirmNav', false)
 
-   const [data, setData] = usePersistedReducer(DataReducer, initData)
+   const [data, setData] = usePersistedReducer(DataReducer, initData, 'Data')
 
    return (
       <DataContext.Provider value={{ isSignedIn, setIsSignedIn, confirmNav, setConfirmNav, data, setData }}>

@@ -64,7 +64,7 @@ const PaymentForm = ({ placeOrder }) => {
 
    useEffect(() => {
       async function fetchData() {
-         const response = await fetch("http://localhost:4000/payment", {
+         const response = await fetch("https://online-store-apollo-server.herokuapp.com/payment", {
             method: "post",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -105,18 +105,6 @@ const PaymentForm = ({ placeOrder }) => {
          </Button>
          {error &&
             <ErrorText> {error} </ErrorText>
-         }
-         {succeeded &&
-            <p>
-               Payment succeeded, see the result in your
-               <a href={`https://dashboard.stripe.com/test/payments`}>
-                  {" "}
-                  <strong>
-                     Stripe dashboard.
-                  </strong>
-               </a>
-               Refresh the page to pay again.
-            </p>
          }
       </StripeForm>
    )

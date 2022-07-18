@@ -1,39 +1,39 @@
 import styled from 'styled-components'
 import { device } from '../Data/Constants'
 
-const activeStyle = '1.5px solid #2196f3'
+const activeStyle = '2px solid #2196f3'
 
 export const ShippingDetails = styled.div`
 	width: 70%;
-    min-height: 15em;
+   min-height: 15em;
 	margin: 1.5em 0rem;
 	padding: 1em 0.5em ;
-    border: ${props => props.active ? activeStyle : '1.5px solid grey'};
-    box-shadow: ${props => props.active ? 'none' :'-5px 5px 5px 1px #b1b493' };
+   border: ${props => props.active ? activeStyle : '1.5px solid grey'};
+   box-shadow: ${props => props.active ? 'none' : '-5px 5px 5px 1px #b1b493'};
 	border-radius: 3px;
 	background: #f7f7ee;
-    cursor: pointer;
-    display: ${props => props.new ? 'flex' : ''};
-    justify-content: center;
-    align-items: center;
+   cursor: pointer;
+   display: ${props => props.new ? 'flex' : ''};
+   justify-content: center;
+   align-items: center;
 
     @media ${device.tablet}{
-        width: 20em;
+      width: 20em;
     }
 
     @media ${device.laptopS}{
-        width: 25%;
-        min-height: 17em;
-        margin: 1.5em 2em 2em;
+      width: 25%;
+      min-height: 17em;
+      margin: 1.5em 2em 2em;
     }
 
     @media ${device.laptopL}{
-        width: 20%;
+      width: 20%;
     }
     
     &:hover{
-        border: ${activeStyle};
-        box-shadow: none;
+      border: ${activeStyle};
+      box-shadow: none;
     }
 
     /* address name */
@@ -120,7 +120,7 @@ export const ShippingDetails = styled.div`
 
 `
 
-export const AddressActions = styled.div `
+export const AddressActions = styled.div`
     &&{
         position: relative;
         display: flex; 

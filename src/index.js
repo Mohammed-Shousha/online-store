@@ -15,7 +15,8 @@ import {
 } from "@apollo/client"
 
 const link = createHttpLink({
-   uri: "http://localhost:4000/graphql",
+   uri: "https://online-store-apollo-server.herokuapp.com/graphql",
+   // uri: "http://localhost:4000/graphql",
    credentials: 'include'
 })
 

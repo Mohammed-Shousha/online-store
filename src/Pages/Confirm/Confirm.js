@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { useMutation, useQuery } from '@apollo/client'
+import { useParams } from 'react-router-dom'
 import { ConfirmContainer, ConfirmTitle } from '../../Components/ConfirmComponents'
 import { Button, LinkButton } from '../../Components/Buttons'
 import { ConfirmNav } from '../../Components/Navbar'
@@ -8,10 +9,12 @@ import Loading from '../../Components/Loading'
 import { DataContext } from '../../Data/DataContext'
 import { confirm } from '../../Data/DataActions'
 import { HANDLE_CONFIRMATION } from '../../Data/Mutations'
-import { USER_BY_TOKEN } from '../../Data/Queries'
+import { USER_BY_ID } from '../../Data/Queries'
 
 
 const Confirm = () => {
+
+   let { id } = useParams()
 
    const { setData } = useContext(DataContext)
    const [name, setName] = useState(null)
@@ -29,9 +32,10 @@ const Confirm = () => {
       }
    })
 
-   const { loading } = useQuery(USER_BY_TOKEN, {
-      onCompleted({ userByToken }) {
-         const { name, email, confirmed } = userByToken
+   const { loading } = useQuery(USER_BY_ID, {
+      variables: { id },
+      onCompleted({ userById }) {
+         const { name, email, confirmed } = userById
          setName(name)
          setEmail(email)
          setDone(confirmed)

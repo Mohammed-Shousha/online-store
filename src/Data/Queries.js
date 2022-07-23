@@ -5,6 +5,7 @@ export const USER_BY_ID = gql`
       userById(id: $id){
          name
          email
+         confirmed
       }
    }
 `

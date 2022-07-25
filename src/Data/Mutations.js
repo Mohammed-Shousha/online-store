@@ -180,8 +180,8 @@ export const HANDLE_ADDING_ORDER = gql`
 `
 
 export const HANDLE_CONFIRMATION = gql`
-mutation HandleConfirmation{
-      handleConfirmation
+mutation HandleConfirmation ($id: ID!){
+      handleConfirmation(id: $id)
    }
 `
 

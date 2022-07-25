@@ -44,7 +44,7 @@ const Confirm = () => {
 
    const confirmEmail = () => {
       setProcessing(true)
-      handleConfirmation()
+      handleConfirmation({ variables: { id } })
       // const response = await fetch(`http://localhost:8888/confirm/${id}`, {
       //     method: "post",
       //     headers: { "Content-Type": "application/json" },

@@ -1,9 +1,14 @@
-import React, { lazy, useEffect } from 'react'
+import React, { lazy, useEffect, useContext } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { useQuery } from '@apollo/client'
 import AOS from "aos"
 import "aos/dist/aos.css"
 import PrivateRoute from './Containers/PrivateRoute/PrivateRoute'
+import { editUser } from './Data/DataActions'
+import { DataContext } from './Data/DataContext'
+import { USER_BY_TOKEN } from './Data/Queries'
+
 AOS.init()
 
 const Home = lazy(() => import('./Pages/Home/Home'))
@@ -53,6 +58,15 @@ const App = () => {
          <Footer />
       </>
    )
+
+   const { setData } = useContext(DataContext)
+
+   useQuery(USER_BY_TOKEN, {
+      onCompleted({ userByToken }) {
+         const user = userByToken
+         setData(editUser(user))
+      }
+   })
 
    const { i18n } = useTranslation()
 

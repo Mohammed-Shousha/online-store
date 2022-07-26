@@ -21,8 +21,9 @@ const Profile = () => {
 
    const [changePassword, setChangePassword] = useState(false)
    const [passwordError, setPasswordError] = useState('')
-   const [changeDataDone, setChangeDataDone] = useState(' ')
-   const [disabled, setDisabled] = useState(false)
+   const [disabledPass, setDisabledPass] = useState(false)
+   const [disabledSave, setDisabledSave] = useState(false)
+
 
    const passwordValue = '•'.repeat(password.length)
 
@@ -66,8 +67,7 @@ const Profile = () => {
          if (result) {
             const { name, email, phone } = user
             setData(editData(name, email, password, phone))
-            setChangeDataDone('Saved')
-            setTimeout(() => setChangeDataDone(' '), 3000)
+            setDisabledSave(false)
          }
       }
    })
@@ -78,9 +78,9 @@ const Profile = () => {
          if (email) {
             setData(editData(name, email, password, phone))
             setChangePassword(false)
-            setDisabled(false)
+            setDisabledPass(false)
          } else if (message) {
-            setDisabled(false)
+            setDisabledPass(false)
             setPasswordError(message)
             setTimeout(() => setPasswordError(''), 2500)
          }
@@ -106,6 +106,7 @@ const Profile = () => {
                      .required("Can't Be Empty"),
                })}
                onSubmit={({ name, phone }) => {
+                  setDisabledSave(true)
                   handleChangeData({ variables: { name, phone } })
                   // const response = await fetch('http://localhost:8888/changedata', {
                   // 	method: 'put',
@@ -142,11 +143,11 @@ const Profile = () => {
                         <ProfileButton
                            type='submit'
                            ref={saveButton}
+                           disabled={disabledSave}
                         >
                            SAVE
                         </ProfileButton>
                      </FlexContainer>
-                     {changeDataDone && <h4>{changeDataDone}</h4>}
                   </Form>
                )}
             </Formik>
@@ -194,7 +195,7 @@ const Profile = () => {
                            .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
                      })}
                      onSubmit={({ password, confirmPassword }) => {
-                        setDisabled(true)
+                        setDisabledPass(true)
                         handleChangePassword({
                            variables: {
                               password,
@@ -255,7 +256,7 @@ const Profile = () => {
                               </ChangePasswordButton>
                               <ChangePasswordButton
                                  color='blue' type='submit'
-                                 ref={OKButton} disabled={disabled}
+                                 ref={OKButton} disabled={disabledPass}
                               >
                                  OK
                               </ChangePasswordButton>

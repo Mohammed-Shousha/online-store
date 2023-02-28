@@ -109,7 +109,7 @@ const Nav = () => {
 
             <Logo />
 
-            {i18n.language === 'en' &&
+            {(i18n.language === 'en-GB' || i18n.language === 'en') &&
                <FormButton
                   onClick={() => changeLanguage('ar')}
                   rev

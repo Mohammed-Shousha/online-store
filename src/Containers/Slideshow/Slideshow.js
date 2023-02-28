@@ -16,7 +16,7 @@ const Slideshow = () => {
    const handleOnDragStart = (e) => e.preventDefault()
 
    const nextPhoto = () => {
-      if (i18n.language === 'en') {
+      if (i18n.language.includes('en')) {
          carouselRef.current.slideNext()
       } else {
          carouselRef.current.slidePrev()
@@ -24,7 +24,7 @@ const Slideshow = () => {
    }
 
    const prevPhoto = () => {
-      if (i18n.language === 'en') {
+      if (i18n.language.includes('en')) {
          carouselRef.current.slidePrev()
       } else {
          carouselRef.current.slideNext()
@@ -37,7 +37,7 @@ const Slideshow = () => {
 
    return (
       <SlideContainer>
-         <img src={i18n.language === 'en' ? prev : next} alt='arrow' onClick={prevPhoto} />
+         <img src={i18n.language.includes('en') ? prev : next} alt='arrow' onClick={prevPhoto} />
          <AliceCarousel
             items={photos}
             ref={carouselRef}
@@ -45,9 +45,10 @@ const Slideshow = () => {
             disableDotsControls={true}
             autoPlay={true}
             autoPlayInterval={2500}
-            autoPlayDirection={i18n.language === 'en' ? 'ltr' : 'rtl'}
+            autoPlayDirection={i18n.language.includes('en') ? 'ltr' : 'rtl'}
+            infinite={true}
          />
-         <img src={i18n.language === 'en' ? next : prev} alt='arrow' onClick={nextPhoto} />
+         <img src={i18n.language.includes('en') ? next : prev} alt='arrow' onClick={nextPhoto} />
       </SlideContainer>
    )
 }

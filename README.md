@@ -8,7 +8,7 @@ _**An online store website that offers a seamless shopping experience to its use
 - Responsive and user-friendly design.
 - Supports arabic langauge.
 
-## Technologies Used:
+## Technologies Used
 - Reactjs
 - React Router
 - styled-components

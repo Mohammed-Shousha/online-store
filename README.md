@@ -6,7 +6,7 @@ _**An online store website that offers a seamless shopping experience to its use
 - Locate address using Google Maps.
 - Online payment using credit card.
 - Responsive and user-friendly design.
-- Supports arabic langauge.
+- Supports Arabic language.
 
 ## Technologies Used
 - Reactjs
